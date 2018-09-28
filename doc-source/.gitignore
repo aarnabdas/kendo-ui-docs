@@ -1,0 +1,5 @@
+.DS_Store
+api/aspnet-mvc
+Gemfile.lock
+.asset-cache
+
