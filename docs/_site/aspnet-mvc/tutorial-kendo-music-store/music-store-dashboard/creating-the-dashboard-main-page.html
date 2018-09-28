@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard/creating-the-dashboard-main-page.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard/creating-the-dashboard-main-page.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="create-the-dashboard-main-page---music-dashboard"><a href="#create-the-dashboard-main-page---music-dashboard">Create the Dashboard Main Page - Music Dashboard</a></h1>
+
+<p><img src="/kendo-ui/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/dashboard-overview.png" alt="dashboard-overview"></p>
+
+<p>The main page constitutes the landing page of the Dashboard, and the navigation strip, an overview of recent sales far various periods of time, top singles and albums, and a series of gauges showing hourly data. For this view, we use a declarative approach similar to the Kendo UI Music Store itself, also using the <strong>data-</strong> attributes, and the <a href="http://demos.telerik.com/kendo-ui/web/mvvm/index.html">Kendo UI MVVM</a> framework.</p>
+
+<p>This page is contained in the files <strong>app/views/main.html</strong>, <strong>app/main-view.js</strong>, and <strong>Content/home-view.css</strong></p>
+
+<h2 id="display-the-sales-tabs"><a href="#display-the-sales-tabs">Display the Sales tabs</a></h2>
+
+<p>To implement the listings of Sales for the various times, we start with some simple HTML to define the categories to display:</p>
+
+<pre><code>&lt;section class="store-tall-tabs"&gt;
+    &lt;span class="big-sales-tab today-sales"&gt;
+        &lt;div class="big-sales-tab-title"&gt;TODAY&lt;/div&gt;
+        &lt;div class="big-sales-tab-amount"&gt;&lt;span data-role="widget" data-bind="text: today"&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/span&gt;
+    &lt;span class="big-sales-tab this-week-sales"&gt;
+        &lt;div class="big-sales-tab-title"&gt;THIS WEEK&lt;/div&gt;
+        &lt;div class="big-sales-tab-amount"&gt;&lt;span data-bind="text: week"&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/span&gt;
+    &lt;span class="big-sales-tab this-month-sales"&gt;
+        &lt;div class="big-sales-tab-title"&gt;THIS MONTH&lt;/div&gt;
+        &lt;div class="big-sales-tab-amount"&gt;&lt;span data-bind="text: month"&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/span&gt;
+    &lt;span class="big-sales-tab last-month-sales"&gt;
+        &lt;div class="big-sales-tab-title"&gt;LAST MONTH&lt;/div&gt;
+        &lt;div class="big-sales-tab-amount"&gt;&lt;span data-bind="text: lastMonth"&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;/span&gt;
+&lt;/section&gt;
+</code></pre>
+
+<p>Each of the <strong>amount</strong> &lt;spans&gt;s contain the <strong>data-bind</strong> attribute that specifies the name of the data in the scheme to place in that view.</p>
+
+<p>This data is bound to an external <strong>DataSource</strong>, which is pulled and bound to these display widgets in the <strong>main-view.js</strong> file:</p>
+
+<pre><code>var totals = new kendo.data.DataSource({
+    transport: {
+        read: 'api/sales/totals'
+    },
+    schema : {
+      data : function(response) {
+          var item = {
+              today: kendo.toString(response.Today, "c"),
+              week: kendo.toString(response.Week, "c"),
+              month: kendo.toString(response.Month, "c"),
+              lastMonth: kendo.toString(response.LastMonth, "c")
+          };
+          return [item];
+      }  
+    },
+    change: function (data) {
+        console.log(data.items[0]);
+        kendo.bind($("#home-view"), data.items[0]);
+    }
+});
+totals.read();
+</code></pre>
+
+<p>Note that the value names in the scheme data of the DataSource match the <strong>data-bind</strong> tags of the views: <strong>data-bind="text: lastMonth"</strong> matches that tag to the <strong>lastMonth</strong> value pulled from the DataSource.</p>
+
+<p>The entirety of the view information in <strong>main.html</strong> is wrapped in the following tag</p>
+
+<pre><code>&lt;section id="home-view"&gt;
+</code></pre>
+
+<p>so that the binding of the sales totals passes back through to the view. **kendo.bind($("#home-view"), data.items[0]); makes use of standard jQuery syntax and performs the binding.</p>
+
+<h2 id="display-top-singles-and-albums-list-views"><a href="#display-top-singles-and-albums-list-views">Display Top Singles and Albums List Views</a></h2>
+
+<p>These lists are created via a combination of HTML markup, templating, and MVVM binding, with the data provided by a remote DataSource. Starting with the markup:</p>
+
+<pre><code>&lt;div class="top-singles-list"&gt;
+    &lt;h3 class="list-title"&gt;Top &lt;span class="italic"&gt;Singles&lt;/span&gt;&lt;/h3&gt;
+    &lt;div id="topSinglesListView"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="top-singles-list"&gt;
+    &lt;h3 class="list-title"&gt;Top &lt;span class="italic"&gt;Albums&lt;/span&gt;&lt;/h3&gt;
+    &lt;div id="topAlbumsListView"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Each requires a Kendo UI template, to render the individual items in the proper manner. The <strong>Single</strong> template is below:</p>
+
+<pre><code>&lt;script type="text/x-kendo-tmpl" id="top-single-template"&gt;
+    &lt;div class="top-single-song-list-item"&gt;
+        &lt;img src="${ArtUrl}" alt="${Name}" width="100px" height="100px" /&gt;
+        &lt;div class="album-list-item-wrapper"&gt;
+            &lt;div class="album-list-title"&gt;${Name}&lt;/div&gt;
+            &lt;div class="album-list-subtitle"&gt;${AlbumName}&lt;/div&gt;
+            &lt;div class="album-list-price"&gt;${kendo.toString(Price, 'c')}&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+</code></pre>
+
+<p>There are several differences in this approach to that used in the Kendo UI Music Store - the use of a remote DataSource facilitates some of the detail be moved around.</p>
+
+<p>The bindings are invoked in the JavaScript (int <strong>main-view.js</strong>); this is also where the templates are applied and the DataSource is bound.</p>
+
+<pre><code>var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "api/top/tracks",
+            dataType: "json"
+        }
+    }
+});
+
+$("#topSinglesListView").kendoListView({
+    dataSource: dataSource,
+    template: kendo.template($("#top-single-template").html()),
+    dataBound: function (e) {
+        // handle event
+        $(".top-single-song-list-item").on("click", function (e) {
+            e.preventDefault();
+            window.location = "#/sales?target=singles";
+        });
+    }
+});
+</code></pre>
+
+<p>The <strong>Albums</strong> ListView is constructed similarly, with the same structure.</p>
+
+<h2 id="create-a-gauge-with-a-custom-background"><a href="#create-a-gauge-with-a-custom-background">Create a Gauge with a custom background</a></h2>
+
+<p>The radial gauges on this page use a custom background image of a record. Every gauge is contained within its own <strong>&lt;div&gt;</strong>, as shown below:</p>
+
+<pre><code>&lt;div class="gauge-container"&gt;
+    &lt;div class="albums-per-hour home-gauge-box"&gt;&lt;/div&gt;
+    &lt;header&gt;
+        &lt;h3 class="gauge-title"&gt;&lt;span class="orange"&gt;Albums&lt;/span&gt;/Hr&lt;/h3&gt;
+    &lt;/header&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>The key here is the <strong>class</strong> attribute "<strong>gauge-container</strong> assigned to each.</p>
+
+<p>Looking at the CSS for this page in <strong>home-view.css</strong>, the background image is defined in the <strong>background-image</strong> attribute:</p>
+
+<pre><code>.gauge-container {
+    height: 250px;
+    display: inline-block;
+    margin: 0 40px;
+    background-image: url("../img/record-gauge-home.png");
+    background-repeat: no-repeat;
+    background-position-y: 15px;
+    width: 225px;
+}
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

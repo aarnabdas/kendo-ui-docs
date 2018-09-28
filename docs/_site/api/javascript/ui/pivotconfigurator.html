@@ -1,0 +1,1678 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI PivotConfigurator</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Code examples for PivotConfigurator UI widget configuration, learn how to use it.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/pivotconfigurator.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/pivotconfigurator.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouipivotconfigurator"><a href="#kendouipivotconfigurator">kendo.ui.PivotConfigurator</a></h1>
+
+<p>Represents the Kendo UI PivotConfigurator widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><code>kendo.data.PivotDataSource</code>
+</h3>
+
+<p>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a>
+instance.</p>
+
+<p>If the <code>dataSource</code> option is set to a JavaScript object the widget will initialize a new <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance using that value as data source configuration.</p>
+
+<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+
+<h4>Example - set dataSource as a JavaScript object</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as an existing kendo.data.PivotDataSource instance</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+    type: "xmla",
+    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+    rows: [{ name: "[Product].[Product]" }],
+    measures: ["[Measures].[Internet Sales Amount]"],
+    transport: {
+        connection: {
+            catalog: "Adventure Works DW 2008R2",
+            cube: "Adventure Works"
+        },
+        discover: {
+            url: "http://demos.telerik.com/olap/msmdpump.dll",
+            dataType: "text",
+            contentType: "text/xml",
+            type: "POST"
+        }
+    },
+    schema: {
+        type: "xmla"
+    }
+});
+
+$("#configurator").kendoPivotConfigurator({
+    dataSource: dataSource
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-filterable">
+<a href="#configuration-filterable">filterable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the user will be able to filter by using the field menu.</p>
+
+<h4>Example - enable filtering</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sortable">
+<a href="#configuration-sortable">sortable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the user could sort the widget by clicking the dimension fields. By default sorting is disabled.</p>
+
+<p>Can be set to a JavaScript object which represents the sorting configuration.</p>
+
+<h4>Example - enable sorting</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    sortable: true,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sortable.allowUnsort">
+<a href="#configuration-sortable.allowUnsort">sortable.allowUnsort </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the user can get the widget in unsorted state by clicking the sorted dimension field.</p>
+
+<h4>Example - allow unsorting</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    sortable: {
+        allowUnsort: true
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The height of the PivotConfigurator. Numeric values are treated as pixels.</p>
+
+<h4>Example - set the height as a number</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the height as a string</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    height: "500px",
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages">
+<a href="#configuration-messages">messages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text messages displayed in the fields sections.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        measures: "Drop Measure Here",
+        columns: "Drop Column Here",
+        rows: "Drop Rows Here",
+        measuresLabel: "Measures",
+        columnsLabel: "Columns",
+        rowsLabel: "Rows",
+        fieldsLabel: "Fields"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.measures">
+<a href="#configuration-messages.measures">messages.measures </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Data Fields Here")</em>
+</h3>
+
+<p>The text messages displayed in the measure fields sections.</p>
+
+<h4>Example - setting measure fields section default text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        measures: "Drop Measure Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.columns">
+<a href="#configuration-messages.columns">messages.columns </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Column Fields Here")</em>
+</h3>
+
+<p>The text messages displayed in the column fields sections.</p>
+
+<h4>Example - setting column fields section default text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        columns: "Drop Column Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.rows">
+<a href="#configuration-messages.rows">messages.rows </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Rows Fields Here")</em>
+</h3>
+
+<p>The text messages displayed in the row fields sections.</p>
+
+<h4>Example - setting row fields section default text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        rows: "Drop Rows Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.measuresLabel">
+<a href="#configuration-messages.measuresLabel">messages.measuresLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Measures")</em>
+</h3>
+
+<p>The text messages displayed for measure label.</p>
+
+<h4>Example - setting measure label text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        measuresLabel: "Values"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.rowsLabel">
+<a href="#configuration-messages.rowsLabel">messages.rowsLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Rows")</em>
+</h3>
+
+<p>The text messages displayed for rows label.</p>
+
+<h4>Example - setting row label text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    rowsLabel: {
+        rows: "Rows"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.columnsLabel">
+<a href="#configuration-messages.columnsLabel">messages.columnsLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Columns")</em>
+</h3>
+
+<p>The text messages displayed for column label.</p>
+
+<h4>Example - setting column label text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        columnsLabel: "Columns"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldsLabel">
+<a href="#configuration-messages.fieldsLabel">messages.fieldsLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Fields")</em>
+</h3>
+
+<p>The text messages displayed for fields label.</p>
+
+<h4>Example - setting fields label text</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    messages: {
+        fieldsLabel: "Fields"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu">
+<a href="#configuration-messages.fieldMenu">messages.fieldMenu </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text messages displayed in the field menu.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            info: "Show items with value that:",
+            sortAscending: "Sort Ascending",
+            sortDescending: "Sort Descending",
+            filterFields: "Fields Filter",
+            filter: "Filter",
+            include: "Include Fields...",
+            title: "Fields to include",
+            clear: "Clear",
+            ok: "Ok",
+            cancel: "Cancel"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.info">
+<a href="#configuration-messages.fieldMenu.info">messages.fieldMenu.info </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Show items with value that:")</em>
+</h3>
+
+<p>The text messages displayed in fields filter.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            info: "Filter items by field name:"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.sortAscending">
+<a href="#configuration-messages.fieldMenu.sortAscending">messages.fieldMenu.sortAscending </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Sort Ascending")</em>
+</h3>
+
+<p>The text message displayed for the menu item which performs ascending sort.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    sortable: true,
+    messages: {
+        fieldMenu: {
+          sortAscending: "Sort (asc)"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.sortDescending">
+<a href="#configuration-messages.fieldMenu.sortDescending">messages.fieldMenu.sortDescending </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Sort Descending")</em>
+</h3>
+
+<p>The text message displayed for the menu item which performs descending sort.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    sortable: true,
+    messages: {
+        fieldMenu: {
+          sortDescending: "Sort (desc)"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.filterFields">
+<a href="#configuration-messages.fieldMenu.filterFields">messages.fieldMenu.filterFields </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Fields Filter")</em>
+</h3>
+
+<p>The text messages of the fields filter menu item.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            filterFields: "Filter current field"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.filter">
+<a href="#configuration-messages.fieldMenu.filter">messages.fieldMenu.filter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Filter")</em>
+</h3>
+
+<p>The text messages of the filter button.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            filter: "Done"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.include">
+<a href="#configuration-messages.fieldMenu.include">messages.fieldMenu.include </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Include Fields...")</em>
+</h3>
+
+<p>The text messages of the include menu item.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            include: "Choose fields to include"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.title">
+<a href="#configuration-messages.fieldMenu.title">messages.fieldMenu.title </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Fields to include")</em>
+</h3>
+
+<p>The title of the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            title: "Choose fields to include"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.clear">
+<a href="#configuration-messages.fieldMenu.clear">messages.fieldMenu.clear </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Clear")</em>
+</h3>
+
+<p>The text of the clear filter expressions button.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            clear: "Clear filter expressions"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.ok">
+<a href="#configuration-messages.fieldMenu.ok">messages.fieldMenu.ok </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Ok")</em>
+</h3>
+
+<p>The text of the OK button in the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            ok: "Done"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.cancel">
+<a href="#configuration-messages.fieldMenu.cancel">messages.fieldMenu.cancel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Cancel")</em>
+</h3>
+
+<p>The text of the cancel button in the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            cancel: "Close"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators">
+<a href="#configuration-messages.fieldMenu.operators">messages.fieldMenu.operators </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text of the filter operators displayed in the filter menu.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                contains: "Contains",
+                doesnotcontain: "Does not contain",
+                startswith: "Starts with",
+                endswith: "Ends with",
+                eq: "Is equal to",
+                neq: "Is not equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.contains">
+<a href="#configuration-messages.fieldMenu.operators.contains">messages.fieldMenu.operators.contains </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Contains")</em>
+</h3>
+
+<p>The text of the "contains" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                contains: "Contains"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.doesnotcontain">
+<a href="#configuration-messages.fieldMenu.operators.doesnotcontain">messages.fieldMenu.operators.doesnotcontain </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Does not contain")</em>
+</h3>
+
+<p>The text of the "Does not contain" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                doesnotcontain: "Doesn't contain"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.startswith">
+<a href="#configuration-messages.fieldMenu.operators.startswith">messages.fieldMenu.operators.startswith </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Starts with")</em>
+</h3>
+
+<p>The text of the "Starts with" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                startswith: "Starts"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.endswith">
+<a href="#configuration-messages.fieldMenu.operators.endswith">messages.fieldMenu.operators.endswith </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Ends with")</em>
+</h3>
+
+<p>The text of the "Ends with" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                endswith: "Ends"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.eq">
+<a href="#configuration-messages.fieldMenu.operators.eq">messages.fieldMenu.operators.eq </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Is equal to")</em>
+</h3>
+
+<p>The text of the "equal" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                eq: "Equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.neq">
+<a href="#configuration-messages.fieldMenu.operators.neq">messages.fieldMenu.operators.neq </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Is not equal to")</em>
+</h3>
+
+<p>The text of the "not equal" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    filterable: true,
+    messages: {
+        fieldMenu: {
+            operators: {
+                neq: "Not equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-dataSource">
+<a href="#fields-dataSource">dataSource </a><code>kendo.data.PivotDataSource</code>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/pivotdatasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+
+<blockquote>
+<p>Changes of the data source will be reflected in the widget.</p>
+
+<p>Assigning a new data source would have no effect. Use the <a href="#methods-setDataSource">setDataSource</a> method instead.</p>
+</blockquote>
+
+<h4>Example - get reference to the widget data source</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+//get reference to the widget data source
+var dataSource = $("#configurator").data("kendoPivotConfigurator").dataSource;
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p>This method does not remove the widget element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+var configurator = $("#configurator").data("kendoPivotConfigurator");
+configurator.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Refresh widget content</p>
+
+<h4>Example - refresh the widget</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+var configurator = $("#configurator").data("kendoPivotConfigurator");
+configurator.refresh();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the data source of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataSource <code>kendo.data.PivotDataSource</code>
+</h5>
+
+<p>The data source to which the widget should be bound.</p>
+
+<h4>Example - set the data source</h4>
+
+<pre><code>&lt;div id="configurator"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#configurator").kendoPivotConfigurator({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+var dataSource = kendo.data.PivotDataSource({
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            discover: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+var configurator = $("#configurator").data("kendoPivotConfigurator");
+configurator.setDataSource(dataSource);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("accessibility/keyboard-support.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//accessibility/keyboard-support.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="keyboard-support"><a href="#keyboard-support">Keyboard Support</a></h1>
+
+<h2 id="an-overview-of-access-keys"><a href="#an-overview-of-access-keys">An Overview of Access Keys</a></h2>
+
+<p>For the unfamiliar, the <code>accesskey</code> property that can be placed on HTML elements to tell the browser that the property in question can be activated with the keyboard. For example, let's assume I have the following input field on a page:</p>
+
+<pre><code>&lt;input type='text' id='name' accesskey='n' /&gt;
+</code></pre>
+
+<p>By using the <code>accesskey</code> attribute, I'm telling the browser to enable to user to set focus on that field by using an access key combination (<a href="http://en.wikipedia.org/wiki/Access_key">which is
+unique to OS and browser</a>) plus the <code>n</code> key. For example, if a user of my site is browsing with Chrome on a
+Mac, they would type 'control' + 'option' + 'n' to set focus on the 'name' field.</p>
+
+<p>Kendo UI recognizes <code>accesskey</code> attributes, and automatically preserves those when creating widgets. This is especially helpful in those cases when
+Kendo creates multiple DOM elements in order to construct some of our more complex widgets (like the NumericTextBox or DatePicker widgets).</p>
+
+<h2 id="built-in-keyboard-support-in-kendo-ui"><a href="#built-in-keyboard-support-in-kendo-ui">Built-in Keyboard Support in Kendo UI</a></h2>
+
+<p>Of course, Keyboard support in Kendo UI is about more than just mapping access keys for you. It's also about ensuring that your users can access the full capabilities of Kendo UI widgets using just the keyboard. And that's something you get out of the box.</p>
+
+<p>In addition to <code>accesskey</code> attribute support, most Kendo UI widgets also support a series of keyboard controls that can be used to interact with our
+widgets. The specific keyboard shortcuts provided with each widget is provided in the keyboard demo for that widget, all of which are linked below:</p>
+
+<ul>
+<li><a href="http://demos.telerik.com/kendo-ui/web/autocomplete/navigation.html">AutoComplete</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/calendar/navigation.html">Calendar</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/combobox/navigation.html">ComboBox</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/datepicker/navigation.html">DatePicker</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/datetimepicker/navigation.html">DateTimePicker</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/dropdownlist/navigation.html">DropDownList</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/editor/navigation.html">Editor</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/gantt/keyboard-navigation">Gantt</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/grid/navigation.html">Grid</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/listview/navigation.html">ListView</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/menu/navigation.html">Menu</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/numerictextbox/navigation.html">NumericTextBox</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/panelbar/navigation.html">PanelBar</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/slider/navigation.html">Slider</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/splitter/navigation.html">Splitter</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/tabstrip/navigation.html">TabStrip</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/timepicker/navigation.html">TimePicker</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/treeview/navigation.html">TreeView</a></li>
+<li><a href="http://demos.telerik.com/kendo-ui/web/window/navigation.html">Window</a></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

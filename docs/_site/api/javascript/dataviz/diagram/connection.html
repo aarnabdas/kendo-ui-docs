@@ -1,0 +1,530 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/dataviz/diagram/connection.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/dataviz/diagram/connection.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatavizdiagramconnection"><a href="#kendodatavizdiagramconnection">kendo.dataviz.diagram.Connection</a></h1>
+
+<p>The Connection object is a visual link or connection in the graph or diagram.
+Connections are usually created by calling <a href="/kendo-ui/api/dataviz/diagram#methods-connect">connect</a> on a Diagram instance.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-stroke">
+<a href="#configuration-stroke">stroke </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the stroke configuration.</p>
+
+<h3 id="configuration-stroke.color">
+<a href="#configuration-stroke.color">stroke.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the stroke or line color of the connection.</p>
+
+<h4>Example - setting the stroke of a Connection</h4>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var Point = kendo.dataviz.diagram.Point;
+    var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+    var shapeA = diagram.addShape(new Point(100, 100));
+    var shapeB = diagram.addShape(new Point(400, 100));
+    var connection = diagram.connect(shapeA, shapeB, { stroke: { color: "red" } });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-hover">
+<a href="#configuration-hover">hover </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the hover configuration.</p>
+
+<h3 id="configuration-hover.stroke">
+<a href="#configuration-hover.stroke">hover.stroke </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the hover stroke configuration.</p>
+
+<h3 id="configuration-hover.stroke.color">
+<a href="#configuration-hover.stroke.color">hover.stroke.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the highlight color when the pointer is hovering over the connection.</p>
+
+<h4>Example setting color and hovering color of the connection</h4>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var Point = kendo.dataviz.diagram.Point;
+    var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+    var shapeA = diagram.addShape(new Point(100, 100));
+    var shapeB = diagram.addShape(new Point(400, 100));
+    var connection = diagram.connect(shapeA, shapeB, {
+        stroke: { color: "red" },
+        hover: {
+            stroke: {
+                color: "blue"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-startCap">
+<a href="#configuration-startCap">startCap </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection start cap configuration or type name.</p>
+
+<h4>Example - configuring the connection start cap</h4>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var Point = kendo.dataviz.diagram.Point;
+  var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+  var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+    startCap: {
+      type: "FilledCircle",
+      fill: {
+        color: "red"
+      },
+      stroke: {
+        color: "blue",
+        width: 2
+      }
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-startCap.fill">
+<a href="#configuration-startCap.fill">startCap.fill </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection start cap fill options or color.</p>
+
+<h3 id="configuration-startCap.fill.color">
+<a href="#configuration-startCap.fill.color">startCap.fill.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "black")</em>
+</h3>
+
+<p>The connection start cap fill color.</p>
+
+<h3 id="configuration-startCap.fill.opacity"><a href="#configuration-startCap.fill.opacity">startCap.fill.opacity</a></h3>
+
+<p>The connection start cap fill opacity.</p>
+
+<h3 id="configuration-startCap.stroke">
+<a href="#configuration-startCap.stroke">startCap.stroke </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection start cap stroke options or color.</p>
+
+<h3 id="configuration-startCap.stroke.color">
+<a href="#configuration-startCap.stroke.color">startCap.stroke.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connection start cap stroke color.</p>
+
+<h3 id="configuration-startCap.stroke.dashType">
+<a href="#configuration-startCap.stroke.dashType">startCap.stroke.dashType </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connection start cap stroke dash type.</p>
+
+<h3 id="configuration-startCap.stroke.width">
+<a href="#configuration-startCap.stroke.width">startCap.stroke.width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The connection start cap stroke width.</p>
+
+<h3 id="configuration-startCap.type">
+<a href="#configuration-startCap.type">startCap.type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "none")</em>
+</h3>
+
+<p>The connection start cap type.</p>
+
+<p>The supported values are:</p>
+
+<ul>
+<li>"none": no cap</li>
+<li>"ArrowStart": a filled arrow</li>
+<li>"FilledCircle": a filled circle</li>
+</ul>
+
+<h3 id="configuration-endCap">
+<a href="#configuration-endCap">endCap </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection end cap configuration or type name.</p>
+
+<h4>Example - configuring the connection end cap</h4>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var Point = kendo.dataviz.diagram.Point;
+  var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+  var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+    endCap: {
+      type: "ArrowEnd",
+      fill: {
+        color: "red"
+      },
+      stroke: {
+        color: "blue",
+        width: 2
+      }
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-endCap.fill">
+<a href="#configuration-endCap.fill">endCap.fill </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection end cap fill options or color.</p>
+
+<h3 id="configuration-endCap.fill.color">
+<a href="#configuration-endCap.fill.color">endCap.fill.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "black")</em>
+</h3>
+
+<p>The connection end cap fill color.</p>
+
+<h3 id="configuration-endCap.fill.opacity"><a href="#configuration-endCap.fill.opacity">endCap.fill.opacity</a></h3>
+
+<p>The connection end cap fill opacity.</p>
+
+<h3 id="configuration-endCap.stroke">
+<a href="#configuration-endCap.stroke">endCap.stroke </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The connection end cap stroke options or color.</p>
+
+<h3 id="configuration-endCap.stroke.color">
+<a href="#configuration-endCap.stroke.color">endCap.stroke.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connection end cap stroke color.</p>
+
+<h3 id="configuration-endCap.stroke.dashType">
+<a href="#configuration-endCap.stroke.dashType">endCap.stroke.dashType </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connection end cap stroke dash type.</p>
+
+<h3 id="configuration-endCap.stroke.width">
+<a href="#configuration-endCap.stroke.width">endCap.stroke.width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The connection end cap stroke width.</p>
+
+<h3 id="configuration-endCap.type">
+<a href="#configuration-endCap.type">endCap.type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "none")</em>
+</h3>
+
+<p>The connection end cap type.</p>
+
+<p>The supported values are:</p>
+
+<ul>
+<li>"none": no cap</li>
+<li>"ArrowEnd": a filled arrow</li>
+<li>"FilledCircle": a filled circle</li>
+</ul>
+
+<h3 id="configuration-points">
+<a href="#configuration-points">points </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>Sets the intermediate points (in global coordinates) of the connection.</p>
+
+<h4>Example - setting intermediate connection points</h4>
+
+<p><img src="/kendo-ui/api/dataviz/diagram/connectionpoints.png" alt="Intermediate connection points."></p>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var Point = kendo.dataviz.diagram.Point;
+    var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+    var connection = diagram.connect(new Point(100,100), new Point(300,100), {
+        points: [
+            new Point(150,100),
+            new Point(150,150),
+            new Point(200,150),
+            new Point(200,100)
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-points.x">
+<a href="#configuration-points.x">points.x </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>Sets the X coordinate of the point.</p>
+
+<h3 id="configuration-points.y">
+<a href="#configuration-points.y">points.y </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>Sets the Y coordinate of the point.</p>
+
+<h3 id="configuration-selectable">
+<a href="#configuration-selectable">selectable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Specifies if the connection can be selected.</p>
+
+<h3 id="configuration-type">
+<a href="#configuration-type">type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies the connection type. The supported values are <code>"polyline"</code> and <code>"cascading"</code>.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-source"><a href="#methods-source">source</a></h3>
+
+<p>Gets or sets the current source of the connection.</p>
+
+<p>This object can be a Point for a floating endpoint (i.e. not attached to a shape), a Shape or a Connector of a Shape. You can use the Shape.getConnector() method to fetch a Connector on the basis of its name. If a Shape is specified the Connection will attach to the "Auto" connector.</p>
+
+<h4>Parameters</h4>
+
+<h5>source <code>kendo.dataviz.diagram.Shape |</code><code>kendo.dataviz.diagram.Point |</code><code>kendo.dataviz.diagram.Connector</code>
+</h5>
+
+<ul>
+<li>Point: any Point on the canvas. This creates an unattached floating endpoint.</li>
+<li>Shape: will bind the endpoint to the"Auto" Connector which will switch between the other connectors to minimize the length of the connection.</li>
+<li>Connector: the connection's endpoint will remain fixed attached to the specified Connector.</li>
+</ul>
+
+<p>If no source is specified the method will return the current object to which the Connection's endpoint is attached.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the connection source.</p>
+
+<h3 id="methods-sourcePoint"><a href="#methods-sourcePoint">sourcePoint</a></h3>
+
+<p>Gets the global coordinate of the connection's start (initial endpoint).
+The method returns a Point independently of the object to which the source is attached.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.dataviz.diagram.Point</code> the coordinates of the connection source.</p>
+
+<h3 id="methods-target"><a href="#methods-target">target</a></h3>
+
+<p>Gets or set the target of the Connection.</p>
+
+<p>This object can be a Point for a floating endpoint (i.e. not attached to a shape), a Shape or a Connector of a Shape. You can use the Shape.getConnector() method to fetch a Connector on the basis of its name. If a Shape is specified the Connection will attach to the "Auto" connector.</p>
+
+<h4>Parameters</h4>
+
+<h5>target <code>kendo.dataviz.diagram.Shape |</code><code>kendo.dataviz.diagram.Point |</code><code>kendo.dataviz.diagram.Connector</code>
+</h5>
+
+<ul>
+<li>Point: any Point on the canvas. This creates an unattached floating endpoint.</li>
+<li>Shape: will bind the endpoint to the"Auto" Connector which will switch between the other connectors to minimize the length of the connection.</li>
+<li>Connector: the connection's endpoint will remain fixed attached to the specified Connector.</li>
+</ul>
+
+<p>If no source is specified the method will return the current object to which the Connection's endpoint is attached.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the connection target.</p>
+
+<h3 id="methods-targetPoint"><a href="#methods-targetPoint">targetPoint</a></h3>
+
+<p>Similar to the sourcePoint, this gets the coordinates of the target of the Connection independently of its endpoint attachement.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.dataviz.diagram.Point</code> the coordinates of the connection target.</p>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Select or deselects the Connection.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h5>
+
+<p>True to select the Connection and <code>false</code> to deselect it.</p>
+
+<h3 id="methods-type"><a href="#methods-type">type</a></h3>
+
+<p>Gets or sets the (sub-) type of the Connection which defines the way it routes.</p>
+
+<p>The routing of a connection is the way that intermediate points of a Connection defines a route. A route is usually defined on the basis of constraints or behaviors. Currently the framework defines a default polyline route (which simply connects the given intermediate points) and a simple rectangular (aka cascading) route. The cascading type is useful when using tree layout and hierarchies; the routed Connection will in this case enhance the representation of the hierarchy and thus reproduce a classic organization diagram.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Polyline")</em>
+</h5>
+
+<ul>
+<li>"Polyline" - connects the defined intermediate points. See the points() method.</li>
+<li>"Cascading" - discards given points and defines a cascading path between the endpoints.</li>
+</ul>
+
+<h3 id="methods-points"><a href="#methods-points">points</a></h3>
+
+<p>Gets the intermediate points of the connection.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the intermediate points of the connection.</p>
+
+<h3 id="methods-allPoints"><a href="#methods-allPoints">allPoints</a></h3>
+
+<p>Gets all points of the Connection.
+This is the union of the endpoints and the intermediate points.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> all points of the connection.</p>
+
+<h3 id="methods-redraw"><a href="#methods-redraw">redraw</a></h3>
+
+<p>Redraws the Connection with the given options.</p>
+
+<h5>Example - changing the Connection after it has been added</h5>
+
+<p><img src="/kendo-ui/api/dataviz/diagram/connectionredraw.png" alt="Connection redraw."></p>
+
+<pre><code>&lt;div id="diagram"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var Point = kendo.dataviz.diagram.Point;
+    var diagram = $("#diagram").kendoDiagram({ }).getKendoDiagram();
+    var connection = diagram.connect(new Point(10,10), new Point(200,70));
+
+    connection.redraw({
+        stroke: {
+            color: "orange"
+        },
+        points:[new Point(200,10)]
+    });
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

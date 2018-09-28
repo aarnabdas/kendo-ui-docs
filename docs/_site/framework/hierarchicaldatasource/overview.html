@@ -1,0 +1,310 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>HierarchicalDataSource component in Kendo UI framework</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="See how to represent hierarchical data using HierarchicalDataSource component, an extension of Kendo UI DataSource.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/hierarchicaldatasource/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/hierarchicaldatasource/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="overview"><a href="#overview">Overview</a></h1>
+
+<p>The HierarchicalDataSource component extends the <a href="/kendo-ui/api/framework/datasource">DataSource component</a>, allowing
+representation of hierarchical data. This help topic assumes that you are familiar with the
+Kendo UI DataSource, and builds upon that knowledge with information that is specific to
+hierarchical data.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<h3 id="creating-a-hierarchicaldatasource-bound-to-local-data"><a href="#creating-a-hierarchicaldatasource-bound-to-local-data">Creating a HierarchicalDataSource bound to local data</a></h3>
+
+<pre><code>var categorizedMovies = [ {
+      categoryName: "SciFi",
+      items: [
+        { title: "Star Wars: A New Hope", year: 1977 },
+        { title: "Star Wars: The Empire Strikes Back", year: 1980 },
+        { title: "Star Wars: Return of the Jedi", year: 1983 }
+      ]
+  }, {
+      categoryName: "Drama",
+      items: [
+        { title: "The Shawshenk Redemption", year: 1994 },
+        { title: "Fight Club", year: 1999 },
+        { title: "The Usual Suspects", year: 1995 }
+      ]
+  }
+];
+
+var localDataSource = new kendo.data.HierarchicalDataSource({ data: categorizedMovies });
+</code></pre>
+
+<h3 id="creating-a-hierarchicaldatasource-bound-to-a-homogeneous-remote-data-service"><a href="#creating-a-hierarchicaldatasource-bound-to-a-homogeneous-remote-data-service">Creating a HierarchicalDataSource bound to a homogeneous remote data service</a></h3>
+
+<pre><code>var homogeneous = new kendo.data.HierarchicalDataSource({
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/Employees",
+            dataType: "json"
+        }
+    },
+    schema: {
+        model: {
+            id: "EmployeeId",
+            hasChildren: "HasEmployees"
+        }
+    }
+});
+</code></pre>
+
+<p>The above snippet will target the HierarchicalDataSource to a single service end-point.
+The data service is homogeneous, i.e. it always returns objects of the same type.
+After executing <code>homogeneous.read()</code>, the service end-point is hit without a EmployeeId parameter:</p>
+
+<pre><code>GET http://demos.telerik.com/kendo-ui/service/Employees
+
+=&gt; [ { "EmployeeId": 2, "Name": "Andrew", "HasEmployees": true } ]
+</code></pre>
+
+<p>Reading the children of the returned item is achieved by calling the <a href="/kendo-ui/api/framework/node#load"><code>load</code> method</a> of the data item:</p>
+
+<pre><code>var ceo = homogeneous.view()[0];
+
+ceo.load();
+</code></pre>
+
+<p>This will hit the service end-point and will supply the id of the data item:</p>
+
+<pre><code>GET http://demos.telerik.com/kendo-ui/service/Employees?EmployeeId=2
+
+=&gt; [
+      { "EmployeeId": 3, "Name": "Bob", "HasEmployees": false },
+      { "EmployeeId": 4, "Name": "Charlie", "HasEmployees": false }
+   ]
+</code></pre>
+
+<p>Now, the children can be accessed:</p>
+
+<pre><code>// ceo.children is a HierarchicalDataSource, too
+var middleManagement = ceo.children.view();
+</code></pre>
+
+<h3 id="the-haschildren-property">
+<a href="#the-haschildren-property">The </a><code>hasChildren</code> property</h3>
+
+<p>The <code>hasChildren</code> boolean property indicates whether a data item contains children that can be fetched from the server.
+You can either hard-code it, map it to another property, or compute it with a function:</p>
+
+<pre><code>// hard-code that the item will always have children
+hasChildren: true
+
+// map the hasChildren property to the HasEmployees field, serialized from the server
+hasChildren: "HasChildren"
+
+// compute whether the given item will have children
+hasChildren: function(item) {
+    return item.HasEmployees &amp;&amp; item.RelatedDepartment;
+}
+</code></pre>
+
+<h3 id="binding-a-hierarchicaldatasource-to-remote-data-with-multiple-service-end-points"><a href="#binding-a-hierarchicaldatasource-to-remote-data-with-multiple-service-end-points">Binding a HierarchicalDataSource to remote data with multiple service end-points</a></h3>
+
+<pre><code>// configuration of the products service end-point
+var Products = {
+        transport: {
+            read: {
+                url: "http://demos.telerik.com/kendo-ui/service/Products",
+                dataType: "json"
+            }
+        },
+        schema: {
+            data: "products",
+            model: {
+                // products will never have children
+                hasChildren: false
+            }
+        }
+    };
+
+// configuration of the categories service end-point
+var Categories = new kendo.data.HierarchicalDataSource({
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/Categories",
+            dataType: "json"
+        }
+    },
+    schema: {
+        data: "categories",
+        model: {
+            id: "categoryId",
+
+            // categories will always have children
+            hasChildren: true,
+
+            // children will be fetched from the Products end-point
+            children: Products
+        }
+    }
+});
+</code></pre>
+
+<p>The configuration above creates a two-level HierarchicalDataSource (categories and products) that
+fetches data from two different end-points (/service/Categories and /service/Products, respectively).</p>
+
+<h2 id="binding-ui-widgets-to-hierarchicaldatasource"><a href="#binding-ui-widgets-to-hierarchicaldatasource">Binding UI widgets to HierarchicalDataSource</a></h2>
+
+<p>At this time, the only widget that is aware of the datasource hierarchy is the TreeView. However,
+since the HierarchicalDataSource inherits the DataSource component, you can share the root level of
+the hierarchy with any DataSource-enabled component.</p>
+
+<h3 id="sharing-a-hierarchicaldatasource-between-a-treeview-and-a-grid"><a href="#sharing-a-hierarchicaldatasource-between-a-treeview-and-a-grid">Sharing a HierarchicalDataSource between a TreeView and a Grid</a></h3>
+
+<pre><code>var Categories = new kendo.data.HierarchicalDataSource({
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/Categories"
+        }
+    },
+    schema: {
+        model: {
+            hasChildren: "Products",
+            id: "CategoryID",
+            children: {
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Products"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        hasChildren: false
+                    }
+                }
+            }
+        }
+    }
+});
+
+$("#treeview").kendoTreeView({
+    dataSource: Categories,
+    dataTextField: ["CategoryName", "ProductName"]
+});
+
+$("#grid").kendoGrid({
+    dataSource: Categories,
+    columns: [
+        { field: "CategoryName", title: "Name" },
+        { field: "Description" }
+    ]
+});
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,399 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API Reference for Kendo Color</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Documentation how to get started with the kendo.Color object. Find examples and guidelines for methods, fields and events of kendo.Color.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/color.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/color.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendocolor"><a href="#kendocolor">kendo.Color</a></h1>
+
+<p>These objects can be used to manipulate colors.  You cannot instantiate a
+<code>Color</code> object directly, instead you should use <code>kendo.parseColor</code> or one of
+the functions below:</p>
+
+<pre><code>var red = kendo.Color.fromRGB(1, 0, 0, 1);
+var blue = kendo.Color.fromBytes(0, 0, 255, 1);
+var green = kendo.Color.fromHSV(120, 1, 1, 1);
+</code></pre>
+
+<p>We support three color representations: as RGB (where the values are float
+numbers between 0 and 1), as Bytes (where values are integers between 0 and
+255) or as <a href="http://en.wikipedia.org/wiki/HSL_and_HSV">HSV</a>.  They all
+support transparency via the last argument, a float between 0 and 1.  If
+missing it will default to 1 (fully opaque).</p>
+
+<p>If you are not certain which representation is used internally for a
+particular color object, you can convert it to the one you need using one of
+the methods below.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-diff"><a href="#methods-diff">diff</a></h3>
+
+<p>Computes the relative luminance between two colors.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The relative luminance.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var red = kendo.parseColor("#ff0000");
+
+var crimson = kendo.parseColor("#dc143c");
+var pink = kendo.parseColor("#ffc0cb");
+var white = kendo.parseColor("#ffffff");
+
+console.log(red.diff(crimson)); // logs 17.118
+console.log(red.diff(pink));    // logs 115.459
+console.log(red.diff(white));   // logs 153.042
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-equals"><a href="#methods-equals">equals</a></h3>
+
+<p>Compares two color objects for equality.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> returns <code>true</code> if the two colors are the same. Otherwise, <code>false</code></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var red = kendo.Color.fromRGB(1,0,0);
+var green = kendo.Color.fromRGB(0,1,0);
+console.log(red.equals(green)); // logs false
+
+var opaqueRed = kendo.Color.fromBytes(255,0,0,1);
+console.log(red.equals(opaqueRed)); // logs true
+&lt;/script&gt;
+</code></pre>
+
+<h4>toHSV</h4>
+
+<p>Returns the color in HSV representation.  As HSV object, it has the
+following properties:</p>
+
+<ul>
+<li>
+<code>h</code> -- hue, an integer between 0 and 360</li>
+<li>
+<code>s</code> -- saturation, floating point between 0 and 1</li>
+<li>
+<code>v</code> -- value, floating point between 0 and 1</li>
+<li>
+<code>a</code> -- alpha, floating point between 0 and 1</li>
+</ul>
+
+<p>This does not modify the current object, it creates a new one instead.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> An object with h, s, v and a fields.</p>
+
+<h4>toRGB</h4>
+
+<p>Returns the color in RGB representation.  The result has the following
+properties:</p>
+
+<ul>
+<li>
+<code>r</code> -- red component as floating point between 0 and 1</li>
+<li>
+<code>g</code> -- green component</li>
+<li>
+<code>b</code> -- blue component</li>
+<li>
+<code>a</code> -- alpha</li>
+</ul>
+
+<p>This does not modify the current object, it creates a new one instead.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> An object with r, g, b and a fields.</p>
+
+<h4>toBytes</h4>
+
+<p>Returns the color in "Bytes" representation.  It has the same properties as
+RGB, but <code>r</code>, <code>g</code> and <code>b</code> are integers between 0 and 255 instead of floats.</p>
+
+<p>This does not modify the current object, it creates a new one instead.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> An object with r, g and b fields.</p>
+
+<h4>toHex</h4>
+
+<p>Returns a string in <code>"FF0000"</code> form (without a leading <code>#</code>).</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The color in hex notation.</p>
+
+<h4>toCss</h4>
+
+<p>Like <code>toHex</code>, but includes a leading <code>#</code>.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The color in CSS notation.</p>
+
+<h4>toCssRgba</h4>
+
+<p>Returns the color in RGBA notation (includes the opacity).</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The color in RGBA notation.</p>
+
+<h4>toDisplay</h4>
+
+<p>Returns the color in the best notation supported by the current browser.  In
+IE &lt; 9 this returns the <code>#FF0000</code> form; in all other browsers it returns the
+RGBA form.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The color in the best notation supported by the current browser.</p>
+
+<h2 id="static-methods"><a href="#static-methods">Static Methods</a></h2>
+
+<h3 id="fromrgb"><a href="#fromrgb">fromRGB</a></h3>
+
+<p>Creates a new color object from the rgba channels in the 0..1 range.</p>
+
+<h4>Parameters</h4>
+
+<h5>red <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The red channel of the color, in the range from 0 to 1.</p>
+
+<h5>green <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The green channel of the color, in the range from 0 to 1.</p>
+
+<h5>blue <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The blue channel of the color, in the range from 0 to 1.</p>
+
+<h5>alpha <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(optional)</em>
+</h5>
+
+<p>The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omitted.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.Color</code> A new object that represents the color with the passed color coordinates</p>
+
+<h4>Example - get the level of the node</h4>
+
+<pre><code>&lt;script&gt;
+var color = kendo.Color.fromRGB(1,0,0);
+console.log(color.toCss()); // logs "#ff0000"
+
+color = kendo.Color.fromRGB(0,1,0,1);
+console.log(color.toCssRgba()); // logs "rgba(0, 255, 0, 1)"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fromhsv"><a href="#fromhsv">fromHSV</a></h3>
+
+<p>Creates a new color object from the hsva channels in the 0..1 range.</p>
+
+<h4>Parameters</h4>
+
+<h5>hue <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The hue channel of the color, in the range from 0 to 1.</p>
+
+<h5>saturation <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The saturation channel of the color, in the range from 0 to 1.</p>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The value channel of the color, in the range from 0 to 1.</p>
+
+<h5>alpha <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(optional)</em>
+</h5>
+
+<p>The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omitted.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.Color</code> A new object that represents the color with the passed color coordinates</p>
+
+<h4>Example - get the level of the node</h4>
+
+<pre><code>&lt;script&gt;
+var color = kendo.Color.fromHSV(1,.5,.5);
+console.log(color.toCss()); // logs "#804140"
+
+color = kendo.Color.fromHSV(.5,1,.5,1);
+console.log(color.toCssRgba()); // logs "rgba(128, 1, 0, 1)"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="frombytes"><a href="#frombytes">fromBytes</a></h3>
+
+<p>Creates a new color object from the rgba channels in the 0..255 range.</p>
+
+<h4>Parameters</h4>
+
+<h5>red <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The red channel of the color, in the range from 0 to 255.</p>
+
+<h5>green <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The green channel of the color, in the range from 0 to 255.</p>
+
+<h5>blue <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The blue channel of the color, in the range from 0 to 255.</p>
+
+<h5>alpha <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(optional)</em>
+</h5>
+
+<p>The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omitted.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.Color</code> A new object that represents the color with the passed color coordinates</p>
+
+<h4>Example - get the level of the node</h4>
+
+<pre><code>&lt;script&gt;
+var color = kendo.Color.fromBytes(0,0,255);
+console.log(color.toCss()); // logs "#0000ff"
+
+color = kendo.Color.fromBytes(255,255,0,.5);
+console.log(color.toCssRgba()); // logs "rgba(255, 255, 0, 0.5)"
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

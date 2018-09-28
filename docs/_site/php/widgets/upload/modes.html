@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>How to configure the upload mode of the Kendo UI Upload widget</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn how to use the synchronous and asynchronous modes of Kendo UI Upload for PHP, handle save and remove requests.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/php-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/php-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/php-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/php-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/php-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("php/widgets/upload/modes.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//php/widgets/upload/modes.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="upload"><a href="#upload">Upload</a></h1>
+
+<p>The Upload supports two modes of operation - synchronous and asynchronous.</p>
+
+<p>This help topic explains how to use these modes with PHP.
+Please review the main <a href="/kendo-ui/web/upload/modes">Upload Modes</a> help topic for general information.</p>
+
+<h2 id="synchronous-mode"><a href="#synchronous-mode">Synchronous mode</a></h2>
+
+<p>In this mode the upload is executed as part of the form submit (synchronously). No dedicated action methods are required.</p>
+
+<ol>
+<li>
+<p>Add a form declaration and set a controller action.</p>
+
+<pre><code>&lt;form method="post" action="form-action.php"&gt;
+&lt;/form&gt;
+</code></pre>
+</li>
+<li>
+<p>Add the Upload inside the form. The only required setting is a Name.</p>
+
+<pre><code>&lt;?php
+$upload = new \Kendo\UI\Upload('upload');
+echo $upload-&gt;render();
+?&gt;
+</code></pre>
+</li>
+<li>
+<p>Add a submit and reset buttons to the form.</p>
+
+<pre><code>&lt;input type="submit" value="Send" class="t-button" /&gt;
+&lt;input type="reset" value="Reset" class="t-button" /&gt;
+</code></pre>
+</li>
+<li>
+<p>The form should look like this:</p>
+
+<pre><code>&lt;form method="post" action="&lt;c:url value='/web/upload/' /&gt;"&gt;
+    &lt;?php
+    $upload = new \Kendo\UI\Upload('upload');
+    echo $upload-&gt;render();
+    ?&gt;
+    &lt;input type="submit" value="Send" class="t-button" /&gt;
+    &lt;input type="reset" value="Reset" class="t-button" /&gt;
+&lt;/form&gt;
+</code></pre>
+</li>
+<li>
+<p>Process the files in "form-action.php". This requires no special server handling compared to a regular input.</p>
+
+<pre><code>&lt;?php
+// Check if any files are uploaded
+if (isset($_FILES['files'])) {
+    $files = $_FILES['files'];
+    $count = count($files['name']);
+
+    for ($index = 0; $index &lt; $count; $index++) {
+        // Save the uploaded files
+        $file = $files['tmp_name'][$index];
+        if (is_uploaded_file($file)) {
+            move_uploaded_file($file, './' . $files['name'][$index]);
+        }
+?&gt;
+</code></pre>
+</li>
+</ol>
+
+<h2 id="asynchronous-mode"><a href="#asynchronous-mode">Asynchronous mode</a></h2>
+
+<p>In this mode the files are uploaded to a handler without interrupting the user interaction with the page.</p>
+
+<h3 id="save-handler"><a href="#save-handler">Save handler</a></h3>
+
+<ol>
+<li>
+<p>Add the upload to the page:</p>
+
+<pre><code>&lt;?php
+$upload = new \Kendo\UI\Upload('files[]');
+$upload-&gt;async(array(
+        'saveUrl' =&gt; 'save.php'
+));
+?&gt;
+</code></pre>
+</li>
+</ol>
+
+<p>The name attribute is required and must be unique. It will be used as a form field name in the requests to the server.</p>
+
+<p>Each request may contain multiple files hence the array-like syntax.</p>
+
+<ol>
+<li>
+<p>Implement the Save handler (save.php):</p>
+
+<pre><code>&lt;?php
+$files = $_FILES['files'];
+// Save the uploaded files
+for ($index = 0; $index &lt; count($files['name']); $index++) {
+    $file = $files['tmp_name'][$index];
+    if (is_uploaded_file($file)) {
+        move_uploaded_file($file, './' . $files['name'][$index]);
+    }
+}
+?&gt;
+</code></pre>
+</li>
+</ol>
+
+<h3 id="remove-handler"><a href="#remove-handler">Remove handler</a></h3>
+
+<p>Users can remove files even after they've been uploaded asynchronously. To enable this feature you need a Remove action.</p>
+
+<ol>
+<li>
+<p>Specify a Remove action</p>
+
+<pre><code>&lt;?php
+$upload = new \Kendo\UI\Upload('files[]');
+$upload-&gt;async(array(
+        'saveUrl' =&gt; 'save.php',
+        'removeUrl' =&gt; 'remove.php',
+        'removeField' =&gt; 'fileNames[]'
+));
+?&gt;
+</code></pre>
+</li>
+<li>
+<p>Implement the Remove handler (remove.php):</p>
+
+<pre><code>$fileNames = $_POST['fileNames'];
+// Delete uploaded files
+for ($index = 0; $index &lt; count($fileNames); $index++) {
+    unlink('./' . $fileNames[$index]);
+}
+</code></pre>
+</li>
+</ol>
+
+<blockquote>
+<p>The Remove action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.</p>
+</blockquote>
+
+<h3 id="disabling-automatic-upload"><a href="#disabling-automatic-upload">Disabling automatic upload</a></h3>
+
+<p>The selected files will be uploaded immediately by default. You can change this behavior by setting autoUpload to false.</p>
+
+<pre><code>    &lt;?php
+    $upload = new \Kendo\UI\Upload('files[]');
+    $upload-&gt;async(array(
+            'saveUrl' =&gt; 'save.php',
+            'removeUrl' =&gt; 'remove.php',
+            'removeField' =&gt; 'fileNames[]',
+            'autoUpload' =&gt; false
+    ));
+    ?&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

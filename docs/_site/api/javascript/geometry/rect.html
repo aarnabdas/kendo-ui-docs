@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API reference for methods and fields of Kendo UI Geometry Rectangle</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/geometry/rect.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/geometry/rect.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendogeometryrect"><a href="#kendogeometryrect">kendo.geometry.Rect</a></h1>
+
+<p>A rectangle with set origin (top-left corner) and size.</p>
+
+<h2 id="example---creating-a-rectangle"><a href="#example---creating-a-rectangle">Example - Creating a rectangle</a></h2>
+
+<pre><code>    &lt;script&gt;
+        var geom = kendo.geometry;
+        var origin = new geom.Point(10, 10);
+        var size = new geom.Size(20, 20);
+        var rect = new geom.Rect(origin, size);
+    &lt;/script&gt;
+</code></pre>
+
+<h2 id="example---creating-a-rectangle-short-syntax"><a href="#example---creating-a-rectangle-short-syntax">Example - Creating a rectangle (short syntax)</a></h2>
+
+<pre><code>    &lt;script&gt;
+        var geom = kendo.geometry;
+        var rect = new geom.Rect([10, 10], [20, 20]);
+    &lt;/script&gt;
+</code></pre>
+
+<h2 id="constructor-parameters"><a href="#constructor-parameters">Constructor Parameters</a></h2>
+
+<h3 id="origin-kendogeometrypointarray">
+<a href="#origin-kendogeometrypointarray">origin </a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The origin (top-left corner) of the rectangle or equivalent [x, y] array.</p>
+
+<h3 id="size-kendogeometrysizearray">
+<a href="#size-kendogeometrysizearray">size </a><a href="/kendo-ui/api/javascript/geometry/size" class="type-link"><code>kendo.geometry.Size |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The size of the rectangle or an equivalent [width, height] array.</p>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-origin">
+<a href="#fields-origin">origin </a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h3>
+
+<p>The origin (top-left corner) of the rectangle.</p>
+
+<h3 id="fields-size">
+<a href="#fields-size">size </a><a href="/kendo-ui/api/javascript/geometry/size" class="type-link"><code>kendo.geometry.Size</code></a>
+</h3>
+
+<p>The size of the rectangle.</p>
+
+<h2 id="class-methods"><a href="#class-methods">Class methods</a></h2>
+
+<h3 id="frompoints"><a href="#frompoints">fromPoints</a></h3>
+
+<p>Creates a Rect instance that contains the points given as arguments.</p>
+
+<h4>Parameters</h4>
+
+<h5>pointA <a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The first point.</p>
+
+<h5>pointB <a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The second point.</p>
+
+<p>Multiple arguments are accepted.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The new Rect instance.</p>
+
+<h3 id="union"><a href="#union">union</a></h3>
+
+<p>Creates a new Rect instance that encloses the two rectangles given as arguments.</p>
+
+<h4>Parameters</h4>
+
+<h5>rectA <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The first rectangle.</p>
+
+<h5>rectB <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The second rectangle.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The new Rect instance.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-bbox"><a href="#methods-bbox">bbox</a></h3>
+
+<p>Returns the bounding box of this rectangle after applying the
+specified transformation matrix.</p>
+
+<h4>Parameters</h4>
+
+<h5>matrix <a href="/kendo-ui/api/javascript/geometry/matrix" class="type-link"><code>kendo.geometry.Matrix</code></a>
+</h5>
+
+<p>Transformation matrix to apply.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box after applying the transformation matrix.</p>
+
+<h3 id="methods-bottomLeft"><a href="#methods-bottomLeft">bottomLeft</a></h3>
+
+<p>Gets the position of the bottom-left corner of the rectangle.
+This is also the rectangle origin</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The position of the bottom-left corner.</p>
+
+<h3 id="methods-bottomRight"><a href="#methods-bottomRight">bottomRight</a></h3>
+
+<p>Gets the position of the bottom-right corner of the rectangle.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The position of the bottom-right corner.</p>
+
+<h3 id="methods-center"><a href="#methods-center">center</a></h3>
+
+<p>Gets the position of the center of the rectangle.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The position of the center.</p>
+
+<h3 id="methods-clone"><a href="#methods-clone">clone</a></h3>
+
+<p>Creates a new instance with the same origin and size.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> A new Rect instance with the same origin and size.</p>
+
+<h3 id="methods-equals"><a href="#methods-equals">equals</a></h3>
+
+<p>Compares this rectangle with another instance.</p>
+
+<h4>Parameters</h4>
+
+<h5>other <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle to compare with.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> true if the origin and size is the same for both rectangles; false otherwise.</p>
+
+<h3 id="methods-getOrigin"><a href="#methods-getOrigin">getOrigin</a></h3>
+
+<p>Gets the origin (top-left point) of the rectangle.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The origin (top-left point).</p>
+
+<h3 id="methods-getSize"><a href="#methods-getSize">getSize</a></h3>
+
+<p>Gets the rectangle size.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/size" class="type-link"><code>kendo.geometry.Size</code></a> The current rectangle Size.</p>
+
+<h3 id="methods-height"><a href="#methods-height">height</a></h3>
+
+<p>Gets the rectangle height.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The rectangle height.</p>
+
+<h3 id="methods-setOrigin"><a href="#methods-setOrigin">setOrigin</a></h3>
+
+<p>Sets the origin (top-left point) of the rectangle.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The new origin Point or equivalent [x, y] array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The current rectangle instance.</p>
+
+<h3 id="methods-setSize"><a href="#methods-setSize">setSize</a></h3>
+
+<p>Sets the rectangle size.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="/kendo-ui/api/javascript/geometry/size" class="type-link"><code>kendo.geometry.Size |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The new rectangle Size or equivalent [width, height] array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The current rectangle instance.</p>
+
+<h3 id="methods-topLeft"><a href="#methods-topLeft">topLeft</a></h3>
+
+<p>Gets the position of the top-left corner of the rectangle.
+This is also the rectangle origin</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The position of the top-left corner.</p>
+
+<h3 id="methods-topRight"><a href="#methods-topRight">topRight</a></h3>
+
+<p>Gets the position of the top-right corner of the rectangle.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a> The position of the top-right corner.</p>
+
+<h3 id="methods-width"><a href="#methods-width">width</a></h3>
+
+<p>Gets the rectangle width.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The rectangle width.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

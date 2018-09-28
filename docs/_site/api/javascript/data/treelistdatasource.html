@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API Reference for Kendo UI TreeListDataSource</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn more about the configuration of Kendo UI TreeListDataSource, methods and events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/data/treelistdatasource.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/data/treelistdatasource.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatatreelistdatasource"><a href="#kendodatatreelistdatasource">kendo.data.TreeListDataSource</a></h1>
+
+<p>The data source used by the <a href="/kendo-ui/api/web/TreeList">kendo.ui.TreeList</a> widget.
+Inherits from <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a>. The TreeListDataSource contains instances of the
+<a href="/kendo-ui/api/javascript/data/treelistmodel">kendo.data.TreeListModel</a> class.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
+
+<h3 id="configuration-schema">
+<a href="#configuration-schema">schema </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The schema configuration of the TreeListDataSource.</p>
+
+<h3 id="configuration-schema.model">
+<a href="#configuration-schema.model">schema.model </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The model configuration of the TreeListDataSource. See <a href="/kendo-ui/api/javascript/data/treelistmodel">kendo.data.TreeListModel</a> for more info.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+
+<h3 id="methods-load"><a href="#methods-load">load</a></h3>
+
+<p>Loads the child nodes of a model.</p>
+
+<h4>Parameters</h4>
+
+<h5>model <code>kendo.data.TreeListModel</code>
+</h5>
+
+<p>The model that must be loaded.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved when the child nodes have been loaded, or rejected if an HTTP error occurs.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.TreeListDataSource({
+    transport: {
+      read: {
+        url: "http://demos.telerik.com/kendo-ui/service/EmployeeDirectory",
+        dataType: "jsonp"
+      }
+    },
+    schema: {
+      model: {
+        id: "EmployeeId",
+        fields: {
+          EmployeeId: { type: "number", nullable: false },
+          parentId: { field: "ReportsTo", nullable: true }
+        }
+      }
+    }
+  });
+
+  dataSource.read().then(function() {
+    // load child nodes of first root item
+    var root = dataSource.at(0);
+    return dataSource.load(root);
+  }).then(function() {
+    // log child nodes of first root
+    var root = dataSource.at(0);
+    var children = dataSource.childNodes(root);
+    console.log(children);
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-childNodes"><a href="#methods-childNodes">childNodes</a></h3>
+
+<p>Child nodes for model.</p>
+
+<h4>Parameters</h4>
+
+<h5>model <code>kendo.data.TreeListModel</code>
+</h5>
+
+<p>The model whose children must be returned.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> of the child items.</p>
+
+<h3 id="methods-rootNodes"><a href="#methods-rootNodes">rootNodes</a></h3>
+
+<p>Return all root nodes.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> of the root items.</p>
+
+<h3 id="methods-parentNode"><a href="#methods-parentNode">parentNode</a></h3>
+
+<p>The parent of given node.</p>
+
+<h4>Parameters</h4>
+
+<h5>model <code>kendo.data.TreeListModel</code>
+</h5>
+
+<p>The model whose parent must be returned.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.data.TreeListModel</code> parent of the node.</p>
+
+<h3 id="methods-level"><a href="#methods-level">level</a></h3>
+
+<p>The hierarchical level of the node.</p>
+
+<h4>Parameters</h4>
+
+<h5>model <code>kendo.data.TreeListModel</code>
+</h5>
+
+<p>The model whose level must be calculated.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> the hierachy level of the node.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

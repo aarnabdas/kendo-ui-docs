@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Visual Basic syntax in Kendo UI MVC wrapper declarations</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Example of correct VB Syntax which is applicable to anonymous types and lambda expressions in Kendo UI MVC wrapper declarations.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/vb.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/vb.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="vb-syntax"><a href="#vb-syntax">VB Syntax</a></h1>
+
+<p>The following examples show the correct Visual Basic (VB) syntax when using <a href="http://msdn.microsoft.com/en-us/library/bb531253.aspx">lamba expressions</a> and
+<a href="http://msdn.microsoft.com/en-us/library/bb384767.aspx">anonymous types</a> inside Kendo UI MVC wrapper declarations.</p>
+
+<h2 id="editor"><a href="#editor">Editor</a></h2>
+
+<pre><code>@Code
+
+    Html.Kendo().Editor() _
+    .Name("Editor") _
+    .HtmlAttributes(New With {.style = "width: 740px;height:440px"}) _
+    .Value(Sub()@&lt;text&gt;&lt;p&gt;Hellow World!&lt;/p&gt;&lt;/text&gt; End Sub) _
+    .Tools(Sub(t)
+                   t.Clear()
+                   t.FontName(Sub(items)
+                                      items.Add("Garamond", "garamond")
+                                      items.Add("Verdana", "verdana")
+                              End Sub)
+                   t.CustomButton(Sub(cb)
+                                          cb.Name("custom")
+                                          cb.ToolTip("horizontal rule")
+                                          cb.Exec(Function()
+                                                          Return "function(e) { alert('exec'); }"
+                                                  End Function)
+                                  End Sub)
+                   t.CustomTemplate(Sub(ct)
+                                            ct.Template("&lt;span&gt;custom template&lt;/span&gt;")
+                                    End Sub)
+           End Sub) _
+    .Render()
+
+End Code
+</code></pre>
+
+<h2 id="tabstrip"><a href="#tabstrip">TabStrip</a></h2>
+
+<pre><code>@Code
+
+    Dim tab As Kendo.Mvc.UI.Fluent.TabStripBuilder = Html.Kendo().TabStrip().Name("TabStrip1")
+
+    tab.Items(Function(f) f.Add().Text("tab 1").Content(Sub()
+                            @&lt;text&gt;HTML content&lt;/text&gt;
+                                                        End Sub))
+    tab.Items(Function(f) f.Add().Text("tab 2").Selected(True).Content("&lt;div&gt;HTML content&lt;/div&gt;"))
+    tab.Render()
+
+End Code
+
+@Code
+    Html.Kendo().TabStrip() _
+        .Name("TabStrip2") _
+        .Items(Function(tabstrip) tabstrip.Add().Text("tab text") _
+            .Selected(True) _
+            .Content(Sub()@&lt;text&gt;html content&lt;/text&gt;
+                    End Sub)) _
+        .Render()
+End Code
+
+@(Html.Kendo().TabStrip() _
+    .Name("TabStrip3") _
+    .Items(Function(tabstrip) tabstrip.Add().Text("tab text") _
+    .Selected(True) _
+    .Content("string content")))
+</code></pre>
+
+<h2 id="grid"><a href="#grid">Grid</a></h2>
+
+<h3 id="view"><a href="#view">View</a></h3>
+
+<pre><code>@Code
+    Html.Kendo().Grid(Of KendoUIMvcVB.Person)() _
+        .Name("Grid") _
+        .Columns(Sub(c)
+                        c.Bound(Function(p) p.PersonID)
+                        c.Bound(Function(p) p.PersonName)
+                        c.Bound(Function(p) p.PersonBirthDate)
+                        c.Template(Sub()
+                                        @&lt;text&gt;server template&lt;/text&gt;
+                                   End Sub).Title("Template column").ClientTemplate("client template")
+                 End Sub) _
+    .Pageable() _
+    .Sortable() _
+    .Filterable() _
+    .DataSource(Function(d)
+                        d.Ajax().Read(Function(read) read.Action("Person_Read", "Home")).Model(Sub(m)
+                                                                                                     m.Id(Function(i) i.PersonID)
+                                                                                               End Sub)
+                End Function) _
+    .Render()
+End Code
+</code></pre>
+
+<h3 id="controller"><a href="#controller">Controller</a></h3>
+
+<pre><code>Imports Kendo.Mvc.Extensions
+Imports Kendo.Mvc.UI
+
+Public Class HomeController
+    Inherits System.Web.Mvc.Controller
+
+    Function Person_Read(&lt;DataSourceRequest&gt;request As DataSourceRequest) As ActionResult
+        Dim result As List(Of Person) = New List(Of Person)
+        Return Json(result.ToDataSourceResult(request))
+    End Function
+
+End Class
+</code></pre>
+
+<h2 id="editor-template"><a href="#editor-template">Editor Template</a></h2>
+
+<pre><code>@ModelType Nullable(Of Integer)
+
+@Code
+    Html.Kendo().NumericTextBoxFor(Function(m) m) _
+      .HtmlAttributes(New With {.style = "width:100%"}) _
+    .Render()
+End Code
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

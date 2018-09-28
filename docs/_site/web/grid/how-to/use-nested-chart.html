@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Use nested chart</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Use nested chart">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/grid/how-to/use-nested-chart.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/grid/how-to/use-nested-chart.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="use-nested-kendo-ui-chart"><a href="#use-nested-kendo-ui-chart">Use nested Kendo UI chart</a></h1>
+
+<p>The example below demonstrates how nest a Kendo UI Chart inside the grid template</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>    &lt;script&gt; 
+      var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne", "Nige"],
+          lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth", "White"],
+          cities = ["Seattle", "Tacoma", "Kirkland", "Redmond", "London", "Philadelphia", "New York", "Seattle", "London", "Boston"],
+          titles = ["Accountant", "Vice President, Sales", "Sales Representative", "Technical Support", "Sales Manager", "Web Designer",
+                    "Software Developer", "Inside Sales Coordinator", "Chief Techical Officer", "Chief Execute Officer"],
+          birthDates = [new Date("1948/12/08"), new Date("1952/02/19"), new Date("1963/08/30"), new Date("1937/09/19"), new Date("1955/03/04"), new Date("1963/07/02"), new Date("1960/05/29"), new Date("1958/01/09"), new Date("1966/01/27"), new Date("1966/03/27")];
+
+      function createRandomData(count) {
+        var data = [],
+            now = new Date();
+        for (var i = 0; i &lt; count; i++) {
+          var firstName = firstNames[Math.floor(Math.random() * firstNames.length)],
+              lastName = lastNames[Math.floor(Math.random() * lastNames.length)],
+              city = cities[Math.floor(Math.random() * cities.length)],
+              title = titles[Math.floor(Math.random() * titles.length)],
+              birthDate = birthDates[Math.floor(Math.random() * birthDates.length)],
+              age = now.getFullYear() - birthDate.getFullYear(),
+              tableValues = [];
+
+          var projLength = Math.floor(Math.random()*10);
+          for(var t=0;t&lt;projLength;t++){
+            tableValues.push({year:2005+t,value:Math.floor(Math.random()*1000)})
+          }
+
+          data.push({
+            Id: i + 1,
+            FirstName: firstName,
+            LastName: lastName,
+            City: city,
+            Title: title,
+            BirthDate: birthDate,
+            Age: age,
+            tableValues:tableValues
+          });
+        }
+        return data;
+      }
+    &lt;/script&gt;
+    &lt;div id="grid"&gt;&lt;/div&gt;
+    &lt;script&gt;
+      $(document).ready(function() {
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: createRandomData(50),
+            pageSize: 10
+          },
+          groupable: true,
+          sortable: true,
+          pageable: {
+            refresh: true,
+            pageSizes: true
+          },
+          dataBound:function(){
+            var grid = this;
+            $(".chart").each(function(){
+              var chart = $(this);
+              var tr = chart.closest('tr');
+              var model = grid.dataItem(tr);
+              chart.kendoChart({ 
+                legend:{
+                  visible:false
+                },
+                dataSource: {
+                  data: model.tableValues
+                },
+                series: [{
+                  field: "value",
+                  name: "United States"
+                }],
+                valueAxis: {
+                  labels: {
+                    format: "{0}$"
+                  }
+                },
+                categoryAxis: {
+                  field: "year"
+                },
+
+                tooltip: {
+                  visible: true,
+                  format: "{0}$"
+                }
+              });
+            })
+          },
+          columns: [ {
+            field: "FirstName",
+            width: 90,
+            title: "First Name"
+          } , {
+            field: "LastName",
+            width: 90,
+            title: "Last Name"
+          } , {
+            width: 100,
+            field: "City"
+          } , {
+            field: "Title"
+          } , {
+            template:'&lt;div class="chart" style="height:200px"&gt;&lt;/div&gt;'   ,
+            width:350
+          },{
+            field: "BirthDate",
+            title: "Birth Date",
+            template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
+          } , {
+            width: 50,
+            field: "Age"
+          }]
+        });
+      });
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

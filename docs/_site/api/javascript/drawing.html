@@ -1,0 +1,610 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API reference for Kendo UI Drawing API static functions</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/drawing.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/drawing.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodrawing"><a href="#kendodrawing">kendo.drawing</a></h1>
+
+<p>Helper functions declared in the kendo.drawing namespace.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-align"><a href="#methods-align">align</a></h3>
+
+<p>Aligns drawing elements x axis position to a given rectangle.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be aligned.</p>
+
+<h5>rect <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle in which the elements should be aligned.</p>
+
+<h5>alignment <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>Specifies how should the elements be aligned. The supported values are:</p>
+
+<ul>
+<li>"start" - the elements will be aligned to the rectangle origin.</li>
+<li>"center" - the elements will be aligned to the rectangle center.</li>
+<li>"end" - the elements will be aligned to the right side of the rectangle.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var rect = new Rect([200, 0], [300, 100]);
+  var path = draw.Path.fromRect(new Rect([0, 0], [100, 100]));
+
+  draw.align([path], rect, "center");
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(path);
+  surface.draw(draw.Path.fromRect(rect));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-drawDOM"><a href="#methods-drawDOM">drawDOM</a></h3>
+
+<p>Converts the given DOM element to a <a href="/kendo-ui/framework/drawing/overview">Drawing API</a> scene.</p>
+
+<p>The operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.</p>
+
+<p>The promise will be resolved with the root <a href="drawing/group">Group</a> of the scene.</p>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The root DOM element to draw.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with the root Group of the scene.</p>
+
+<h4>Example - Exporting a DOM element to an image</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var draw = kendo.drawing;
+
+    draw.drawDOM($("#calendar"))
+    .then(function(root) {
+        return draw.exportImage(root);
+    })
+    .done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "calendar.png"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-exportImage"><a href="#methods-exportImage">exportImage</a></h3>
+
+<p>Exports a group of drawing elements as an image.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.</p>
+
+<p>The promise will be resolved with a PNG image encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<blockquote>
+<p>Scene images must be of same origin or <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image">CORS-enabled</a>.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>group <a href="/kendo-ui/api/javascript/drawing/group" class="type-link"><code>kendo.drawing.Group</code></a>
+</h5>
+
+<p>The root group containing all elements to export.</p>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>Parameters for the exported image.</p>
+
+<h5>options.width <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The width of the exported image. Defaults to the scene width.</p>
+
+<h5>options.height <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The height of the exported image. Defaults to the scene height.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a PNG image encoded as a Data URI.</p>
+
+<h4>Example - Exporting a drawing to an image</h4>
+
+<pre><code>&lt;script&gt;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+
+    var rect = new geom.Rect([5, 5], [240, 240]);
+    var path = draw.Path.fromRect(rect).stroke("red", 5);
+
+    var root = new draw.Group();
+    root.append(path);
+
+    draw.exportImage(root, { width: "250px", height: "250px" }).done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "frame.png"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-exportPDF"><a href="#methods-exportPDF">exportPDF</a></h3>
+
+<p>Exports a group of drawing elements as a PDF file.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.</p>
+
+<p>The promise will be resolved with a PDF file encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<blockquote>
+<p>Scene images must be of same origin or <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image">CORS-enabled</a>.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>group <a href="/kendo-ui/api/javascript/drawing/group" class="type-link"><code>kendo.drawing.Group</code></a>
+</h5>
+
+<p>The root group containing all elements to export.</p>
+
+<h5>options <a href="/kendo-ui/api/javascript/drawing/pdfoptions" class="type-link"><code>kendo.drawing.PDFOptions</code></a>
+</h5>
+
+<p>Parameters for the exported PDF file.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a PDF file encoded as a Data URI.</p>
+
+<h4>Example - Exporting a drawing to a PDF file</h4>
+
+<pre><code>&lt;script&gt;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+
+    var rect = new geom.Rect([5, 5], [240, 240]);
+    var path = draw.Path.fromRect(rect).stroke("red", 5);
+
+    var root = new draw.Group();
+    root.append(path);
+
+    draw.exportPDF(root, { paperSize: "A5", landscape: true }).done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "frame.pdf"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-exportSVG"><a href="#methods-exportSVG">exportSVG</a></h3>
+
+<p>Exports a group of drawing elements as an SVG document.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.</p>
+
+<p>The promise will be resolved with a SVG document encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>group <a href="/kendo-ui/api/javascript/drawing/group" class="type-link"><code>kendo.drawing.Group</code></a>
+</h5>
+
+<p>The root group containing all elements to export.</p>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>optional</em>
+</h5>
+
+<p>Export options.</p>
+
+<h5>options.raw <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h5>
+
+<p>Resolves the promise with the raw SVG document without the Data URI prefix.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a SVG document encoded as a Data URI.</p>
+
+<h4>Example - Exporting a drawing to an SVG document</h4>
+
+<pre><code>&lt;script&gt;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+
+    var rect = new geom.Rect([5, 5], [240, 240]);
+    var path = draw.Path.fromRect(rect).stroke("red", 5);
+
+    var root = new draw.Group();
+    root.append(path);
+
+    draw.exportSVG(root).done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "frame.svg"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-fit"><a href="#methods-fit">fit</a></h3>
+
+<p>Scales uniformly an element so that it fits in a given rectangle. No scaling will be applied if the element is already small enough to fit in the rectangle.</p>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="/kendo-ui/api/javascript/drawing/element" class="type-link"><code>kendo.drawing.Element</code></a>
+</h5>
+
+<p>The drawing element that should be fitted.</p>
+
+<h5>rect <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle in which the elements should be fitted.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+
+  var group = new draw.Group();
+  var rect = new Rect([0, 0], [200, 100]);
+  var path = draw.Path.fromRect(new Rect([0, 0], [300, 300]), {
+    fill: {
+      color: "#ff0000"
+    }
+  });
+  group.append(path, draw.Path.fromRect(rect));
+
+  draw.fit(path, rect);
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(group);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-stack"><a href="#methods-stack">stack</a></h3>
+
+<p>Stacks drawing elements horizontally.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be stacked.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var Path = draw.Path;
+  var pathRect = new Rect([0, 0], [100, 100]);
+
+  var pathA = Path.fromRect(pathRect);
+  var pathB = Path.fromRect(pathRect);
+        var pathC = Path.fromRect(pathRect);
+
+  draw.stack([pathA, pathB, pathC]);
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(new draw.Group().append(pathA, pathB, pathC));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-vAlign"><a href="#methods-vAlign">vAlign</a></h3>
+
+<p>Aligns drawing elements y axis position to a given rectangle.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be aligned.</p>
+
+<h5>rect <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle in which the elements should be aligned.</p>
+
+<h5>alignment <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>Specifies how should the elements be aligned. The supported values are:</p>
+
+<ul>
+<li>"start" - the elements will be aligned to the rectangle origin.</li>
+<li>"center" - the elements will be aligned to the rectangle center.</li>
+<li>"end" - the elements will be aligned to the bottom side of the rectangle.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface" style="height: 300px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var rect = new Rect([0, 0], [100, 300]);
+  var path = draw.Path.fromRect(new Rect([0, 0], [100, 100]));
+
+  draw.vAlign([path], rect, "center");
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(path);
+  surface.draw(draw.Path.fromRect(rect));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-vStack"><a href="#methods-vStack">vStack</a></h3>
+
+<p>Stacks drawing elements vertically.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be stacked.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface" style="height:300px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var Path = draw.Path;
+  var pathRect = new Rect([0, 0], [100, 100]);
+
+  var pathA = Path.fromRect(pathRect);
+  var pathB = Path.fromRect(pathRect);
+  var pathC = Path.fromRect(pathRect);
+
+  draw.vStack([pathA, pathB, pathC]);
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(new draw.Group().append(pathA, pathB, pathC));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-vWrap"><a href="#methods-vWrap">vWrap</a></h3>
+
+<p>Stacks drawing elements vertically. Multiple stacks will be used if the elements height exceeds the given rectangle height.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be wrapped.</p>
+
+<h5>rect <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle in which the elements should be wrapped.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> An array with the stacks. Each stack is an <code>Array</code> holding the stack drawing elements.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface" style="height:300px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var Path = draw.Path;
+  var rect = new Rect([0, 0], [250, 250])
+  var pathRect = new Rect([0, 0], [100, 100]);
+  var group = new draw.Group();
+  var pathA = Path.fromRect(pathRect);
+  var pathB = Path.fromRect(pathRect);
+  var pathC = Path.fromRect(pathRect);
+
+  var stacks = draw.vWrap([pathA, pathB, pathC], rect);
+  for (var idx = 0; idx &lt; stacks.length; idx++) {
+    var stackGroup = new draw.Group();
+    stackGroup.append.apply(stackGroup, stacks[idx]);
+    group.append(stackGroup);
+  }
+  draw.stack(group.children);
+
+  group.append(Path.fromRect(rect));
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(group);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-wrap"><a href="#methods-wrap">wrap</a></h3>
+
+<p>Stacks drawing elements horizontally. Multiple stacks will be used if the elements width exceeds the given rectangle width.</p>
+
+<h4>Parameters</h4>
+
+<h5>elements <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array with the drawing elements that should be wrapped.</p>
+
+<h5>rect <a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a>
+</h5>
+
+<p>The rectangle in which the elements should be wrapped.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> An array with the stacks. Each stack is an <code>Array</code> holding the stack drawing elements.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="surface" style="height:300px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var draw = kendo.drawing;
+  var Rect = kendo.geometry.Rect;
+  var Path = draw.Path;
+  var rect = new Rect([0, 0], [250, 250])
+  var pathRect = new Rect([0, 0], [100, 100]);
+  var group = new draw.Group();
+  var pathA = Path.fromRect(pathRect);
+  var pathB = Path.fromRect(pathRect);
+  var pathC = Path.fromRect(pathRect);
+
+  var stacks = draw.wrap([pathA, pathB, pathC], rect);
+  for (var idx = 0; idx &lt; stacks.length; idx++) {
+    var stackGroup = new draw.Group();
+    stackGroup.append.apply(stackGroup, stacks[idx]);
+    group.append(stackGroup);
+  }
+  draw.vStack(group.children);
+
+  group.append(Path.fromRect(rect));
+
+  var surface = draw.Surface.create($("#surface"));
+  surface.draw(group);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

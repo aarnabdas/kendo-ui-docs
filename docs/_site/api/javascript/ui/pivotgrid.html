@@ -1,0 +1,3464 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI PivotGrid</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Code examples for PivotGrid UI widget configuration, learn how to use methods and which events to set once the grid UI widget detail is initialized and expanded.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/pivotgrid.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/pivotgrid.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouipivotgrid"><a href="#kendouipivotgrid">kendo.ui.PivotGrid</a></h1>
+
+<p>Represents the Kendo UI PivotGrid widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><code>kendo.data.PivotDataSource</code>
+</h3>
+
+<p>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a>
+instance.</p>
+
+<p>If the <code>dataSource</code> option is set to a JavaScript object the widget will initialize a new <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance using that value as data source configuration.</p>
+
+<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+
+<h4>Example - set dataSource as a JavaScript object</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as an existing kendo.data.PivotDataSource instance</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+    type: "xmla",
+    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+    rows: [{ name: "[Product].[Product]" }],
+    measures: ["[Measures].[Internet Sales Amount]"],
+    transport: {
+        connection: {
+            catalog: "Adventure Works DW 2008R2",
+            cube: "Adventure Works"
+        },
+        read: {
+            url: "http://demos.telerik.com/olap/msmdpump.dll",
+            dataType: "text",
+            contentType: "text/xml",
+            type: "POST"
+        }
+    },
+    schema: {
+        type: "xmla"
+    }
+});
+
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: dataSource
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-autoBind">
+<a href="#configuration-autoBind">autoBind </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will not bind to the data source during initialization. In this case data binding will occur when the <a href="/kendo-ui/api/framework/datasource#events-change">change</a> event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</p>
+
+<blockquote>
+<p>Setting <code>autoBind</code> to <code>false</code> is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.</p>
+</blockquote>
+
+<h4>Example - disable automatic binding</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    autoBind: false,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+dataSource.read(); // "read()" will fire the "change" event of the dataSource and the widget will be bound
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-reorderable">
+<a href="#configuration-reorderable">reorderable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the user will not be able to add/close/reorder current fields for columns/rows/measures.</p>
+
+<h4>Example - disable fields reordering</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    reorderable: false,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-excel">
+<a href="#configuration-excel">excel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the Kendo UI PivotGrid Excel export settings.</p>
+
+<h3 id="configuration-excel.fileName">
+<a href="#configuration-excel.fileName">excel.fileName </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Export.xslx")</em>
+</h3>
+
+<p>Specifies the file name of the exported Excel file.</p>
+
+<h4>Example - set the default Excel file name</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    excel: {
+        fileName: "InternetSalesAmount.xlsx"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-excel.filterable">
+<a href="#configuration-excel.filterable">excel.filterable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Enables or disables column filtering in the Excel file. Not to be mistaken with the pivotgrid filtering feature.</p>
+
+<h4>Example - enable filtering in the output Excel file</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    excel: {
+        filterable: false
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-excel.forceProxy">
+<a href="#configuration-excel.forceProxy">excel.forceProxy </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to true, the content will be forwarded to <a href="#configuration-excel.proxyURL">proxyURL</a> even if the browser supports saving files locally.</p>
+
+<h3 id="configuration-excel.proxyURL">
+<a href="#configuration-excel.proxyURL">excel.proxyURL </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>The URL of the server side proxy which will stream the file to the end user.</p>
+
+<p>A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.</p>
+
+<p>The developer is responsible for implementing the server-side proxy.</p>
+
+<p>The proxy will receive a POST request with the following parameters in the request body:</p>
+
+<ul>
+<li>contentType: The MIME type of the file</li>
+<li>base64: The base-64 encoded file content</li>
+<li>fileName: The file name, as requested by the caller.</li>
+</ul>
+
+<p>The proxy should return the decoded file with the "Content-Disposition" header set to
+<code>attachment; filename="&lt;fileName.xslx&gt;"</code>.</p>
+
+<h4>Example - set the server proxy URL</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    excel: {
+        proxyURL: "/save"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf">
+<a href="#configuration-pdf">pdf </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the Kendo UI PivotGrid PDF export settings.</p>
+
+<h3 id="configuration-pdf.author">
+<a href="#configuration-pdf.author">pdf.author </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>The author of the PDF document.</p>
+
+<h4>Example - set the author</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        author: "John Doe"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.creator">
+<a href="#configuration-pdf.creator">pdf.creator </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Kendo UI PDF Generator")</em>
+</h3>
+
+<p>The creator of the PDF document.</p>
+
+<h4>Example - set the creator</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        creator: "John Doe"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.date">
+<a href="#configuration-pdf.date">pdf.date </a><code>Date</code>
+</h3>
+
+<p>The date when the PDF document is created. Defaults to <code>new Date()</code>.</p>
+
+<h4>Example - set the date</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        date: new Date("2014/10/10")
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.fileName">
+<a href="#configuration-pdf.fileName">pdf.fileName </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Export.pdf")</em>
+</h3>
+
+<p>Specifies the file name of the exported PDF file.</p>
+
+<h4>Example - set the default PDF file name</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        fileName: "Products.pdf"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.forceProxy">
+<a href="#configuration-pdf.forceProxy">pdf.forceProxy </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to true, the content will be forwarded to <a href="#configuration-pdf.proxyURL">proxyURL</a> even if the browser supports saving files locally.</p>
+
+<h3 id="configuration-pdf.keywords">
+<a href="#configuration-pdf.keywords">pdf.keywords </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Specifies the keywords of the exported PDF file.</p>
+
+<h4>Example - set the keywords</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        keywords: "northwind products"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.landscape">
+<a href="#configuration-pdf.landscape">pdf.landscape </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Set to <code>true</code> to reverse the paper dimensions if needed such that width is the larger edge.</p>
+
+<h4>Example - enable landscape mode</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        landscape: true
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.margin">
+<a href="#configuration-pdf.margin">pdf.margin </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).</p>
+
+<h4>Example - set the margins</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        margin: {
+            left: 10,
+            right: "10pt",
+            top: "10mm",
+            bottom: "1in"
+        }
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.margin.bottom">
+<a href="#configuration-pdf.margin.bottom">pdf.margin.bottom </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The bottom margin. Numbers are considered as "pt" units.</p>
+
+<h3 id="configuration-pdf.margin.left">
+<a href="#configuration-pdf.margin.left">pdf.margin.left </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The left margin. Numbers are considered as "pt" units.</p>
+
+<h3 id="configuration-pdf.margin.right">
+<a href="#configuration-pdf.margin.right">pdf.margin.right </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The right margin. Numbers are considered as "pt" units.</p>
+
+<h3 id="configuration-pdf.margin.top">
+<a href="#configuration-pdf.margin.top">pdf.margin.top </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The top margin. Numbers are considered as "pt" units.</p>
+
+<h3 id="configuration-pdf.paperSize">
+<a href="#configuration-pdf.paperSize">pdf.paperSize </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>(default: "auto")</em>
+</h3>
+
+<p>Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.</p>
+
+<blockquote>
+<p>The size of the content in pixels will match the size of the output in points (1 pixel = 1/72 inch).</p>
+</blockquote>
+
+<p>Supported values:</p>
+
+<ul>
+<li>A predefined size: "A4", "A3" etc</li>
+<li>An array of two numbers specifying the width and height in points (1pt = 1/72in)</li>
+<li>An array of two strings specifying the width and height in units.
+Supported units are "mm", "cm", "in" and "pt".</li>
+</ul>
+
+<h4>Example - set custom paper size</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        paperSize: ["20mm", "20mm"]
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.proxyURL">
+<a href="#configuration-pdf.proxyURL">pdf.proxyURL </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>The URL of the server side proxy which will stream the file to the end user.</p>
+
+<p>A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari. PDF export is not supported in Internet Explorer 8 and below.</p>
+
+<p>The developer is responsible for implementing the server-side proxy.</p>
+
+<p>The proxy will receive a POST request with the following parameters in the request body:</p>
+
+<ul>
+<li>contentType: The MIME type of the file</li>
+<li>base64: The base-64 encoded file content</li>
+<li>fileName: The file name, as requested by the caller.</li>
+</ul>
+
+<p>The proxy should return the decoded file with the "Content-Disposition" header set to
+<code>attachment; filename="&lt;fileName.pdf&gt;"</code>.</p>
+
+<h4>Example - set the server proxy URL</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        proxyURL: "/save"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.proxyTarget">
+<a href="#configuration-pdf.proxyTarget">pdf.proxyTarget </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "_self")</em>
+</h3>
+
+<p>A name or keyword indicating where to display the document returned from the proxy.</p>
+
+<p>If you want to display the document in a new window or iframe,
+the proxy should set the "Content-Disposition" header to <code>inline; filename="&lt;fileName.pdf&gt;"</code>.</p>
+
+<h4>Example - open the generated document in a new window</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        forceProxy: true,
+        proxyURL: "/save",
+        proxyTarget: "_blank"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.subject">
+<a href="#configuration-pdf.subject">pdf.subject </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Sets the subject of the PDF file.</p>
+
+<h4>Example - set the subject</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        subject: "Products"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pdf.title">
+<a href="#configuration-pdf.title">pdf.title </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Sets the title of the PDF file.</p>
+
+<h4>Example - set the title</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdf: {
+        title: "Internet Sales Amount"
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-filterable">
+<a href="#configuration-filterable">filterable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the user will be able to filter by using the field menu.</p>
+
+<h4>Example - enable filtering</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    filterable: true,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sortable">
+<a href="#configuration-sortable">sortable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the user could sort the pivotgrid by clicking the dimension fields. By default sorting is disabled.</p>
+
+<p>Can be set to a JavaScript object which represents the sorting configuration.</p>
+
+<h4>Example - enable sorting</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    sortable: true,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sortable.allowUnsort">
+<a href="#configuration-sortable.allowUnsort">sortable.allowUnsort </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>true</code> the user can get the pivotgrid in unsorted state by clicking the sorted dimension field.</p>
+
+<h4>Example - disable unsorting</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    sortable: {
+        allowUnsort: false
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-columnWidth">
+<a href="#configuration-columnWidth">columnWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The width of the table columns. Value is treated as pixels.</p>
+
+<blockquote>
+<p>This option defines the <strong>minimum</strong> width of the column. If the widget is wider then (column numbers * column width) then the columns will be wider then the defined value. This is done to occupy all available space in the widget wrapper.</p>
+</blockquote>
+
+<h4>Example - set the column width as a number</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    columnWidth: 200,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The height of the PivotGrid. Numeric values are treated as pixels.</p>
+
+<h4>Example - set the height as a number</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the height as a string</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: "550px",
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-columnHeaderTemplate">
+<a href="#configuration-columnHeaderTemplate">columnHeaderTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the content of the column header cell. By default it renders the <em>caption</em> of the tuple member.</p>
+
+<p>The fields which can be used in the template are:</p>
+
+<ul>
+<li>member - the member of the corresponding column header cell</li>
+<li>tuple - the tuple of the corresponding column header cell</li>
+</ul>
+
+<p>For information about the tuple structure check this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.axes">link</a>.</p>
+
+<h4>Example - emphasize the title of a specific member</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+
+&lt;script id="columnTemplate" type="text/x-kendo-template"&gt;
+    # if (member.name === "[Date].[Calendar].[Year].&amp;[2005]") { #
+        &lt;em&gt;#: member.caption #&lt;/em&gt;
+    # } else { #
+        #: member.caption #
+    # } #
+&lt;/script&gt;
+
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    columnHeaderTemplate: $("#columnTemplate").html(),
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true } ],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataCellTemplate">
+<a href="#configuration-dataCellTemplate">dataCellTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.</p>
+
+<p>The fields which can be used in the template are:</p>
+
+<ul>
+<li>columnTuple - the tuple of the corresponding column header cell</li>
+<li>rowTuple - the tuple of the corresponding row header cell</li>
+<li>measure - the value of the data cell measure</li>
+<li>dataItem - the data item itself</li>
+</ul>
+
+<p>For information about the tuple structure check this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.axes">link</a>.
+About the data item structure review this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.data">help topic</a>.</p>
+
+<h4>Example - emphasize the values in <em>2005</em>
+</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+
+&lt;script id="datacelltemplate" type="text/x-kendo-template"&gt;
+    # if (columnTuple.members[0].name === "[Date].[Calendar].[Year].&amp;[2005]") { #
+        &lt;em&gt;#: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #&lt;/em&gt;
+    # } else { #
+        #: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #
+    # } #
+&lt;/script&gt;
+
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    dataCellTemplate: $("#dataCellTemplate").html(),
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true } ],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-kpiStatusTemplate">
+<a href="#configuration-kpiStatusTemplate">kpiStatusTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the content of the <code>KPI Status</code> value. By default renders "open", "hold" and "denied" status icons.</p>
+
+<p>The fields which can be used in the template are:</p>
+
+<ul>
+<li>columnTuple - the tuple of the corresponding column header cell</li>
+<li>rowTuple - the tuple of the corresponding row header cell</li>
+<li>measure - the value of the data cell measure</li>
+<li>dataItem - the data item itself</li>
+</ul>
+
+<p>For information about the tuple structure check this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.axes">link</a>.
+About the data item structure review this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.data">help topic</a>.</p>
+
+<h4>Example - specify a custom template for the KPI Status measure</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+
+&lt;script id="kpiStatusTemplate" type="text/x-kendo-template"&gt;
+    # if (dataItem.value !== 0) { #
+        &lt;em&gt;Open/Denied&lt;/em&gt;
+    # } else { #
+        &lt;strong&gt;Hold&lt;/strong&gt;
+    # } #
+&lt;/script&gt;
+
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    kpiStatusTemplate: $("#kpiStatusTemplate").html(),
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true } ],
+        measures: ["[Measures].[Internet Revenue Status]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-kpiTrendTemplate">
+<a href="#configuration-kpiTrendTemplate">kpiTrendTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the content of the <code>KPI Trend</code> value. By default renders "increase", "decrease" and "equal" status icons.</p>
+
+<p>The fields which can be used in the template are:</p>
+
+<ul>
+<li>columnTuple - the tuple of the corresponding column header cell</li>
+<li>rowTuple - the tuple of the corresponding row header cell</li>
+<li>measure - the value of the data cell measure</li>
+<li>dataItem - the data item itself</li>
+</ul>
+
+<p>For information about the tuple structure check this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.axes">link</a>.
+About the data item structure review this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.data">help topic</a>.</p>
+
+<h4>Example - specify a custom template for the KPI Trend measure</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+
+&lt;script id="kpiTrendTemplate" type="text/x-kendo-template"&gt;
+    # if (dataItem.value !== 0) { #
+        &lt;em&gt;Increase/Decrease&lt;/em&gt;
+    # } else { #
+        &lt;strong&gt;Equal&lt;/strong&gt;
+    # } #
+&lt;/script&gt;
+
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    kpiTrendTemplate: $("#kpiTrendTemplate").html(),
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true } ],
+        measures: ["[Measures].[Internet Revenue Trend]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-rowHeaderTemplate">
+<a href="#configuration-rowHeaderTemplate">rowHeaderTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the content of the row header cell. By default it renders the <em>caption</em> of the tuple member.</p>
+
+<p>The fields which can be used in the template are:</p>
+
+<ul>
+<li>member - the member of the corresponding row header cell</li>
+<li>tuple - the tuple of the corresponding row header cell</li>
+</ul>
+
+<p>For information about the tuple structure check this <a href="/kendo-ui/api/framework/pivotdatasource#configuration-schema.axes">link</a>.</p>
+
+<h4>Example - emphasize the title of a specific member</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+
+&lt;script id="rowTemplate" type="text/x-kendo-template"&gt;
+    # if (member.name === "[Date].[Calendar].[Year].&amp;[2005]") { #
+        &lt;em&gt;#: member.caption #&lt;/em&gt;
+    # } else { #
+        #: member.caption #
+    # } #
+&lt;/script&gt;
+
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    rowHeaderTemplate: $("#rowTemplate").html(),
+    dataSource: {
+        type: "xmla",
+        rows: [{ name: "[Date].[Calendar]", expand: true } ],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages">
+<a href="#configuration-messages">messages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text messages displayed in the fields sections.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    messages: {
+        measureFields: "Drop Measure Here",
+        columnFields: "Drop Column Here",
+        rowFields: "Drop Rows Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.measureFields">
+<a href="#configuration-messages.measureFields">messages.measureFields </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Measure Here")</em>
+</h3>
+
+<p>The text messages displayed in the measure fields sections.</p>
+
+<h4>Example - setting measure fields section default text</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    messages: {
+        measureFields: "Drop Measure Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.columnFields">
+<a href="#configuration-messages.columnFields">messages.columnFields </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Column Here")</em>
+</h3>
+
+<p>The text messages displayed in the column fields sections.</p>
+
+<h4>Example - setting column fields section default text</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    messages: {
+        columnFields: "Drop Column Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.rowFields">
+<a href="#configuration-messages.rowFields">messages.rowFields </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Drop Rows Here")</em>
+</h3>
+
+<p>The text messages displayed in the row fields sections.</p>
+
+<h4>Example - setting row fields section default text</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    messages: {
+        rowFields: "Drop Rows Here"
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu">
+<a href="#configuration-messages.fieldMenu">messages.fieldMenu </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text messages displayed in the field menu.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            info: "Show items with value that:",
+            sortAscending: "Sort Ascending",
+            sortDescending: "Sort Descending",
+            filterFields: "Fields Filter",
+            filter: "Filter",
+            include: "Include Fields...",
+            title: "Fields to include",
+            clear: "Clear",
+            ok: "Ok",
+            cancel: "Cancel"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.info">
+<a href="#configuration-messages.fieldMenu.info">messages.fieldMenu.info </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Show items with value that:")</em>
+</h3>
+
+<p>The text messages displayed in fields filter.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            info: "Filter items by field name:"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.sortAscending">
+<a href="#configuration-messages.fieldMenu.sortAscending">messages.fieldMenu.sortAscending </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Sort Ascending")</em>
+</h3>
+
+<p>The text message displayed for the menu item which performs ascending sort.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    sortable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+          sortAscending: "Sort (asc)"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.sortDescending">
+<a href="#configuration-messages.fieldMenu.sortDescending">messages.fieldMenu.sortDescending </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Sort Descending")</em>
+</h3>
+
+<p>The text message displayed for the menu item which performs descending sort.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    sortable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+          sortDescending: "Sort (desc)"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.filterFields">
+<a href="#configuration-messages.fieldMenu.filterFields">messages.fieldMenu.filterFields </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Fields Filter")</em>
+</h3>
+
+<p>The text messages of the fields filter menu item.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            filterFields: "Filter current field"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.filter">
+<a href="#configuration-messages.fieldMenu.filter">messages.fieldMenu.filter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Filter")</em>
+</h3>
+
+<p>The text messages of the filter button.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            filter: "Done"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.include">
+<a href="#configuration-messages.fieldMenu.include">messages.fieldMenu.include </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Include Fields...")</em>
+</h3>
+
+<p>The text messages of the include menu item.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            include: "Choose fields to include"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.title">
+<a href="#configuration-messages.fieldMenu.title">messages.fieldMenu.title </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Fields to include")</em>
+</h3>
+
+<p>The title of the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            title: "Choose fields to include"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.clear">
+<a href="#configuration-messages.fieldMenu.clear">messages.fieldMenu.clear </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Clear")</em>
+</h3>
+
+<p>The text of the clear filter expressions button.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            clear: "Clear filter expressions"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.ok">
+<a href="#configuration-messages.fieldMenu.ok">messages.fieldMenu.ok </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Ok")</em>
+</h3>
+
+<p>The text of the OK button in the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            ok: "Done"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.cancel">
+<a href="#configuration-messages.fieldMenu.cancel">messages.fieldMenu.cancel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Cancel")</em>
+</h3>
+
+<p>The text of the cancel button in the include fields dialog.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            cancel: "Close"
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators">
+<a href="#configuration-messages.fieldMenu.operators">messages.fieldMenu.operators </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The text of the filter operators displayed in the filter menu.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                contains: "Contains",
+                doesnotcontain: "Does not contain",
+                startswith: "Starts with",
+                endswith: "Ends with",
+                eq: "Is equal to",
+                neq: "Is not equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.contains">
+<a href="#configuration-messages.fieldMenu.operators.contains">messages.fieldMenu.operators.contains </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Contains")</em>
+</h3>
+
+<p>The text of the "contains" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                contains: "Contains"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.doesnotcontain">
+<a href="#configuration-messages.fieldMenu.operators.doesnotcontain">messages.fieldMenu.operators.doesnotcontain </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Does not contain")</em>
+</h3>
+
+<p>The text of the "Does not contain" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                doesnotcontain: "Doesn't contain"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.startswith">
+<a href="#configuration-messages.fieldMenu.operators.startswith">messages.fieldMenu.operators.startswith </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Starts with")</em>
+</h3>
+
+<p>The text of the "Starts with" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                startswith: "Starts"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.endswith">
+<a href="#configuration-messages.fieldMenu.operators.endswith">messages.fieldMenu.operators.endswith </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Ends with")</em>
+</h3>
+
+<p>The text of the "Ends with" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                endswith: "Ends"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.eq">
+<a href="#configuration-messages.fieldMenu.operators.eq">messages.fieldMenu.operators.eq </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Is equal to")</em>
+</h3>
+
+<p>The text of the "equal" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                eq: "Equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.fieldMenu.operators.neq">
+<a href="#configuration-messages.fieldMenu.operators.neq">messages.fieldMenu.operators.neq </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Is not equal to")</em>
+</h3>
+
+<p>The text of the "not equal" filter operator.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    filterable: true,
+    height: 550,
+    messages: {
+        fieldMenu: {
+            operators: {
+                neq: "Not equal to"
+            }
+        }
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-dataSource">
+<a href="#fields-dataSource">dataSource </a><code>kendo.data.PivotDataSource</code>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/pivotdatasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+
+<blockquote>
+<p>Changes of the data source will be reflected in the widget.</p>
+
+<p>Assigning a new data source would have no effect. Use the <a href="#methods-setDataSource">setDataSource</a> method instead.</p>
+</blockquote>
+
+<h4>Example - get reference to the widget data source</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+//get reference to the widget data source
+var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-cellInfo"><a href="#methods-cellInfo">cellInfo</a></h3>
+
+<p>Returns an information about a data cell at a specific column and row index.</p>
+
+<h4>Parameters</h4>
+
+<h5>columnIndex <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The index of the column cell that crosses the data cell.</p>
+
+<h5>rowIndex <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The index of the row cell that crosses the data cell.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the data cell information.</p>
+
+<p>The fields of the result object:</p>
+
+<ul>
+<li>columnTuple - the tuple of the corresponding column header cell</li>
+<li>rowTuple - the tuple of the corresponding row header cell</li>
+<li>measure - the measure value of the data cell</li>
+<li>dataItem - the data item itself</li>
+</ul>
+
+<h4>Example - get an information for a specific data cell</h4>
+
+<pre><code>&lt;button id="get"&gt;Get info&lt;/button&gt;
+&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$(function() {
+    var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true } ],
+            rows: [{ name: "[Product].[Category]", expand: true }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    }).data("kendoPivotGrid");
+
+    $("#button").click(function() {
+        var columnIndex = 1; //2006
+        var rowIndex = 1; //Bikes
+
+        var info = pivotgrid.cellInfo(columnIndex, rowIndex); //retrieve data cell information
+
+        console.log(info);
+    });
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-cellInfoByElement"><a href="#methods-cellInfoByElement">cellInfoByElement</a></h3>
+
+<p>Returns an information about for a specific data cell element</p>
+
+<h4>Parameters</h4>
+
+<h5>cell <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A string, DOM element or jQuery object which represents the data table cell. A string is treated as a jQuery selector.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the data cell information.</p>
+
+<p>The fields of the result object:</p>
+
+<ul>
+<li>columnTuple - the tuple of the corresponding column header cell</li>
+<li>rowTuple - the tuple of the corresponding row header cell</li>
+<li>measure - the measure value of the data cell</li>
+<li>dataItem - the data item itself</li>
+</ul>
+
+<h4>Example - get information on element hover</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$(function() {
+    var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+        height: 550,
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true } ],
+            rows: [{ name: "[Product].[Category]", expand: true }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: {
+                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    dataType: "text",
+                    contentType: "text/xml",
+                    type: "POST"
+                }
+            },
+            schema: {
+                type: "xmla"
+            }
+        }
+    }).data("kendoPivotGrid");
+
+    pivotgrid.wrapper.on("mouseenter", ".k-grid-content td", function(e){
+        var info = pivotgrid.cellInfoByElement(e.currentTarget);
+
+        console.log(info);
+    });
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p>This method does not remove the widget element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Renders all content using the current data items.</p>
+
+<h4>Example - refresh the widget</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.refresh();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the data source of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataSource <code>kendo.data.PivotDataSource</code>
+</h5>
+
+<p>The data source to which the widget should be bound.</p>
+
+<h4>Example - set the data source</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var dataSource = kendo.data.PivotDataSource({
+    type: "xmla",
+    columns: [{ name: "[Date].[Calendar]", expand: true }],
+    rows: [{ name: "[Product].[Product]" }],
+    measures: ["[Measures].[Internet Sales Amount]"],
+    transport: {
+        connection: {
+            catalog: "Adventure Works DW 2008R2",
+            cube: "Adventure Works"
+        },
+        read: {
+            url: "http://demos.telerik.com/olap/msmdpump.dll",
+            dataType: "text",
+            contentType: "text/xml",
+            type: "POST"
+        }
+    },
+    schema: {
+        type: "xmla"
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.setDataSource(dataSource);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-saveAsExcel"><a href="#methods-saveAsExcel">saveAsExcel</a></h3>
+
+<p>Initiates the Excel export. Also fires the <a href="#events-excelExport"><code>excelExport</code></a> event.</p>
+
+<blockquote>
+<p>Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.</p>
+</blockquote>
+
+<h4>Example - manually initiate Excel export</h4>
+
+<pre><code>&lt;button id="export"&gt;Export to Excel&lt;/button&gt;
+&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+$("#export").click(function(e) {
+    var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+    pivotgrid.saveAsExcel();
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-saveAsPDF"><a href="#methods-saveAsPDF">saveAsPDF</a></h3>
+
+<p>Initiates the PDF export and returns a promise. Also triggers the <a href="#events-pdfExport">pdfExport</a> event.</p>
+
+<blockquote>
+<p>Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.</p>
+</blockquote>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved when the export completes. The same promise is available in the <a href="#events-pdfExport">pdfExport</a> event arguments.</p>
+
+<h4>Example - manually initiate PDF export</h4>
+
+<pre><code>&lt;button id="export"&gt;Export to PDF&lt;/button&gt;
+&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+$("#export").click(function(e) {
+    var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+    pivotgrid.saveAsPDF();
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-dataBinding"><a href="#events-dataBinding">dataBinding</a></h3>
+
+<p>Fired before the widget binds to its data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked prevents the data bind action. The PivotGrid will remain unchanged and <code>dataBound</code> event will not fire.</p>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "dataBinding" event during initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataBinding: function(e) {
+        e.preventDefault(); //this will prevent the data bind action
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dataBinding" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+function dataBinding(e) {
+    e.preventDefault();
+}
+
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("dataBinding", dataBinding);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-dataBound"><a href="#events-dataBound">dataBound</a></h3>
+
+<p>Fired after the widget is bound to the data from its data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "dataBound" event during initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataBound: function(e) {
+        console.log("data bound");
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dataBound" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+function dataBound(e) {
+    console.log("data bound");
+}
+
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("dataBound", dataBound);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-expandMember"><a href="#events-expandMember">expandMember</a></h3>
+
+<p>Fired before column or row field is expanded.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked prevents the expand and the widget will remain in its current state.</p>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.axis <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The axis that will be expanded. Possible values <code>columns</code> or <code>rows</code>.</p>
+
+<h5>e.path <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The path to the field that will be expanded.</p>
+
+<h4>Example - subscribe to the "expandMember" event during initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    expandMember: function(e) {
+        console.log("expand member");
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "expandMember" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+function expandMember(e) {
+    console.log("expand member");
+}
+
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("expandMember", expandMember);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-collapseMember"><a href="#events-collapseMember">collapseMember</a></h3>
+
+<p>Fired before column or row field is collapsed.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked prevents the collapse and the widget will remain in its current state.</p>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.axis <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The axis that will be collapsed. Possible values <code>columns</code> or <code>rows</code>.</p>
+
+<h5>e.path <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The path to the field that will be collapsed.</p>
+
+<h4>Example - subscribe to the "collapseMember" event during initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    collapseMember: function(e) {
+        console.log("collapse member");
+    },
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "collapseMember" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+function collapseMember(e) {
+    console.log("collapse member");
+}
+
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("collapseMember", collapseMember);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-excelExport"><a href="#events-excelExport">excelExport</a></h3>
+
+<p>Fired when <a href="#methods-saveAsExcel"><code>saveAsExcel</code></a> method is called.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The array of data items used to create the Excel workbook.</p>
+
+<h5>e.workbook <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The Excel <a href="/kendo-ui/api/javascript/ooxml/workbook#configuration">workbook configuration object</a>. Used to initialize a <code>kendo.ooxml.Workbook</code> class. Modifications of the workbook will reflect in the output Excel document.</p>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked the grid will not save the generated file.</p>
+
+<h4>Example - subscribe to the "excelExport" event during initialization</h4>
+
+<pre><code>&lt;div id="grid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#grid").kendoGrid({
+  toolbar: ["excel"],
+  columns: [
+    { field: "name" }
+  ],
+  dataSource: [
+    { name: "Jane Doe"},
+    { name: "John Doe"}
+  ],
+  excelExport: function(e) {
+    e.workbook.fileName = "Grid.xslx";
+  }
+});
+var grid = $("#grid").data("kendoGrid");
+grid.saveAsExcel();
+&lt;/script&gt;
+
+&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    excelExport: function(e) {
+        e.workbook.fileName = "Grid.xslx";
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.saveAsExcel();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "excelExport" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("excelExport", function(e) {
+    e.workbook.fileName = "Grid.xslx";
+});
+pivotgrid.saveAsExcel();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-pdfExport"><a href="#events-pdfExport">pdfExport</a></h3>
+
+<p>Fired when the user clicks the "Export to PDF" toolbar button.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.PivotGrid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked the grid will not save the generated file.</p>
+
+<h5>e.promise <a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a>
+</h5>
+
+<p>A promise that will be resolved when the export completes.</p>
+
+<h4>Example - subscribe to the "pdfExport" event during initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    pdfExport: function(e) {
+        alert("PDF export");
+    },
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.saveAsPDF();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "pdfExport" event after initialization</h4>
+
+<pre><code>&lt;div id="pivotgrid"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#pivotgrid").kendoPivotGrid({
+    height: 550,
+    dataSource: {
+        type: "xmla",
+        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+        rows: [{ name: "[Product].[Product]" }],
+        measures: ["[Measures].[Internet Sales Amount]"],
+        transport: {
+            connection: {
+                catalog: "Adventure Works DW 2008R2",
+                cube: "Adventure Works"
+            },
+            read: {
+                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            }
+        },
+        schema: {
+            type: "xmla"
+        }
+    }
+});
+var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+pivotgrid.bind("pdfExport", function(e) {
+    alert("PDF export");
+});
+pivotgrid.saveAsPDF();
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

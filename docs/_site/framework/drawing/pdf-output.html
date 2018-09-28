@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Export a drawing as a PDF file</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/drawing/pdf-output.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/drawing/pdf-output.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="pdf-drawing-backend"><a href="#pdf-drawing-backend">PDF drawing backend</a></h1>
+
+<p>The Kendo UI Drawing API can export your drawing to a PDF file.  However, because PDF-s can't be displayed by a browser inside an HTML element, you cannot create a <code>Surface</code> object for this kind of output; instead, you will use a few functions exported into <code>kendo.drawing.pdf</code> to generate the binary data.  Example usage:</p>
+
+<pre><code>var drawing = kendo.drawing;
+var geo = kendo.geometry;
+
+// this will contain all our drawing
+var group = new drawing.Group();
+
+// draw a circle
+var circleGeometry = new geo.Circle([ 100, 100 ], 50);
+var circle = new drawing.Circle(circleGeometry).stroke("red", 1);
+
+// and add it to the group
+group.append(circle);
+
+// add some text
+var text = new drawing.Text("Hello World", new geo.Point(100, 200));
+group.append(text);
+
+// set PDF arguments (optional, see the "PDF options" section below)
+group.options.set("pdf", {
+    paperSize: "A4",
+    margin: {
+        left   : "20mm",
+        top    : "40mm",
+        right  : "20mm",
+        bottom : "40mm"
+    }
+});
+
+// you can offer the file for download now
+drawing.pdf.saveAs(group, "filename.pdf", proxyUrl, callback);
+</code></pre>
+
+<p>The <code>proxyUrl</code> and <code>callback</code> arguments are optional.  <code>proxyUrl</code> is necessary for the download to work with Internet Explorer 9 and Safari; it won't be used for other browsers.  See <a href="/kendo-ui/api/javascript/kendo.html#methods-saveAs">kendo.saveAs</a> for more information about the <code>proxyURL</code>.  The <code>callback</code> will be invoked when the file has been successfully generated (generation could be asynchronous).</p>
+
+<pre><code>// or, you can get the PDF as Blob object in browsers that support it
+// (all except IE &lt; 10).
+drawing.pdf.toBlob(group, function(blob){
+    // you can now upload it to a server.
+    // this form simulates an &lt;input type="file" name="pdfFile" /&gt;
+    var form = new FormData();
+    form.append("pdfFile", blob);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/posturl", true);
+    xhr.send(form);
+});
+
+// or, you can get it as a data URL
+drawing.pdf.toDataURL(group, function(dataURL){ ... });
+</code></pre>
+
+<h2 id="pdf-options"><a href="#pdf-options">PDF options</a></h2>
+
+<p>The following options are currently supported:</p>
+
+<ul>
+<li><p><code>paperSize</code> — can be either a paper name (i.e. "A4"), an array of two numbers (paper width and height), or "auto".  By default it's "auto" which means the paper size will be just enough to fit the drawing.  If numbers are specified they are assumed to be in typographic points unit.  A point is 1/72 of an inch.  Strings of the form "297mm" can also be used.  The supported units are: "mm", "cm", "in" and "pt".</p></li>
+<li><p><code>margin</code> — paper margins.  Must be an object containing <code>top</code>, <code>left</code>, <code>right</code> and <code>bottom</code>, numbers which specify the paper margins.  Again, if numbers are passed they will be assumed to be in points; with strings you can specify units. When <code>paperSize</code> is "auto", the dimensions will be adjusted to include the margin.</p></li>
+<li><p><code>landscape</code> (boolean, default <code>false</code>) — if <code>true</code> is specified the paper dimensions will be rotated if needed such that the width is the larger edge.</p></li>
+<li><p><code>title</code>, <code>author</code>, <code>subject</code>, <code>keywords</code>, <code>creator</code> — optional strings to be included in the PDF information dictionary.</p></li>
+<li><p><code>date</code> — optional <code>Date</code> object to specify the creation date of the document.  Default is current date/time (<code>new Date()</code>).</p></li>
+<li><p><code>multiPage</code> (boolean, default <code>false</code>) — pass <code>true</code> to enable support for multiple page output (see the next section).</p></li>
+</ul>
+
+<h2 id="multiple-pages-output"><a href="#multiple-pages-output">Multiple pages output</a></h2>
+
+<p>For rendering a multiple pages PDF, you must pass <code>multiPage: true</code> to the <code>Group</code> object that you pass to <code>drawing.pdf.toDataURL</code> (let's call this the “master group”).  This group is then expected to contain in turn only <code>Group</code> shapes, one for each page (“page groups”).  The PDF options that you pass to the master group will apply to each page group, unless the page group overrides them.  The following options can be overridden:</p>
+
+<ul>
+<li>paperSize</li>
+<li>margin</li>
+<li>landscape</li>
+</ul>
+
+<p>Note that if <code>paperSize</code> is <code>"auto"</code> on the master group and page groups do not override it, then the paper size for each individual page will be determined by its corresponding group—this means the final document could have pages of different sizes.</p>
+
+<h2 id="using-custom-fonts"><a href="#using-custom-fonts">Using custom fonts</a></h2>
+
+<p>The drawing API allows you to specify fonts with the <code>font</code> option of <code>Text</code> elements:</p>
+
+<pre><code>var text = new drawing.Text("Hello World", new geo.Point(100, 100));
+text.options.set("font", "30px Verdana");
+</code></pre>
+
+<p>In order for this to render correctly as PDF, our code must have access to the TTF files.  Ideally they must be the same fonts that the browser uses to render on screen.  However, we cannot access the fonts from client-side JavaScript on the machine where the browser runs, so they must be provided on the server, and the paths to them must be declared as follows:</p>
+
+<pre><code>kendo.pdf.defineFont({
+    "Verdana"             : "/fonts/Verdana.ttf", // this is a URL
+    "Verdana|Bold"        : "/fonts/Verdana_Bold.ttf",
+    "Verdana|Bold|Italic" : "/fonts/Verdana_Bold_Italic.ttf",
+    "Verdana|Italic"      : "/fonts/Verdana_Italic.ttf"
+});
+</code></pre>
+
+<p>This code must run before a PDF is requested; you could simply include it into a <code>&lt;script&gt;</code> tag in your page.</p>
+
+<p>The object passed to <code>kendo.pdf.defineFont</code> must map between font name/style to an URL with the TrueType file.  The “same domain policy” applies, you can't specify URLs to different hosts.</p>
+
+<p>Fonts are loaded on-demand, so you can declare more fonts than might be needed without worrying that data will be needlessly downloaded or parsed.  On the other hand, they will be cached so if you are building a "SPA" (Single-Page Application) the overhead will occur only once.</p>
+
+<p>Currently only TTF fonts having an Unicode mapping are supported.</p>
+
+<p>If you do not declare any fonts, our PDF generator will fallback to the following standard PDF fonts:</p>
+
+<pre><code>"serif"                  : "Times-Roman",
+"serif|bold"             : "Times-Bold",
+"serif|italic"           : "Times-Italic",
+"serif|bold|italic"      : "Times-BoldItalic",
+"sans-serif"             : "Helvetica",
+"sans-serif|bold"        : "Helvetica-Bold",
+"sans-serif|italic"      : "Helvetica-Oblique",
+"sans-serif|bold|italic" : "Helvetica-BoldOblique",
+"monospace"              : "Courier",
+"monospace|bold"         : "Courier-Bold",
+"monospace|italic"       : "Courier-Oblique",
+"monospace|bold|italic"  : "Courier-BoldOblique"
+</code></pre>
+
+<p>The font names above (on the right) are reserved and cannot be used as URLs to TrueType fonts with <code>kendo.pdf.defineFont</code>.</p>
+
+<p>Note that non-ASCII characters are unsupported with the standard PDF fonts.</p>
+
+<h3 id="unicode-notes"><a href="#unicode-notes">Unicode notes</a></h3>
+
+<p>Unicode is supported only if the fonts you provide contain glyphs for the referenced characters.  Otherwise, a default glyph will be displayed (it depends on the font, but it's usually a blank rectangle).  Currently we don't do font substitution, so if the text contains glyphs that are not available in the current font, but are perhaps available in another font that was declared, the default glyph will still be used.</p>
+
+<h2 id="compression"><a href="#compression">Compression</a></h2>
+
+<p>The PDF generator supports compression via the JavaScript <a href="https://github.com/nodeca/pako">pako library</a>.  Just load pako with a <code>&lt;script&gt;</code> tag (window.pako should be available) and compression will be automatically enabled.</p>
+
+<p>Compression can make a big difference in the output file size when you're using custom TTF fonts or images with alpha channel (i.e. PNGs with transparency).</p>
+
+<blockquote>
+<p><strong>Note:</strong> besides drastically reducing the output size, Pako enables the browser to use less memory while rendering
+the PDF.  Chrome is known to crash on generating very large PDF-s and simply including this library will mitigate the
+problem.  It is bundled with Kendo as <code>pako_deflate.min.js</code>.</p>
+</blockquote>
+
+<h2 id="supported-browsers"><a href="#supported-browsers">Supported browsers</a></h2>
+
+<p>Kendo PDF Generator has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.  We use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">typed arrays</a> where available to improve speed (all browsers except IE9).</p>
+
+<p>Internet Explorer &lt;= 8 is not supported.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

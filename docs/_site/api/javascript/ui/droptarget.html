@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Drop interaction with jQuery | Kendo UI DropTarget API Reference</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn how to group sets of draggable and drop targets, destroy all DropTarget instances from a group and handle events, fired once draggable interacts with the drop target.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/droptarget.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/droptarget.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouidroptarget"><a href="#kendouidroptarget">kendo.ui.DropTarget</a></h1>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-group">
+<a href="#configuration-group">group </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "default")</em>
+</h3>
+
+<p>Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div class="orange"&gt;&lt;/div&gt;
+&lt;div class="orange"&gt;&lt;/div&gt;
+&lt;div class="purple"&gt;&lt;/div&gt;
+&lt;div class="purple"&gt;&lt;/div&gt;
+&lt;div id="orangeArea"&gt;&lt;/div&gt;
+&lt;div id="purpleArea"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $(".orange").kendoDraggable({
+    group: "orangeGroup",
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $(".purple").kendoDraggable({
+    group: "purpleGroup",
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $("#orangeArea").kendoDropTarget({ group: "orangeGroup", drop: onDrop });
+  $("#purpleArea").kendoDropTarget({ group: "purpleGroup", drop: onDrop });
+
+  function onDrop(e) {
+    e.draggable.destroy();
+    e.draggable.element.remove();
+  }
+&lt;/script&gt;
+&lt;style&gt;
+  .orange, .purple{
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  #orangeArea, #purpleArea {
+    width: 200px;
+    height: 200px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .orange, #orangeArea { background-color: orange; }
+  .purple, #purpleArea { background-color: purple; }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroyGroup"><a href="#methods-destroyGroup">destroyGroup</a></h3>
+
+<p>Destroys all DropTarget instances from the group with the given name.</p>
+
+<h4>Example - destroy group's DropTargets and detach events</h4>
+
+<pre><code>&lt;div class="orange"&gt;&lt;/div&gt;
+&lt;div class="orangeArea"&gt;&lt;/div&gt;
+&lt;div class="orangeArea"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $(".orange").kendoDraggable({
+    group: "orangeGroup",
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $(".orangeArea").kendoDropTarget({ group: "orangeGroup", drop: onDrop });
+
+  function onDrop(e) {
+    e.draggable.destroy();
+    e.draggable.element.remove();
+  }
+
+  //destroy components and detach events
+  kendo.ui.DropTarget.destroyGroup("orangeGroup");
+&lt;/script&gt;
+&lt;style&gt;
+  .orange {
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .orangeArea {
+    width: 200px;
+    height: 200px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .orange, .orangeArea { background-color: orange; }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-dragenter"><a href="#events-dragenter">dragenter</a></h3>
+
+<p>Fired when draggable moves over the drop target.
+The <code>dragenter</code> event represents a jQuery <code>mousemove</code> event and contains all the event data of the <a href="http://api.jquery.com/category/events/event-object/">jQuery Event Object</a>.</p>
+
+<h4>Example - modify draggable hint and dropTarget element</h4>
+
+<pre><code>&lt;div class="draggable orange"&gt;&lt;/div&gt;
+&lt;div class="target orange"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $(".draggable").kendoDraggable({
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $(".target").kendoDropTarget({ 
+      dragenter: function(e) {
+          e.draggable.hint.css("opacity", 0.5); //modify the draggable hint
+          e.dropTarget.removeClass("orange").addClass("purple"); //modify dropTarget element
+      },
+      dragleave: function(e) {
+          e.draggable.hint.css("opacity", 1); //modify the draggable hint
+          e.dropTarget.removeClass("purple").addClass("orange"); //modify dropTarget element
+
+      }
+  });
+
+&lt;/script&gt;
+&lt;style&gt;
+  .draggable {
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .target {
+    width: 200px;
+    height: 200px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .orange { background-color: orange; }
+  .purple { background-color: purple; }
+&lt;/style&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.draggable <code>kendo.ui.Draggable</code>
+</h5>
+
+<p>The Draggable instance that enters the drop target.</p>
+
+<h5>e.dropTarget <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The DropTarget element.</p>
+
+<h5>e.target <code>Element</code>
+</h5>
+
+<p>The Draggable element.</p>
+
+<h3 id="events-dragleave"><a href="#events-dragleave">dragleave</a></h3>
+
+<p>Fired when draggable moves out of the drop target.
+The <code>dragleave</code> event represents a jQuery <code>mousemove</code> event and contains all the event data of the <a href="http://api.jquery.com/category/events/event-object/">jQuery Event Object</a>.</p>
+
+<h4>Example - modify draggable hint and dropTarget element</h4>
+
+<pre><code>&lt;div class="draggable orange"&gt;&lt;/div&gt;
+&lt;div class="target orange"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $(".draggable").kendoDraggable({
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $(".target").kendoDropTarget({ 
+      dragenter: function(e) {
+          e.draggable.hint.css("opacity", 0.5); //modify the draggable hint
+          e.dropTarget.removeClass("orange").addClass("purple"); //modify dropTarget element
+      },
+      dragleave: function(e) {
+          e.draggable.hint.css("opacity", 1); //modify the draggable hint
+          e.dropTarget.removeClass("purple").addClass("orange"); //modify dropTarget element
+
+      }
+  });
+
+&lt;/script&gt;
+&lt;style&gt;
+  .draggable {
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .target {
+    width: 200px;
+    height: 200px;
+    border: 2px solid green;
+    margin: 5px;
+  }
+  .orange { background-color: orange; }
+  .purple { background-color: purple; }
+&lt;/style&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.draggable <code>kendo.ui.Draggable</code>
+</h5>
+
+<p>The Draggable instance that leaves the drop target.</p>
+
+<h5>e.dropTarget <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The DropTarget element.</p>
+
+<h5>e.target <code>Element</code>
+</h5>
+
+<p>The Draggable element.</p>
+
+<h3 id="events-drop"><a href="#events-drop">drop</a></h3>
+
+<p>Fired when draggable is dropped over the drop target.
+The <code>dragleave</code> event represents a jQuery <code>mouseup</code> event and contains all the event data of the <a href="http://api.jquery.com/category/events/event-object/">jQuery Event Object</a>.</p>
+
+<h4>Example - disable draggable component after it has been dropped</h4>
+
+<pre><code>&lt;div class="draggable orange"&gt;&lt;/div&gt;
+&lt;div class="draggable orange"&gt;&lt;/div&gt;
+&lt;div class="draggable orange"&gt;&lt;/div&gt;
+&lt;br /&gt;
+&lt;div class="target orange"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $(".draggable").kendoDraggable({
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $(".target").kendoDropTarget({ 
+      drop: function(e) {
+          e.draggable.destroy(); //detach events
+          e.draggable.element.css("opacity", 0.3); //change opacity
+      }
+  });
+
+&lt;/script&gt;
+&lt;style&gt;
+  .draggable {
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+    float: left;
+  }
+  .target {
+    width: 200px;
+    height: 200px;
+    border: 2px solid green;
+    margin: 50px;
+  }
+  .orange { background-color: orange; }
+  .purple { background-color: purple; }
+&lt;/style&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.draggable <code>kendo.ui.Draggable</code>
+</h5>
+
+<p>The Draggable instance that leaves the drop target.</p>
+
+<h5>e.dropTarget <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The DropTarget element.</p>
+
+<h5>e.target <code>Element</code>
+</h5>
+
+<p>The Draggable element.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Custom edit and event templates</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Custom edit and event templates">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/scheduler/how-to/custom-edit-and-event-templates.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/scheduler/how-to/custom-edit-and-event-templates.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="custom-edit-and-event-templates"><a href="#custom-edit-and-event-templates">Custom edit and event templates</a></h1>
+
+<p>The example below demonstrates how to create and use custom templates for the Kendo UI Scheduler events and edit window.</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>    &lt;div id="example"&gt;
+      &lt;div id="team-schedule"&gt;
+        &lt;div id="people"&gt;
+          &lt;input checked type="checkbox" id="alex" value="1"&gt;
+          &lt;input checked type="checkbox" id="bob" value="2"&gt;
+          &lt;input type="checkbox" id="charlie" value="3"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id="scheduler"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script id="event-template" type="text/x-kendo-template"&gt;
+    &lt;div class="movie-template"&gt;
+      &lt;p&gt;
+          #: kendo.toString(start, "hh:mm") # - #: kendo.toString(end, "hh:mm") #
+      &lt;/p&gt;
+      &lt;h3&gt;#: title #&lt;/h3&gt;
+      &lt;p&gt;#: description #&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/script&gt;
+    &lt;script id="customEditorTemplate" type="text/x-kendo-template"&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="title"&gt;Title&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="title" class="k-edit-field"&gt;
+        &lt;input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title"&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;
+        &lt;label for="start"&gt;Start&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;div data-container-for="start" class="k-edit-field"&gt;
+        &lt;input type="text" 
+               data-role="datetimepicker" 
+               data-interval="15"
+               data-type="date" 
+               data-bind="value:start,invisible:isAllDay" 
+               name="start"/&gt;
+        &lt;input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:isAllDay" name="start" /&gt;
+        &lt;span data-bind="text: startTimezone"&gt;&lt;/span&gt;
+        &lt;span data-for="start" class="k-invalid-msg" style="display: none;"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="end"&gt;End&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="end" class="k-edit-field"&gt;
+        &lt;input type="text" data-type="date" data-role="datetimepicker" data-bind="value:end,invisible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" /&gt;
+        &lt;input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" /&gt;
+        &lt;span data-bind="text: endTimezone"&gt;&lt;/span&gt;
+        &lt;span data-bind="text: startTimezone, invisible: endTimezone"&gt;&lt;/span&gt;
+        &lt;span data-for="end" class="k-invalid-msg" style="display: none;"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="isAllDay"&gt;All day event&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="isAllDay" class="k-edit-field"&gt;
+        &lt;input type="checkbox" name="isAllDay" data-type="boolean" data-bind="checked:isAllDay"&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="recurrenceRule"&gt;Repeat&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="recurrenceRule" class="k-edit-field"&gt;
+        &lt;div data-bind="value:recurrenceRule" name="recurrenceRule" data-role="recurrenceeditor"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="description"&gt;Description&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="description" class="k-edit-field"&gt;
+        &lt;textarea name="description" class="k-textbox" data-bind="value:description"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;div class="k-edit-label"&gt;&lt;label for="ownerId"&gt;Owner&lt;/label&gt;&lt;/div&gt;
+    &lt;div data-container-for="ownerId" class="k-edit-field"&gt;
+        &lt;select id="ownerId" data-bind="value:ownerId" data-role="dropdownlist"
+                        data-value-field="value" data-text-field="text"&gt;
+          &lt;!--&lt;option value="1"&gt;Alex&lt;/option&gt;
+          &lt;option value="2"&gt;Bob&lt;/option&gt;
+          &lt;option value="3"&gt;Charlie&lt;/option&gt;--&gt;
+      &lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+      $(function() {
+        $("#scheduler").kendoScheduler({
+          date: new Date("2013/6/13"),
+          startTime: new Date("2013/6/13 07:00 AM"),
+          height: 600,
+          views: [
+            "day",
+            { type: "workWeek", selected: true },
+            "week",
+            "month",
+            "agenda"
+          ],
+          editable: {
+            template: $("#customEditorTemplate").html(),
+          },
+          eventTemplate: $("#event-template").html(),
+          timezone: "Etc/UTC",
+          dataSource: {
+            batch: true,
+            transport: {
+              read: {
+                url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                dataType: "jsonp"
+              },
+              update: {
+                url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                dataType: "jsonp"
+              },
+              create: {
+                url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                dataType: "jsonp"
+              },
+              destroy: {
+                url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                dataType: "jsonp"
+              },
+              parameterMap: function(options, operation) {
+                if (operation !== "read" &amp;&amp; options.models) {
+                  return {models: kendo.stringify(options.models)};
+                }
+              }
+            },
+            schema: {
+              model: {
+                id: "taskId",
+                fields: {
+                  taskId: { from: "TaskID", type: "number" },
+                  title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                  start: { type: "date", from: "Start" },
+                  end: { type: "date", from: "End" },
+                  startTimezone: { from: "StartTimezone" },
+                  endTimezone: { from: "EndTimezone" },
+                  description: { from: "Description" },
+                  recurrenceId: { from: "RecurrenceID" },
+                  recurrenceRule: { from: "RecurrenceRule" },
+                  recurrenceException: { from: "RecurrenceException" },
+                  ownerId: { from: "OwnerID", defaultValue: 1 },
+                  isAllDay: { type: "boolean", from: "IsAllDay" }
+                }
+              }
+            },
+            filter: {
+              logic: "or",
+              filters: [
+                { field: "ownerId", operator: "eq", value: 1 },
+                { field: "ownerId", operator: "eq", value: 2 }
+              ]
+            }
+          },
+          resources: [
+            {
+              field: "ownerId",
+              title: "Owner",
+              dataSource: [
+                { text: "Alex", value: 1, color: "#f8a398" },
+                { text: "Bob", value: 2, color: "#51a0ed" },
+                { text: "Charlie", value: 3, color: "#56ca85" }
+              ]
+            }
+          ],
+          edit: function(e) {
+            var ownerId = e.container.find("#ownerId").data("kendoDropDownList");
+
+            //bind the widget to the resouces
+            ownerId.dataSource.data(e.sender.resources[0].dataSource.data());
+          }
+        });
+
+        $("#people :checkbox").change(function(e) {
+          var checked = $.map($("#people :checked"), function(checkbox) {
+            return parseInt($(checkbox).val());
+          });
+
+          var scheduler = $("#scheduler").data("kendoScheduler");
+
+          scheduler.dataSource.filter({
+            operator: function(task) {
+              return $.inArray(task.ownerId, checked) &gt;= 0;
+            }
+          });
+        });
+      });
+    &lt;/script&gt;
+    &lt;style scoped&gt;
+
+      .k-nav-current &gt; .k-link span + span {
+        max-width: 200px;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        vertical-align: top;
+      }
+
+      #team-schedule {
+        background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
+        height: 115px;
+        position: relative;
+      }
+
+      #people {
+        background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+        width: 345px;
+        height: 115px;
+        position: absolute;
+        right: 0;
+      }
+      #alex {
+        position: absolute;
+        left: 4px;
+        top: 81px;
+      }
+      #bob {
+        position: absolute;
+        left: 119px;
+        top: 81px;
+      }
+      #charlie {
+        position: absolute;
+        left: 234px;
+        top: 81px;
+      }
+    &lt;/style&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

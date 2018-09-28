@@ -1,0 +1,409 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Summary of Splitter UI widget primary functions</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Find out how to use the Splitter UI widget and achieve complex layouts.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/splitter/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/splitter/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="splitter-overview"><a href="#splitter-overview">Splitter Overview</a></h1>
+
+<p>The <strong>Splitter</strong> provides a dynamic layout of resizable and collapsible panes. It converts the
+children of an HTML element in to the interactive layout, adding resize and collapse handles based on
+configuration. A <strong>Splitter</strong> can be mixed in a vertical or horizontal orientation to build
+complex layouts.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>The layout and structure of a <strong>Splitter</strong> is defined within the DOM as a div with child elements.</p>
+
+<h3 id="create-a-div-with-children-that-will-become-panes"><a href="#create-a-div-with-children-that-will-become-panes">Create a div with children that will become panes</a></h3>
+
+<pre><code>&lt;div id="splitter"&gt;
+    &lt;div&gt;Area 1&lt;/div&gt;
+    &lt;div&gt;Area 2&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>Initialization of a <strong>Splitter</strong> should occur after the DOM is fully loaded. It is recommended
+that initialization the <strong>Splitter</strong> occur within a handler is provided to $(document).ready().</p>
+
+<h3 id="initialize-the-splitter-using-a-selector-within-documentready"><a href="#initialize-the-splitter-using-a-selector-within-documentready">Initialize the Splitter using a selector within $(document).ready()</a></h3>
+
+<pre><code>$(document).ready(function() {
+    $("#splitter").kendoSplitter();
+});
+</code></pre>
+
+<p>When the <strong>Splitter</strong> is initialized, a vertical split bar will be placed between the two div
+elements. This bar can be moved by a user left and right to adjust the size on the panes.</p>
+
+<h2 id="configuring-splitter-behaviors"><a href="#configuring-splitter-behaviors">Configuring Splitter Behaviors</a></h2>
+
+<p>The <strong>Splitter</strong> has a default configuration specified during initialization. However, these
+options may be overriden to control the following properties:</p>
+
+<ul>
+<li>  Maximum and/or minimum pane sizes</li>
+<li>  Resizable and collapsible/expandable pane behaviors</li>
+<li>  Orientation (horizontal or vertical)</li>
+</ul>
+
+<p>The properties of a pane must be set during initialization and set for each individual pane in a
+<strong>Splitter</strong>.</p>
+
+<h3 id="initialize-a-splitter-and-the-properties-of-its-panes"><a href="#initialize-a-splitter-and-the-properties-of-its-panes">Initialize a Splitter and the properties of its panes</a></h3>
+
+<pre><code>$("#splitter").kendoSplitter({
+    panes: [
+        { collapsible: true, min: "100px", max: "300px" },
+        { collapsible: true }
+    ],
+    orientation: "vertical"
+});
+</code></pre>
+
+<h2 id="nested-splitter-layouts"><a href="#nested-splitter-layouts">Nested Splitter Layouts</a></h2>
+
+<p>To achieve complex layouts, the <strong>Splitter</strong> supports nested layouts.</p>
+
+<h3 id="creating-nested-splitter-layout"><a href="#creating-nested-splitter-layout">Creating nested Splitter layout</a></h3>
+
+<pre><code>&lt;div id="horizontalSplitter"&gt;
+    &lt;div&gt;&lt;p&gt;Left Side Pane Content&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;
+        &lt;div id="verticalSplitter"&gt;
+            &lt;div&gt;&lt;p&gt;Right Side, Top Pane Content&lt;/p&gt;&lt;/div&gt;
+            &lt;div&gt;&lt;p&gt;Right Side, Bottom Pane Content&lt;/p&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3 id="initialize-two-splitters-with-differing-orientations"><a href="#initialize-two-splitters-with-differing-orientations">Initialize two Splitters with differing orientations</a></h3>
+
+<pre><code>$("#horizontalSplitter").kendoSplitter();
+$("#verticalSplitter").kendoSplitter({ orientation: "vertical" });
+</code></pre>
+
+<blockquote>
+<p>Using the same DIV element for a Splitter pane and for a nested Splitter is not recommended.
+Nested Splitters will be sized automatically to match the parent pane's height if the nested Splitter has 100% width and height styles.
+We recommend using a nested Splitter, which is a direct child of the parent Splitter's pane.</p>
+</blockquote>
+
+<h2 id="loading-content-with-ajax"><a href="#loading-content-with-ajax">Loading Content with AJAX</a></h2>
+
+<p>While any valid technique for loading content via AJAX may be used, <strong>Splitter</strong> provides built-in
+support for asynchronously loading content from URLs. These URLs should return HTML fragments that can be
+loaded in the pane of a <strong>Splitter</strong>. If you want to load a whole page in an IFRAME, you may do so
+by specifying the complete URL (i.e. <a href="http://telerik.com/">http://telerik.com/</a>).</p>
+
+<h3 id="loading-splitter-content-asynchronously"><a href="#loading-splitter-content-asynchronously">Loading Splitter content asynchronously</a></h3>
+
+<pre><code>&lt;div id="splitter"&gt;
+    &lt;div&gt;Area 1 with Static Content&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h3 id="initialize-splitter-configure-async-loading-for-one-pane-and-an-iframe-for-a-third-pane"><a href="#initialize-splitter-configure-async-loading-for-one-pane-and-an-iframe-for-a-third-pane">Initialize Splitter; configure async loading for one pane; and an iframe for a third pane</a></h3>
+
+<pre><code>$(document).ready(function() {
+    $("#splitter").kendoSplitter({
+        panes: [
+            {},
+            { contentUrl: "html-content-snippet.html" },
+            { contentUrl: "http://telerik.com/" }
+        ]
+    });
+});
+</code></pre>
+
+<h2 id="accessing-an-existing-splitter"><a href="#accessing-an-existing-splitter">Accessing an Existing Splitter</a></h2>
+
+<p>You can reference an existing <strong>Splitter</strong> instance via
+<a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+use the API to control its behavior.</p>
+
+<h3 id="accessing-an-existing-splitter-instance"><a href="#accessing-an-existing-splitter-instance">Accessing an existing Splitter instance</a></h3>
+
+<pre><code>var splitter = $("#splitter").data("kendoSplitter");
+</code></pre>
+
+<h2 id="make-the-splitter-expand-to-100-height"><a href="#make-the-splitter-expand-to-100-height">Make the Splitter expand to 100% height</a></h2>
+
+<p>When making the Splitter 100% high, one should keep in mind that web standards require elements with percentage height to have a parent element with an explicit height.
+In this case the parent of the Splitter is the <code>body</code>, so it receives a <code>height:100%</code> style, which in turn results in the <code>html</code> element obtaining the style as well. If the requirement is not met,
+the Splitter's computed height will fallback to <code>auto</code> and the widget may collapse completely, depending ot its content. In addition, the Splitter should have its border removed. 100% high elements
+cannot have borders, margins, paddings and sibling elements. In a nested Splitters scenario, the inner Splitters remove their borders automatically,
+given that each Splitter is a direct child of a parent pane.</p>
+
+<h3 id="html-markup"><a href="#html-markup">HTML Markup</a></h3>
+
+<pre><code>&lt;body&gt;
+  &lt;div id="vertical"&gt;
+    &lt;div&gt;
+        &lt;p&gt;
+            Outer splitter : top pane (resizable and collapsible)
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;div id="horizontal"&gt;
+            &lt;div&gt;
+                &lt;p&gt;
+                    Inner splitter :: left pane
+                &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                    Inner splitter :: center pane
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;p&gt;
+                    Inner splitter :: right pane
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;p&gt;
+            Outer splitter : bottom pane (non-resizable, non-collapsible)
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+</code></pre>
+
+<h3 id="javascript-code"><a href="#javascript-code">Javascript code</a></h3>
+
+<pre><code>$("#vertical").kendoSplitter({
+    orientation: "vertical",
+    panes: [
+        { collapsible: true, size: "60px" },
+        { collapsible: false },
+        { collapsible: false, resizable: false, size: "10%" }
+    ]
+});
+
+$("#horizontal").kendoSplitter({
+    panes: [
+        { collapsible: true, size: "100px" },
+        { collapsible: false },
+        { collapsible: true, size: "20%" }
+    ]
+});
+</code></pre>
+
+<h3 id="css-code"><a href="#css-code">CSS code</a></h3>
+
+<pre><code>html,
+body
+{
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+#vertical,
+#horizontal
+{
+    height:100%;
+}
+
+#vertical
+{
+    border-width: 0;
+}
+</code></pre>
+
+<h2 id="resizing-a-splitter-manually"><a href="#resizing-a-splitter-manually">Resizing a Splitter manually</a></h2>
+
+<p>The Splitter <code>div</code> can be resized manually by applying new width or height style with Javascript. Afterwards, the <a href="/kendo-ui/using-kendo-in-responsive-web-pages"><code>resize()</code></a> method
+should be executed, so that the widget readjusts its layout and pane sizes.</p>
+
+<pre><code>var splitterElement = $("#SplitterID"),
+    splitterObject = splitterElement.data("kendoSplitter");
+
+splitterElement.css({width: "800px", height: "600px" });
+splitterObject.resize();
+
+// for versions Q2 2013 SP1 and older use this instead:
+//splitterObject.trigger("resize");
+</code></pre>
+
+<p>If the Splitter layout needs readjusting, but the dimensions of the Splitter wrapper <code>&lt;div&gt;</code> have not changed, the <code>resize</code> method must be executed with a parameter in order to take effect.
+This is useful when the Splitter has been initialized in an invisible container and the panes' dimensions and position have not been calculated correctly.</p>
+
+<pre><code>splitterObject.resize(true);
+</code></pre>
+
+<p>On a side note, changing the pane sizes manually is not recommended. Use the <a href="/kendo-ui/api/web/splitter#methods-size"><code>size()</code></a> method for that.</p>
+
+<h2 id="change-pane-settings-after-initialization"><a href="#change-pane-settings-after-initialization">Change pane settings after initialization</a></h2>
+
+<p>The Splitter pane settings (<code>collapsible</code> and <code>resizable</code>) can be changed with Javascript after the Splitter has been initialized. For example:</p>
+
+<pre><code>$("#SplitterID").kendoSplitter({
+    panes: [
+        { collapsible: false, resizable: false, size: 100 },
+        { }
+    ]
+});
+
+var splitterObject = $("#SplitterID").data("kendoSplitter");
+
+splitterObject.options.panes[0].collapsible = true;
+splitterObject.options.panes[0].resizable = true;
+splitterObject.resize(true);
+</code></pre>
+
+<p>The <code>resize()</code> method of the Splitter causes the pane sizes to be recalculated, and the splitbars to be rendered with the current widget settings.</p>
+
+<h2 id="allow-an-element-to-overflow-a-splitter-pane"><a href="#allow-an-element-to-overflow-a-splitter-pane">Allow an element to overflow a Splitter pane</a></h2>
+
+<p>Splitter panes are either scrollable (have an <code>overflow:auto</code> style) or they clip overflowing content (have an <code>overflow:hidden</code> style). In either case, nothing is allowed to be displayed outside the pane boundaries.
+This can be problematic in scenarios, which include Menus and other <strong>non-detached</strong> popups, which are rendered <strong>inside</strong> the pane (Most Kendo UI widgets, except the Menu, use detached popups, so there is no problem).</p>
+
+<p>The solution is to disable pane content scrolling and clipping by enforcing an <code>overflow:visible</code> style to the Splitter pane <code>&lt;div&gt;</code>. In addition, the pane's stacking context must be raised by applying
+a positive <code>z-index</code> style.</p>
+
+<h3 id="example"><a href="#example">Example</a></h3>
+
+<h4>HTML</h4>
+
+<pre><code>&lt;div id="splitter1"&gt;
+    &lt;div id="pane1"&gt;
+        &lt;ul id="menu1"&gt;
+            &lt;li&gt;root menu item
+                &lt;ul&gt;
+                    &lt;!-- child menu items --&gt;
+                &lt;/ul&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h4>CSS</h4>
+
+<pre><code>#pane1
+{
+    overflow: visible;
+    z-index: 2;
+}
+</code></pre>
+
+<p>If there are several nested Splitters, then <strong>each</strong> pane, which is an ancestor of the Menu, requires the specified <code>overflow</code> and <code>z-index</code> styles. These styles can also be applied inline instead of externally.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

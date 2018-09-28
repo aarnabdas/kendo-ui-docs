@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration guide for the chart tooltip</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure the tooltip of a chart, make it visible and set its properties upon your preferences.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("dataviz/chart/tooltip.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//dataviz/chart/tooltip.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="tooltip"><a href="#tooltip">Tooltip</a></h1>
+
+<p>The Chart can display details about the data point that the mouse is currently hovering. The border of this tooltip matches the color of the series.</p>
+
+<p><img src="/kendo-ui/dataviz/chart/chart-tooltip.png" alt=""></p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>The tooltip is not visible by default. You can enable it by setting the visible property of the tooltip object to true:</p>
+
+<pre><code>$("#chart").kendoChart({
+    series: [{
+        type: "bar",
+        name: "United States",
+        data: [67.96, 68.93, 75, 74, 78]
+    }],
+    categoryAxis: {
+        categories: [2005, 2006, 2007, 2008, 2009]
+    },
+    tooltip: {
+        visible: true
+    }
+});
+</code></pre>
+
+<p>The tooltip can also be configured per-series:</p>
+
+<pre><code>series: [{
+    type: "bar",
+    name: "United States",
+    data: [67.96, 68.93, 75, 74, 78],
+    tooltip: {
+      visible: true
+    }
+}]
+</code></pre>
+
+<h2 id="formating-values"><a href="#formating-values">Formating values</a></h2>
+
+<p>The point value can be formatted using the format property:</p>
+
+<pre><code>tooltip: {
+    visible: true,
+    format: "Value: {0:N0}"
+}
+</code></pre>
+
+<p>The format string supports a subset of the syntax available in Java and C#.</p>
+
+<p>Here "N0" indicates that the value should be rounded to a whole number and should have a thousands separator.</p>
+
+<p>*<em>Note: *</em>Points in XY charts have two values - {0} and {1} (X and Y).</p>
+
+<h2 id="templates"><a href="#templates">Templates</a></h2>
+
+<p>Tooltip content can be defined with a Kendo Template when more flexibility is desired. The template provides access to all information associated with the point:</p>
+
+<ul>
+<li>  value - the point value. Value dimensions are available as properties, for example, <strong>value.x</strong> and <strong>value.y</strong>
+</li>
+<li>  category - the category name.</li>
+<li>  series - the data series.</li>
+<li>  dataItem - the original data item (when binding to dataSource).</li>
+</ul>
+
+<p>For example:</p>
+
+<pre><code>$("#chart").kendoChart({
+     title: {
+         text: "My Chart Title"
+     },
+     series: [{
+         name: "Series 1",
+         data: [200, 450, 300, 125]
+     }],
+     categoryAxis: {
+         categories: [2000, 2001, 2002, 2003]
+     },
+     tooltip: {
+         visible: true,
+         template: "${category} - ${value}"
+     }
+});
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

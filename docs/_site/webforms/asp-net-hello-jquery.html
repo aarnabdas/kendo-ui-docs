@@ -1,0 +1,483 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Tutorial series for HTML5 development with ASP.NET: Hello jQuery</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="This tutorial for HTML5 development with ASP.NET will help you learn how to install jQuery, then use it with WebForms and IE F12 Developer Tools.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("webforms/asp-net-hello-jquery.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//webforms/asp-net-hello-jquery.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="tutorial-html5-development-with-aspnet-part-1-hello-jquery"><a href="#tutorial-html5-development-with-aspnet-part-1-hello-jquery">Tutorial: HTML5 Development With ASP.NET Part 1, Hello jQuery</a></h1>
+
+<p>This tutorial will walk you through building an HTML5 application in ASP.NET.  In this first tutorial of a 5 part series you will learn</p>
+
+<ul>
+<li>How to install jQuery</li>
+<li>How to use jQuery with WebForms</li>
+<li>How to use the IE F12 Developer Tools</li>
+</ul>
+
+<p>This module covers the very basic information that you will need to know
+about <a href="http://jquery.com/">jQuery</a> and how to use it inside of Visual Studio / Internet
+Explorer. There are some good tips on things you can do with the <a href="http://msdn.microsoft.com/en-us/library/dd565628.aspx">IE Developer Tools</a> here as well. Check out the screencast, or skip to the written
+summary below.</p>
+
+<h2 id="screencast"><a href="#screencast">Screencast</a></h2>
+
+<iframe height="360" src="http://www.youtube.com/embed/6BS-dZMHyKg?rel=0" frameborder="0" width="640"></iframe>
+
+<h2 id="written-summary"><a href="#written-summary">Written Summary</a></h2>
+
+<p>In this tutorial, you will be building a sample application which takes in a
+user's first name and last name, and then returns a greeting. First you will
+build the application in typical WebForms fashion, then you will refactor the
+application to use <a href="http://jquery.com/">jQuery</a>.</p>
+
+<h4>Create The Sample Application</h4>
+
+<p>Open Visual Studio. All of these examples will use Visual Studio 2010 and .NET
+Version 4.0, but remember that the only limiting factor to your HTML5
+development is the browser. As long the browser is capable, .NET is capable.</p>
+
+<p>Select <strong>File / New Project</strong> and select the <strong>ASP.NET Web Application</strong> project template.  Name the application "HellojQuery".</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-file-new-project.png" alt="File New Project"></p>
+
+<p>Open the <strong>Default.aspx</strong> page.  Switch to <strong>Design</strong> view and delete all the
+content.  From the toolbox, drag out two <strong>TextBoxes</strong>, a <strong>Button</strong> and a
+<strong>Label</strong> control.  In front of the first TextBox, type "First Name: ".
+After the first TextBox, put a space and then type "Last Name: ".  Put a
+space between the second TextBox and the Button.  Put the label on the
+following line by pressing <strong>Enter</strong>.</p>
+
+<p>Name the first TextBox "txtFirstName", the second one "txtLastName".
+Name the Button "btnSayHello" and change it's <strong>Text</strong> property to "Say Hello".  Set the Label ID to <strong>lblResult</strong> and clear out the <strong>Text</strong> property.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-default-design-view.png" alt="Default Design View"></p>
+
+<p>Double-click the <strong>Say Hello</strong> button to create a new button click event in
+the <strong>Default.aspx.cs</strong> file.  Set the label text equal to the string "Hello" concatenated with the <strong>Text</strong> property of <strong>txtFirstName</strong> and the
+<strong>Text</strong> property of <strong>txtLastName</strong>.</p>
+
+<h3 id="btnsayhello-click-event"><a href="#btnsayhello-click-event">btnSayHello Click Event</a></h3>
+
+<pre><code>protected void btnSayHello_Click(object sender, EventArgs e) {
+
+    lblResult.Text = "Hello " + txtFirstName.Text + " " + txtLastName.Text;
+
+}
+</code></pre>
+
+<h4>Using IE Developer Tools</h4>
+
+<p>Press <strong>F5</strong> or the run icon and run the application.  Don't enter in your
+name yet or click the button.  Instead, press <strong>F12</strong> to open the IE Developer
+Tools.  Switch to the <strong>Network</strong> tab and click the <strong>Start Capturing</strong>
+button.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-developer-tools.png" alt="F12 Developer Tools"></p>
+
+<p>Refresh the page.  Notice that the <strong>Network</strong> tab now shows three items.  The
+first is the <strong>Default.aspx</strong> page that you are looking at.  The second is the
+<strong>CSS</strong> file that is referenced in the head of the <strong>Default.aspx</strong> page.  The
+last one is the <strong>WebResource.axd</strong> file which contains JavaScript and other
+resources for the page as determined by WebForms per the ASP.NET controls that
+you choose to use.</p>
+
+<p>Also notice that the method for all three requests is a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a>.  This
+means that the browser requested three files from the server and did that with
+an HTTP <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a>.  A <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a> is commonly used when requesting
+information from a server.  By default when you visit a URL, your browser will
+do a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a> to retrieve the requested site.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-network-traffic-get.png" alt="Network Traffic For A Get"></p>
+
+<p>Now fill the form out in the application with your first name and click the
+<strong>Say Hello</strong> button.  The server responds as expected by setting the label
+text equal to the first name field plus the last name field.  Have another
+look at the network traffic pane.  It looks nearly identical, but the
+<strong>Default.aspx</strong> page was retrieved this time with a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">POST</a>.  This is
+because this time the browser sent some data to the server specifically the
+values of the first name and last name textboxes.  When browsers send
+information to the server and expect a response, this is typically done with a
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">POST</a>.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-network-traffic-post.png" alt="Network Traffic For A Post"></p>
+
+<p>In ASP.NET WebForms, the page posts back to itself, or the same URL. To
+inspect the information that was sent to the server, double click on the
+<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">POST</a> method and click on the <strong>Request Body</strong> tab.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-network-request-body.png" alt="Network Request Body"></p>
+
+<p>Here you can see that the <a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx">_VIEWSTATE</a> object was sent back to the server.
+If you scroll down far enough, you will find the values of the first and last
+name textboxes in the view state object.  What happened is that the browser
+did a <strong>POST</strong> to the server requesting the page, but also passing in the
+values of the textboxes.  The server event was fired, the HTML in the
+<strong>Default.aspx</strong> page was altered and then sent to the browser.</p>
+
+<p>This requires a complete "round trip" to the server.  This means that the
+browser has to load up the page all over again.  This is completely
+unnecessary (especially in this simple application).</p>
+
+<p><a href="http://jquery.com/">jQuery</a> is a simple JavaScript library that allows the developer to
+interact with the HTML of the page (amongst many other things) in a very
+straight forward way.</p>
+
+<h4>Add jQuery To The Project</h4>
+
+<p>Visual Studio projects actually come with <a href="http://jquery.com/">jQuery</a> in the <strong>Scripts</strong> folder by default.  However, these <a href="http://jquery.com/">jQuery</a> and VSDoc files may be out of
+date and not connected with a <a href="http://msdn.microsoft.com/en-us/library/dd565622">Nuget</a> installation.  Delete the <a href="http://jquery.com/">jQuery</a> files in the <strong>Scripts</strong> folder, including the VSDoc file.</p>
+
+<p>To install <a href="http://jquery.com/">jQuery</a> from <a href="http://msdn.microsoft.com/en-us/library/dd565622.aspx">Nuget</a>, right-click the project and select
+<strong>Add Library Package Reference</strong>.  Select <strong>Online</strong> from the left-hand side
+and enter "jquery" in the search box.  Click the <strong>Install</strong> button on the
+<a href="http://jquery.com/">jQuery</a> package.  This will install the VSDoc files as well.  There is no
+need to install them separately.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-nuget-jquery-search.png" alt="Nuget jQuery Search"></p>
+
+<p>This will put the latest version of <a href="http://jquery.com/">jQuery</a> in the <strong>Scripts</strong> folder.
+There will be 3 files there.</p>
+
+<p><strong>1. jquery-1.9.1.js</strong> This is the full <a href="http://jquery.com/">jQuery</a> source file.</p>
+
+<p><strong>2. jquery-1.9.1.min.js</strong> This is the minified version of <a href="http://jquery.com/">jQuery</a>,
+which removes all whitespace and comments, as well as [minifying](<a href="http://en.wikipedia.org/wiki/Minification_(programming)">http://en.wikipedia.org/wiki/Minification_(programming)</a> the
+script to make it as small as possible.  This version is identical to the
+first one in every way except that it is unreadable for debugging.  This is
+generally the file used when an application is in production.  For
+development, use the full <a href="http://jquery.com/">jQuery</a> version.</p>
+
+<p><strong>3. jquery-1.9.1-vsdoc.js</strong> This file provides Intellisense inside of
+Visual Studio for <a href="http://jquery.com/">jQuery</a>.  As long as this file is named in the same way
+as the <a href="http://jquery.com/">jQuery</a> file, Intellisense will work.</p>
+
+<p>Open up the <strong>Site.Master</strong> page.  Drag the full <a href="http://jquery.com/">jQuery</a> source into the
+<strong>head</strong> of the page, directly below the <strong>link</strong> tag to <strong>Site.css</strong>.  This
+will create a new <strong>link</strong> tag pointing to the jQuery-1.9.1.js file.
+<a href="http://jquery.com/">JQuery</a> has now been added to the project.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-jquery-added-to-master.png" alt="jQuery Added To The Master Page"></p>
+
+<h4>Using jQuery Directly In The Browser</h4>
+
+<p>Run the application again.  When it comes up, open the developer tools by
+selecting <strong>F12</strong>.  Switch to the <strong>Console</strong> tab in the developer tools.  The
+console allows a developer to execute arbitrary JavaScript commands at
+runtime.  As a test, type <strong>alert("Hello!");</strong> in the console and press enter.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-alert-hello.png" alt="Alert Hello"></p>
+
+<p><a href="http://jquery.com/">jQuery</a> code can be executed either by calling methods off of the
+<strong>jQuery</strong> object, or simply using the <strong>$</strong>. The <strong>$</strong> is commonly known and
+recognized as representing <a href="http://jquery.com/">jQuery</a>.</p>
+
+<p>For this project, you should be aware of one important thing that <a href="http://jquery.com/">jQuery</a>
+does, and that's select items out of the <a href="http://en.wikipedia.org/wiki/Minification">DOM</a>.  The <a href="http://en.wikipedia.org/wiki/Minification">DOM</a> is the
+Document Object Model, but you can think of this as just your page.
+<a href="http://jquery.com/">jQuery</a> allows you to select elements out of your page and get or set
+different properties on the elements.  <a href="http://jquery.com/">jQuery</a> has many types of
+selectors, but it's important to be very comfortable with the following two
+basic types of selectors.</p>
+
+<p><strong>1. ID Selectors</strong></p>
+
+<p>This is when you select an element based upon it's unique ID.  Every HTML
+element on your page should have a unique ID.  This is done by using a <strong>#</strong> sign.</p>
+
+<h3 id="selecting-an-element-by-id-with-jquery"><a href="#selecting-an-element-by-id-with-jquery">Selecting An Element By ID With jQuery</a></h3>
+
+<pre><code>// gets the firstname textbox
+var txtFirstName = $("#txtFirstName");
+</code></pre>
+
+<p><strong>2. Class Selectors</strong></p>
+
+<p>This is when an element, or a group of elements is selected by the <strong>css</strong>
+class.  If you have several elements on a page with the same class, all of
+them will be returned.  This is done by using a <code>.</code>.</p>
+
+<h3 id="selecting-elements-by-class-with-jquery"><a href="#selecting-elements-by-class-with-jquery">Selecting Elements By Class With jQuery</a></h3>
+
+<pre><code>// gets the textboxes with a class of "textbox"
+var textboxes = $(".textbox");
+</code></pre>
+
+<p>Enter a first and last name in the textboxes in the application before
+proceeding.</p>
+
+<p>To select the <strong>First Name</strong> textbox value in this project, remember that you
+set the ID earlier in this tutorial to <strong>txtFirstName</strong>.  You then need to
+call the <a href="http://jquery.com/">jQuery</a> <a href="http://api.jquery.com/val/">val()</a> method to retrieve the text inside of the
+textbox.  Enter the following command in the console and press enter.</p>
+
+<h3 id="get-the-text-of-txtfirstname"><a href="#get-the-text-of-txtfirstname">Get The Text Of txtFirstName</a></h3>
+
+<pre><code>// gets the text of the element with the id txtFirstName
+$("#txtFirstName").val();
+</code></pre>
+
+<p>Notice that the command is echoed out into the Console, but there is no value.
+This mistake was made to demonstrate an important feature of ASP.NET WebForms.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-txtfirstname-no-value.png" alt="txtFirstName Has No Value"></p>
+
+<p>To debug why this didn't work, click on the white arrow which is the element
+selector.  Then go up into the page and click on the textbox that you named
+<strong>txtFirstName</strong>.  The HTML tab will open and the element in the page will be
+highlighted.  Notice that it's ID is not <strong>txtFirstName</strong>, but rather
+<strong>MainContent_txtFirstName</strong>.  This is because the controls were added to a
+content container in <strong>Default.aspx</strong>.  In ASP.NET WebForms, controls added to
+a parent server control will be prefixed with the parent name.  If parents are
+nested within parents, they may have multiple values appended onto the front.
+This is to make sure that ID's do in fact remain unique.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-main-content-txt-firstname.png" alt="Main Content Prefixed txtFirstName"></p>
+
+<p>Switch back to the <strong>Console</strong> tab and keeping in mind the actual ID of
+<strong>txtFirstName</strong> at runtime, enter the following command in the <strong>console.</strong></p>
+
+<h3 id="get-the-text-of-txtfirstname"><a href="#get-the-text-of-txtfirstname">Get The Text Of txtFirstName</a></h3>
+
+<pre><code>// gets the text of the element with the id txtFirstName
+$("#MainContent_txtFirstName").val();
+</code></pre>
+
+<p>Notice that the text value of the first name textbox is returned.</p>
+
+<p><img src="/kendo-ui/images/webforms/hello-jquery-txtfirstname-has-value.png" alt="txtFirstName Has A Value"></p>
+
+<h4>Refactor The Application To Use jQuery</h4>
+
+<p>Given the fact that you can select any element in the page, and get or set its
+value, switch back to Visual Studio and open up the <strong>Default.aspx</strong> file.
+Right above the closing <code>&lt;/asp:Content&gt;</code> tag, open a new script block.  You
+do not have to specify the type of the script block.  All script blocks are
+assumed to be JavaScript unless otherwise specified.</p>
+
+<h3 id="open-a-new-script-block"><a href="#open-a-new-script-block">Open A New Script Block</a></h3>
+
+<pre><code>&lt;script&gt;
+    // ... JavaScript will go here
+&lt;/script&gt;
+</code></pre>
+
+<p><strong>Document Ready</strong></p>
+
+<p>Another important concept to understand in jQuery is the <a href="http://api.jquery.com/ready/">Document Ready</a> function.  This is a function that jQuery will execute when the
+page has finished loading.  This is important as you don't want to execute any
+code until all libraries, CSS and HTML elements have been loaded into the
+page.</p>
+
+<p>The shorthand for this function is to declare a function, wrap that function
+in parenthesis and put the jQuery <strong>$</strong> at the front.  This should be
+committed to memory as it is used quite frequently in jQuery powered
+applications.</p>
+
+<h3 id="create-a-document-ready-function"><a href="#create-a-document-ready-function">Create A Document Ready Function</a></h3>
+
+<pre><code>&lt;script&gt;
+
+    $(function() {
+        // no code here will be executed until the page has
+        // finished loading
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Before writing any code in the <a href="http://api.jquery.com/ready/">Document Ready</a>, a slight
+modification is needed in the HTML.  All the contents inside of <strong>Default.aspx</strong> are ultimately rendered inside a <strong>Form</strong> tag that is in the Master page.
+This means that any button click will cause the page to post back or rather,
+submits the page to the server.  This is the round trip that we are attempting
+eliminate.  Remove the <strong>Button</strong> markup and replace it with plain HTML that
+renders an input with a type of button.  This will display a button, but its
+click will not cause the form to post.</p>
+
+<h3 id="replace-asp-button-control-with-standard-input"><a href="#replace-asp-button-control-with-standard-input">Replace ASP Button Control With Standard Input</a></h3>
+
+<pre><code>&lt;!-- Replace This --&gt;
+&lt;asp:Button ID="btnSayHello" runat="server" onclick="btnSayHello_Click" Text="Say Hello" /&gt;
+
+
+&lt;!-- With This --&gt;
+&lt;input type="button" id="btnSayHello" value="Say Hello" /&gt;
+</code></pre>
+
+<p>In order to create a new click event for the input button, select the button
+with <a href="http://jquery.com/">jQuery</a> and then specify its <strong>click</strong> event.  When the click event
+is specified, a function is passed in that will be executed when the button
+click actually occurs.  Notice that it is unnecessary to prefix the new button
+with <strong>MainContent</strong>, because while it is in fact in an ASP.NET Content Area,
+it is not a server control and consequently its ID will not be modified at
+runtime.</p>
+
+<h3 id="create-a-click-event-for-the-new-button"><a href="#create-a-click-event-for-the-new-button">Create A Click Event For The New Button</a></h3>
+
+<pre><code>&lt;script&gt;
+
+    $(function() {
+
+        $("#btnSayHello").click(function() {
+
+            // all code here will be executed when
+            // btnSayHello is clicked
+
+        });
+
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Select both the first name and last name textboxes and store their values in
+variables.  Lastly, the <strong>lblResult</strong> control renders as a <code>&lt;span&gt;</code>  tag at
+runtime.  In order to set the text that's rendered inside of the span tag,
+select the <strong>lblResult</strong> control with <a href="http://jquery.com/">jQuery</a> and set its <strong>html</strong> property.</p>
+
+<h3 id="the-full-click-event-code"><a href="#the-full-click-event-code">The Full Click Event Code</a></h3>
+
+<pre><code>&lt;script&gt;
+
+    $(function() {
+
+
+        $("#btnSayHello").click(function() {
+
+            // get the values of the first and last name textboxes
+            var firstName = $("#MainContent_txtFirstName").val();
+            var lastName = $("#MainContent_txtLastName").val();
+
+            // set the text of the label
+            $("#MainContent_lblResult").html("Hello " + firstName + " " + lastName);
+
+        });
+
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Run the application.  Enter in a first name and last name value.  Click the
+button and notice that the value of the label is updated, but the page never
+posts back to the server.  All manipulation happens client side.</p>
+
+<h3 id="further-reading--resources"><a href="#further-reading--resources">Further Reading / Resources</a></h3>
+
+<p>If you wish to become very knowledgeable about <a href="http://jquery.com/">jQuery</a>, it is highly
+recommended that you go through the <a href="http://tutsplus.com/course/30-days-to-learn-jquery/">30 Days To Learn jQuery</a> course on <a href="http://tutsplus.com/">TutsPlus</a>.  After finishing this set of learning screencasts for
+<a href="http://jquery.com/">jQuery</a>, you should not only be extremely comfortable with the library,
+but you will have vastly accelerated your skills in overall HTML5 development.</p>
+
+<p>Code from this module can be downloaded from the course <a href="https://github.com/telerik/html5-dev-for-aspnet-devs">GitHub repository</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

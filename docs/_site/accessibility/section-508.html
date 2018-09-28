@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Section 508 Support</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Kendo UI Section 508 support">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("accessibility/section-508.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//accessibility/section-508.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendo-ui-section-508-support"><a href="#kendo-ui-section-508-support">Kendo UI Section 508 Support</a></h1>
+
+<p>The following table shows the level of support that Kendo UI provides for the
+<a href="http://www.section508.gov/section-508-standards-guide#Web">Section 508 Web standard</a>.</p>
+
+<h2 id="section-119422-web-based-internet-information-and-applications"><a href="#section-119422-web-based-internet-information-and-applications">Section 1194.22 Web-based Internet Information and Applications</a></h2>
+
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th>Supporting features</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000704">(a)</a> A text equivalent for every non-text element shall be provided (e.g., via "alt", "longdesc", or in element content).</td>
+<td>Supports</td>
+<td>All images (<code>img</code> HTML elements) used by Kendo UI have their <code>alt</code> attribute set. If the developer uses images in Kendo UI templates he or she must set the "alt" or "longdesc" attribute in the template definition.)</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000727">(b)</a> Equivalent alternatives for any multimedia presentation shall be synchronized with the presentation.</td>
+<td>Not applicable</td>
+<td>Kendo UI does not use multimedia (sound or video) presentation.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000730">(c)</a> Web pages shall be designed so that all information conveyed with color is also available without color, for example from context or markup.</td>
+<td>Supports</td>
+<td>Kendo UI widgets make sure that information is conveyed by other means besides color.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000736">(d)</a> Documents shall be organized so they are readable without requiring an associated style sheet.</td>
+<td>Supports with exceptions</td>
+<td>Kendo UI widgets will work without an applied stylesheet. Some widgets with rich UI (Scheduler, Gantt) will not look as good.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000739">(e)</a> Redundant text links shall be provided for each active region of a server-side image map.</td>
+<td>Supports</td>
+<td>Kendo UI does not use image maps.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000741">(f)</a> Client-side image maps shall be provided instead of server-side image maps except where the regions cannot be defined with an available geometric shape.</td>
+<td>Supports</td>
+<td>Kendo UI does not use image maps.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000743">(g)</a> Row and column headers shall be identified for data tables.</td>
+<td>Supports with exceptions</td>
+<td>The Kendo UI widgets use attributes to identify the column headers.  The Pivot and Scheduler are exceptions that will be addressed by a future update.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000750">(h)</a> Markup shall be used to associate data cells and header cells for data tables that have two or more logical levels of row or column headers.</td>
+<td>Does not support</td>
+<td>Kendo UI doesn't identify headers for complex data tables. Will be addressed by a future update.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000753">(i)</a> Frames shall be titled with text that facilitates frame identification and navigation.</td>
+<td>Does not support</td>
+<td>The Kendo UI Editor doesn't set the title of the content editable iframe. Will be addressed by a future update.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000756">(j)</a> Pages shall be designed to avoid causing the screen to flicker with a frequency greater than 2 Hz and lower than 55 Hz.</td>
+<td>Supports</td>
+<td>Kendo UI does not cause screen flicker with a frequency greater than 2 Hz and lower than 55 Hz.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000759">(k)</a> A text-only page, with equivalent information or functionality, shall be provided to make a web site comply with the provisions of this part, when compliance cannot be accomplished in any other way. The content of the text-only page shall be updated whenever the primary page changes.</td>
+<td>Not applicable</td>
+<td>The developer is responsible for providing text-only content for pages that use Kendo UI.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000763">(l)</a> When pages utilize scripting languages to display content, or to create interface elements, the information provided by the script shall be identified with functional text that can be read by assistive technology.</td>
+<td>Supports</td>
+<td>Kendo UI is a JavaScript framework and can't operate when JavaScript is disabled.  Kendo UI provides keyboard navigation support and screen reader support (via ARIA attributes).</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000782">(m)</a> When a web page requires that an applet, plug-in or other application be present on the client system to interpret page content, the page must provide a link to a plug-in or applet that complies with §1194.21(a) through (l).</td>
+<td>Supports</td>
+<td>Kendo UI doesn't use any external plug-ins or applets.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000785">(n)</a> When electronic forms are designed to be completed on-line, the form shall allow people using assistive technology to access the information, field elements, and functionality required for completion and submission of the form, including all directions and cues.</td>
+<td>Supports with exceptions</td>
+<td>Most forms in Kendo UI are accessible to assistive technologies with some exceptions that will be addressed by a future update.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000794">(o)</a> A method shall be provided that permits users to skip repetitive navigation links.</td>
+<td>Supports</td>
+<td>Kendo UI does not provide a 'skip navigation link', but instead offers keyboard shortcuts to most of the features in the user interface.</td>
+</tr>
+<tr>
+<td>
+<a href="https://www.webaccessibility.com/best_practices.php?standard_id=1000797">(p)</a> When a timed response is required, the user shall be alerted and given sufficient time to indicate more time is required.</td>
+<td>Supports</td>
+<td>Kendo UI does not require a timed response as part of its core functionality.</td>
+</tr>
+</tbody>
+</table>
+
+<style>
+table td {
+    vertical-align: top;
+}
+table td:nth-child(1) {
+    width: 430px;
+}
+table td:nth-child(2) {
+    white-space:nowrap;
+}
+</style>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

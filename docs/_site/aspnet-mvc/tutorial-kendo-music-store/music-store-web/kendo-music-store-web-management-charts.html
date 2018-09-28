@@ -1,0 +1,368 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/tutorial-kendo-music-store/music-store-web/kendo-music-store-web-management-charts.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/tutorial-kendo-music-store/music-store-web/kendo-music-store-web-management-charts.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="create-the-store-management-charts---kendo-ui-music-store"><a href="#create-the-store-management-charts---kendo-ui-music-store">Create the Store Management Charts - Kendo UI Music Store</a></h1>
+
+<p><img src="/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-manage-charts-screenshot.png" alt="kendo-manage-charts-screenshot"></p>
+
+<p>When logged in to the Music Store as an administrator an additional button titled "Manage Store" is made available in the upper right corner.
+This opens the management graphs which can be used to monitor the sales status of the store.
+This page uses <a href="http://demos.telerik.com/kendo-ui/dataviz/overview/index.html">Kendo UI data vizualization</a> to render the graphs.</p>
+
+<p>This code is located in <strong>Scripts/App/storemanager-graphs.js</strong>.</p>
+
+<blockquote>
+<p>You can log in to the Music Store as the administrator by using the username "Owner" and the password "p@ssword123".</p>
+</blockquote>
+
+<h2 id="set-up-the-html"><a href="#set-up-the-html">Set up the HTML</a></h2>
+
+<p>The page contains a date range selector that can be used to choose whether to view a day, week, month, or year of data.
+This selector is represented by a <a href="http://demos.telerik.com/kendo-ui/web/listview/index.html">Kendo UI ListView</a> widget.
+The main graph is represented by a <a href="http://demos.telerik.com/kendo-ui/dataviz/overview/index.html">Kendo UI Chart</a>.
+The HTML used is:</p>
+
+<pre><code>&lt;ul id="date-range" class="selector" &gt;&lt;/ul&gt;
+&lt;h3&gt;Overall Sales&lt;/h3&gt;
+&lt;div id="revenue-chart"&gt;&lt;/div&gt;
+</code></pre>
+
+<h2 id="initialize-the-widgets"><a href="#initialize-the-widgets">Initialize the Widgets</a></h2>
+
+<p>We start by setting up the DataSource for the Revenue/Orders chart:</p>
+
+<pre><code>var revenueChartDataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: store.config.salesAndRevenueUrl,
+            dataType: "json"
+        }
+    },
+    sort: {
+        field: "Day",
+        dir: "asc"
+    }
+});
+</code></pre>
+
+<blockquote>
+<p>Please note that the data represented by these charts is generated randomly on the server.
+It was unreasonable to backfill a year's worth of orders into the SQL Local DB on startup.</p>
+</blockquote>
+
+<p>Then the grid is initialized with this data:</p>
+
+<pre><code>var createOrderRevenueChart = function () {
+    $("#revenue-chart").kendoChart({
+        theme: $(document).data("kendoSkin") || "default",
+        dataSource: revenueChartDataSource,
+        legend: {
+            position: "top"
+        },
+        series: [
+            ...
+        ],
+        valueAxis: [
+            ...
+        ],
+        categoryAxis: {
+            ...
+        },
+        tooltip: {
+            visible: true
+        }
+    });
+};
+</code></pre>
+
+<h3 id="specify-series"><a href="#specify-series">Specify Series</a></h3>
+
+<p>The chart contains 2 series. One is the total revenue per day. The other is the number of orders per day.
+There are defined in the <strong>series: []</strong> array property.</p>
+
+<pre><code>        series: [
+            {
+                type: "column",
+                name: "Revenue",
+                field: "Revenue",
+                color: "#cc6e38",
+                tooltip: {
+                    visible: true,
+                    format: "{0:c}"
+                }
+            },
+            {
+                type: "line",
+                name: "Orders",
+                field: "Orders",
+                color: "#5a5959",
+                axis: "orders",
+                tooltip: {
+                    visible: true,
+                    format: "{0} Orders"
+                }
+            }
+        ]
+</code></pre>
+
+<p>Each series is defined by an object that contains these properties:</p>
+
+<p><strong>type</strong> is the type or style of chart to render. Here we use a column chart for the revenue and a line chart for the orders.
+This demonstrates that we can mix chart types on a single chart.</p>
+
+<p><strong>name</strong> is the display name that will be put in the legend of the chart, if the legend is displayed.</p>
+
+<p><strong>field</strong> is the name of the property on the data that contains the values we want to render on the chart.</p>
+
+<p><strong>color</strong> is the color used to represent the series on the chart and in the legend.</p>
+
+<p><strong>tooltip</strong> defines what will be displayed if the user puts the mouse over a data point or column.
+The format string follows the parameters for the <a href="http:///api/framework/kendo#format">kendo.format</a> function.</p>
+
+<h3 id="specify-the-axis"><a href="#specify-the-axis">Specify the Axis</a></h3>
+
+<p>The <strong>valueAxis</strong> property is set to an array of objects that represent the vertical axis on the chart.
+The number of items in the series and valueAxis arrays should be the same.</p>
+
+<pre><code>        valueAxis: [
+            {
+                title: { text: "Revenue" },
+                labels: {
+                    format: "c"
+                }
+            },
+            {
+                name: "orders",
+                title: { text: "Number of Orders" },
+                color: "#ec5e0a"
+            }
+        ]
+</code></pre>
+
+<p><strong>name</strong> is the display value that will be placed along side the vertical axis.</p>
+
+<p>The <strong>categoryAxis</strong> property is set to a single item that represents the horizontal axis.</p>
+
+<pre><code>        categoryAxis: {
+            field: "Day",
+            format: "d",
+            type: "date",
+            baseUnit: selectedDateRange.unit,
+            labels: {
+                rotation: 60
+            },
+            axisCrossingValue: [0, 1000]
+        }
+</code></pre>
+
+<p><strong>field</strong> is the name of the property on the data objects that will be used to get the value to display.</p>
+
+<p><strong>format</strong> and <strong>type</strong> are used to specify the axis consists of dates and to format them as dates.</p>
+
+<p><strong>labels.rotation</strong></p>
+
+<p>The <strong>axisCrossingValue</strong> is an array that specified where each of the vertical axis defined in the valueAxis array should be rendered.
+Each value in the array corresponds to the valueAxis with the same array index.
+We specify 0 for the first value to place the "Revenue" vertical axis on the left.
+To place the "Orders" vertical axis on the right side of the graph, a number has to be chosen that is better than the number of items
+in the categoryAxis. Here our biggest collection will be when we display data for the "Month" time range, where we show the last 30 days,
+so any number higher than that could have been chosen.</p>
+
+<h2 id="change-the-date-ranges"><a href="#change-the-date-ranges">Change the Date Ranges</a></h2>
+
+<p>To facilitate selecting a date range to display on the chart, we used a Kendo UI ListView widget to display the available date ranges.
+First we defined an array of the date ranges, using <strong>date.js</strong> to get ranges appropriate date ranges.
+The default selected item is also saved to a separate variable.</p>
+
+<pre><code>var dateRanges = [{
+    name: "Day",
+    start: Date.today().toString("M/d/yyyy"),
+    end: Date.today().add(1).days().toString("M/d/yyyy"),
+    unit: "days"
+},
+{
+    name: "Week",
+    start: Date.today().add(-7).days().toString("M/d/yyyy"),
+    end: Date.today().add(1).days().toString("M/d/yyyy"),
+    unit: "days"
+},
+{
+    name: "Month",
+    start: Date.today().add(-1).months().toString("M/d/yyyy"),
+    end: Date.today().add(1).days().toString("M/d/yyyy"),
+    unit: "days"
+},
+{
+    name: "Year",
+    start: Date.today().add(-1).years().toString("M/d/yyyy"),
+    end: Date.today().add(1).days().toString("M/d/yyyy"),
+    unit: "months"
+}];
+
+var selectedDateRange = dateRanges[1];
+</code></pre>
+
+<p>When we query the server for data, we want to add the start and end date of the selected date range as query string parameters.
+To do this, we override the <strong>transport.parameterMap</strong> on the DataSource, referencing the <strong>selectedDateRange</strong> in a closure.</p>
+
+<pre><code>var revenueChartDataSource = new kendo.data.DataSource({
+    transport: {
+        ...
+
+        parameterMap: function (options, type) {
+            return {
+                start: selectedDateRange.start,
+                end: selectedDateRange.end
+            };
+        }
+
+        ...
+</code></pre>
+
+<p>In the parameterMap function, we return an object that has <strong>start</strong> and <strong>end</strong> properties, which will be added to the request to the server.</p>
+
+<p>The HTML element to hold the date range selector also needs to be set to a ListView widget, and the currently selected value set to the default date range:</p>
+
+<pre><code>var dateRangeSelector = $("#date-range");
+dateRangeSelector.kendoListView({
+    dataSource: dateRanges,
+    template: "&lt;li&gt;#= name #&lt;/li&gt;",
+    selectable: "single",
+    change: dateRangeChanged
+});
+dateRangeSelector.data("kendoListView").select(dateRangeSelector.children()[1]);
+</code></pre>
+
+<p>The ListView has <strong>selectable: "single"</strong> defined in its configuration, which puts the ListView into a selection mode where one item can be selected at a time.
+On selection change, the <strong>change</strong> event is triggered. This calls the <strong>dateRangeChanged</strong> function:</p>
+
+<pre><code>var dateRangeChanged = function (e) {
+    var data = this.dataSource.view();
+    selectedDateRange = data[$(this.select()[0]).index()];
+    $("#revenue-chart").data("kendoChart").options.categoryAxis.baseUnit = selectedDateRange.unit;
+    revenueChartDataSource.read();
+    genreChartDataSource.read();
+};
+</code></pre>
+
+<p>In this function, we take the selected date range item and update the <strong>selectedDateRange</strong> variable.
+Then the chart data is redrawn by updating its underlying data source, by calling its <strong>.read()</strong> method.
+The <strong>baseUnit</strong> for the chart is also changed based on the date range.
+For Day, Week and Month, the scale is set to a single day.
+For Year, the scale is set to one month.
+This is done by setting the <strong>options.categoryAxis.baseUnit</strong> property on the chart before it is redrawn.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,562 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/jsp-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/jsp-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/jsp-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/jsp-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/jsp-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("jsp/tags/gantt/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//jsp/tags/gantt/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="gantt"><a href="#gantt">Gantt</a></h1>
+
+<p>The Gantt tag is a server-side wrapper for the <a href="/kendo-ui/web/gantt/overview">Kendo UI Gantt</a> widget.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>Here is how to configure the Kendo UI Gantt for displaying and editing gantt tasks.</p>
+
+<ol>
+<li>Make sure you have followed all the steps from the <a href="/kendo-ui/jsp/introduction">Introduction</a> help topic.</li>
+<li>
+<p>Create a class which will represent the gantt. We will call it <code>GanttTask</code>.</p>
+
+<pre><code>@Entity
+@Table(name="GanttTasks")
+public class GanttTask {
+    private int id;
+    private int orderId;
+    private Integer parentId;
+    private Date start;
+    private Date end;
+    private String title;
+    private boolean summary;
+    private boolean expanded;
+    private double percentComplete;
+
+    @Id
+    @Column(name="ID")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id ) {
+        this.id = id ;
+    }
+
+    @Column(name="OrderID")
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    @Column(name="ParentID")
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    @Column(name="Start")
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    @Column(name="End")
+    @JsonSerialize(using=IsoDateJsonSerializer.class)
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    @Column(name="Title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name="Summary")
+    public boolean getSummary() {
+        return summary;
+    }
+
+    public void setSummary(boolean summary) {
+        this.summary = summary;
+    }
+
+    @Column(name="Expanded")
+    public boolean getExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    @Column(name="PercentComplete")
+    public double getPercentComplete() {
+        return percentComplete;
+    }
+
+    public void setPercentComplete(double percentComplete) {
+        this.percentComplete = percentComplete;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>Register the Telerik UI for JSP taglib in your JSP page</p>
+
+<pre><code>&lt;%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%&gt;
+</code></pre>
+</li>
+<li>
+<p>Declare a gantt tag. Configure it's tasks data source and dependencies data source model's fields.</p>
+
+<pre><code>&lt;kendo:gantt name="gantt" height="700" showWorkDays="false" showWorkHours="false" snap="false"&gt;
+    &lt;kendo:dataSource batch="false"&gt;
+         &lt;kendo:dataSource-schema&gt;
+            &lt;kendo:dataSource-schema-model id="id"&gt;
+                &lt;kendo:dataSource-schema-model-fields&gt;
+                    &lt;kendo:dataSource-schema-model-field name="id" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="orderId" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="parentId" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="start" type="date" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="end" type="date" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="title" defaultValue="No title" type="string" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="percentComplete" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="expanded" type="boolean" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="summary" type="boolean" /&gt;
+                &lt;/kendo:dataSource-schema-model-fields&gt;
+            &lt;/kendo:dataSource-schema-model&gt;
+        &lt;/kendo:dataSource-schema&gt;
+    &lt;/kendo:dataSource&gt;
+    &lt;kendo:dependencies batch="false"&gt;
+         &lt;kendo:dataSource-schema&gt;
+            &lt;kendo:dataSource-schema-model id="id"&gt;
+                 &lt;kendo:dataSource-schema-model-fields&gt;
+                     &lt;kendo:dataSource-schema-model-field name="id" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="predecessorId" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="successorId" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="type" type="number" /&gt;
+                &lt;/kendo:dataSource-schema-model-fields&gt;
+            &lt;/kendo:dataSource-schema-model&gt;
+        &lt;/kendo:dataSource-schema&gt;
+    &lt;/kendo:dependencies&gt;
+&lt;/kendo:gantt&gt;
+</code></pre>
+</li>
+<li>
+<p>Specify the action methods which will perform the "create", "read", "update" and "destroy" operations for the tasks and dependencies:</p>
+
+<pre><code>&lt;kendo:gantt name="gantt" height="700" showWorkDays="false" showWorkHours="false" snap="false"&gt;
+    &lt;kendo:dataSource batch="false"&gt;
+         &lt;kendo:dataSource-schema&gt;
+            &lt;kendo:dataSource-schema-model id="id"&gt;
+                &lt;kendo:dataSource-schema-model-fields&gt;
+                    &lt;kendo:dataSource-schema-model-field name="id" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="orderId" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="parentId" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="start" type="date" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="end" type="date" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="title" defaultValue="No title" type="string" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="percentComplete" type="number" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="expanded" type="boolean" /&gt;
+                    &lt;kendo:dataSource-schema-model-field name="summary" type="boolean" /&gt;
+                &lt;/kendo:dataSource-schema-model-fields&gt;
+            &lt;/kendo:dataSource-schema-model&gt;
+        &lt;/kendo:dataSource-schema&gt;
+        &lt;kendo:dataSource-transport&gt;
+            &lt;kendo:dataSource-transport-create url="${tasksCreateUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-read url="${tasksReadUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-update url="${tasksUpdateUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-destroy url="${tasksDestroyUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-parameterMap&gt;
+                &lt;script&gt;
+                    function parameterMap(options, type) {
+                        return JSON.stringify(options.models || [ options ]);
+                    }
+                &lt;/script&gt;
+            &lt;/kendo:dataSource-transport-parameterMap&gt;
+        &lt;/kendo:dataSource-transport&gt;
+    &lt;/kendo:dataSource&gt;
+    &lt;kendo:dependencies batch="false"&gt;
+         &lt;kendo:dataSource-schema&gt;
+            &lt;kendo:dataSource-schema-model id="id"&gt;
+                 &lt;kendo:dataSource-schema-model-fields&gt;
+                     &lt;kendo:dataSource-schema-model-field name="id" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="predecessorId" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="successorId" type="number" /&gt;
+                     &lt;kendo:dataSource-schema-model-field name="type" type="number" /&gt;
+                &lt;/kendo:dataSource-schema-model-fields&gt;
+            &lt;/kendo:dataSource-schema-model&gt;
+        &lt;/kendo:dataSource-schema&gt;
+        &lt;kendo:dataSource-transport&gt;
+            &lt;kendo:dataSource-transport-create url="${dependencyCreateUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-read url="${dependencyReadUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-update url="${dependencyUpdateUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-destroy url="${dependencyDestroyUrl}" dataType="json" type="POST" contentType="application/json" /&gt;
+            &lt;kendo:dataSource-transport-parameterMap&gt;
+                &lt;script&gt;
+                    function parameterMap(options, type) { 
+                        return JSON.stringify(options.models || [ options ]);
+                    }
+                &lt;/script&gt;
+            &lt;/kendo:dataSource-transport-parameterMap&gt;              
+        &lt;/kendo:dataSource-transport&gt;
+    &lt;/kendo:dependencies&gt;
+&lt;/kendo:gantt&gt;
+</code></pre>
+</li>
+<li>
+<p>Implement the "create_task" method.</p>
+
+<pre><code>@Autowired
+private GanttTaskDao taskDao;
+
+// The new gantt tasks are posted as JSON
+@RequestMapping(value = "/tasks/create", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttTask&gt; create_task(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) throws ParseException {
+    List&lt;GanttTask&gt; newTasks = new ArrayList&lt;GanttTask&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttTask task = new GanttTask();
+
+        task.setTitle((String)model.get("title"));
+
+        SimpleDateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        iso8601.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        task.setStart(iso8601.parse((String)model.get("start")));
+        task.setEnd(iso8601.parse((String)model.get("end")));
+        task.setSummary((boolean)model.get("summary"));
+        task.setExpanded((boolean)model.get("expanded"));
+        task.setParentId((Integer)model.get("parentId"));
+        task.setOrderId((int)model.get("orderId"));
+        task.setPercentComplete((double)model.get("percentComplete"));
+
+        newTasks.add(task);
+    }
+
+    taskDao.saveOrUpdate(newTasks);
+
+    return newTasks;
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "read_tasks" method.</p>
+
+<pre><code>// Return a list of tasks as JSON
+@RequestMapping(value = "/tasks/read", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttTask&gt; read_tasks() {
+    return taskDao.getList();
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "update_task" method.</p>
+
+<pre><code>@RequestMapping(value = "/tasks/update", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttTask&gt; update_task(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) throws ParseException {
+    List&lt;GanttTask&gt; updatedTasks = new ArrayList&lt;GanttTask&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttTask task = new GanttTask();
+
+        task.setId((int)model.get("id"));
+        task.setTitle((String)model.get("title"));
+
+        SimpleDateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        iso8601.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        task.setStart(iso8601.parse((String)model.get("start")));
+        task.setEnd(iso8601.parse((String)model.get("end")));
+        task.setSummary((boolean)model.get("summary"));
+        task.setExpanded((boolean)model.get("expanded"));
+        task.setParentId((Integer)model.get("parentId"));
+        task.setOrderId((int)model.get("orderId"));
+        task.setPercentComplete((double)model.get("percentComplete"));
+
+        updatedTasks.add(task);
+    }
+
+    taskDao.saveOrUpdate(updatedTasks);
+
+    return updatedTasks;
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "destroy_task" method.</p>
+
+<pre><code>@RequestMapping(value = "/tasks/destroy", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttTask&gt; destroy_task(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) {
+    List&lt;GanttTask&gt; deletedTasks = new ArrayList&lt;GanttTask&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttTask task = new GanttTask();
+
+        task.setId((int)model.get("id"));
+
+        deletedTasks.add(task);
+    }
+
+    taskDao.delete(deletedTasks);
+
+    return deletedTasks;
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "create_dependency" method.</p>
+
+<pre><code>@Autowired
+private GanttDependencyDao dependencyDao;
+
+@RequestMapping(value = "/dependencies/create", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttDependency&gt; create_dependency(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) throws ParseException {
+    List&lt;GanttDependency&gt; newDependencies = new ArrayList&lt;GanttDependency&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttDependency dependency = new GanttDependency();
+
+        dependency.setPredecessorId((int)model.get("predecessorId"));
+        dependency.setSuccessorId((int)model.get("successorId"));
+        dependency.setType((int)model.get("type"));
+
+        newDependencies.add(dependency);
+    }
+
+    dependencyDao.saveOrUpdate(newDependencies);
+
+    return newDependencies;
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "read_dependencies" method.</p>
+
+<pre><code>@RequestMapping(value = "/dependencies/read", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttDependency&gt; read_dependencies() {
+    return dependencyDao.getList();
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "update_dependency" method.</p>
+
+<pre><code>@RequestMapping(value = "/dependencies/update", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttDependency&gt; update_dependency(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) throws ParseException {
+    List&lt;GanttDependency&gt; updatedDependencies = new ArrayList&lt;GanttDependency&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttDependency dependency = new GanttDependency();
+
+        dependency.setId((int)model.get("id"));
+
+        dependency.setPredecessorId((int)model.get("predecessorId"));
+        dependency.setSuccessorId((int)model.get("successorId"));
+        dependency.setType((int)model.get("type"));    
+
+        updatedDependencies.add(dependency);
+    }
+
+    dependencyDao.saveOrUpdate(updatedDependencies);
+
+    return updatedDependencies;
+}
+</code></pre>
+</li>
+<li>
+<p>Implement the "destroy_dependency" method.</p>
+
+<pre><code>@RequestMapping(value = "/dependencies/destroy", method = RequestMethod.POST)
+public @ResponseBody List&lt;GanttDependency&gt; destroy_dependency(@RequestBody ArrayList&lt;Map&lt;String, Object&gt;&gt; models) {
+    List&lt;GanttDependency&gt; deletedDependencies = new ArrayList&lt;GanttDependency&gt;();
+
+    for (Map&lt;String, Object&gt; model : models) {
+        GanttDependency dependency = new GanttDependency();
+
+        dependency.setId((int)model.get("id"));
+
+        deletedDependencies.add(dependency);
+    }
+
+    dependencyDao.delete(deletedDependencies);
+
+    return deletedDependencies;
+}
+</code></pre>
+</li>
+</ol>
+
+<h2 id="getting-reference-to-a-kendo-ui-gantt"><a href="#getting-reference-to-a-kendo-ui-gantt">Getting reference to a Kendo UI Gantt</a></h2>
+
+<p>To get a reference to a Kendo UI Gantt instance, use the jQuery <code>data</code> and pass "kendoGantt" as argument.</p>
+
+<h3 id="example---get-reference-to-a-kendo-ui-gantt"><a href="#example---get-reference-to-a-kendo-ui-gantt">Example - get reference to a Kendo UI Gantt</a></h3>
+
+<pre><code>&lt;kendo:gantt name="gantt"&gt;
+    &lt;!-- snip --&gt;
+&lt;/kendo:gantt&gt;
+&lt;script&gt;
+// Get reference to the kendo.ui.Gantt instance
+var gantt = $("#gantt").data("kendoGantt");
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="subscribing-to-the-events-of-kendo-ui-gantt"><a href="#subscribing-to-the-events-of-kendo-ui-gantt">Subscribing to the events of Kendo UI Gantt</a></h2>
+
+<p>The gantt widget supports a set of <a href="/kendo-ui/api/web/gantt#events">events</a> which the developer can subscribe to. All events are exposed as attributes and nested tags of the gantt JSP tag.</p>
+
+<h3 id="example---handle-gantt-events-by-setting-their-attributes"><a href="#example---handle-gantt-events-by-setting-their-attributes">Example - handle gantt events by setting their attributes</a></h3>
+
+<pre><code>&lt;kendo:gantt name="gantt" dataBound="gantt_dataBound"&gt;
+    &lt;!-- snip --&gt;
+&lt;/kendo:gantt&gt;
+&lt;script&gt;
+function gantt_dataBound(e) {
+    console.log("dataBound");
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="example---handle-gantt-events-by-setting-a-nested-tag"><a href="#example---handle-gantt-events-by-setting-a-nested-tag">Example - handle gantt events by setting a nested tag</a></h3>
+
+<pre><code>&lt;kendo:gantt name="gantt"&gt;
+    &lt;!-- snip --&gt;
+    &lt;kendo:gantt-dataBound&gt;
+        &lt;script&gt;
+        function gantt_dataBound(e) {
+            console.log("dataBound");
+        }
+        &lt;/script&gt;
+    &lt;/kendo:gantt-dataBound&gt;
+&lt;/kendo:gantt&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

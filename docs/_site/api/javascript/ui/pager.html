@@ -1,0 +1,1138 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Pager</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Configuration steps for the Pager widget and methods for different actions: return number of pages, page size, specified page, update all values.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/pager.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/pager.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouipager"><a href="#kendouipager">kendo.ui.Pager</a></h1>
+
+<p>Represents the Kendo UI Pager widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-autoBind">
+<a href="#configuration-autoBind">autoBind </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Indicates whether the pager refresh method will be called within its initialization.</p>
+
+<h4>Example - disable reading the state of the DataSource instance during initialization</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+        ],
+        pageSize: 25
+      });
+
+    dataSource.read();
+
+    $("#pager").kendoPager({
+      autoBind: false,
+      dataSource: dataSource
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-buttonCount">
+<a href="#configuration-buttonCount">buttonCount </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 10)</em>
+</h3>
+
+<p>Defines the number of buttons displayed in the numeric pager.</p>
+
+<h4>Example - set button count</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      buttonCount: 1
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h3>
+
+<p>Instance of kendo DataSource. See the <a href="/kendo-ui/api/framework/datasource"><strong>kendo.data.DataSource</strong></a>.</p>
+
+<p>This option is mandatory because the Pager is tightly connected with DataSource. The pager is UI widget for managing paging over the DataSource. The Pager gets values like page size or total count of items from DataSource.</p>
+
+<h4>Example - standalone pager</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+        data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+        ],
+        pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+        dataSource: dataSource,
+        pageSizes: [10, 25, 50]
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<p>If the Pager is used with another widget then we usually specify this Pager like object of options for given widget. In that case the DataSource is automatically injected to the Pager from the widget. See example for a Grid below.</p>
+
+<h4>Example - grid pager</h4>
+
+<pre><code>&lt;div id="grid"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        // we don't set any DataSource here
+        pageSize: 2,
+        buttonCount: 1
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-selectTemplate">
+<a href="#configuration-selectTemplate">selectTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The template for selected page number link.</p>
+
+<h4>Example - declare custom template for the selected page number</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      selectTemplate: '&lt;li&gt;&lt;span style="color:red"&gt;#=text#&lt;/span&gt;&lt;/li&gt;'
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-linkTemplate">
+<a href="#configuration-linkTemplate">linkTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The template for page number links.</p>
+
+<h4>Example - declare custom link Template</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      linkTemplate: '&lt;li&gt;&lt;a href="\\#" class="k-link" data-#=ns#page="#=idx#"&gt;&lt;strong&gt;#=text#&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;'
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-info">
+<a href="#configuration-info">info </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Defines if a label showing current paging information will be displayed.</p>
+
+<h4>Example - hide the paging information</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      info: false
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-input">
+<a href="#configuration-input">input </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Defines if an input element which allows the user to navigate to given page will be displayed.</p>
+
+<h4>Example - show the navigate-to-page input</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      input: true
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-numeric">
+<a href="#configuration-numeric">numeric </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Defines if numeric portion of the pager will be shown.</p>
+
+<h4>Example - hides the numeric page links</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      numeric: false
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pageSizes">
+<a href="#configuration-pageSizes">pageSizes </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the pager will display a drop-down which allows the user to pick a page size.
+By default the page size drop-down is not displayed.</p>
+
+<p>Can be set to an array of predefined page sizes to override the default list.
+A special <code>all</code> value is supported. It sets the page size to the total number of records.</p>
+
+<p>If a <code>pageSize</code> setting is provided for the data source then this value will be selected initially.</p>
+
+<h4>Example - show the page size drop-down with default values</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      pageSizes: true
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - show the page size drop-down with custom values</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      pageSizes: [2, 3, 4, "all"]
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-previousNext">
+<a href="#configuration-previousNext">previousNext </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Defines if buttons for navigating to the first, last, previous and next pages will be shown.</p>
+
+<h4>Example - hide the first, last, previous and next buttons</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      previousNext: false
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-refresh">
+<a href="#configuration-refresh">refresh </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Defines if a refresh button will be displayed. Click on that button will call DataSource read() method to get actual data.</p>
+
+<h4>Example - show the refresh button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      refresh: true
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages">
+<a href="#configuration-messages">messages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines texts shown within the pager. Use this option to customize or localize the pager messages.</p>
+
+<h3 id="configuration-messages.display">
+<a href="#configuration-messages.display">messages.display </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "{0} - {1} of {2} items")</em>
+</h3>
+
+<p>The pager info text. Uses <a href="/kendo-ui/api/framework/kendo#methods-format">kendo.format</a>.</p>
+
+<p>Contains three placeholders:</p>
+
+<ul>
+<li>{0} - the first data item index</li>
+<li>{1} - the last data item index</li>
+<li>{2} - the total number of data items</li>
+</ul>
+
+<h4>Example - set the "display" message</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        display: "Showing {0}-{1} from {2} data items"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.empty">
+<a href="#configuration-messages.empty">messages.empty </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "No items to display")</em>,</h3>
+
+<p>The text displayed when the DataSource view does no contain items.</p>
+
+<h4>Example - set the "empty" message</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        empty: "No data"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.allPages">
+<a href="#configuration-messages.allPages">messages.allPages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "All")</em>,</h3>
+
+<p>The text displayed for the item that represents the allPages option when allPages is enabled.</p>
+
+<h4>Example - set the label before the pager input</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      input: true,
+      messages: {
+        allPages: "All Pages"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.page">
+<a href="#configuration-messages.page">messages.page </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Page")</em>,</h3>
+
+<p>The label displayed before the pager input.</p>
+
+<h4>Example - set the label before the pager input</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      input: true,
+      messages: {
+        page: "Enter page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.of">
+<a href="#configuration-messages.of">messages.of </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "of {0}")</em>,</h3>
+
+<p>The label displayed before the pager input. Uses <a href="/kendo-ui/api/framework/kendo#methods-format">kendo.format</a>. Contains one optional placeholder {0} which represents the total number of pages.</p>
+
+<h4>Example - set the label after the pager input</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      input: true,
+      messages: {
+        of: "from {0}"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.itemsPerPage">
+<a href="#configuration-messages.itemsPerPage">messages.itemsPerPage </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "items per page")</em>,</h3>
+
+<p>The label displayed after the page size DropDownList.</p>
+
+<h4>Example - set the label after the page size DropDownList</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      pageSizes: true,
+      messages: {
+        itemsPerPage: "data items per page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.first">
+<a href="#configuration-messages.first">messages.first </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Go to the first page")</em>,</h3>
+
+<p>The tooltip of the button which navigates to the first page.</p>
+
+<h4>Example - set the tooltip of the first page button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        first: "First Page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.previous">
+<a href="#configuration-messages.previous">messages.previous </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Go to the previous page")</em>,</h3>
+
+<p>The tooltip of the button which navigates to the previous page.</p>
+
+<h4>Example - set the tooltip of the previous page button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        previous: "Previous Page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.next">
+<a href="#configuration-messages.next">messages.next </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Go to the next page")</em>,</h3>
+
+<p>The tooltip of the button which navigates to the next page.</p>
+
+<h4>Example - set the tooltip of the next page button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        next: "Next Page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.last">
+<a href="#configuration-messages.last">messages.last </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Go to the last page")</em>,</h3>
+
+<p>The tooltip of the button which navigates to the last page.</p>
+
+<h4>Example - set the tooltip of the last page button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        last: "Last Page"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.refresh">
+<a href="#configuration-messages.refresh">messages.refresh </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Refresh")</em>,</h3>
+
+<p>The tooltip of the refresh button.</p>
+
+<h4>Example - set the tooltip of the refresh button</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      messages: {
+        refresh: "Refresh data"
+      }
+    });
+
+    dataSource.read();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-totalPages"><a href="#methods-totalPages">totalPages</a></h3>
+
+<p>Returns the number of pages.</p>
+
+<h4>Example - get the total number of pages</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    console.log(pager.totalPages()); // displays "2"
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The number of pages.</p>
+
+<h3 id="methods-pageSize"><a href="#methods-pageSize">pageSize</a></h3>
+
+<p>Returns the page size - maximum number of items allowed on one page.</p>
+
+<h4>Example - get the page size</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    console.log(pager.pageSize()); // displays "2"
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The maximum number of items allowed on one page.</p>
+
+<h3 id="methods-page"><a href="#methods-page">page</a></h3>
+
+<p>Sets or gets the current page.</p>
+
+<h4>Example - get current page</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    console.log(pager.page()); // displays "1"
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set current page</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    pager.page(2);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>page <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>The new page number.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The current page number.</p>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Updates all values of pager elements so that these values fit the values of DataSource. This method is automatically called after DataSource change event is fired.</p>
+
+<h4>Example - refresh the pager</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    pager.refresh();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Unbinds all callbacks created within pager initialization. This method doesn't remove pager element from DOM.</p>
+
+<blockquote>
+<p>This method does not remove the widget element from DOM.</p>
+</blockquote>
+
+<h4>Example - destroy pager</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    pager.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the current page has changed.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Grid</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    $("#pager").kendoPager({
+      dataSource: dataSource,
+      change: function() {
+        console.log("pager change event");
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;div id="pager"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    function pager_change() {
+      console.log("pager change event");
+    }
+
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageSize: 2
+    });
+
+    dataSource.read();
+
+    var pager = $("#pager").kendoPager({
+      dataSource: dataSource
+    }).data("kendoPager");
+
+    pager.bind("change", pager_change);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

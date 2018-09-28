@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Tutorial SalesHub - Creating the Customer TreeView</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/tutorial-saleshub/home-page/kendo-saleshub-customer-treeview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/tutorial-saleshub/home-page/kendo-saleshub-customer-treeview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="tutorial-saleshub-creating-the-customer-treeview"><a href="#tutorial-saleshub-creating-the-customer-treeview">Tutorial: SalesHub: Creating the Customer TreeView</a></h1>
+
+<p><img src="/kendo-ui/aspnet-mvc/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-screenshot.png" alt="kendo-saleshub-customer-TreeView-screenshot"></p>
+
+<p>In this section of the tutorial you'll learn how to create a <a href="http://demos.telerik.com/kendo-ui/web/treeview/index.html">Kendo TreeView</a>
+server-side.</p>
+
+<p>In the SalesHub application, a <a href="http://demos.telerik.com/kendo-ui/web/treeview/index.html">Kendo TreeView</a> is used to display all of the Customers which belong to a Selling Company. The Selling Company appears as a root node in the TreeView and the Customers for each Selling Company are grouped by
+the region in which the customer is located. So the basic structure of the TreeView is: <code>Selling Company -&gt; Region -&gt; Customer Name</code>.</p>
+
+<p>When a Customer is selected in the <a href="http://demos.telerik.com/kendo-ui/web/treeview/index.html">Kendo TreeView</a> the Order's grid is updated to
+display only the Orders for the selected Customer. If you would like to learn how the Order's grid is updated depending on the selected
+Customer, please read <a href="kendo-saleshub-filtering-orders-server-side">Filtering Order's Server-Side</a>.</p>
+
+<p>The Customer TreeView is located in <strong>Views/Home/Index.cshtml</strong></p>
+
+<h2 id="set-up-the-customer-treeview"><a href="#set-up-the-customer-treeview">Set up the Customer TreeView</a></h2>
+
+<p>To generate the Customer TreeView we use the following Razor code:</p>
+
+<pre><code>@using Kendo.Mvc.UI
+@model SalesHub.Client.ViewModels.Client.IndexViewModel
+@functions
+{
+    public static Dictionary&lt;string, object&gt; BuildAttributesForItem(SellingCompanyTreeViewItem item)
+    {
+        var attributes = new Dictionary&lt;string, object&gt;();
+
+        if (item.CustomerId.HasValue)
+        {
+            attributes.Add("data-customer-id", item.CustomerId.Value.ToString());
+        }
+        return attributes;
+    }
+}
+
+@(Html.Kendo().TreeView().Name("customerTreeView").BindTo(Model.TreeViewRoot.Items, binding =&gt; binding
+    .For&lt;SellingCompanyTreeViewItem&gt;(mapping =&gt; mapping
+        .Children(sellingCompanyTreeViewItem =&gt; sellingCompanyTreeViewItem.Items)
+        .ItemDataBound((item, sellingCompanyTreeViewItem) =&gt; {
+            item.Text = sellingCompanyTreeViewItem.Text;
+            item.Expanded = sellingCompanyTreeViewItem.Expanded;
+
+            var attributes = BuildAttributesForItem(sellingCompanyTreeViewItem);
+            foreach (var attr in attributes)
+            {
+                item.HtmlAttributes.Add(attr);
+            }
+        })
+    ))
+    .Events(events =&gt; events.Select("window.SalesHub.CustomerTreeView_Select")))
+</code></pre>
+
+<p>Let's walk step-by-step through this code and describe what it does.</p>
+
+<pre><code>@using Kendo.Mvc.UI
+</code></pre>
+
+<p>In order to use the Kendo UI MVC extensions we must first include the namespace for the extensions in our View. Including
+this namespace will cause the <code>Kendo()</code> extension method to become available and allow use to create Kendo UI widgets.</p>
+
+<pre><code>@functions
+{
+    public static Dictionary&lt;string, object&gt; BuildAttributesForItem(SellingCompanyTreeViewItem item)
+    { // Code... }
+}
+</code></pre>
+
+<p>Before we create our TreeView we create a helper function that will generate a Dictionary of HTML data attributes and
+their corresponding value. This helper function will be used when the TreeView is bound. These HTML data attributes will
+eventually be used by our custom client-side code.</p>
+
+<pre><code>@Html.Kendo().TreeView().Name("customerTreeView")
+</code></pre>
+
+<p>Here we use the <code>Kendo()</code> extension method to tell the Kendo UI MVC extensions that we want it to create a Kendo TreeView
+with <code>customerTreeView</code> as its <code>Name</code>. When using the Kendo UI MVC extensions the name of a Kendo UI widget is the <code>id</code>
+of the HTML element that the extensions generate.</p>
+
+<p>Just telling the extensions to generate a TreeView is not all that useful in and of itself. We also need to tell it what
+data we want it to bind against the TreeView. With the extensions we can either tell the TreeView to bind against a remote
+data-service or have it generate the complete markup for the tree server-side. In our case we have it generate the markup
+server-side using the <code>BindTo</code> function on a TreeView.</p>
+
+<pre><code>.BindTo(Model.TreeViewRoot.Items, binding =&gt; { // Our custom binding })
+</code></pre>
+
+<p>Since we already know what data we want in our TreeView when we create it, we take advantage of the <code>BindTo</code> function. The
+<code>BindTo</code> function takes two parameters, the first parameter is the Enumerable that we would like to bind the tree against
+and the second parameter is an <code>Action</code> that takes a <code>NavigationBindingFactory</code> object as its parameter.</p>
+
+<pre><code>.BindTo(Model.TreeViewRoot.Items,binding =&gt;
+    binding.For&lt;SellingCompanyTreeViewItem&gt;(mapping =&gt; { // Code to map our SellingCompanyTreeViewItem to a Kendo TreeViewItem. })
+</code></pre>
+
+<p>We can use this binding factory to iterate over the objects in the Enumerable that we supplied to the <code>BindTo</code> function by calling
+it's <code>For</code> function. The generic type given to this function has to be the same type as the objects which are in the <code>Enumerable</code>
+that we gave to the <code>BindTo</code> function. In our case, the <code>Enumerable</code> is a list of <code>SellingCompanyTreeViewItems</code>. The <code>For</code>
+function takes an <strong>Action&lt;NavigationBindingBuilder&gt;</strong> as a parameter.</p>
+
+<pre><code>binding.For&lt;SellingCompanyTreeViewItem&gt;(mapping =&gt; mapping
+    .Children(sellingCompanyTreeViewItem =&gt; sellingCompanyTreeViewItem.Items)
+    .ItemDataBound((item, sellingCompanyTreeViewItem) =&gt; {
+        item.Text = sellingCompanyTreeViewItem.Text;
+        item.Expanded = sellingCompanyTreeViewItem.Expanded;
+
+        var attributes = BuildAttributesForItem(sellingCompanyTreeViewItem);
+        foreach (var attr in attributes)
+        {
+            item.HtmlAttributes.Add(attr);
+        }
+    })
+</code></pre>
+
+<p>We use the <code>mapping</code> object to tell Kendo what property to use on our <code>SellingCompanyTreeViewItem</code> when it tries
+to render the children of that <code>SellingCompanyTreeViewItem</code> and we give it a function to call every time a Kendo TreeViewItem
+is bound to the TreeView.</p>
+
+<pre><code>.Children(sellingCompanyTreeViewItem =&gt; sellingCompanyTreeViewItem.Items)
+</code></pre>
+
+<p>Is how we tell it where to look for children nodes when it's rendering the TreeView.</p>
+
+<pre><code>.ItemDataBound((item, sellingCompanyTreeViewItem) =&gt; {
+    item.Text = sellingCompanyTreeViewItem.Text;
+    item.Expanded = sellingCompanyTreeViewItem.Expanded;
+
+    var attributes = BuildAttributesForItem(sellingCompanyTreeViewItem);
+    foreach (var attr in attributes)
+    {
+        item.HtmlAttributes.Add(attr);
+    }
+})
+</code></pre>
+
+<p>The function we give to <code>ItemDataBound</code> is called every time that a Kendo TreeViewItem is bound to the TreeView. The callback function
+takes two parameters. The first one is the Kendo TreeViewItem that is being bound to the TreeView and the second parameter is the
+<code>SellingCompanyTreeViewItem</code> that corresponds to that Kendo TreeViewItem. This is the point where we set the <code>Text</code> and the <code>Expanded</code> state
+of the resulting TreeViewItem.</p>
+
+<p>This is also the point where we call our Razor helper function to generate some HTML data attributes for the items in the TreeView.</p>
+
+<pre><code>.Events(events =&gt; events.Select("window.SalesHub.CustomerTreeView_Select"))
+</code></pre>
+
+<p>Since we want to update the Order's grid depending on the selected Customer, we attach an event handler for the <code>Select</code> event of
+the TreeView. If you'd like to read more on how we handle the <code>Select</code> event from the TreeView please read
+<a href="kendo-saleshub-filtering-orders-server-side">Filtering Order's Server-Side</a>.</p>
+
+<p>If you inspect the resulting HTML markup using your browsers Developer Tools, you'll notice that a <code>&lt;script&gt;</code> tag was created
+and placed after the markup for the TreeView. This script tag was generated by the Kendo UI MVC extensions and contains JavaScript,
+which runs automatically when the page is loaded, that turns the markup into an actual Kendo TreeView.</p>
+
+<p>The contents of the script tag should look something like:</p>
+
+<pre><code>jQuery(function(){jQuery("#customerTreeView").kendoTreeView({"select":window.SalesHub.CustomerTreeView_Select});});
+</code></pre>
+
+<p>As you can see, the JavaScript generated by the extensions looks for the generated markup based on an <code>id</code>. The <code>id</code> it
+looks for is the same as the <code>Name</code> that we gave the Kendo TreeView when we declared it. After it finds the element, it turns
+it into a TreeView by calling <code>kendoTreeView</code> on it.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

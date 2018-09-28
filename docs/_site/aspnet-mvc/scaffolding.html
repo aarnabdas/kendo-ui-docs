@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Introduction to Kendo UI Scaffolder Visual Studio extension.</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to use the Kendo UI Scaffolder extension.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/scaffolding.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/scaffolding.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendo-ui-scaffolder-visual-studio-extension"><a href="#kendo-ui-scaffolder-visual-studio-extension">Kendo UI Scaffolder Visual Studio extension</a></h1>
+
+<p>Since the <strong>Q1 2015</strong> release, <strong>Telerik UI for ASP.NET MVC</strong> contains the <strong>Kendo UI Scaffolder</strong> extension. It 
+allows the developer to generate an MVC wrapper widget declarations together with the related Controller action methods. Currently the Kendo UI Grid and Chart widgets can be scaffolded. More widgets will be added in future releases.</p>
+
+<h1 id="requirements-and-supported-environments"><a href="#requirements-and-supported-environments">Requirements and Supported Environments</a></h1>
+
+<ul>
+<li>Visual Studio 2013 (with Update 2 or higher) or Visual Studio 2015</li>
+<li>ASP.NET MVC 4 or ASP.NET MVC 5</li>
+<li>C#</li>
+<li>Entity Framework Data Model</li>
+</ul>
+
+<h1 id="installation"><a href="#installation">Installation</a></h1>
+
+<p>The extension will be automatically installed by the <strong>Telerik UI for ASP.NET MVC</strong> installer.</p>
+
+<p>You could also manually install it by navigating to the <strong>wrappers\aspnetmvc\Scaffolding</strong> folder of the distribution package and opening the included <strong>vsix</strong> file. It will automatically detect compatible Visual Studio versions.</p>
+
+<h1 id="usage"><a href="#usage">Usage</a></h1>
+
+<p>The <strong>Kendo UI Scaffolder</strong> extension could be accessed through the <strong>New Scaffolded Item...</strong> menu which has different items depending on the currently installed Scaffolders:</p>
+
+<p><img src="/kendo-ui/aspnet-mvc/images/scaffolding/new_scaffolded_item.png" alt="New Scaffolded Item"></p>
+
+<p>Select the <strong>Kendo UI Scaffolder</strong> from the next menu:</p>
+
+<p><img src="/kendo-ui/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png" alt="Kendo UI Scaffolder"></p>
+
+<p>This will bring up the <strong>Kendo UI</strong> scaffolding configuration panel to choose between Kendo UI Grid or Chart:</p>
+
+<p><img src="/kendo-ui/aspnet-mvc/images/scaffolding/widget_select.png" alt="Kendo UI Scaffolder Widget Selection"></p>
+
+<p>Detailed information about the possible configuration options could be found in the <a href="/kendo-ui/aspnet-mvc/helpers/grid/scaffolding">scaffolding section of the Grid Helper documentation</a> and <a href="/kendo-ui/aspnet-mvc/helpers/chart/scaffolding">scaffolding section of the Chart Helper documentation</a>. The Controller will be generated in the currently selected location along with the corresponding view.</p>
+
+<h1 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h1>
+
+<p>This list provides solutions to common problems you may encounter while working with the <strong>Kendo UI Scaffolder</strong> extension.</p>
+
+<h3 id="the-new-scaffolded-item-menu-is-not-displayed-when-right-clicking-a-project-location"><a href="#the-new-scaffolded-item-menu-is-not-displayed-when-right-clicking-a-project-location">The "New Scaffolded Item..." menu is not displayed when right clicking a project location.</a></h3>
+
+<ul>
+<li>Make sure that a compatible Visual Studio version is used and all of the listed requirements are fulfilled.</li>
+<li>Check if the <strong>Kendo UI Scaffolder</strong> extension is listed in the <strong>Tools | Extensions and Updates</strong> list.</li>
+</ul>
+
+<h3 id="the-data-context-class-dropdownlist-is-empty"><a href="#the-data-context-class-dropdownlist-is-empty">The "Data Context Class" DropDownList is empty.</a></h3>
+
+<ul>
+<li>Make sure that the current project contains a valid <strong>Entity Framework Data Model</strong>. If this is true, rebuild the solution.</li>
+</ul>
+
+<h3 id="i-get-invalid-model-configuration-error-when-running-the-scaffolder"><a href="#i-get-invalid-model-configuration-error-when-running-the-scaffolder">I get "Invalid model configuration" error when running the scaffolder.</a></h3>
+
+<ul>
+<li>The most probable reason for this error is that the selected <strong>Model Class</strong> is not a valid entity in the current <strong>Data Context</strong>. Make sure that a valid entity is selected.</li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

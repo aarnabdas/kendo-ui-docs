@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Kendo UI Mobile Frequently Asked Questions</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Answers to Frequently Asked Questions about how Kendo UI mobile works and behaves">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("mobile/faq.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//mobile/faq.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="frequently-asked-questions"><a href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
+
+<p>This is a collection of frequently asked questions about how Kendo UI mobile framework works and behaves.</p>
+
+<h2 id="all-platforms"><a href="#all-platforms">All platforms</a></h2>
+
+<h3 id="q-can-i-use-the-kendo-ui-web-mobile-widget-skins-from-q1-2014-with-kendo-ui-mobile-platform-themes"><a href="#q-can-i-use-the-kendo-ui-web-mobile-widget-skins-from-q1-2014-with-kendo-ui-mobile-platform-themes">Q: Can I use the Kendo UI Web mobile widget skins from Q1 2014 with Kendo UI Mobile platform themes?</a></h3>
+
+<p>A: <em><strong>No. They are incompatible.</strong></em> The reason for this is that Kendo UI Web skins don't have skin names as a class selector and their styling is affecting everything in your page/app. They will also partially
+override the existing Kendo UI Mobile platform themes. You can use them in Kendo UI Mobile only, if you don't use the Kendo UI Mobile platform themes at all, including the common CSS -
+the Web skins already have everything needed.</p>
+
+<h3 id="q-my-icons-are-missing-replaced-with-strange-symbols-and-my-ios-back-button-doesnt-look-okay-what-am-i-missing"><a href="#q-my-icons-are-missing-replaced-with-strange-symbols-and-my-ios-back-button-doesnt-look-okay-what-am-i-missing">Q: My icons are missing, replaced with strange symbols and my iOS back button doesn't look okay. What am I missing?</a></h3>
+
+<p>A: Kendo UI Mobile stylesheets need the <strong>images</strong> subfolder to load the icon font and the back button mask. Please copy them over with your stylesheet(s).</p>
+
+<h3 id="q-i-have-a-button-with-an-onclick-event-attached-but-the-event-doesnt-fire-every-time"><a href="#q-i-have-a-button-with-an-onclick-event-attached-but-the-event-doesnt-fire-every-time">Q: I have a button with an onclick event attached, but the event doesn't fire every time?</a></h3>
+
+<p>A: Due to issues with simultaneous handling of mouse and touch events on hybrid devices, Kendo UI Mobile has strict requirements for events.
+You can attach your handler to the Button's own click event.</p>
+
+<h3 id="q-i-have-several-text-entry-forms-in-my-application-but-i-experience-strange-issues-in-android-and-wp8-what-is-going-on"><a href="#q-i-have-several-text-entry-forms-in-my-application-but-i-experience-strange-issues-in-android-and-wp8-what-is-going-on">Q: I have several text entry forms in my application, but I experience strange issues in Android and WP8, what is going on?</a></h3>
+
+<p>A: Android has severe problems with input elements, especially when mixed with CSS3 transforms (which our mobile scroller uses for faster animation).
+WP8 on the other hand switches off transforms when an input element is focused, thus stopping any scrolling and resetting the scroller to top.
+Check the <a href="./mobile/forms">Forms</a> article for more information about both. To avoid these issues, refer to View's <a href="../api/mobile/view#configuration-useNativeScrolling">useNativeScroller</a>
+config option or Scroller's <a href="../api/mobile/scroller#configuration-useNative">useNative</a> option (available since Q1 2013).</p>
+
+<h3 id="q-my-application-looks-different-in-all-platforms-why-is-that"><a href="#q-my-application-looks-different-in-all-platforms-why-is-that">Q: My application looks different in all platforms, why is that?</a></h3>
+
+<p>A: Kendo UI Mobile strives to achieve native-like styling for the different platforms, hence the styling is completely different and tries to match the current device
+styling automatically. If you want to have the same styling on all devices, choose the one you want and force it
+through the Application <a href="./mobile/application#force-ios-5-look">platform</a> option.</p>
+
+<h3 id="q-i-defined-a-layout-for-each-view-but-it-disappears-after-the-user-navigates-why-is-that"><a href="#q-i-defined-a-layout-for-each-view-but-it-disappears-after-the-user-navigates-why-is-that">Q: I defined a layout for each View, but it disappears after the user navigates, why is that?</a></h3>
+
+<p>A: This can happen when Kendo UI Mobile application is initialized multiple times - like for instance when the initialization occurs
+in the _Layout.cshtml page of an ASP.NET MVC project. Mobile application should be initialized only once to be able to function properly.</p>
+
+<h3 id="q-widget-event-fires-multiple-times-why-is-that"><a href="#q-widget-event-fires-multiple-times-why-is-that">Q: Widget event fires multiple times, why is that?</a></h3>
+
+<p>A: This can happen when the mobile widget is initialized multiple times. A common mistake that developers make is to build the widget at the show event of the View. Kendo UI Mobile widgets should be initialized <strong>only once</strong> - at the init event of their View <strong>or</strong> via data-attributes in the mark-up.</p>
+
+<h2 id="ios"><a href="#ios">iOS</a></h2>
+
+<h3 id="q-i-run-a-phonegap-application-in-ios7-and-the-status-bar-overlays-my-navbar-what-gives"><a href="#q-i-run-a-phonegap-application-in-ios7-and-the-status-bar-overlays-my-navbar-what-gives">Q: I run a PhoneGap application in iOS7 and the status bar overlays my NavBar, what gives?</a></h3>
+
+<p>A: According to the <a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/Bars.html#//apple_ref/doc/uid/TP40006556-CH12-SW1">official iOS7 design guidelines</a>,
+the iOS7 status bar should be transparent and always visible. Kendo Mobile allows this by using the <a href="/kendo-ui/mobile/application#seamless-status-bar-in-ios7">Application's statusBarStyle option</a>
+set to "black-transparent". If you still wish to use the old black non-transparent status bar style, you can change it through the PhoneGap XCode project's <a href="http://stackoverflow.com/a/4053237/258445">plist</a>.</p>
+
+<h3 id="q-my-tabstrip-looks-different-on-different-versions-of-the-os-or-even-between-ipad-and-iphone-why"><a href="#q-my-tabstrip-looks-different-on-different-versions-of-the-os-or-even-between-ipad-and-iphone-why">Q: My TabStrip looks different on different versions of the OS or even between iPad and iPhone, why?</a></h3>
+
+<p>A: Kendo UI Mobile tries to match the native look of several iOS platform versions and devices. Thus some widgets look slightly different on iOS 5 versus iOS 6.
+Additionally tablet and phone styling is slightly different too. If you want to have the same styling on all iOS devices, choose the one you want and force it
+through the Application <a href="./mobile/application#force-ios-5-look">platform</a> option.</p>
+
+<h2 id="android"><a href="#android">Android</a></h2>
+
+<h3 id="q-i-have-webkit-mask-icons-in-my-application-and-in-some-places-android-renders-them-as-colored-squares"><a href="#q-i-have-webkit-mask-icons-in-my-application-and-in-some-places-android-renders-them-as-colored-squares">Q: I have WebKit mask icons in my application and in some places Android renders them as colored squares?</a></h3>
+
+<p>A: WebKit mask icons break in Android when mixed with CSS3 transforms which our Scroller uses and the TabStrip.</p>
+
+<h3 id="q-i-have-an-android-40-device-and-kendo-ui-mobile-view-transitions-while-very-smooth-seem-to-start-much-slower-than-on-android-2x"><a href="#q-i-have-an-android-40-device-and-kendo-ui-mobile-view-transitions-while-very-smooth-seem-to-start-much-slower-than-on-android-2x">Q: I have an Android 4.0 device and Kendo UI Mobile View transitions while very smooth seem to start much slower than on Android 2.x</a></h3>
+
+<p>A: The rendering hardware acceleration that Android 4.0 has does indeed perform much better than Android 2.x for View transitions, but the preparation of the hardware accelerated
+layer that runs the animation takes considerable time. Your application will actually be much more responsive if you disable the hardware acceleration from the manifest file.
+Check the <a href="./mobile/performance">Performance</a> article for more information about that.</p>
+
+<h3 id="q-i-have-some-inputs-with-type-date-and-time-when-i-test-on-jelly-bean-i-can-see-datetime-pickers-in-the-browser-but-they-dont-work-in-phonegap-why-so"><a href="#q-i-have-some-inputs-with-type-date-and-time-when-i-test-on-jelly-bean-i-can-see-datetime-pickers-in-the-browser-but-they-dont-work-in-phonegap-why-so">Q: I have some inputs with type date and time. When I test on Jelly Bean, I can see date/time pickers in the browser, but they don't work in PhoneGap, why so?</a></h3>
+
+<p>A: By default Kendo UI Mobile doesn't have integrated date/time pickers as many platforms already support them, excluding iOS 4.x, all Android versions and now WP8.</p>
+
+<p>The default browser on Nexus 7 is Chrome which supports native HTML5 date/time pickers. However PhoneGap still uses the old WebKit found on previous Android devices that
+doesn't support native pickers. To work around that you can use input validation or an external picker library.</p>
+
+<h2 id="blackberry"><a href="#blackberry">BlackBerry</a></h2>
+
+<h3 id="q-i-have-webkit-mask-icons-in-my-application-and-they-are-rendered-as-squares-in-blackberry-os-70"><a href="#q-i-have-webkit-mask-icons-in-my-application-and-they-are-rendered-as-squares-in-blackberry-os-70">Q: I have webkit mask icons in my application and they are rendered as squares in BlackBerry OS 7.0?</a></h3>
+
+<p>A: WebKit masks are completely broken in BlackBerry OS 7.0, though they work fine in 6.x and 7.1. Either use font icons or normal images.</p>
+
+<h3 id="q-my-trackball-doesnt-seem-to-work-properly-how-should-i-scroll"><a href="#q-my-trackball-doesnt-seem-to-work-properly-how-should-i-scroll">Q: My trackball doesn't seem to work properly, how should I scroll?</a></h3>
+
+<p>A: Kendo UI Mobile supports only touchscreen BlackBerry devices. The trackball/pad that can be found on the older phone models fires mouse events (which are handled), but
+doesn't support content dragging. This limitation is listed in Kendo UI Mobile requirements.</p>
+
+<h2 id="windows-phone-8"><a href="#windows-phone-8">Windows Phone 8</a></h2>
+
+<h3 id="q-my-icons-do-not-render-in-wp8-phonegap-or-html5-apps-can-i-do-something-about-it"><a href="#q-my-icons-do-not-render-in-wp8-phonegap-or-html5-apps-can-i-do-something-about-it">Q: My icons do not render in WP8 PhoneGap or HTML5 apps, can I do something about it?</a></h3>
+
+<p>A: Local web fonts are not loaded in WP8 HTML5/PhoneGap apps or fonts loaded from local CSS. According to some sources,
+external CSS should load web fonts, but we were not able to confirm this. As a workaround, use normal images for icons in WP8 HTML5/PhoneGap applications.</p>
+
+<h3 id="q-i-get-a-gray-background-when-i-click-on-a-link-or-label-in-kendo-ui-mobile-under-windows-phone-8-why"><a href="#q-i-get-a-gray-background-when-i-click-on-a-link-or-label-in-kendo-ui-mobile-under-windows-phone-8-why">Q: I get a gray background when I click on a link or label in Kendo UI Mobile under Windows Phone 8, why?</a></h3>
+
+<p>A: By default Windows Phone 8 highlights all links when they are active (hold down). Stopping this behaviour requires manually adding a meta tag to your application/site -
+adding the tag through Javascript is ignored:</p>
+
+<h4>Q: I want to Stop link highlighting in WP8?</h4>
+
+<p>A: Add the following meta tag:</p>
+
+<pre><code>&lt;meta name="msapplication-tap-highlight" content="no" /&gt;
+</code></pre>
+
+<h3 id="q-when-i-change-the-windows-phone-8-theme-my-application-starts-to-look-different-why"><a href="#q-when-i-change-the-windows-phone-8-theme-my-application-starts-to-look-different-why">Q: When I change the Windows Phone 8 theme, my application starts to look different. Why?</a></h3>
+
+<p>A: Kendo UI Mobile adapts to the current theme in Windows Phone 8 and changes the background and highlight colors of your application. In the browser this is
+semi-automatic when you click inside the application to focus it, but in PhoneGap it happens automatically on app resume after you change the theme.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,756 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Configuration, methods and events of the Kendo UI Notification">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/notification.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/notification.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouinotification"><a href="#kendouinotification">kendo.ui.Notification</a></h1>
+
+<p><em>It is assumed that the reader of this page is familiar with the <a href="/kendo-ui/web/notification/overview/">Notification widget Overview</a>.</em></p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-allowHideAfter">
+<a href="#configuration-allowHideAfter">allowHideAfter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Indicates the period in milliseconds after which a notification can be dismissed (hidden) by the user.</p>
+
+<h4>Example - set allowHideAfter to 1 second</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    allowHideAfter: 1000
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to false disables animations.</p>
+
+<h4>Example - disable animations</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    animation: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - slide animations</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    animation: {
+        open: {
+            effects: "slideIn:left"
+        },
+        close: {
+            effects: "slideIn:left",
+            reverse: true
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-appendTo">
+<a href="#configuration-appendTo">appendTo </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Defines the element to which the notifications will be appended or prepended (depending on the <a href="#configuration-stacking">stacking</a> direction).</p>
+
+<h4>Example - set appendTo as a selector string</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;div id="container"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    appendTo: "#container"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set appendTo as a DOM element</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;div id="container"&gt;&lt;/div&gt;
+&lt;script&gt;
+var container = document.getElementById("container");
+$("#notification").kendoNotification({
+    appendTo: container
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set appendTo as a jQuery object</h4>
+
+<pre><code>&lt;div id="notification"&gt;&lt;/div&gt;
+&lt;script&gt;
+var element = $("#notification");
+element.kendoNotification({
+    appendTo: element
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-autoHideAfter">
+<a href="#configuration-autoHideAfter">autoHideAfter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 5000)</em>
+</h3>
+
+<p>Indicates the period in milliseconds after which a notification disappears automatically. Setting a zero value disables this behavior.</p>
+
+<h4>Example - set autoHideAfter to 3 seconds</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    autoHideAfter: 3000
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - disable automatic hiding</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    autoHideAfter: 0
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-button">
+<a href="#configuration-button">button </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Determines whether the notifications will include a hide button. <strong>This setting works with the built-in templates only.</strong></p>
+
+<h4>Example - enable hide buttons</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    button: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Defines the notifications' height. Numbers are treated as pixels.</p>
+
+<h4>Example - set height as a number</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    height: 50
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set height as a string</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    height: "4em"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-hideOnClick">
+<a href="#configuration-hideOnClick">hideOnClick </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Determines whether notifications can be hidden by clicking anywhere on their content.</p>
+
+<h4>Example - disable hideOnClick</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    hideOnClick: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position">
+<a href="#configuration-position">position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p><strong>This setting applies to popup notifications only, i.e. in cases when <code>appendTo</code> is not set.</strong>
+It determines the position of the first notification on the screen, as well as whether the notifications will move together with the page content during scrolling.
+<code>top</code> takes precedence over <code>bottom</code> and <code>left</code> takes precedence over <code>right</code>.</p>
+
+<h4>Default position settings</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        pinned: true,
+        top: null,
+        left: null,
+        bottom: 20,
+        right: 20
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.bottom">
+<a href="#configuration-position.bottom">position.bottom </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 20)</em>
+</h3>
+
+<p>Determines the pixel position of the first popup notification with regard to the viewport's bottom edge.</p>
+
+<h4>Example - set position.bottom</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        bottom: 30
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.left">
+<a href="#configuration-position.left">position.left </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Determines the pixel position of the first popup notification with regard to the viewport's left edge.</p>
+
+<h4>Example - set position.left</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        left: 30
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.pinned">
+<a href="#configuration-position.pinned">position.pinned </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Determines whether the popup notifications will move together with the other page content during scrolling.</p>
+
+<h4>Example - disable pinned notifications</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        pinned: false
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.right">
+<a href="#configuration-position.right">position.right </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 20)</em>
+</h3>
+
+<p>Determines the pixel position of the first popup notification with regard to the viewport's right edge.</p>
+
+<h4>Example - set position.right</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        right: 30
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.top">
+<a href="#configuration-position.top">position.top </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Determines the position of the first popup notification with regard to the viewport's top edge. Numeric values are treated as pixels.</p>
+
+<h4>Example - set position.top</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        top: 30
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-stacking">
+<a href="#configuration-stacking">stacking </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "default")</em>
+</h3>
+
+<p>Determines the direction in which multiple notification will stack (arrange) with regard to the first one. Possible values are <code>"up"</code>, <code>"right"</code>, <code>"down"</code>, <code>"left"</code> and <code>"default"</code>.
+The <code>"default"</code> setting takes into consideration the applied <code>position</code> settings and is evaluated to <code>"up"</code> or <code>"down"</code>.</p>
+
+<h4>Example - set downward stacking</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    position: {
+        top: 20,
+        right: 20
+    },
+    stacking: "down"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-templates">
+<a href="#configuration-templates">templates </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>(default: [])</em>
+</h3>
+
+<p>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are <code>"info"</code>, <code>"success"</code>, <code>"warning"</code> and <code>"error"</code>.</p>
+
+<p><em>This documentation section assumes that you are familiar with <a href="/kendo-ui/framework/templates/overview">Kendo UI templates</a></em>.</p>
+
+<h4>Example - define several custom templates</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+
+&lt;script id="myAlertTemplate" type="text/x-kendo-template"&gt;
+    &lt;div class="myAlert"&gt;System alert generated at #= time # : #= myMessage #&lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+$(function(){
+    var notificationElement = $("#notification");
+
+    notificationElement.kendoNotification({
+        templates: [{
+                // define a custom template for the built-in "warning" notification type
+                type: "warning",
+                template: "&lt;div class='myWarning'&gt;Warning: #= myMessage #&lt;/div&gt;"
+            }, {
+                // define a template for the custom "timeAlert" notification type
+                type: "timeAlert",
+                template: "&lt;div class='myAlert'&gt;System alert generated at #= time # : #= myMessage #&lt;/div&gt;"
+                // template content can also be defined separately
+                //template: $("#myAlertTemplate").html()
+        }]
+    });
+
+    var n = notificationElement.data("kendoNotification");
+
+    // show a warning message using the built-in shorthand method
+    n.warning({
+        myMessage: "some warning message here"
+    });
+
+    // show a "timeAlert" message using the default show() method
+    n.show({
+        time: new Date().toLocaleTimeString(),
+        myMessage: "Server will be restarted."
+    }, "timeAlert");
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-templates.type">
+<a href="#configuration-templates.type">templates.type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "")</em>
+</h3>
+
+<p><strong>Required.</strong> Specified a unique identifier, which is used to retrieve the correct template when a notification of this type is shown.</p>
+
+<p>See the <a href="#configuration-templates">example above</a>.</p>
+
+<h3 id="configuration-templates.template">
+<a href="#configuration-templates.template">templates.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "")</em>
+</h3>
+
+<p>Defines a Kendo UI template to be used with the corresponding notification type.</p>
+
+<p>See the <a href="#configuration-templates">example above</a>.</p>
+
+<h3 id="configuration-width">
+<a href="#configuration-width">width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Defines the notifications' width. Numbers are treated as pixels.</p>
+
+<h4>Example - set width as a number</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    width: 300
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set width as a string</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#notification").kendoNotification({
+    width: "20em"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-error"><a href="#methods-error">error</a></h3>
+
+<p>This is a shorthand method for <a href="#methods-show"><code>show(data, "error")</code></a></p>
+
+<h4>Parameters</h4>
+
+<h5>data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p><strong>Required</strong>. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.</p>
+
+<h3 id="methods-getNotifications"><a href="#methods-getNotifications">getNotifications</a></h3>
+
+<p>Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a <code>div.k-notification</code> element.</p>
+
+<p>If you will be using this method to dispose of all visible messages, (e.g. before showing new ones), then <strong>remove</strong> them from the DOM
+instead of <a href="#methods-hide">hiding</a> them, unless animations are disabled. This is because animations are asynchronous and the new messages
+will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
+<a href="/kendo-ui/web/notification/overview#popup-messages"><strong>popup</strong></a> notification messages, you should remove the <a href="/kendo-ui/web/notification/overview#html-output"><strong>parent</strong></a>
+of each member of the collection, returned by the <code>getNotifications()</code> method. In this case the parent will be a <code>div.k-animation-container</code> element.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;button id="removeMessages" type="button" class="k-button"&gt;Remove messages and show new ones&lt;/button&gt;
+
+&lt;script&gt;
+
+var notificationWidget = $("#notification").kendoNotification({
+    button: false,
+    hideOnClick: false,
+    autoHideAfter: 0
+}).data("kendoNotification");
+
+var messageCount = 1;
+
+notificationWidget.show("foo " + messageCount);
+notificationWidget.show("bar " + messageCount);
+
+$("#removeMessages").click(function(){
+    // since there is no way for the user to hide notifications,
+    // the following expression will return two elements, no matter when it is executed
+    var elements = notificationWidget.getNotifications();
+
+    // remove the two messages from the DOM
+    elements.each(function(){
+        $(this).parent().remove();
+    });
+
+    messageCount++;
+
+    // show two new messages
+    notificationWidget.show("foo " + messageCount);
+    notificationWidget.show("bar " + messageCount);
+});
+
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> A collection of all visible notifications.</p>
+
+<h3 id="methods-hide"><a href="#methods-hide">hide</a></h3>
+
+<p>Hides all notifications from the given widget instance.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+notificationWidget.show("foo");
+notificationWidget.show("bar");
+
+notificationWidget.hide();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-info"><a href="#methods-info">info</a></h3>
+
+<p>This is a shorthand method for <a href="#methods-show"><code>show(data, "info")</code></a></p>
+
+<h4>Parameters</h4>
+
+<h5>data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p><strong>Required</strong>. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.</p>
+
+<h3 id="methods-show"><a href="#methods-show">show</a></h3>
+
+<p>Displays a notification.</p>
+
+<h4>Parameters</h4>
+
+<h5>data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p><strong>Required</strong>. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.</p>
+
+<h5>type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The notification type. Built-in types include <code>"info"</code>, <code>"success"</code>, <code>"warning"</code> and <code>"error"</code>. Custom types should match the types from the <a href="#configuration-templates">template configuration</a>.
+If this argument is not supplied, then <code>"info"</code> is assumed.</p>
+
+<h4>Example - use the show method with a string argument</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+notificationWidget.show("foo text", "warning");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - use the show method with an object argument</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+var notificationWidget = $("#notification").kendoNotification({
+    templates: {
+        myAlert: "&lt;div&gt;System alert: #= myMessage #&lt;/div&gt;"
+    }
+}).data("kendoNotification");
+
+notificationWidget.show({ myMessage: "foo text" }, "myAlert");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - use the show method with a function argument</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+function getNotificationMessage() {
+    return {
+        myMessage: "foo text"
+    }
+}
+
+var notificationWidget = $("#notification").kendoNotification({
+    templates: {
+        myAlert: "&lt;div&gt;System alert: #= myMessage #&lt;/div&gt;"
+    }
+}).data("kendoNotification");
+
+notificationWidget.show(getNotificationMessage, "myAlert");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-success"><a href="#methods-success">success</a></h3>
+
+<p>This is a shorthand method for <a href="#methods-show"><code>show(data, "success")</code></a></p>
+
+<h4>Parameters</h4>
+
+<h5>data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p><strong>Required</strong>. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.</p>
+
+<h3 id="methods-warning"><a href="#methods-warning">warning</a></h3>
+
+<p>This is a shorthand method for <a href="#methods-show"><code>show(data, "warning")</code></a></p>
+
+<h4>Parameters</h4>
+
+<h5>data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p><strong>Required</strong>. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.</p>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-hide"><a href="#events-hide">hide</a></h3>
+
+<p>Fires when a notification's hiding animation starts.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.element <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The jQuery object, which wraps the element being hidden.</p>
+
+<h4>Example - subscribe to the "hide" event during initialization</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+
+function onHide(e) {
+    var elementBeingHidden = e.element;
+}
+
+$("#notification").kendoNotification({
+    hide: onHide
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-show"><a href="#events-show">show</a></h3>
+
+<p>Fires when a notification's showing animation starts.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.element <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The jQuery object, which wraps the element being displayed.</p>
+
+<h4>Example - subscribe to the "show" event during initialization</h4>
+
+<pre><code>&lt;span id="notification"&gt;&lt;/span&gt;
+&lt;script&gt;
+
+function onShow(e) {
+    var elementBeingShown = e.element;
+}
+
+$("#notification").kendoNotification({
+    show: onShow
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

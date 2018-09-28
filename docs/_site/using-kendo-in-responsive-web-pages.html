@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to implement responsive web design with Kendo UI widgets.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("using-kendo-in-responsive-web-pages.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//using-kendo-in-responsive-web-pages.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="responsive-web-design-concepts"><a href="#responsive-web-design-concepts">Responsive Web Design concepts</a></h1>
+
+<p>By definition, responsive web design or responsiveness is an approach to web design aimed at crafting sites to provide an optimal viewing experience - easy reading and navigation with a minimum of resizing, panning, and scrolling — across a wide range of devices (from desktop computer monitors to mobile phones). Responsive web design is the foundation of modern UX practices for building applications for the mobile web.</p>
+
+<h1 id="using-kendo-ui-in-responsive-web-pages"><a href="#using-kendo-ui-in-responsive-web-pages">Using Kendo UI in Responsive Web Pages</a></h1>
+
+<p>Most Kendo UI Widgets work and auto-resize when used in responsive web pages out of the box. Several widgets will need an additional <a href="/kendo-ui/api/framework/kendo#methods-resize">kendo.resize</a> in case their dimensions are set to percentage values.</p>
+
+<h2 id="widgets-that-do-not-support-auto-resizing-when-container-is-resized"><a href="#widgets-that-do-not-support-auto-resizing-when-container-is-resized">Widgets that do not support auto resizing when container is resized:</a></h2>
+
+<ul>
+<li>All DataViz Widgets</li>
+<li>Mobile Actionsheet</li>
+<li>Mobile ListView</li>
+<li>Mobile ScrollView</li>
+<li>MobileSwitch</li>
+<li>Grid</li>
+<li>Scheduler</li>
+<li>Slider</li>
+<li>Splitter</li>
+<li>Window</li>
+</ul>
+
+<h4>Auto resizing chart with 100% width</h4>
+
+<pre><code>&lt;div class="chart-wrapper"&gt;
+   &lt;div id="chart" style="width:100%"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $(function() {
+        $("#chart").kendoChart({
+            title: {
+                text: "Gross domestic product growth /GDP annual %/"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                type: "area"
+            },
+            series: [{
+                name: "India",
+                data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+            }],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                },
+                line: {
+                    visible: false
+                },
+                axisCrossingValue: -10
+            },
+            categoryAxis: {
+                categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%",
+                template: "#= series.name #: #= value #"
+            }
+        });
+    });
+
+    $(window).on("resize", function() {
+      kendo.resize($(".chart-wrapper"));
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="individual-widget-resizing"><a href="#individual-widget-resizing">Individual widget resizing</a></h2>
+
+<p>Each Kendo UI widget has a <code>resize()</code> method, which can be used to trigger a layout readjustment, instead of using <code>kendo.resize</code>.
+The widget's <code>resize</code> method accepts a single boolean parameter, which defines whether the widget should execute its layout adjustment algorithm
+even if the widget's dimensions have not changed ("force" mode).</p>
+
+<h4>Example: using widget <code>resize()</code>
+</h4>
+
+<pre><code>var gridWidget = $("#GridID").data("kendoGrid");
+
+// apply new height and trigger layout readjustment
+gridWidget.wrapper.height(800);
+gridWidget.resize();
+
+// force layout readjustment without setting a new height
+gridWidget.resize(true);
+</code></pre>
+
+<p>The code above uses a <code>wrapper</code> field, which is documented in the <a href="/kendo-ui/framework/widgets/wrapper-element">Widget wrapper and widget element</a> page.</p>
+
+<p>If the widget wrapper has a <code>height:100%</code> style and resizes automatically with its parent,
+then setting an explicit pixel height for the <code>wrapper</code> is not required before executing the <code>resize</code> method.</p>
+
+<h2 id="kendo-ui-and-media-queries"><a href="#kendo-ui-and-media-queries">Kendo UI and media queries</a></h2>
+
+<p>Kendo UI uses media queries to enhance the behavior of Kendo UI widgets on different form factors. Media queries, a part of the <a href="http://www.w3.org/TR/css3-mediaqueries/">CSS3 specification</a>, load different set of styles to different devices, delivering improved and unified end user experience.</p>
+
+<h4>CSS media query example:</h4>
+
+<pre><code>@media only screen and (max-width: 480px) {
+    h2 {
+        font-size: 14pt;
+    }
+}
+</code></pre>
+
+<p>Kendo UI responsive styles use the Non-Mobile First Method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, styles written e.g. under 480px breakpoint will override the base styles on screens of max-width equal to 480px or less.</p>
+
+<h1 id="responsive-ui-enhancements"><a href="#responsive-ui-enhancements">Responsive UI enhancements</a></h1>
+
+<p>These utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. </p>
+
+<p>Such features are available for widgets like grid, scheduler, treelist, etc. </p>
+
+<h4>Responsive UI features in widgets</h4>
+
+<ul>
+<li>Grid: Integrates a responsive pager, which automatically adjusts on different screen widths and provides the ability to define which columns to be hidden on small view ports. This makes them more flexible for mobile web usage. </li>
+<li>Scheduler: provides mechanism to overflow its View selection options into a dropdown on small screen estates. Additionally, it can apply short date/month/year abbreviations where applicable. Thus, its visual presentation is fine-tuned for usage in responsive web scenarios. </li>
+</ul>
+
+<p>We also have a responsive panel widget which is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its "hamburger" icon button is clicked.</p>
+
+<p>You can see them in action <a href="http://demos.telerik.com/kendo-ui/responsive/">here</a>.</p>
+
+<h2 id="see-also"><a href="#see-also">See Also</a></h2>
+
+<p><a href="http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap">Twitter Bootstrap Integration</a></p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

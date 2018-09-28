@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile Collapsible widget</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Configuration, methods and events of Kendo UI Mobile Collapsible widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/collapsible.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/collapsible.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuicollapsible"><a href="#kendomobileuicollapsible">kendo.mobile.ui.Collapsible</a></h1>
+
+<p>Represents the Kendo UI Mobile Collapsible widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Turns on or off the animation of the widget.</p>
+
+<h4>Example - turn off the animation</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-animation="false"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed purus sed orci aliquet dapibus.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-collapsed">
+<a href="#configuration-collapsed">collapsed </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget content will be expanded initially. The content of the widget is collapsed by default.</p>
+
+<h4>Example - create initially expanded collapsible panel</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapsed="false"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed purus sed orci aliquet dapibus.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+
+&lt;!-- &lt;script src="../src/kendo.mobile.application.js"&gt;&lt;/script&gt; --&gt;
+</code></pre>
+
+<h3 id="configuration-collapseIcon">
+<a href="#configuration-collapseIcon">collapseIcon </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "minus")</em>
+</h3>
+
+<p>Sets the icon for the header of the collapsible widget when it is in a collapsed state.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapse-icon="arrow-up" data-expand-icon="arrow-down"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+
+&lt;style&gt;
+    /*
+        define custom icon names, full list of available icons can be found at:
+        http://docs.telerik.com/kendo-ui/mobile/icons
+    */
+    .km-arrow-up:after,
+    .km-arrow-up:before {
+        content: "\e011";
+    }
+
+    .km-arrow-down:after,
+    .km-arrow-down:before {
+        content: "\e012";
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h3 id="configuration-expandIcon">
+<a href="#configuration-expandIcon">expandIcon </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "plus")</em>
+</h3>
+
+<p>Sets the icon for the header of the collapsible widget when it is in a expanded state.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapse-icon="arrow-up" data-expand-icon="arrow-down"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+
+&lt;style&gt;
+    /*
+        define custom icon names, full list of available icons can be found at:
+        http://docs.telerik.com/kendo-ui/mobile/icons
+    */
+    .km-arrow-up:after,
+    .km-arrow-up:before {
+        content: "\e011";
+    }
+
+    .km-arrow-down:after,
+    .km-arrow-down:before {
+        content: "\e012";
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h3 id="configuration-iconPosition">
+<a href="#configuration-iconPosition">iconPosition </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "left")</em>
+</h3>
+
+<p>Sets the icon position in the header of the collapsible widget. Possible values are "left", "right", "top".</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-icon-postion="right"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-inset">
+<a href="#configuration-inset">inset </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: "false")</em>
+</h3>
+
+<p>Forses inset appearance - the collapsible panel is padded from the View and receives rounded corners.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-inset="true"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-collapse"><a href="#methods-collapse">collapse</a></h3>
+
+<p>Collapses the content.</p>
+
+<h4>Parameters</h4>
+
+<h5>instant <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Optional. When set to true the collapse action will be performed without animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapsed="false"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function onInit() {
+        $("#collapsible").data("kendoMobileCollapsible").collapse();
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>Collapsible</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the Collapsible element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapsed="false"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;a data-role="button" data-click="removeBtn"&gt;Remove button&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  var app = new kendo.mobile.Application();
+
+  function removeBtn() {
+    $("#collapsible").data("kendoMobileCollapsible").destroy(); //detach events
+    $("#collapsible").remove();
+  }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-expand"><a href="#methods-expand">expand</a></h3>
+
+<p>Expands the content.</p>
+
+<h4>Parameters</h4>
+
+<h5>instant <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>optional</em>
+</h5>
+
+<p>When set to true the expand action will be performed without animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;div id="collapsible" data-role="collapsible"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function onInit() {
+        $("#collapsible").data("kendoMobileCollapsible").expand();
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-resize"><a href="#methods-resize">resize</a></h3>
+
+<p>Recalculates the content height.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-expand="onExpand"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function onExpand() {
+        var that = this;
+        setTimeout(function() {
+            that.refresh();
+        });
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-toggle"><a href="#methods-toggle">toggle</a></h3>
+
+<p>Toggles the content visibility.</p>
+
+<h4>Parameters</h4>
+
+<h5>instant <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>optional</em>
+</h5>
+
+<p>When set to true the expand/collapse action will be performed without animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;a data-role="button" data-click="onClick"&gt;Toggle&lt;/a&gt;
+    &lt;div id="collapsible" data-role="collapsible"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function onClick() {
+        $("#collapsible").data("kendoMobileCollapsible").toggle();
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-collapse"><a href="#events-collapse">collapse</a></h3>
+
+<p>Fires when the user collapses the content.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-collapse="collapseHandler"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function collapseHandler() {
+        console.log("expand");
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-expand"><a href="#events-expand">expand</a></h3>
+
+<p>Fires when the user expands the content.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-expand="expandHandler"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+
+    function expandHandler() {
+        console.log("expand");
+    }
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

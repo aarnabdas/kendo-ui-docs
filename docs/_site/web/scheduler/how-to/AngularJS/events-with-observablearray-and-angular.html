@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Events with ObservableArray and AngularJS</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Events with ObservableArray and AngularJS">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/scheduler/how-to/AngularJS/events-with-observablearray-and-angular.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/scheduler/how-to/AngularJS/events-with-observablearray-and-angular.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="events-with-observablearray-and-angularjs"><a href="#events-with-observablearray-and-angularjs">Events with ObservableArray and AngularJS</a></h1>
+
+<p>The example below demonstrates how to create events using Kendo UI ObservableArray and set them using AngularJS. The example also demonstrates how to convert between timezones.</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>    &lt;div id="example" ng-app="KendoDemos"&gt;
+      &lt;div ng-controller="MyCtrl"&gt;
+        &lt;div kendo-scheduler="scheduler" k-options="schedulerOptions" class=""&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+      angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+
+        var events = new kendo.data.ObservableArray([]);
+
+        $scope.ds = new kendo.data.SchedulerDataSource({
+          data: events,
+          schema: {
+            model: {
+              id: "taskId",
+              fields: {
+                taskId: { from: "id", type: "number" },
+                title: { from: "title", defaultValue: "No title", validation: { required: true } },
+                start: { type: "date", from: "start" },
+                end: { type: "date", from: "end" },
+                description: { from: "description" },
+                recurrenceId: { from: "recurrenceID" },
+                recurrenceRule: { from: "recurrenceRule" },
+                recurrenceException: { from: "recurrenceException" },
+                isAllDay: { type: "boolean", from: "isAllDay" },
+              }
+            }
+          }
+        });
+
+        $scope.schedulerOptions = {
+          date: new Date("2014/09/08"),
+          views: [
+            { type: "day",  workWeekStart: 1, workWeekEnd: 7 },
+            { type: "week", selected: true,workWeekStart: 1, workWeekEnd: 7 }
+          ],
+          timezone: "Etc/UTC",
+          eventTemplate: "&lt;span class='custom-event'&gt; -- &lt;/span&gt;",
+
+          allDayEventTemplate: "&lt;div class='custom-all-day-event'&gt; *&lt;/div&gt;",
+          dataSource: $scope.ds
+        };
+
+        function fill() {
+          var response = [
+            {
+              "description": "BH",
+              "end": new Date("2014-09-08T04:30:00+0000"),
+              "id": 26877083371,
+              "isAllDay": false,
+              "recurrenceException": null,
+              "recurrenceId": 26825796528,
+              "recurrenceRule": null,
+              "start": new Date("2014-09-08T04:15:00+0000"),
+              "title": "Event 1"
+
+            }, {
+              "description": "BH",
+              "end": new Date("2014-09-08T04:00:00+0000"),
+              "id": 26876983371,
+              "isAllDay": false,
+              "recurrenceException": null,
+              "recurrenceId": 26825796525,
+              "recurrenceRule": null,
+              "start": new Date("2014-09-08T03:45:00+0000"),
+              "title": "Event 2"
+            }
+          ];
+
+          var event;
+          var timezone = $scope.schedulerOptions.timezone;
+
+          for (var i = 0; i &lt; response.length; i++) {
+            event = response[i];
+            event.start = convertDate(event.start, timezone);
+            event.end = convertDate(event.end, timezone);
+
+            events.push(new kendo.data.SchedulerEvent(event));
+          }
+
+        };
+
+        function convertDate(date, timezone) {
+          return kendo.timezone.convert(date, date.getTimezoneOffset(), timezone);
+        }
+
+        setTimeout(function () {
+          fill();
+        }, 1000);
+      });
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

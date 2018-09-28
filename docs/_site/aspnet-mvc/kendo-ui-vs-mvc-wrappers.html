@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>ASP.NET MVC wrappers vs Kendo UI widgets</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Comparison between the HTML/JS Kendo UI widgets and their ASP.NET MVC wrappers">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/kendo-ui-vs-mvc-wrappers.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/kendo-ui-vs-mvc-wrappers.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="aspnet-mvc-wrappers-ui-helpers-vs-kendo-ui-widgets"><a href="#aspnet-mvc-wrappers-ui-helpers-vs-kendo-ui-widgets">ASP.NET MVC wrappers (UI helpers) vs Kendo UI widgets</a></h1>
+
+<p>From client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their ASP.NET MVC wrappers (UI helpers) represent the same thing and provide the same capabilities.
+However, there are some implementation specifics to consider before choosing one product over the other.</p>
+
+<p>The <strong>UI for ASP.NET MVC</strong> helpers (Kendo UI MVC wrappers) provide the following benefits:</p>
+
+<ul>
+<li>Create widgets with no HTML and JavaScript coding. JavaScript knowledge will still be required to use client-side methods and events.</li>
+<li>
+<a href="/kendo-ui/aspnet-mvc/helpers/grid/server-binding">Server-side data binding</a> and in some cases, server-side rendering.</li>
+<li>Use the <a href="/kendo-ui/aspnet-mvc/helpers/grid/ajax-binding">ToDataSourceResult</a> extension method to bind Kendo UI widgets to server-side collections and
+perform data operations (paging, sorting, filtering, grouping).</li>
+<li>Integration with some ASP.NET MVC features, e.g. <a href="/kendo-ui/aspnet-mvc/helpers/menu/overview#security-trimming">security trimming</a> or
+<a href="/kendo-ui/aspnet-mvc/globalization#localized-user-interface">localization with resource files</a> or <a href="/kendo-ui/aspnet-mvc/helpers/grid/editor-templates">editor templates</a>.</li>
+<li>Support for unobtrusive validation based on Data Annotation attributes.</li>
+<li>CRUD operations implementation simplicity - support for CRUD operations will require less coding, compared to when client-side Kendo UI is used.
+In the latter case, you will have to repeat the model and data field configuration in the JavaScript code.</li>
+<li>Visual Studio intellisense for the server-side configuration syntax.</li>
+<li>
+<a href="/kendo-ui/aspnet-mvc/vs-integration/introduction">Visual Studio Extensions</a> for automatic creation of new Kendo UI ASP.NET MVC applications, or adding Kendo UI to existing projects,
+or automatic updating of the Kendo UI version.</li>
+<li>Use <a href="/kendo-ui/aspnet-mvc/scaffolding">Scaffolding</a> to generate widget declarations and related controller action methods.</li>
+</ul>
+
+<p>The vanilla HTML/JavaScript Kendo UI widgets provide the following benefits:</p>
+
+<ul>
+<li>Complete server platform independence. The widgets can be used with any web server and server framework (<strong>including ASP.NET MVC</strong>).
+For example, you can build Single Page Applications with any RESTful back-end.</li>
+<li>Full control over the initialization scripts' placement - server wrappers render the widgets' initialization scripts right after the widget's HTML output.
+Even if you use <a href="/kendo-ui/aspnet-mvc/fundamentals#deferred-initialization">deferred initialization</a>, the scripts will still be in the View.
+When using plain (non-wrapper) Kendo UI widgets, you write the initialization scripts yourself and can move them to external script files.</li>
+<li>Integration with <a href="/kendo-ui/framework/mvvm/overview">MVVM</a>, <a href="/kendo-ui/AngularJS/introduction">AngularJS</a> and <a href="/kendo-ui/framework/spa/overview">Single Page Application</a> development patterns.
+Server wrappers are not intended to be used with those.</li>
+<li>
+<a href="/kendo-ui/vs-intellisense">Visual Studio Intellisense</a> for the client-side API.</li>
+</ul>
+
+<p>Finally, there is no problem to use UI for ASP.NET MVC helpers and vanilla Kendo UI widgets <strong>at the same time on the same page</strong>, if a specific scenario requires that.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

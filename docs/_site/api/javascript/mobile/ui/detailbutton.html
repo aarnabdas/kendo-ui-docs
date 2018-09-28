@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile DetailButton</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Documentation on how to initialize Kendo UI mobile DetailButton.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/detailbutton.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/detailbutton.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuidetailbutton"><a href="#kendomobileuidetailbutton">kendo.mobile.ui.DetailButton</a></h1>
+
+<p>Represents the Kendo UI Mobile DetailButton widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="detailbutton"><a href="#detailbutton">DetailButton</a></h2>
+
+<p>The DetailButton widget navigates to a mobile View when pressed.</p>
+
+<h4>Initialize Kendo mobile DetailButton based on role data attribute</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;ul data-role="listview"&gt;
+    &lt;li&gt;Item 1&lt;a data-role="detailbutton"&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;a data-role="detailbutton"&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>DetailButton</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the DetailButton element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-init="onInit"&gt;
+  &lt;ul data-role="listview"&gt;
+     &lt;li&gt;Item 1&lt;a data-role="detailbutton"&gt;&lt;/a&gt;&lt;/li&gt;
+     &lt;li&gt;Item 2&lt;a data-role="detailbutton"&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onInit() {
+$(".km-listview")
+  .find("[data-role='detailbutton']")
+  .each(function(idx, item) {
+    $(item).data("kendoMobileDetailButton").destroy(); //detach events
+    $(item).remove(); //remove element from the DOM
+  });
+}
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-click"><a href="#events-click">click</a></h3>
+
+<p>Fires when the user taps the button.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.target <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The clicked DOM element</p>
+
+<h5>e.button <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The button DOM element</p>
+
+<h4>Example - get the item to which DetailButton belongs to</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;ul data-role="listview"&gt;
+    &lt;li&gt;Item 1&lt;a data-role="detailbutton" data-style="rowinsert" data-click="onClick"&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;a data-role="detailbutton" data-style="rowinsert" data-click="onClick"&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Item 3&lt;a data-role="detailbutton" data-style="rowinsert" data-click="onClick"&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onClick(e) {
+var item = e.button.closest("li"); //get the item
+item.css("background", "yellow"); //change its background
+}
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

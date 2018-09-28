@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Install Kendo UI as a Bower Package</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Use Kendo UI in your project by installing it as a Bower package">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("install/bower.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//install/bower.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="install-kendo-ui-as-a-bower-package"><a href="#install-kendo-ui-as-a-bower-package">Install Kendo UI as a Bower Package</a></h1>
+
+<p><a href="http://bower.io/">Bower</a> is a popular package manager for the web.</p>
+
+<p>Kendo UI maintains two bower packages, Kendo UI Core and Kendo UI Professional.
+Official releases, service packs and internal builds are uploaded to both.</p>
+
+<blockquote>
+<p>The professional bower package is available only for licensed user accounts; <em>it is not accessible for trial accounts</em>.</p>
+</blockquote>
+
+<h2 id="install-kendo-ui-core-bower-package"><a href="#install-kendo-ui-core-bower-package">Install Kendo UI Core Bower Package</a></h2>
+
+<p>The Kendo UI Core Bower package is is available as a <a href="https://github.com/kendo-labs/bower-kendo-ui">public GitHub repository</a>. It is also registered as <code>kendo-ui-core</code> in the bower registry.</p>
+
+<pre lang="sh"><code>bower install kendo-ui-core
+</code></pre>
+
+<h2 id="install-kendo-ui-professional-bower-package"><a href="#install-kendo-ui-professional-bower-package">Install Kendo UI Professional Bower Package</a></h2>
+
+<p>The Kendo UI Professional Bower package is hosted as a private Git repository on <code>bower.telerik.com</code>. To access it, you need an active Telerik account.</p>
+
+<p>Bower will prompt for your Telerik username and password during installation and update.</p>
+
+<pre lang="sh"><code>bower install https://bower.telerik.com/bower-kendo-ui.git
+</code></pre>
+
+<p>You can also add the package in the <code>bower.json</code> file:</p>
+
+<pre lang="json"><code>"dependencies": {
+    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
+}
+</code></pre>
+
+<blockquote>
+<p>The installation may <strong>request your password multiple times</strong>. See the next section.</p>
+</blockquote>
+
+<h2 id="storing-repository-credentials"><a href="#storing-repository-credentials">Storing repository credentials</a></h2>
+
+<p>Credentials can be cached to avoid retyping them.
+The simplest option is to store them as plain text in a <a href="http://www.mavetju.org/unix/netrc.php">.netrc file</a>.</p>
+
+<p>You can use Git credential helpers as a secure alternative.
+See the discussion in <a href="http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github">on Stack Overflow</a>.</p>
+
+<h3 id="windows"><a href="#windows">Windows</a></h3>
+
+<blockquote>
+<p>Caching the credentials is required if you're using the Kendo UI Bower package in an <strong>ASP.NET vNext</strong> project.</p>
+</blockquote>
+
+<ol>
+<li>Create a text file called <code>_netrc</code> in your home directory (e.g. <code>c:\users\jane\_netrc</code>).</li>
+<li>
+<p>Declare a HOME environment variable:</p>
+
+<pre><code>C:\&gt; SETX HOME %USERPROFILE%
+</code></pre>
+</li>
+<li>Add the credentials using the format listed above.</li>
+</ol>
+
+<p>Git might have problems resolving your home directory if it contains spaces in its path (e.g. <code>c:\Documents and Settings\jane</code>).
+You should update your %HOME% environment variable to point to a directory with no spaces in its name.</p>
+
+<h3 id="linux-os-x-and-unix-like-systems"><a href="#linux-os-x-and-unix-like-systems">Linux, OS X and Unix-like systems</a></h3>
+
+<ol>
+<li>
+<p>Create a file called <code>.netrc</code> in your home directory (<code>~/.netrc</code>). Make sure you modify the file permissions to make it readable only to you.</p>
+
+<pre lang="sh"><code>touch ~/.netrc
+chmod 0600 ~/.netrc
+</code></pre>
+</li>
+<li>Add the credentials using the format listed below.</li>
+</ol>
+
+<h3 id="sample-netrc-file-contents"><a href="#sample-netrc-file-contents">Sample ~/.netrc file contents</a></h3>
+
+<pre><code>machine bower.telerik.com
+        login my-telerik.identity@example.com
+        password mysecret
+</code></pre>
+
+<h3 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h3>
+
+<ul>
+<li>Bower on Windows may have troubles installing the repository, failing with</li>
+</ul>
+
+<pre><code>fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
+</code></pre>
+
+<p>The cause of this issue is the underlying git installation is missing the certificate bundle.
+To resolve the issue, <a href="http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx">follow the steps in this help article</a>.</p>
+
+<ul>
+<li>GitHub build 1.9.5 will not work with the Bower package. Using Git version 1.8.3 is recommended.</li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

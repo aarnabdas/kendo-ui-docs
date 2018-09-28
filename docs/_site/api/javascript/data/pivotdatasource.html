@@ -1,0 +1,1838 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API Reference for Kendo UI PivotDataSource</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn more about the configuration of Kendo UI PivotDataSource, methods and events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/data/pivotdatasource.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/data/pivotdatasource.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatapivotdatasource"><a href="#kendodatapivotdatasource">kendo.data.PivotDataSource</a></h1>
+
+<p>The data source used by the <a href="/kendo-ui/api/web/pivotgrid">kendo.ui.PivotGrid</a> widget.
+Inherits from <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
+
+<h3 id="configuration-columns">
+<a href="#configuration-columns">columns </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchal name of the member.</p>
+
+<h4>Example - set the columns</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-columns.expand">
+<a href="#configuration-columns.expand">columns.expand </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>If set to true the member will be expanded.</p>
+
+<h4>Example - set the column as expanded</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: [{ name: "[Date].[Calendar]", expand: true }],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-columns.name">
+<a href="#configuration-columns.name">columns.name </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The hierarchal name of the column</p>
+
+<h4>Example - set the column name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: [{ name: "[Date].[Calendar]", expand: false }],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-measures">
+<a href="#configuration-measures">measures </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The configuration of measures. An string array which values are interpreted as the name of the measures to be loaded.
+Measures can be defined as a list of objects with <code>name</code> and <code>type</code> fields:</p>
+
+<pre><code>[{
+    name: "[Measures].[_Internet Current Quarter Sales Performance Status]",
+    type: "status"
+}]
+</code></pre>
+
+<blockquote>
+<p>The <code>type</code> value can be defined to "status" or "trend" to render <a href="/kendo-ui/api/javascript/ui/pivotgrid#configuration-kpiStatusTemplate">kpiStatusTemplate</a>
+or <a href="/kendo-ui/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplate">kpiTrendTemplate</a>. If type is not defined, then the
+<a href="/kendo-ui/api/javascript/ui/pivotgrid#configuration-dataCellTemplate">dataCellTemplate</a> will be used.</p>
+</blockquote>
+
+<h4>Example - set the measures</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  measures: ["[Measures].[Internet Order Lines Count]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-measures.values">
+<a href="#configuration-measures.values">measures.values </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>An string array which values are interpreted as the name of the measures to be loaded.</p>
+
+<h4>Example - set the measures</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  measures: {
+      values: ["[Measures].[Internet Order Lines Count]"]
+  },
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-measures.axis">
+<a href="#configuration-measures.axis">measures.axis </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: columns)</em>
+</h3>
+
+<p>The name of the axis on which the measures will be displayed. Supported values are rows or columns. This option is applicable if multiple measures are used.</p>
+
+<h4>Example - set the measures axis</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  measures: {
+      values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
+      axis: "rows"
+  },
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-rows">
+<a href="#configuration-rows">rows </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchal name of the member.</p>
+
+<h4>Example - set the columns</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  rows: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-rows.expand">
+<a href="#configuration-rows.expand">rows.expand </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>If set to true the member will be expanded.</p>
+
+<h4>Example - set the rows as expanded</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: [{ name: "[Date].[Calendar]", expand: true }],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-rows.name">
+<a href="#configuration-rows.name">rows.name </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The hierarchal name of the rows</p>
+
+<h4>Example - set the rows name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  rows: [{ name: "[Date].[Calendar]", expand: false }],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-transport">
+<a href="#configuration-transport">transport </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The configuration used to load data items and discover schema information.</p>
+
+<h3 id="configuration-transport.discover">
+<a href="#configuration-transport.discover">transport.discover </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The configuration used when the data source discovers schema information about the current cube.</p>
+
+<blockquote>
+<p>The data source uses <a href="http://api.jquery.com/jQuery.ajax">jQuery.ajax</a> to make a HTTP request to the remote service. The value configured via <code>transport.discover</code> is passed to <code>jQuery.ajax</code>. This means that you can set
+all options supported by <code>jQuery.ajax</code> via <code>transport.read</code> except the <code>success</code> and <code>error</code> callback functions which are used by the transport.</p>
+</blockquote>
+
+<p>If the value of <code>transport.discover</code> is a function, the data source invokes that function instead of <code>jQuery.ajax</code>.</p>
+
+<p>If the value of <code>transport.discover</code> is a string the data source uses this string as the URL of the remote service.</p>
+
+<p>If the value of <code>transport.discover</code> is omitted the data source uses <code>transport.read</code> for schema discover.</p>
+
+<h4>Example - set the discover remote service</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    discover: "http://demos.telerik.com/olap/msmdpump.dll",
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+dataSource.schemaDimensions().done(function(dimensions) {
+  console.log(dimensions.length);
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-transport.connection">
+<a href="#configuration-transport.connection">transport.connection </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The configuration used for setting connection options.</p>
+
+<h3 id="configuration-transport.connection.catalog">
+<a href="#configuration-transport.connection.catalog">transport.connection.catalog </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The catalog name.</p>
+
+<h4>Example - set the connection catalog name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll",
+  },
+  schema: {
+    type: "xmla"
+  }
+
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-transport.connection.cube">
+<a href="#configuration-transport.connection.cube">transport.connection.cube </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The cube name in the current data source.</p>
+
+<h4>Example - set the cube catalog name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll",
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema">
+<a href="#configuration-schema">schema </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The schema configuration of the PivotDataSource.</p>
+
+<h3 id="configuration-schema.axes">
+<a href="#configuration-schema.axes">schema.axes </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the columns and rows axes data. Can be set to a function which is called to
+return the columns and rows axes data for the response.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> The columns and rows axes data from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>{
+    columns:{ // columns axis data
+        tuples:[{
+                members:[{
+                    children:[],
+                    caption:"All",
+                    name:"[Date].[Calendar].[All]",
+                    levelName:"[Date].[Calendar].[(All)]",
+                    levelNum:"0",
+                    hasChildren:true,
+                    hierarchy:"[Date].[Calendar]"
+                }, /*..other tuple members..*/]
+            }
+            /*..other tuples..*/
+        ]
+    },
+    rows:{ //rows axis data
+        tuples:[{
+                members:[{
+                    children:[],
+                    caption:"All",
+                    name:"[Customer].[Commute Distance].[All]",
+                    levelName:"[Customer].[Commute Distance].[(All)]",
+                    levelNum:"0",
+                    hasChildren:true,
+                    hierarchy:"[Customer].[Commute Distance]"
+                }, /*..other tuple members..*/]
+            },
+            /*..other tuples..*/
+        ]
+    }
+}
+</code></pre>
+
+<h4>Example - specify the field which contains columns and rows axes as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    axes: "axes" // axes are returned in the "axes" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set columns and rows axes data as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    axes: function(response) {
+      return response.axes; // axes are returned in the "axes" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.catalogs">
+<a href="#configuration-schema.catalogs">schema.catalogs </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the list of catalogs available on the server. Can be set to a function which is called to
+return the catalogs schema information for the response. It is executed during the schema discover.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The catalogs schema from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>[{
+    "name":"Adventure Works Internet Sales Model"
+}]
+</code></pre>
+
+<h4>Example - specify the field which contains catalogs schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    catalogs: "catalogs" // catalogs information is returned in the "catalogs" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set cubes schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    catalogs: function(response) {
+      return response.catalogs; // catalogs information are returned in the "catalogs" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.cubes">
+<a href="#configuration-schema.cubes">schema.cubes </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the list of cubes available in the catalog. Can be set to a function which is called to
+return the cubes schema information for the response. It is executed during the schema discover.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The cubes schema from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>[{
+    name:"Adventure Works Internet Sales Model",
+    caption:"Adventure Works Internet Sales Model",
+    type:"CUBE"
+ },{
+    name:"Internet Sales",
+    caption:"Internet Sales",
+    type:"CUBE"
+ }]
+</code></pre>
+
+<h4>Example - specify the field which contains cubes schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    cubes: "cubes" // cubes information is returned in the "cubes" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set cubes schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    cubes: function(response) {
+      return response.cubes; // cubes information are returned in the "cubes" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.cube">
+<a href="#configuration-schema.cube">schema.cube </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The cube declaration. If configured this option will enable the client cube processing, usefull for binding to flat data. Note: This is only applicable if client cube processing is used.</p>
+
+<h4>schema.cube.dimensions <code>Object</code>
+</h4>
+
+<p>A set of key/value pairs which specify the field-dimension mapping for the available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped. Note: The key should match the column name used in the columns definition.</p>
+
+<h5>Example - define cube dimentions</h5>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.PivotDataSource({
+    columns: ["ProductName" ],
+    rows: ["Category"],
+    data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+    schema: {
+      cube: {
+        dimensions: {
+          ProductName: { caption: "All Products" },
+          Category: { caption: "All Cateogries" }
+        }
+      }
+    }
+  });
+
+  dataSource.fetch(function() {
+    console.log(dataSource.data(), dataSource.axes());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h5>schema.cube.dimensions.dimensionName <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The name of the field which map to the dimension.</p>
+
+<h5>schema.cube.dimensions.dimensionName.caption <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>A user-friendly name of the dimension.</p>
+
+<h4>schema.cube.measures <code>Object</code>
+</h4>
+
+<p>A set of key/value pairs which specify the available measures. The key specifies the name of measure.Note: The key should match the measure name used in the measures definition of the PivotDataSource</p>
+
+<h4>Example - define cube measures which calculates the sum of products price</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.PivotDataSource({
+    columns: ["ProductName" ],
+    rows: ["Category"],
+    measures: ["Sum"],
+    data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+    schema: {
+      cube: {
+        dimensions: {
+          ProductName: { caption: "All Products" },
+          Category: { caption: "All Cateogries" }
+        },
+        measures: {
+          "Sum": {
+              field: "UnitPrice",
+              format: "{0:c}",
+              aggregate: function(value, state, context) {
+                  return (state.accumulator || 0) + value;
+              }
+          }
+        }
+      }
+    }
+  });
+
+  dataSource.fetch(function() {
+    console.log(dataSource.data(), dataSource.axes());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h5>schema.cube.measures.measureName.field <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The field name which value is used to calculations.</p>
+
+<h5>schema.cube.measures.measureName.format <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The format which to be applied on the calculated measure value.</p>
+
+<h5>schema.cube.measures.measureName.aggregate <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The function used to aggregate the measure value. The built-in aggregates are "average", "count", "max", "min" and "sum".</p>
+
+<h6>Returns</h6>
+
+<p><code>Object</code> The result of the calculation</p>
+
+<h6>Parameters</h6>
+
+<h6># value <code>Object</code>
+</h6>
+
+<p>The value of the specified field of the current processed record.</p>
+
+<h6># state <code>Object</code>
+</h6>
+
+<p>The current aggregated result of the function for already processed records.</p>
+
+<blockquote>
+<p>The <code>state</code> uses a predefined field named <strong>accumulator</strong>, where the last aggregated result is preserved.</p>
+</blockquote>
+
+<h6># context <code>Object</code>
+</h6>
+
+<p>The context for the current aggregate call. It includes the current data item and its index in the data:</p>
+
+<pre><code>{
+    dataItem: `data item`,
+    index: `data item index`
+}
+</code></pre>
+
+<h6>Example - specify a built-in "average" aggregate function</h6>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.PivotDataSource({
+    columns: ["ProductName" ],
+    rows: ["Category"],
+    measures: ["Sum"],
+    data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+    schema: {
+      cube: {
+        dimensions: {
+          ProductName: { caption: "All Products" },
+          Category: { caption: "All Cateogries" }
+        },
+        measures: {
+          "Average": {
+            field: "UnitPrice",
+            aggregate: "average"
+        }
+      }
+    }
+  });
+
+  dataSource.fetch(function() {
+    console.log(dataSource.data(), dataSource.axes());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h6>Example - specify an aggregate function for a value summing</h6>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.PivotDataSource({
+    columns: ["ProductName" ],
+    rows: ["Category"],
+    measures: ["Sum"],
+    data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+    schema: {
+      cube: {
+        dimensions: {
+          ProductName: { caption: "All Products" },
+          Category: { caption: "All Cateogries" }
+        },
+        measures: {
+          "Average": {
+            field: "UnitPrice",
+            aggregate: function(value, state, context) {
+                return (state.accumulator || 0) + value;
+            }
+        }
+      }
+    }
+  });
+
+  dataSource.fetch(function() {
+    console.log(dataSource.data(), dataSource.axes());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h5>schema.cube.measures.measureName.result <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>The function that will be called at the end of tuple aggregation.</p>
+
+<blockquote>
+<p>If it is not defined, the <code>state.accumulator</code> value set in the <code>aggregate</code> function will be used.</p>
+</blockquote>
+
+<h6>Returns</h6>
+
+<p><code>Object</code> The result of the calculation</p>
+
+<h6>Parameters</h6>
+
+<h6># state <code>Object</code>
+</h6>
+
+<p>The last aggregated result of the function for already processed records.</p>
+
+<blockquote>
+<p>The <code>state</code> uses a predefined field named <strong>accumulator</strong>, where the last aggregated result is preserved.</p>
+</blockquote>
+
+<h6>Example - specify a result function calculating the final value</h6>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.PivotDataSource({
+    columns: ["ProductName" ],
+    rows: ["Category"],
+    measures: ["Sum"],
+    data: [{ ProductName: "Chai", UnitPrice: 42, Cateogry: "Beverages" } ],
+    schema: {
+      cube: {
+        dimensions: {
+          ProductName: { caption: "All Products" },
+          Category: { caption: "All Cateogries" }
+        },
+        measures: {
+          "Average": {
+            field: "UnitPrice",
+            aggregate: function(value, state, context) {
+                if (!isNaN(value)) {
+                    state.count = (state.count || 0) + 1;
+                    return (state.accumulator || 0) + value;
+                } else {
+                    return state.accumulator;
+                }
+            },
+            result: function(state) {
+                result state.accumulator / state.count;
+            }
+        }
+      }
+    }
+  });
+
+  dataSource.fetch(function() {
+    console.log(dataSource.data(), dataSource.axes());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.data">
+<a href="#configuration-schema.data">schema.data </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the cells data. Can be set to a function which is called to
+return the cells data for the response.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The cells data from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>[{
+    value:"1",
+    fmtValue:"1",
+    ordinal:0
+},{
+    value:"42",
+    fmtValue:"$42.00",
+    ordinal:1
+}, /*..*/]
+</code></pre>
+
+<h4>Example - specify the field which contains cells data as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    data: "data" // cells data are returned in the "data" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set cells data as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    data: function(response) {
+      return response.data; // cells data are returned in the "data" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.dimensions">
+<a href="#configuration-schema.dimensions">schema.dimensions </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the dimensions schema information. Can be set to a function which is called to
+return the dimensions schema information for the response. It is executed during the schema discover.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The dimensions schema from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>[
+  {
+     "name":"Customer",
+     "caption":"Customer",
+     "uniqueName":"[Customer]",
+     "defaultHierarchy":"[Customer].[Commute Distance]",
+     "type":"3"
+  },
+  {
+     "name":"Date",
+     "caption":"Date",
+     "uniqueName":"[Date]",
+     "defaultHierarchy":"[Date].[Calendar]",
+     "type":"1"
+  }, /*..*/
+</code></pre>
+
+<p>]</p>
+
+<h4>Example - specify the field which contains dimensions schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    dimensions: "dimensions" // dimensions information is returned in the "dimensions" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dimensions schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    dimensions: function(response) {
+      return response.dimensions; // dimensions information are returned in the "dimensions" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.hierarchies">
+<a href="#configuration-schema.hierarchies">schema.hierarchies </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the hierarchies schema information. Can be set to a function which is called to
+return the hierarchies schema information for the response. It is executed during the schema discover requests.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The cube hierarchies schema from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<pre><code>[
+    {
+        "name":"Address Line 1",
+        "caption":"Address Line 1",
+        "uniqueName":"[Customer].[Address Line 1]",
+        "dimensionUniqueName":"[Customer]",
+        "origin":"2",
+        "defaultMember":"[Customer].[Address Line 1].[All]"
+    },
+    {
+        "name":"Address Line 2",
+        "caption":"Address Line 2",
+        "uniqueName":"[Customer].[Address Line 2]",
+        "dimensionUniqueName":"[Customer]",
+        "origin":"2",
+        "defaultMember":"[Customer].[Address Line 2].[All]"
+    },
+    /*..*/
+]
+</code></pre>
+
+<h4>Example - specify the field which contains hierarchies schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    hierarchies: "hierarchies" // hierarchies schema information is returned in the "hierarchies" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set hierarchies schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    hierarchies: function(response) {
+      return response.hierarchies; // hierarchies information are returned in the "hierarchies" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.levels">
+<a href="#configuration-schema.levels">schema.levels </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the levels schema information. Can be set to a function which is called to
+return the levels schema information for the response. It is executed during the schema discover.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The levels schema from the response.</p>
+
+<p>The result should have the following format and attributes:</p>
+
+<p>[
+      {
+         "name":"(all)",
+         "caption":"(all)",
+         "uniquename":"[customer].[address line 1].[(all)]",
+         "dimensionuniquename":"[customer]",
+         "orderingproperty":"(all)",
+         "origin":"2",
+         "hierarchyuniquename":"[customer].[address line 1]"
+      },
+      {
+         "name":"address line 1",
+         "caption":"address line 1",
+         "uniquename":"[customer].[address line 1].[address line 1]",
+         "dimensionuniquename":"[customer]",
+         "orderingproperty":"address line 1",
+         "origin":"2",
+         "hierarchyuniquename":"[customer].[address line 1]"
+      }, /<em>..</em>/
+   ]</p>
+
+<h4>Example - specify the field which contains levels schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    levels: "levels" // levels information is returned in the "levels" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set levels schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    levels: function(response) {
+      return response.levels; // levels information are returned in the "levels" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-schema.measures">
+<a href="#configuration-schema.measures">schema.measures </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The field from the server response which contains the measures schema information. Can be set to a function which is called to
+return the measures schema information for the response. It is executed during the schema discover.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> The measures schema from the response.</p>
+
+<p>The result should have the following format:</p>
+
+<pre><code>[
+    {
+        "name":"Days Current Quarter to Date",
+        "caption":"Days Current Quarter to Date",
+        "uniqueName":"[Measures].[Days Current Quarter to Date]",
+        "aggregator":"0",
+        "groupName":"Date"
+    },
+    {
+        "name":"Days in Current Quarter",
+        "caption":"Days in Current Quarter",
+        "uniqueName":"[Measures].[Days in Current Quarter]",
+        "aggregator":"0",
+        "groupName":"Date"
+    },
+    /*..*/
+]
+</code></pre>
+
+<h4>Example - specify the field which contains measures schema information as a string</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    measures: "measures" // measures information is returned in the "measures" field of the response
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set measures schema information as a function</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.PivotDataSource({
+  transport: {
+    /* transport configuration */
+  }
+  schema: {
+    measures: function(response) {
+      return response.measures; // measures information are returned in the "measures" field of the response
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+
+<h3 id="methods-axes"><a href="#methods-axes">axes</a></h3>
+
+<p>Get the parsed axes data</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the parsed axes data</p>
+
+<h4>Example - get the axes data</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.fetch();
+
+var axes = dataSource.axes();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-catalog"><a href="#methods-catalog">catalog</a></h3>
+
+<p>Get or sets the current catalog name.</p>
+
+<h4>Parameters</h4>
+
+<h5>name <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The name of the catalog.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the current catalog name.</p>
+
+<h4>Example - set the catalog</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.catalog("Adventure Works DW 2008R2");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the catalog name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var catalogName = dataSource.catalog();
+console.log(catalogName);// prints "Adventure Works DW 2008R2"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-columns"><a href="#methods-columns">columns</a></h3>
+
+<p>Get or sets the columns configuration.</p>
+
+<h4>Parameters</h4>
+
+<h5>val <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The columns configuration. Accepts the same values as the <a href="#configuration-columns">columns</a> option.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the current columns configuration.</p>
+
+<h4>Example - set the columns</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.columns(["[Date].[Calendar]"]);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the columns name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var columns = dataSource.columns();
+console.log(columns);// [{ name: ["[Date].[Calendar]"] }]
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-cube"><a href="#methods-cube">cube</a></h3>
+
+<p>Get or sets the current cube name.</p>
+
+<h4>Parameters</h4>
+
+<h5>name <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The name of the cube.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the current cube name.</p>
+
+<h4>Example - set the cube</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.cube("Adventure Works");
+
+dataSource.fetch();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the cube name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  columns: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var cubeName = dataSource.cube();
+console.log(cubeName);// prints "Adventure Works"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-discover"><a href="#methods-discover">discover</a></h3>
+
+<p>Starts discover request with given options.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The options of the discover request</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.discover({
+    data: {
+      command: "schemaMeasures",
+      restrictions: {
+        catalogName: dataSource.catalog(),
+        cubeName: dataSource.cube()
+      }
+    }).done(function(response) {
+        console.log(response);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-measures"><a href="#methods-measures">measures</a></h3>
+
+<p>Get or sets the measures configuration.</p>
+
+<h4>Parameters</h4>
+
+<h5>val <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The measures configuration. Accepts the same values as the <a href="#configuration-measures-values">measures</a> option.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the current measures configuration.</p>
+
+<h4>Example - set the measures</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.measures(["[Measures].[Internet Order Lines Count]"]);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the measures</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  measures: ["[Measures].[Internet Order Lines Count]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var measures = dataSource.measures();
+console.log(measures);// [{ name: "[Measures].[Internet Order Lines Count]" }]
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-measuresAxis"><a href="#methods-measuresAxis">measuresAxis</a></h3>
+
+<p>Get the name of the axis on which measures are displayed.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the axis name.</p>
+
+<h4>Example - set the measures</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  measures: {
+      values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
+      axis: "rows"
+  },
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var axis = dataSource.measuresAxis();
+console.log(axis); // "rows"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-rows"><a href="#methods-rows">rows</a></h3>
+
+<p>Get or sets the rows configuration.</p>
+
+<h4>Parameters</h4>
+
+<h5>val <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The rows configuration. Accepts the same values as the <a href="#configuration-rows">row</a> option.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the current rows configuration.</p>
+
+<h4>Example - set the rows</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2",
+        cube: "Adventure Works"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.rows(["[Date].[Calendar]"]);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the rows name</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  rows: ["[Date].[Calendar]"],
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var rows = dataSource.rows();
+console.log(rows);// [{ name: ["[Date].[Calendar]"] }]
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaCatalogs"><a href="#methods-schemaCatalogs">schemaCatalogs</a></h3>
+
+<p>Request catalogs information.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.schemaCatalogs()
+    .done(function(catalogs) {
+        console.log(catalogs);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaCubes"><a href="#methods-schemaCubes">schemaCubes</a></h3>
+
+<p>Request cubes schema information.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.schemaCubes()
+    .done(function(cubes) {
+        console.log(cubes);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaDimensions"><a href="#methods-schemaDimensions">schemaDimensions</a></h3>
+
+<p>Request dimensions schema information.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.schemaDimensions()
+    .done(function(dimensions) {
+        console.log(dimensions);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaHierarchies"><a href="#methods-schemaHierarchies">schemaHierarchies</a></h3>
+
+<p>Request hierarchies schema information.</p>
+
+<h4>Parameters</h4>
+
+<h5>dimensionName <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The name of the dimensions which is 'owner' of the hierarchy.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var dimensionName = "[Customer]";
+
+dataSource.schemaHierarchies(dimensionName)
+    .done(function(dimensions) {
+        console.log(dimensions);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaLevels"><a href="#methods-schemaLevels">schemaLevels</a></h3>
+
+<p>Request levels schema information.</p>
+
+<h4>Parameters</h4>
+
+<h5>hierarchyName <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The name of the hierarchy which is 'owner' of the level.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+var hierarchyName = "[Georgaphy].[City]";
+
+dataSource.schemaLevels(hierarchyName)
+    .done(function(levels) {
+        console.log(levels);
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-schemaMeasures"><a href="#methods-schemaMeasures">schemaMeasures</a></h3>
+
+<p>Request measures schema information.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> Deferred object</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  type: "xmla",
+  transport: {
+    connection: {
+        catalog: "Adventure Works DW 2008R2"
+    },
+    read: "http://demos.telerik.com/olap/msmdpump.dll"
+  },
+  schema: {
+    type: "xmla"
+  }
+});
+
+dataSource.schemaMeasures()
+    .done(function(measures) {
+        console.log(measures);
+    });
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,411 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/dataviz/diagram/shape.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/dataviz/diagram/shape.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatavizdiagramshape"><a href="#kendodatavizdiagramshape">kendo.dataviz.diagram.Shape</a></h1>
+
+<p>The Shape object represents a visual node in the graph or diagram.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-id">
+<a href="#configuration-id">id </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The unique identifier for a Shape.</p>
+
+<h3 id="configuration-editable">
+<a href="#configuration-editable">editable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Defines the shape editable options.</p>
+
+<h3 id="configuration-editable.connect">
+<a href="#configuration-editable.connect">editable.connect </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>Specifies whether the connectors should appear on hover.</p>
+
+<h3 id="configuration-path">
+<a href="#configuration-path">path </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (<a href="http://www.w3.org/TR/SVG/paths.html#PathData">http://www.w3.org/TR/SVG/paths.html#PathData</a> "SVG Path data.").</p>
+
+<h3 id="configuration-stroke">
+<a href="#configuration-stroke">stroke </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the stroke configuration.</p>
+
+<h3 id="configuration-stroke.color">
+<a href="#configuration-stroke.color">stroke.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the color of the shape's stroke.</p>
+
+<h3 id="configuration-stroke.width">
+<a href="#configuration-stroke.width">stroke.width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>Defines the thickness or width of the shape's stroke.</p>
+
+<h3 id="configuration-stroke.dashType">
+<a href="#configuration-stroke.dashType">stroke.dashType </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The dash type of the shape.</p>
+
+<p>The following dash types are supported:</p>
+
+<ul>
+<li>"dash" - a line consisting of dashes</li>
+<li>"dashDot" - a line consisting of a repeating pattern of dash-dot</li>
+<li>"dot" - a line consisting of dots</li>
+<li>"longDash" - a line consisting of a repeating pattern of long-dash</li>
+<li>"longDashDot" - a line consisting of a repeating pattern of long-dash-dot</li>
+<li>"longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot</li>
+<li>"solid" - a solid line</li>
+</ul>
+
+<h3 id="configuration-type">
+<a href="#configuration-type">type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "rectangle")</em>
+</h3>
+
+<p>Specifies the type of the Shape using any of the built-in shape type.</p>
+
+<ul>
+<li>"rectangle": this is the default option, representing a SVG Rectangle</li>
+<li>"circle" : a SVG circle/ellipse</li>
+</ul>
+
+<h3 id="configuration-x">
+<a href="#configuration-x">x </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Defines the x-coordinate of the shape when added to the diagram.</p>
+
+<h3 id="configuration-y">
+<a href="#configuration-y">y </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Defines the y-coordinate of the shape when added to the diagram.</p>
+
+<h3 id="configuration-minWidth">
+<a href="#configuration-minWidth">minWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 20)</em>
+</h3>
+
+<p>Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.</p>
+
+<h3 id="configuration-minHeight">
+<a href="#configuration-minHeight">minHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 20)</em>
+</h3>
+
+<p>Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.</p>
+
+<h3 id="configuration-width">
+<a href="#configuration-width">width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
+</h3>
+
+<p>Defines the width of the shape when added to the diagram.</p>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
+</h3>
+
+<p>Defines the height of the shape when added to the diagram.</p>
+
+<h3 id="configuration-fill">
+<a href="#configuration-fill">fill </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the fill options of the shape.</p>
+
+<h3 id="configuration-fill.color">
+<a href="#configuration-fill.color">fill.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the fill color of the shape.</p>
+
+<h3 id="configuration-fill.opacity">
+<a href="#configuration-fill.opacity">fill.opacity </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>Defines the fill opacity of the shape.</p>
+
+<h3 id="configuration-hover">
+<a href="#configuration-hover">hover </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the hover configuration.</p>
+
+<h3 id="configuration-hover.fill">
+<a href="#configuration-hover.fill">hover.fill </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the hover fill options of the shape.</p>
+
+<h3 id="configuration-hover.fill.color">
+<a href="#configuration-hover.fill.color">hover.fill.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the hover fill color of the shape.</p>
+
+<h3 id="configuration-hover.fill.opacity">
+<a href="#configuration-hover.fill.opacity">hover.fill.opacity </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>Defines the hover fill opacity of the shape.</p>
+
+<h3 id="configuration-connectors">
+<a href="#configuration-connectors">connectors </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>Defines the connectors the shape owns.</p>
+
+<h3 id="configuration-connectors.name">
+<a href="#configuration-connectors.name">connectors.name </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connector name. Predefined names include:</p>
+
+<ul>
+<li>"top" - top connector.</li>
+<li>"right" - right connector.</li>
+<li>"bottom" - bottom connector.</li>
+<li>"bottomRight" - bottom right connector.</li>
+<li>"left" - left connector.</li>
+<li>"auto" - auto connector.</li>
+</ul>
+
+<h3 id="configuration-connectors.description">
+<a href="#configuration-connectors.description">connectors.description </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The connector description.</p>
+
+<h3 id="configuration-connectors.position">
+<a href="#configuration-connectors.position">connectors.position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The function that positions the connector.</p>
+
+<h3 id="configuration-rotation">
+<a href="#configuration-rotation">rotation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The shape rotation settings.</p>
+
+<h3 id="configuration-rotation.angle">
+<a href="#configuration-rotation.angle">rotation.angle </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The rotation angle.</p>
+
+<h3 id="configuration-content">
+<a href="#configuration-content">content </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the shapes content settings.</p>
+
+<h3 id="configuration-content.text">
+<a href="#configuration-content.text">content.text </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The text displayed in the shape.</p>
+
+<h3 id="configuration-content.align">
+<a href="#configuration-content.align">content.align </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The alignment of the text inside the shape.</p>
+
+<h3 id="configuration-selectable">
+<a href="#configuration-selectable">selectable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Specifies if the shape can be selected.</p>
+
+<h3 id="configuration-visual">
+<a href="#configuration-visual">visual </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>A function returning a visual element to render for this shape.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-position"><a href="#methods-position">position</a></h3>
+
+<p>Get or set method returning the current global position or sets the position specified.</p>
+
+<h4>Parameters</h4>
+
+<h5>point <code>kendo.dataviz.diagram.Point</code>
+</h5>
+
+<p>Either the location to set or if no parameter given returns the current location.</p>
+
+<h3 id="methods-clone"><a href="#methods-clone">clone</a></h3>
+
+<p>Returns a clone (with a different id) of the shape.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.dataviz.diagram.Shape</code> A clone of the current shape.</p>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Selects or deselects the shape.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Use 'true' to select the shape or 'false' to deselect it.</p>
+
+<h3 id="methods-connections"><a href="#methods-connections">connections</a></h3>
+
+<p>Returns the connections attached to the shape. You can optionally specify to return only the incoming or outgoing connections.</p>
+
+<h4>Parameters</h4>
+
+<h5>type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>If not parameter specified all connections are returned, if "in" then only the incoming (i.e. towards the shape) are returned, if "out" the only the outgoing (i.e. away from the shape) are returned.</p>
+
+<h3 id="methods-getConnector"><a href="#methods-getConnector">getConnector</a></h3>
+
+<p>Fetches a (default or custom) Connector defined on the Shape by its name.</p>
+
+<h3 id="methods-getPosition"><a href="#methods-getPosition">getPosition</a></h3>
+
+<p>Returns the middle positions of the sides of the bounds or the center of the shape's bounds. This method is useful when defining custom connectors where a position function relative to the shape's coordinate system is required.</p>
+
+<h4>Parameters</h4>
+
+<h5>side <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>One of the four sides of a bound; "left", "right", "top", "bottom". If none specified the center of the shape's bounds will be returned.</p>
+
+<h3 id="methods-redraw"><a href="#methods-redraw">redraw</a></h3>
+
+<p>Renders the shape with the given options. It redefines the options and redraws the shape accordingly.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

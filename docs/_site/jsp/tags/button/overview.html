@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Button JSP tag for Kendo UI Button widget | Kendo UI documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Getting started with Button JSP tag extension in quick steps - configure Kendo UI Button widget and operate Kendo UI Button events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/jsp-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/jsp-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/jsp-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/jsp-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/jsp-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("jsp/tags/button/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//jsp/tags/button/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="button"><a href="#button">Button</a></h1>
+
+<p>The Button JSP tag is a server-side wrapper for the <a href="/kendo-ui/api/web/button">Kendo UI Button</a> widget.</p>
+
+<p>It is assumed that the reader of this page is familiar with the fundamental <a href="/kendo-ui/widgets">Kendo UI widget concepts</a> and
+the <a href="/kendo-ui/jsp/introduction">Kendo UI Java wrappers</a> are setup correctly.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>The <strong>Button</strong> widget can be initialized from any element, defined via the <code>tag</code> attribute. However, using <code>button</code> or <code>a</code> elements is more reasonable. A <code>button</code> element is used by default, unless otherwise specified.</p>
+
+<p>The <strong>Button</strong> can include both inline and block elements defined via <code>content</code>. One should take into account web standards, which prohibit placing block elements (e.g. <code>div</code>, <code>p</code>) inside inline elements (e.g. <code>a</code>, <code>span</code>).</p>
+
+<p>Placing clickable elements with their own special behavior inside the <strong>Button</strong> (e.g. hyperlinks, textboxes, etc) may cause undesired side efects.</p>
+
+<h3 id="button-initialization-examples"><a href="#button-initialization-examples">Button initialization examples</a></h3>
+
+<h4>Using the default <code>button</code> tag</h4>
+
+<pre><code>&lt;kendo:button name="textButton" type="button" content="Text button"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<h4>Using an <code>anchor</code> tag</h4>
+
+<pre><code>&lt;kendo:button name="linkButton" tag="a" content="Link button"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<h2 id="using-icons"><a href="#using-icons">Using Icons</a></h2>
+
+<p>The <strong>Button</strong> can accommodate an icon, which enhances the meaning of the text content.
+The widget provides three ways to add an icon with a classic <code>img</code> element or with a background image (usually a sprite).
+From web standarts' point of view, using background images is better, because the icon does not represent structural content, but it's simply a decoration.</p>
+
+<p>There are three settings, which the <strong>Button</strong> provides for configuring icons - <code>icon</code>, <code>spriteCssClass</code> and <code>imageUrl</code>. Only one should be used at a time.</p>
+
+<h3 id="background-icons"><a href="#background-icons">Background icons</a></h3>
+
+<p>Background icons are applied via the <code>icon</code> or <code>spriteCssClass</code> properties and are displayed as a background of a <code>span</code> element.</p>
+
+<p>The difference between the two settings is that <code>icon</code> is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
+For a list of available icon names, please refer to the <a href="http://demos.telerik.com/kendo-ui/web/styling/icons.html">Icons demo</a>.</p>
+
+<h4>Using <code>icon</code>
+</h4>
+
+<pre><code>&lt;kendo:button name="cancelButton" type="button" icon="cancel" content="Cancel"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<p>The above configuration will produce the following HTML output:</p>
+
+<pre><code>&lt;button type="button" id="cancelButton" class="k-button k-button-icontext"&gt;&lt;span class="k-icon k-cancel"&gt;&lt;/span&gt;Cancel&lt;/button&gt;
+</code></pre>
+
+<h4>Using <code>spriteCssClass</code>
+</h4>
+
+<pre><code>&lt;kendo:button name="spriteButton" type="button" spriteCssClass="myIconClass" content="Sprite icon"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<p>The above configuration will produce the following HTML output:</p>
+
+<pre><code>&lt;button type="button" id="spriteButton" class="k-button k-button-icontext"&gt;&lt;span class="k-sprite myIconClass"&gt;&lt;/span&gt;Sprite button&lt;/button&gt;
+</code></pre>
+
+<p>Technically, <code>spriteCssClass="k-icon k-cancel"</code> can be used to achieve the same result as <code>icon="cancel"</code>,
+but <code>icon</code> will spare you the need to set two CSS classes at the same time and will provides a certain level of abstraction.</p>
+
+<h4>Using a Button with no text</h4>
+
+<p>The Button will use an existing <code>span</code> element if it is supplied as <code>content</code>, e.g. if the goal is to have a Button with no text. The <code>span</code> element must have a <code>k-sprite</code> CSS class.</p>
+
+<pre><code>&lt;kendo:button name="deleteButton" type="button" spriteCssClass="myDeleteClass" content="&lt;span class='k-sprite'&gt;Delete&lt;/span&gt;"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<h3 id="image-icons"><a href="#image-icons">Image icons</a></h3>
+
+<p>Image icons are applied via the <code>imageUrl</code> property and are displayed as a <code>img</code> element.</p>
+
+<h4>Using <code>imageUrl</code>
+</h4>
+
+<pre><code>&lt;kendo:button name="imageButton" type="button" imageUrl="${myIcon}" content="Image button"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<p>The above configuration will produce the following HTML output:</p>
+
+<pre><code>&lt;button type="button" id="imageButton" class="k-button k-button-icontext"&gt;&lt;img class="k-image" src="/images/myIcon.gif" alt="icon" /&gt;Image button&lt;/button&gt;
+</code></pre>
+
+<h4>Using <code>imageUrl</code> with no text</h4>
+
+<p>An <code>img</code> tag should be placed inside the <strong>Button</strong> content. The image should have a <code>k-image</code> CSS class.</p>
+
+<pre><code>&lt;kendo:button name="imageButton" type="button" imageUrl="${myIcon}" content="&lt;img class='k-image' alt='my icon' /&gt;"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<h2 id="enabled-and-disabled-buttons"><a href="#enabled-and-disabled-buttons">Enabled and Disabled buttons</a></h2>
+
+<p>The business logic of an application often requires a certain button to be temporarily disabled or enabled.
+The <strong>Button</strong> can be configured to be initially disabled via its <code>enable</code> setting.
+The widget can also be disabled or enabled at any time with Javascript by using its <code>enable</code> method with a boolean argument.</p>
+
+<h3 id="using-enable">
+<a href="#using-enable">Using </a><code>enable</code>
+</h3>
+
+<pre><code>&lt;kendo:button name="disabledButton" type="button" enable="false" content="Disabled button"&gt;
+&lt;/kendo:button&gt;
+</code></pre>
+
+<p>For more information on the <strong>Button</strong> <a href="/kendo-ui/api/web/button#methods-enable"><code>enable</code> method</a>, please refer to the <a href="/kendo-ui/api/web/button/">Button API</a>.</p>
+
+<h2 id="accessing-the-button-instance"><a href="#accessing-the-button-instance">Accessing the Button instance</a></h2>
+
+<p>Please refer to the <strong>Button</strong>'s <a href="/kendo-ui/web/button/overview/#accessing-the-button-instance">Getting Started</a> documentation page.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

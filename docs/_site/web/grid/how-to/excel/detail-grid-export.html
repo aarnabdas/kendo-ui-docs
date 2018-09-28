@@ -1,0 +1,449 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to export master and detail grids in Excel">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/grid/how-to/excel/detail-grid-export.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/grid/how-to/excel/detail-grid-export.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="detail-grid-excel-export"><a href="#detail-grid-excel-export">Detail Grid Excel Export</a></h1>
+
+<p>The following demos shows how to export the detail grids and merge their workbooks with the master grid workbook. They use the <a href="/kendo-ui/api/javascript/ui/grid#events-excelExport">excelExport</a> event to get the
+workbook of the detail grids. The event is prevented to avoid saving an Excel file for every detail grid. For additional info check <a href="/kendo-ui/framework/excel/introduction#create-excel-document">Create Excel Documents</a>.</p>
+
+<h4>Example - detail grid Excel export (all pages and details)</h4>
+
+<pre lang="html"><code>&lt;div id="grid"&gt;&lt;/div&gt;
+&lt;script&gt;
+  // used to wait for the children to finish async export
+  var detailExportPromises = [];
+
+
+  var dataSource = new kendo.data.DataSource({
+    type: "odata",
+    transport: {
+      read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+    }
+  });
+
+  dataSource.read();
+
+  $("#grid").kendoGrid({
+    toolbar: ["excel"],
+    dataSource: {
+      type: "odata",
+      transport: {
+        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+      },
+      pageSize: 6,
+      serverPaging: true
+    },
+    height: 600,
+    pageable: true,
+    detailInit: detailInit,
+    excel: {
+      allPages: true
+    },
+    dataBound: function() {
+      detailExportPromises = [];
+      this.expandRow(this.tbody.find("tr.k-master-row").first());
+    },
+    excelExport: function(e) {
+      e.preventDefault();
+
+      var workbook = e.workbook;
+
+      detailExportPromises = [];
+
+      var masterData = e.data;
+
+      for (var rowIndex = 0; rowIndex &lt; masterData.length; rowIndex++) {
+        exportChildData(masterData[rowIndex].EmployeeID, rowIndex);
+      }
+
+      $.when.apply(null, detailExportPromises)
+      .then(function() {
+        // get the export results
+        var detailExports = $.makeArray(arguments);
+
+        // sort by masterRowIndex
+        detailExports.sort(function(a, b) {
+          return a.masterRowIndex - b.masterRowIndex;
+        });
+
+        // add an empty column
+        workbook.sheets[0].columns.unshift({
+          width: 30
+        });
+
+        // prepend an empty cell to each row
+        for (var i = 0; i &lt; workbook.sheets[0].rows.length; i++) {
+          workbook.sheets[0].rows[i].cells.unshift({});
+        }
+
+        // merge the detail export sheet rows with the master sheet rows
+        // loop backwards so the masterRowIndex doesn't need to be updated
+        for (var i = detailExports.length - 1; i &gt;= 0; i--) {
+          var masterRowIndex = detailExports[i].masterRowIndex + 1; // compensate for the header row
+
+          var sheet = detailExports[i].sheet;
+
+          // prepend an empty cell to each row
+          for (var ci = 0; ci &lt; sheet.rows.length; ci++) {
+            if (sheet.rows[ci].cells[0].value) {
+              sheet.rows[ci].cells.unshift({});
+            }
+          }
+
+          // insert the detail sheet rows after the master row
+          [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
+        }
+
+        // save the workbook
+        kendo.saveAs({
+          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
+          fileName: "Export.xlsx"
+        });
+
+
+      });
+    },
+    columns: [
+      { field: "FirstName", title: "First Name", width: "110px" },
+      { field: "LastName", title: "Last Name", width: "110px" },
+      { field: "Country", width: "110px" },
+      { field: "City", width: "110px" },
+      { field: "Title" }
+    ]
+  });
+
+  function exportChildData(EmployeeID, rowIndex) {
+    var deferred = $.Deferred();
+
+    detailExportPromises.push(deferred);
+
+    var rows = [{
+      cells: [
+        // First cell
+        { value: "OrderID" },
+        // Second cell
+        { value: "Freight" },
+        // Third cell
+        { value: "ShipName" },
+        // Fourth cell
+        { value: "OrderDate" },
+        // Fifth cell
+        { value: "ShipCity" }
+      ]
+    }];
+
+    dataSource.filter({ field: "EmployeeID", operator: "eq", value: EmployeeID});
+
+    var exporter = new kendo.ExcelExporter({
+      columns: [{
+        field: "OrderID"
+      }, {
+        field: "Freight"
+      }, {
+        field: "ShipName"
+      }, {
+        field: "ShipCity"
+      }],
+      dataSource: dataSource
+    });
+
+    exporter.workbook().then(function(book, data) {
+      deferred.resolve({
+        masterRowIndex: rowIndex,
+        sheet: book.sheets[0]
+      });
+    });
+  }
+
+  function detailInit(e) {
+    // initiallize a new jQuery Deferred http://api.jquery.com/jQuery.Deferred/
+    //var deferred = $.Deferred();
+
+    // get the index of the master row
+    //var masterRowIndex = e.masterRow.index(".k-master-row");
+
+    // add the deferred to the list of promises
+    //detailExportPromises.push(deferred);
+
+    $("&lt;div/&gt;").appendTo(e.detailCell).kendoGrid({
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+        },
+        serverPaging: true,
+        serverSorting: true,
+        serverFiltering: true,
+        pageSize: 10,
+        filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+      },
+      excelExport: function (e) {
+        // prevent saving the file
+        e.preventDefault();
+
+        // resolve the deferred
+        //deferred.resolve({
+        //  masterRowIndex: masterRowIndex,
+        //  sheet: e.workbook.sheets[0]
+        //});
+      },
+      scrollable: false,
+      pageable: true,
+      columns: [
+        { field: "OrderID", width: "70px" },
+        { field: "ShipCountry", title:"Ship Country", width: "110px" },
+        { field: "ShipAddress", title:"Ship Address" },
+        { field: "ShipName", title: "Ship Name", width: "300px" }
+      ]
+    });
+  }
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - detail grid Excel export (current page only)</h4>
+
+<pre lang="html"><code>&lt;div id="grid"&gt;&lt;/div&gt;
+&lt;script&gt;
+  // used to wait for the children to finish async export
+  var detailExportPromises = [];
+
+  $("#grid").kendoGrid({
+    toolbar: ["excel"],
+    dataSource: {
+      type: "odata",
+      transport: {
+        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+      },
+      pageSize: 6,
+      serverPaging: true
+    },
+    height: 600,
+    pageable: true,
+    detailInit: detailInit,
+    dataBound: function() {
+      detailExportPromises = [];
+      this.expandRow(this.tbody.find("tr.k-master-row").first());
+    },
+    excelExport: function(e) {
+      // prevent saving the file because we will update the workbook
+      e.preventDefault();
+
+      var workbook = e.workbook;
+
+      // Export all detail grids
+      $("#grid [data-role=grid]").each(function() {
+        $(this).data("kendoGrid").saveAsExcel();
+      });
+
+      // wait for all detail grids to finish exporting
+      $.when.apply(null, detailExportPromises)
+      .then(function() {
+        // get the export results
+        var detailExports = $.makeArray(arguments);
+
+        // sort by masterRowIndex
+        detailExports.sort(function(a, b) {
+          return a.masterRowIndex - b.masterRowIndex;
+        });
+
+        // add an empty column
+        workbook.sheets[0].columns.unshift( { width: 30 } );
+
+        // prepend an empty cell to each row
+        for (var i = 0; i &lt; workbook.sheets[0].rows.length; i++) {
+          workbook.sheets[0].rows[i].cells.unshift( { });
+        }
+
+        // merge the detail export sheet rows with the master sheet rows
+        // loop backwards so the masterRowIndex doesn't need to be updated
+        for (var i = detailExports.length - 1; i &gt;= 0; i--) {
+          var masterRowIndex = detailExports[i].masterRowIndex + 1; // compensate for the header row
+
+          var sheet = detailExports[i].sheet;
+
+          // prepend an empty cell to each row
+          for (var ci = 0; ci &lt; sheet.rows.length; ci++) {
+            if (sheet.rows[ci].cells[0].value) {
+              sheet.rows[ci].cells.unshift( { } );
+            }
+          }
+
+          // insert the detail sheet rows after the master row
+          [].splice.apply(workbook.sheets[0].rows, [masterRowIndex + 1, 0].concat(sheet.rows));
+        }
+
+        // save the workbook
+        kendo.saveAs({
+          dataURI: new kendo.ooxml.Workbook(workbook).toDataURL(),
+          fileName: "Export.xlsx"
+        })
+      });
+    },
+    columns: [
+      { field: "FirstName", title: "First Name", width: "110px" },
+      { field: "LastName", title: "Last Name", width: "110px" },
+      { field: "Country", width: "110px" },
+      { field: "City", width: "110px" },
+      { field: "Title" }
+    ]
+  });
+
+  function detailInit(e) {
+    // initiallize a new jQuery Deferred http://api.jquery.com/jQuery.Deferred/
+    var deferred = $.Deferred();
+
+    // get the index of the master row
+    var masterRowIndex = e.masterRow.index(".k-master-row");
+
+    // add the deferred to the list of promises
+    detailExportPromises.push(deferred);
+
+    $("&lt;div/&gt;").appendTo(e.detailCell).kendoGrid({
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+        },
+        serverPaging: true,
+        serverSorting: true,
+        serverFiltering: true,
+        pageSize: 10,
+        filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+      },
+      excelExport: function (e) {
+        // prevent saving the file
+        e.preventDefault();
+
+        // resolve the deferred
+        deferred.resolve({
+          masterRowIndex: masterRowIndex,
+          sheet: e.workbook.sheets[0]
+        });
+      },
+      scrollable: false,
+      pageable: true,
+      columns: [
+        { field: "OrderID", width: "70px" },
+        { field: "ShipCountry", title:"Ship Country", width: "110px" },
+        { field: "ShipAddress", title:"Ship Address" },
+        { field: "ShipName", title: "Ship Name", width: "300px" }
+      ]
+    });
+  }
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

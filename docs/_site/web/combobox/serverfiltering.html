@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Kendo UI ComboBox Server Filtering</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="This document provides information how to configure server filtering in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/combobox/serverfiltering.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/combobox/serverfiltering.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="server-filtering"><a href="#server-filtering">Server Filtering</a></h1>
+
+<p>Kendo UI AutoComplete, ComboBox, DropDownList and MultiSelect widget support <em>server filtering</em>, which is useful to display
+only a data subset. Basically, the widget will display only the data returned from the server.</p>
+
+<p>The server filtering can be used to display a reduced portion of the whole dataset. This is useful when the end user cannot or does not
+want to see the whole dataset in the popup element.</p>
+
+<h2 id="how-to-configure-server-filtering"><a href="#how-to-configure-server-filtering">How to configure server filtering</a></h2>
+
+<p>This functionality is based on the filtering capability of the DataSource component. That being said, you will need to be
+familiar with the filtering configuration of the component:</p>
+
+<ul>
+<li><a href="/kendo-ui/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering">DataSource serverFiltering option</a></li>
+</ul>
+
+<p>Once the DataSource is configured to perform server filtering, the only option that needs to be defined of the widget is the
+<a href="/kendo-ui/kendo-ui/api/javascript/ui/combobox#configuration-filter">filter</a> option.</p>
+
+<p>This online demo shows how to configure the server filtering:</p>
+
+<ul>
+<li><a href="http://demos.telerik.com/kendo-ui/combobox/serverfiltering">ComboBox Server Filtering demo</a></li>
+</ul>
+
+<h2 id="benefits-of-server-filtering"><a href="#benefits-of-server-filtering">Benefits of server filtering</a></h2>
+
+<p>As mentioned, the server filtering feature can be used to display only a subset of a dataset. This is quite useful when the
+dataset is large and contains thousands or more records. In such situation the developer can define a minimum filter length
+using <a href="/kendo-ui/kendo-ui/api/javascript/ui/combobox#configuration-minLength">minLength</a> option. For instance, this option can be set to <code>3</code>,
+which means that the widget will not start filtering the dataset until at least 3 characters are entered.</p>
+
+<p>The other plus of this functionality is the ability to bind the widget to only one data item - the selected one. Thus you avoid the need to retrieve the whole
+dataset in order to display the selected value/text. This approach can boost the loading time of the widget.
+To take an advantage of this approach, you need to send the selected value to the server and return only the matching data item. For that task, you can use
+the datasource's <a href="/kendo-ui/kendo-ui/api/javascript/data/datasource#configuration-transport.read.data">data</a> callback:</p>
+
+<pre lang="javascript"><code>    data: function() {
+        //the selectedValue is used on the server to filter the source and return only the matching data item
+        return {
+            selectedValue: $("#[widget id]").data("kendoComboBox").value()
+        }
+    }
+</code></pre>
+
+<h2 id="known-limitations"><a href="#known-limitations">Known limitations</a></h2>
+
+<ul>
+<li>The server filtering feature (as its name says) only filters the source. If you would like to page (and filter) the data set, then you will need to use
+the <a href="/kendo-ui/kendo-ui/web/combobox/virtualization">Virtualization</a> feature of the widget.</li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

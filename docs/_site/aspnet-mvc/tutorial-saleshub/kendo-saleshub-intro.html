@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Tutorial SalesHub - Introduction</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="tutorial-saleshub-introduction"><a href="#tutorial-saleshub-introduction">Tutorial: SalesHub: Introduction</a></h1>
+
+<ul>
+<li><a href="#aims-of-the-saleshub-sample-project">Aims of the SalesHub sample project</a></li>
+<li><a href="#view-the-live-site">View the live site</a></li>
+<li><a href="#get-the-source-code">Get the Source Code</a></li>
+<li><a href="#add-the-kendo-ui-mvc-extensions-to-the-project">Add the Kendo UI MVC Extensions to the Project</a></li>
+<li><a href="#build-and-run-the-application">Build and Run the Application</a></li>
+<li><a href="#solution-structure">Solution Structure</a></li>
+</ul>
+
+<p>In this tutorial, we will review portions of the SalesHub sample project.</p>
+
+<p><img src="/kendo-ui/aspnet-mvc/tutorial-saleshub/images/kendo-saleshub-intro-home-screenshot.png" alt="kendo-saleshub-intro-home-screenshot"></p>
+
+<h2 id="aims-of-the-saleshub-sample-project"><a href="#aims-of-the-saleshub-sample-project">Aims of the SalesHub sample project</a></h2>
+
+<p>The SalesHub is an Order Management System that demonstrates the usage of the Telerik UI for ASP.NET MVC in
+an enterprise environment.</p>
+
+<p>The goal of this sample project to is show how to use a subset of Kendo UI widgets using Telerik UI for ASP.NET MVC, as well as
+to show how to easily implement server-side filtering for <a href="/kendo-ui/api/framework/datasource">DataSource</a> requests, using the
+server-side components that the Telerik UI for ASP.NET MVC provide.</p>
+
+<p>This sample is not feature-complete and is only meant to be used as a reference for how to use the Telerik UI for ASP.NET MVC.</p>
+
+<h2 id="view-the-live-site"><a href="#view-the-live-site">View the live site</a></h2>
+
+<p>The live SalesHub demo can be viewed at <a href="http://demos.telerik.com/kendo-ui/saleshub">demos.telerik.com/kendo-ui/saleshub</a>.</p>
+
+<h2 id="get-the-source-code"><a href="#get-the-source-code">Get the Source Code</a></h2>
+
+<p>Start by getting the source for <a href="https://github.com/telerik/kendo-saleshub-demo">SalesHub from GitHub</a>.</p>
+
+<blockquote>
+<p>This sample project is for <strong>Microsoft Visual Studio 2012</strong>, and requires MVC4, NuGet, Telerik UI for ASP.NET MVC, and SQLExpress in order to run.</p>
+</blockquote>
+
+<h2 id="add-the-kendo-ui-mvc-extensions-to-the-project"><a href="#add-the-kendo-ui-mvc-extensions-to-the-project">Add the Kendo UI MVC Extensions to the Project</a></h2>
+
+<blockquote>
+<p>Due to licensing restrictions, <strong>the sample project does not include the dll for the Telerik UI for ASP.NET MVC</strong>.</p>
+</blockquote>
+
+<p>If you have a license for the Telerik UI for ASP.NET MVC, you can use the <a href="http://www.telerik.com/download-trial-file.aspx?pid=972">Telerik Control Panel</a>
+to download and install the extensions. If you haven't purchased a license yet, you can download and install the 30 day <a href="http://www.telerik.com/download/kendo-ui-complete">free trial</a>
+for the extensions.</p>
+
+<p>Once you've downloaded and installed the extensions, all that is required is for <code>\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll</code> to be copied from the installation
+directory of the Telerik UI for ASP.NET MVC into the <code>SalesHub\libs</code> directory.</p>
+
+<blockquote>
+<p>The standard installation directory for the extensions is <strong><code>C:\Program Files (x86)\Telerik\Telerik UI for ASP.NET MVC &lt;version&gt;</code></strong>.</p>
+</blockquote>
+
+<h2 id="build-and-run-the-application"><a href="#build-and-run-the-application">Build and Run the Application</a></h2>
+
+<p>Once you've copied <code>Kendo.Mvc.dll</code> to the correct location, you should be able to build and run the application.</p>
+
+<p>The first time the application launches, it creates and seeds its database. Seeding the database may take a few minutes to complete.</p>
+
+<h2 id="solution-structure"><a href="#solution-structure">Solution Structure</a></h2>
+
+<p><img src="/kendo-ui/aspnet-mvc/tutorial-saleshub/images/kendo-saleshub-intro-project-structure-screenshot.png" alt="kendo-saleshub-intro-project-structure-screenshot"></p>
+
+<p>There are three main projects in this sample application. They are:</p>
+
+<ol>
+<li>
+<p><strong>SalesHub.Client</strong>:</p>
+
+<p>This is a standard MVC project and uses the default MVC project structure with one exception. The data services, which
+are MVC controllers that return JSON results, are in their own namespace (<code>SalesHub.Client.Api</code>), so as to avoid confusion
+which controllers return Views and which ones return JSON.</p>
+</li>
+<li>
+<p><strong>SalesHub.Data</strong>:</p>
+
+<p>This project contains the Entity Framework repositories for data models.</p>
+</li>
+<li>
+<p><strong>SalesHub.Core</strong>:</p>
+
+<p>This project contains the data models and the repository interfaces used by SalesHub.Data.</p>
+</li>
+</ol>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

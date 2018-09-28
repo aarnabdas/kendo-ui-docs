@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>DropDownList HtmlHelper extension for Kendo UI DropDownList | Kendo UI documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to bind a Kendo UI DropDownList for ASP.NET MVC, configure a server-side wrapper for Kendo UI DropDownlist Widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/helpers/dropdownlist/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/helpers/dropdownlist/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="dropdownlist"><a href="#dropdownlist">DropDownList</a></h1>
+
+<p>The DropDownList HtmlHelper extension is a server-side wrapper for the <a href="/kendo-ui/api/web/dropdownlist">Kendo UI DropDownList</a> widget.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>There are two ways to bind a Kendo DropDownList for ASP.NET MVC:</p>
+
+<ul>
+<li>  <strong>server</strong> - the data will be serialized to the client. No Ajax requests will be made.</li>
+<li>  <strong>ajax</strong> - the dropdownlist will make ajax request to get the data.</li>
+</ul>
+
+<h3 id="configure-the-kendo-dropdownlist-for-server-binding"><a href="#configure-the-kendo-dropdownlist-for-server-binding">Configure the Kendo DropDownList for server binding</a></h3>
+
+<p>Here is how to configure the Kendo DropDownList  for server binding to the Northwind Products table using Linq to SQL:</p>
+
+<ol>
+<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li>
+<p>Create a new action method and pass the Products table as the model:</p>
+
+<pre><code>public ActionResult Index()
+{
+    NorthwindDataContext northwind = new NorthwindDataContext();
+
+    return View(northwind.Products);
+}
+</code></pre>
+</li>
+<li>
+<p>Make your view strongly typed:</p>
+
+<ul>
+<li>
+<p>WebForms</p>
+
+<pre><code>&lt;%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+   Inherits="System.Web.Mvc.ViewPage&lt;IEnumerable&lt;MvcApplication1.Models.Product&gt;&gt;" %&gt;
+</code></pre>
+</li>
+<li>
+<p>Razor</p>
+
+<pre><code>@model IEnumerable&lt;MvcApplication1.Models.Product&gt;
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Add a server bound dropdownlist:</p>
+
+<ul>
+<li>
+<p>WebForms</p>
+
+<pre><code>&lt;%: Html.Kendo().DropDownList()
+    .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+    .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+    .BindTo(Model)   //Pass the list of Products to the dropdownlist.
+    .SelectedIndex(10) //Select an item with index 10\. Note that the indexes are zero based.
+%&gt;
+</code></pre>
+</li>
+<li>
+<p>Razor</p>
+
+<pre><code>@(Html.Kendo().DropDownList()
+  .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+  .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+  .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+  .BindTo(Model)   //Pass the list of Products to the dropdownlist.
+  .SelectedIndex(10) //Select an item with index 10\. Note that the indexes are zero based.
+)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+<h3 id="configure-the-kendo-dropdownlist-for-ajax-binding"><a href="#configure-the-kendo-dropdownlist-for-ajax-binding">Configure the Kendo DropDownList for ajax binding</a></h3>
+
+<p>Here is how to configure the Kendo DropDownList for ajax binding to the Northwind Products table using Linq to SQL:</p>
+
+<ol>
+<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li>
+<p>Create an action method which renders the view:</p>
+
+<pre><code>public ActionResult Index()
+{
+    return View();
+}
+</code></pre>
+</li>
+<li>
+<p>Create a new action method and pass the Products table as Json result:</p>
+
+<pre><code>public JsonResult GetProducts()
+{
+    NorthwindDataContext northwind = new NorthwindDataContext();
+
+    return Json(northwind.Products, JsonRequestBehavior.AllowGet);
+}
+</code></pre>
+</li>
+<li>
+<p>Add a ajax bound dropdownlist:</p>
+
+<ul>
+<li>
+<p>WebForms</p>
+
+<pre><code>&lt;%: Html.Kendo().DropDownList()
+    .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+    .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+    .DataSource(source =&gt;
+    {
+           source.Read(read =&gt;
+           {
+                read.Action("GetProducts", "Home"); //Set the Action and Controller name
+           })
+           .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+    })
+    .SelectedIndex(0) //Select first item.
+%&gt;
+</code></pre>
+</li>
+<li>
+<p>Razor</p>
+
+<pre><code>@(Html.Kendo().DropDownList()
+    .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+    .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+    .DataSource(source =&gt;
+    {
+           source.Read(read =&gt;
+           {
+                read.Action("GetProducts", "Home"); //Set the Action and Controller name
+           })
+           .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+    })
+    .SelectedIndex(0) //Select first item.
+)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+<blockquote>
+<p><strong>Important:</strong> <strong>ToDataSourceResult()</strong> extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.</p>
+</blockquote>
+
+<h3 id="configure-the-kendo-dropdownlist-to-work-with-todatasourceresult-instance"><a href="#configure-the-kendo-dropdownlist-to-work-with-todatasourceresult-instance">Configure the Kendo DropDownList to work with ToDataSourceResult instance</a></h3>
+
+<p>Here is how to configure the dropdownlist to use a custom datasource and thus to bind to a ToDataSourceResult instance.</p>
+
+<ol>
+<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li>
+<p>Create an action method which renders the view:</p>
+
+<pre><code>public ActionResult Index()
+{
+    return View();
+}
+</code></pre>
+</li>
+<li>
+<p>Create a new action method and pass the Products table as Json result:</p>
+
+<pre><code>public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
+{
+    NorthwindDataContext northwind = new NorthwindDataContext();
+
+    return Json(northwind.Products.ToDataSourceResult(request));
+}
+</code></pre>
+</li>
+<li>
+<p>Add a ajax bound dropdownlist:</p>
+
+<ul>
+<li>
+<p>WebForms</p>
+
+<pre><code>&lt;%: Html.Kendo().DropDownList()
+    .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+    .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+    .DataSource(source =&gt;
+    {
+        source.Custom()
+              .ServerFiltering(true)
+              .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+              .Transport(transport =&gt;
+              {
+                  transport.Read("GetProducts", "Home");
+              })
+              .Schema(schema =&gt;
+              {
+                  schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                        .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+              });
+    })
+%&gt;
+</code></pre>
+</li>
+<li>
+<p>Razor</p>
+
+<pre><code>@(Html.Kendo().DropDownList()
+    .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+    .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+    .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+    .DataSource(source =&gt;
+    {
+        source.Custom()
+              .ServerFiltering(true)
+              .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+              .Transport(transport =&gt;
+              {
+                  transport.Read("GetProducts", "Home");
+              })
+              .Schema(schema =&gt;
+              {
+                  schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                        .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+              });
+    })
+)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+
+<h3 id="sending-parameters-to-the-server"><a href="#sending-parameters-to-the-server">Sending parameters to the server</a></h3>
+
+<p>Here is how to configure the Kendo DropDownList to send parameters to the server:</p>
+
+<ul>
+<li>
+<p>WebForms</p>
+
+<pre><code>&lt;%: Html.Kendo().DropDownList()
+        .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+        .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+        .Filter(FilterType.Contains)
+        .DataSource(source =&gt;
+        {
+                source.Read(read =&gt;
+               {
+                        read.Action("GetProducts", "Home")
+                            .Data("onAdditionalData");
+               });
+        })
+ %&gt;
+ &lt;script&gt;
+    function onAdditionalData() {
+        return {
+            text: $("#productDropDownList").data("kendoDropDownList").text()
+        };
+    }
+&lt;/script&gt;
+</code></pre>
+</li>
+<li>
+<p>Razor</p>
+
+<pre><code>@(Html.Kendo().DropDownList()
+      .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
+      .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
+      .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+      .Filter(FilterType.Contains)
+      .DataSource(source =&gt;
+      {
+         source.Read(read =&gt;
+         {
+              read.Action("GetProducts", "Home") //Set the Action and Controller name
+                  .Data("onAdditionalData");
+         });
+      })
+)
+
+&lt;script&gt;
+    function onAdditionalData() {
+        return {
+            text: $("#productDropDownList").data("kendoDropDownList").filterInput.val()
+        };
+    }
+&lt;/script&gt;
+</code></pre>
+</li>
+</ul>
+
+<p>Here is how the <strong>GetProducts</strong> method looks like:</p>
+
+<pre><code>    public JsonResult GetProducts(string text)
+    {
+        var northwind = new SampleEntities();
+
+        var products = northwind.Products.Select(product =&gt; new ProductViewModel
+                {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice ?? 0,
+                UnitsInStock = product.UnitsInStock ?? 0,
+                UnitsOnOrder = product.UnitsOnOrder ?? 0,
+                Discontinued = product.Discontinued
+                });
+
+        if (!string.IsNullOrEmpty(text))
+        {
+            products = products.Where(p =&gt; p.ProductName.Contains(text));
+        }
+
+        return Json(products, JsonRequestBehavior.AllowGet);
+    }
+</code></pre>
+
+<blockquote>
+<p>The Kendo DropDownList has default event handler for the DataSource's Data callback. If you do not
+define event handler, it will be used.</p>
+</blockquote>
+
+<p><em>Default event handler for the DataSource's Data callback</em></p>
+
+<pre><code>function requestData(selector) {
+    var dropdownlist = $(selector).data("kendoDropDownList"),
+        filters = dropdownlist.dataSource.filter(),
+        value = dropdownlist.filterInput.val();
+
+    if (!filters) {
+        value = "";
+    }
+
+    return { text: value };
+}
+</code></pre>
+
+<p>As you can see the dropdownlist sends the input's value only if the end-user starts to type in it.</p>
+
+<h2 id="accessing-an-existing-dropdownlist"><a href="#accessing-an-existing-dropdownlist">Accessing an Existing DropDownList</a></h2>
+
+<p>You can reference an existing DropDownList instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
+Once a reference has been established, you can use the <a href="/kendo-ui/api/web/dropdownlist#methods">API</a> to control its behavior.</p>
+
+<h3 id="accessing-an-existing-dropdownlist-instance"><a href="#accessing-an-existing-dropdownlist-instance">Accessing an existing DropDownList instance</a></h3>
+
+<pre><code>//Put this after your Kendo DropDownList for ASP.NET MVC declaration
+&lt;script&gt;
+$(function() {
+// Notice that the Name() of the dropdownlist is used to get its client-side instance
+var dropdownlist = $("#productDropDownList").data("kendoDropDownList");
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="handling-kendo-ui-dropdownlist-events"><a href="#handling-kendo-ui-dropdownlist-events">Handling Kendo UI DropDownList events</a></h2>
+
+<p>You can subscribe to all <a href="/kendo-ui/api/web/dropdownlist#events">events</a> exposed by Kendo UI DropDownList:</p>
+
+<h3 id="webforms---subscribe-by-handler-name"><a href="#webforms---subscribe-by-handler-name">WebForms - subscribe by handler name</a></h3>
+
+<pre><code>&lt;%: Html.Kendo().DropDownList()
+    .Name("dropdownlist")
+    .BindTo(new string[] { "Item1", "Item2", "Item3" })
+    .Events(e =&gt; e
+        .Select("dropdownlist_select")
+        .Change("dropdownlist_change")
+    )
+%&gt;
+&lt;script&gt;
+function dropdownlist_select() {
+    //Handle the select event
+}
+
+function dropdownlist_change() {
+    //Handle the change event
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="razor---subscribe-by-handler-name"><a href="#razor---subscribe-by-handler-name">Razor - subscribe by handler name</a></h3>
+
+<pre><code>@(Html.Kendo().DropDownList()
+  .Name("dropdownlist")
+  .BindTo(new string[] { "Item1", "Item2", "Item3" })
+  .Events(e =&gt; e
+        .Select("dropdownlist_select")
+        .Change("dropdownlist_change")
+  )
+)
+&lt;script&gt;
+function dropdownlist_select() {
+    //Handle the select event
+}
+
+function dropdownlist_change() {
+    //Handle the change event
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="razor---subscribe-by-template-delegate"><a href="#razor---subscribe-by-template-delegate">Razor - subscribe by template delegate</a></h3>
+
+<pre><code>@(Html.Kendo().DropDownList()
+  .Name("dropdownlist")
+  .BindTo(new string[] { "Item1", "Item2", "Item3" })
+  .Events(e =&gt; e
+      .Select(@&lt;text&gt;
+        function() {
+            //Handle the select event inline
+        }
+      &lt;/text&gt;)
+      .Change(@&lt;text&gt;
+        function() {
+            //Handle the change event inline
+        }
+        &lt;/text&gt;)
+  )
+)
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Documentation for Sparkline widget in Kendo UI DataViz</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to create a sparkline, enable the visualization of a series that displays inline data, explore the quick overview of Sparkline widget major features.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("dataviz/sparkline/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//dataviz/sparkline/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="sparkline-overview"><a href="#sparkline-overview">Sparkline Overview</a></h1>
+
+<h2 id="getting-started"><a href="#getting-started">Getting started</a></h2>
+
+<p>Sparklines are simple, word-sized graphics that can be embedded in text, tables or headlines.
+The concept for such graphics was developed by Edward Tufte.</p>
+
+<p>Kendo UI Sparkline is a version of the Chart widget tailored for this specific application.</p>
+
+<p>While sparklines are typically line charts, other types are supported as well:</p>
+
+<ul>
+<li>  Line (default)</li>
+<li>  Bar (Data Bars)</li>
+<li>  Column</li>
+<li>  Area</li>
+<li>  Pie</li>
+<li>  Bullet</li>
+</ul>
+
+<p>Please visit the <a href="http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap">Kendo UI Roadmap</a> for additional information about
+new Sparkline types and features.</p>
+
+<h3 id="creating-a-sparkline"><a href="#creating-a-sparkline">Creating a Sparkline</a></h3>
+
+<p>To create a sparkline, add an empty span in the HTML and give it an ID.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+</code></pre>
+
+<p>Optionally, set the line-height of the desired sparkline inline or with CSS.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>The width of line, area and column sparklines is determined by the number of data points.</li>
+<li>Bar and Bullet graphs have a default width that can be overriden with CSS.</li>
+<li>The Pie width equals the line-height to make a square.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>&lt;span id="sparkline" style="line-height: 60px"&gt;&lt;/span&gt;
+</code></pre>
+
+<p>The sparkline is rendered by selecting the span with a jQuery selector and calling the kendoSparkline() function.</p>
+
+<h4>Example</h4>
+
+<pre><code>$("#sparkline").kendoSparkline([1, 2, 3, 2, 1]);
+</code></pre>
+
+<h3 id="data-binding"><a href="#data-binding">Data Binding</a></h3>
+
+<p>The Sparklines can visualize series bound to both local and remote data.</p>
+
+<h4>Binding to local data</h4>
+
+<p>Binding to local data can be done by:</p>
+
+<ul>
+<li>Passing an array with values to the widget constructor</li>
+<li>Setting the root-level <em>data</em> field to an array with values</li>
+<li>Configuring a series and setting its <em>data</em> option</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>// The following configurations are identical
+
+$("#sparkline").kendoSparkline([200, 450, 300, 125]);
+
+$("#sparkline").kendoSparkline({
+    type: "line",
+    data: [200, 450, 300, 125]
+});
+
+$("#sparkline").kendoSparkline({
+    series: [{
+        type: "line",
+        data: [200, 450, 300, 125]
+    }]
+});
+</code></pre>
+
+<h4>Binding to remote data</h4>
+
+<p>See <a href="/kendo-ui/dataviz/chart/data-binding#binding-to-a-data-source">Binding to a Data Source</a></p>
+
+<h2 id="axes"><a href="#axes">Axes</a></h2>
+
+<p>Sparklines are categorical (discrete) charts and have an implicit category and value axis.
+The awareness for their existence is important even though they are not typically visible.</p>
+
+<p>The axis orientation (horizontal or vertical) is inferred from the series type.</p>
+
+<h3 id="category-axis"><a href="#category-axis">Category axis</a></h3>
+
+<p>While category names are not visible (by default), they will be displayed in tooltips.</p>
+
+<p>Use the categoryAxis object to set the category names:</p>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#sparkline").kendoSparkline({
+    series: [{
+        name: "World",
+        data: [15.7, 16.7, 20, 23.5, 26.6]
+    }],
+    categoryAxis: {
+        categories: [2005, 2006, 2007, 2008, 2009]
+    }
+});
+&lt;script&gt;
+</code></pre>
+
+<p>The category name can also be bound to a field of the data item:</p>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+&lt;script&gt;
+var internetUsers = [ {
+    "country": "United States",
+    "year": "2005",
+    "value": 67.96
+    }, {
+    "country": "United States",
+    "year": "2006",
+    "value": 68.93
+}];
+
+$("#sparkline").kendoSparkline({
+    dataSource: {
+        data: internetUsers
+    },
+    series: [{
+        field: "value",
+        name: "United States"
+    }],
+    categoryAxis: {
+        field: "year"
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Displaying Dates</h4>
+
+<p>The category axis provides built-in support for displaying dates. This includes:</p>
+
+<ul>
+<li>Automatic selection of granularity/base unit (minutes, hours, days, etc.)</li>
+<li>Label formatting matched to the granularity</li>
+<li>Grouping of categories into base units and series aggregates</li>
+</ul>
+
+<p>Specifying categories of type Date will switch the axis to date mode.
+The automatic mode selection can be overriden by specifying <code>type: "Date"</code></p>
+
+<h5>Base Unit</h5>
+
+<p>The default base unit is determined from the smallest duration between categories.
+For example:</p>
+
+<pre><code>categoryAxis: {
+    categories: [new Date(2005, 0, 1), new Date(2006, 0, 1)]
+    // baseUnit is set to "years"
+}
+
+categoryAxis: {
+    categories: [new Date(2005, 1, 1), new Date(2005, 1, 2)]
+    // baseUnit is set to "days"
+}
+</code></pre>
+
+<p>The base unit can also be specified manually. Valid options are:</p>
+
+<ul>
+<li>minutes</li>
+<li>hours</li>
+<li>days</li>
+<li>months</li>
+<li>years</li>
+</ul>
+
+<h5>Series Aggregates</h5>
+
+<p>If more than one category falls within a base unit, then its
+values are aggregated to display a single point.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#sparkline").kendoSparkline({
+    series: [{
+        type: "column",
+        data: [20, 40, 45, 30, 50]
+    }],
+    categoryAxis: {
+        categories: [
+            new Date("2011/12/30"),
+            new Date("2011/12/31"),
+            new Date("2012/01/01"),
+            new Date("2012/01/02"),
+            new Date("2012/01/03")
+        ]
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>Produces the following sparkline. Note that values are displayed as-is:</p>
+
+<p><img src="/kendo-ui/dataviz/sparkline/sparkline-category-date-axis.png" alt="Sparkline with date category axis"></p>
+
+<p>Now change the base unit to "years":</p>
+
+<pre><code>categoryAxis: {
+    baseUnit: "years",
+    categories: [
+        new Date("2011/12/30"),
+        new Date("2011/12/31"),
+        new Date("2012/01/01"),
+        new Date("2012/01/02"),
+        new Date("2012/01/03")
+    ]
+}
+</code></pre>
+
+<p>Notice how the sparkline now displays the maximum value for each year:</p>
+
+<p><img src="/kendo-ui/dataviz/sparkline/sparkline-category-date-axis-grouped.png" alt="Sparkline with grouped date category axis"></p>
+
+<p>The aggregate function can be changed for each series:</p>
+
+<pre><code>series: [{
+    aggregate: "sum",
+    type: "column",
+    data: [20, 40, 45, 30, 50]
+}]
+</code></pre>
+
+<p>Available options are:</p>
+
+<ul>
+<li>min</li>
+<li>max</li>
+<li>count</li>
+<li>sum</li>
+<li>avg</li>
+<li>function (values, series) (Custom aggregate)</li>
+</ul>
+
+<h3 id="value-axis"><a href="#value-axis">Value axis</a></h3>
+
+<p>The Sparkline currently supports only Numeric value axes.</p>
+
+<p>Configuration options are accessible through the <a href="/kendo-ui/api/dataviz/sparkline#valueaxis-object"><code>valueAxis</code> object</a>:</p>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#sparkline").kendoSparkline({
+    series: [{
+        name: "World",
+        data: [15.7, 16.7, 20, 23.5, 26.6]
+    }],
+    valueAxis: {
+        min: 0,
+        max: 100
+    },
+    categoryAxis: {
+        categories: [2005, 2006, 2007, 2008, 2009]
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>Here we have configured a Numeric axis with a minimum value of 0 and a maximum value of 100.</p>
+
+<h2 id="plot-bands"><a href="#plot-bands">Plot Bands</a></h2>
+
+<p>Each axis can be configured to display bands with different colors for predefined value ranges.</p>
+
+<p>The category index (zero based) is used as a value for the category axis.</p>
+
+<p>For example:</p>
+
+<pre><code>&lt;span id="sparkline"&gt;&lt;/span&gt;
+&lt;script&gt;
+$("#sparkline").kendoSparkline({
+    data: [15.7, 16.7, 20, 23.5, 26.6],
+    valueAxis: {
+        plotBands: [{
+            from: 0,
+            to: 20,
+            color: "#f99"
+        }]
+    }
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

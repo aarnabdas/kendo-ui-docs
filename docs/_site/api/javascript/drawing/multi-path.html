@@ -1,0 +1,487 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API reference for methods and fields of Kendo UI DataViz Drawing MultiPath</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/drawing/multi-path.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/drawing/multi-path.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodrawingmultipath--kendodrawingelement">
+<a href="#kendodrawingmultipath--kendodrawingelement">kendo.drawing.MultiPath</a><span class="type-link">Inherits from <a class="type-link" href="/kendo-ui/api/javascript/drawing/element">kendo.drawing.Element</a></span>
+</h1>
+
+<p>Draws a composite path consisting of multiple sub-paths.
+Using composite paths is more efficient than drawing the paths individually.</p>
+
+<p>The interface of MultiPath mirrors that of <a href="path">Path</a>,
+but each moveTo command starts a new sub-path.</p>
+
+<h4>Example - drawng a multi-path</h4>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 250px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var draw = kendo.drawing;
+
+    var multiPath = new draw.MultiPath()
+        .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]).close()
+        .moveTo(150, 150).lineTo(200, 150).close();
+
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(multiPath);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="constructor-parameters"><a href="#constructor-parameters">Constructor Parameters</a></h2>
+
+<h3 id="options-object">
+<a href="#options-object">options </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The configuration options.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-clip">
+<a href="#configuration-clip">clip </a><a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
+</h3>
+
+<p>The element clipping path.
+Inherited from <a href="element#configuration-clip">Element.clip</a></p>
+
+<h3 id="configuration-fill">
+<a href="#configuration-fill">fill </a><a href="/kendo-ui/api/javascript/drawing/fill-options" class="type-link"><code>kendo.drawing.FillOptions</code></a>
+</h3>
+
+<p>The fill options of the shape.</p>
+
+<h3 id="configuration-opacity">
+<a href="#configuration-opacity">opacity </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The element opacity.
+Inherited from <a href="element#configuration-opacity">Element.opacity</a></p>
+
+<h3 id="configuration-stroke">
+<a href="#configuration-stroke">stroke </a><a href="/kendo-ui/api/javascript/drawing/stroke-options" class="type-link"><code>kendo.drawing.StrokeOptions</code></a>
+</h3>
+
+<p>The stroke options of the shape.</p>
+
+<h3 id="configuration-transform">
+<a href="#configuration-transform">transform </a><a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
+</h3>
+
+<p>The transformation to apply to this element.
+Inherited from <a href="element#configuration-transform">Element.transform</a></p>
+
+<h3 id="configuration-visible">
+<a href="#configuration-visible">visible </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>A flag, indicating if the element is visible.
+Inherited from <a href="element#configuration-visible">Element.visible</a></p>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-paths">
+<a href="#fields-paths">paths </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>A collection of sub-<a href="path">paths</a>.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-bbox"><a href="#methods-bbox">bbox</a></h3>
+
+<p>Returns the bounding box of the element with transformations applied.
+Inherited from <a href="element#methods-bbox">Element.bbox</a></p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with transformations applied.</p>
+
+<h3 id="methods-clip"><a href="#methods-clip">clip</a></h3>
+
+<p>Gets or sets the element clipping path.
+Inherited from <a href="element#methods-clip">Element.clip</a></p>
+
+<h4>Parameters</h4>
+
+<h5>clip <a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
+</h5>
+
+<p>The element clipping path.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a> The current element clipping path.</p>
+
+<h3 id="methods-clippedBBox"><a href="#methods-clippedBBox">clippedBBox</a></h3>
+
+<p>Returns the bounding box of the element with clipping and transformations applied.
+Inherited from <a href="element#methods-clippedBBox">Element.clippedBBox</a></p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with clipping transformations applied.</p>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes the current sub-path by linking its current end point with its start point.</p>
+
+<h4>Example - Draw a closed sub-path</h4>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 250px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var draw = kendo.drawing;
+
+    var multiPath = new draw.MultiPath()
+        .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]);
+
+    // The following commands are interchangable
+    multiPath.close();
+    multiPath.lineTo(100, 200);
+
+    // Draw the next sub-path
+    multiPath.moveTo(150, 150).lineTo(200, 150).close();
+
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(multiPath);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-curveTo"><a href="#methods-curveTo">curveTo</a></h3>
+
+<p>Draws a cubic Bézier curve (with two control points).</p>
+
+<p>A quadratic Bézier curve (with one control point) can be plotted by making the control point equal.</p>
+
+<h4>Example - Draw a curved sub-path</h4>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 250px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var draw = kendo.drawing;
+
+    var multiPath = new draw.MultiPath()
+        .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]).close()
+        .moveTo(150, 150).lineTo(200, 150).close();
+
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(multiPath);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>controlOut <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The first control point for the curve.</p>
+
+<h5>controlIn <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The second control point for the curve.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-fill"><a href="#methods-fill">fill</a></h3>
+
+<p>Sets the shape <a href="#configuration-fill">fill</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>color <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The <a href="fill-options#fields-color">fill color</a> to set.</p>
+
+<h5>opacity <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>optional</em>
+</h5>
+
+<p>The <a href="fill-options#fields-opacity">fill opacity</a> to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-lineTo"><a href="#methods-lineTo">lineTo</a></h3>
+
+<p>Draws a straight line to the specified absolute coordinates.</p>
+
+<h4>Example - Draw a straight sub-path</h4>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 250px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+
+    var multiPath = new draw.MultiPath()
+        .moveTo(100, 200);
+
+    // The following commands are interchangeable
+    multiPath.lineTo(200, 200);
+    multiPath.lineTo([200, 200]);
+    multiPath.lineTo(new geom.Point(200, 200));
+
+    multiPath.moveTo(150, 150).lineTo(200, 150).close();
+
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(multiPath);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>x <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The line end X coordinate or a Point/Array with X and Y coordinates.</p>
+
+<h5>y <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>optional</em>
+</h5>
+
+<p>The line end Y coordinate.</p>
+
+<p>Optional if the first parameter is a Point/Array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-moveTo"><a href="#methods-moveTo">moveTo</a></h3>
+
+<p>Creates a new sub-path or clears all segments and moves the starting point to the specified absolute coordinates.</p>
+
+<h4>Example - Set the sub-path start coordinates</h4>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 250px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var draw = kendo.drawing;
+    var geom = kendo.geometry;
+
+    var multiPath = new draw.MultiPath();
+
+    // The following commands are interchangeable
+    multiPath.moveTo(100, 200);
+    multiPath.moveTo([100, 200]);
+    multiPath.moveTo(new geom.Point(100, 200));
+
+    multiPath.lineTo(200, 200).close();
+    multiPath.moveTo(150, 150).lineTo(200, 150).close();
+
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(multiPath);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>x <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/geometry/point" class="type-link"><code>kendo.geometry.Point</code></a>
+</h5>
+
+<p>The starting X coordinate or a Point/Array with X and Y coordinates.</p>
+
+<h5>y <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>optional</em>
+</h5>
+
+<p>The starting Y coordinate.</p>
+
+<p>Optional if the first parameter is a Point/Array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-opacity"><a href="#methods-opacity">opacity</a></h3>
+
+<p>Gets or sets the element opacity.
+Inherited from <a href="element#methods-opacity">Element.opacity</a></p>
+
+<p>If set, the stroke and fill opacity will be multiplied by the element opacity.</p>
+
+<h4>Parameters</h4>
+
+<h5>opacity <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The element opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The current element opacity.</p>
+
+<h3 id="methods-stroke"><a href="#methods-stroke">stroke</a></h3>
+
+<p>Sets the shape <a href="#configuration-stroke">stroke</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>color <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The <a href="stroke-options#fields-color">stroke color</a> to set.</p>
+
+<h5>width <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>optional</em>
+</h5>
+
+<p>The <a href="stroke-options#fields-width">stroke width</a> to set.</p>
+
+<h5>opacity <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>optional</em>
+</h5>
+
+<p>The <a href="stroke-options#fields-opacity">stroke opacity</a> to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/drawing/multi-path" class="type-link"><code>kendo.drawing.MultiPath</code></a> The current instance to allow chaining.</p>
+
+<h3 id="methods-transform"><a href="#methods-transform">transform</a></h3>
+
+<p>Gets or sets the transformation of the element.
+Inherited from <a href="element#methods-transform">Element.transform</a></p>
+
+<h4>Parameters</h4>
+
+<h5>transform <a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
+</h5>
+
+<p>The transformation to apply to the element.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a> The current transformation on the element.</p>
+
+<h3 id="methods-visible"><a href="#methods-visible">visible</a></h3>
+
+<p>Gets or sets the visibility of the element.
+Inherited from <a href="element#methods-visible">Element.visible</a></p>
+
+<h4>Parameters</h4>
+
+<h5>visible <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>A flag indicating if the element should be visible.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> true if the element is visible; false otherwise.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

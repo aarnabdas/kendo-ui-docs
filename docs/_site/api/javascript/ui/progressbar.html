@@ -1,0 +1,532 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, fields, methods and events of Kendo UI ProgressBar</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure and control Kendo UI ProgressBar widget">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/progressbar.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/progressbar.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouiprogressbar"><a href="#kendouiprogressbar">kendo.ui.ProgressBar</a></h1>
+
+<p>Represents the Kendo UI ProgressBar widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the progress animation. Currently only the duration of the animation could be set.</p>
+
+<h4>Example - specify the duration of the progress animation</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    animation: {
+      duration: 500  
+    }
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - disable the progress animation</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    animation: false
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.duration">
+<a href="#configuration-animation.duration">animation.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 400)</em>
+</h3>
+
+<p>The duration of each progress animation in milliseconds.</p>
+
+<h4>Example - specify the duration of the progress animation</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    animation: {
+      duration: 800  
+    }
+  });  
+&lt;/script&gt;   
+</code></pre>
+
+<h3 id="configuration-chunkCount">
+<a href="#configuration-chunkCount">chunkCount </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 5)</em>
+</h3>
+
+<p>Specifies the number of chunks.</p>
+
+<blockquote>
+<p><strong>Important</strong> This property is applicable only when the type of the <strong>ProgressBar</strong> is set to <strong>chunk</strong>.</p>
+</blockquote>
+
+<h4>Example - specify the number of chunks</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    type: "chunk",
+    chunkCount: 10
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-enable">
+<a href="#configuration-enable">enable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will be disabled. It will still allow changing the value. The widget is enabled by default.</p>
+
+<h4>Example - disable the widget on initialization.</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    enable: false
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-max">
+<a href="#configuration-max">max </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
+</h3>
+
+<p>The maximum value of the <strong>ProgressBar</strong>.</p>
+
+<h4>Example - specify the maximum value of the widget</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    max: 10,
+    value: 5
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-min">
+<a href="#configuration-min">min </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>The minimum value of the <strong>ProgressBar</strong>.</p>
+
+<h4>Example - specify the minimum value of the widget</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    min: 10,    
+    max: 50
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-orientation">
+<a href="#configuration-orientation">orientation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "horizontal")</em>
+</h3>
+
+<p>The orientation of the <strong>ProgressBar</strong>. Possible values are <strong>horizontal</strong> and <strong>vertical</strong>.</p>
+
+<h4>Example - specify vertical orientation for the ProgressBar</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    orientation: "vertical"
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-reverse">
+<a href="#configuration-reverse">reverse </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Specifies if the progress direction will be reversed.</p>
+
+<h4>Example - specify reversed progress direction</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    reverse: true
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-showStatus">
+<a href="#configuration-showStatus">showStatus </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Specifies if the progress status will be shown.</p>
+
+<h4>Example - hide the status of the ProgressBar</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    showStatus: false
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-type">
+<a href="#configuration-type">type </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "value")</em>
+</h3>
+
+<p>Specifies the type of the <strong>ProgressBar</strong>. The supported types are <strong>value</strong>, <strong>percent</strong> and <strong>chunk</strong>.</p>
+
+<blockquote>
+<p><strong>Important</strong> The <strong>chunk</strong> progress type is not supported in Internet Explorer 7.</p>
+</blockquote>
+
+<h4>Example - set the type of the ProgressBar</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    type: "percent"
+  });  
+&lt;/script&gt;   
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The underlying value of the <strong>ProgressBar</strong>. It should be a number or <code>false</code>. Setting the value to <code>false</code> will set the state of the ProgressBar to indeterminate.</p>
+
+<h4>Example - set the initial ProgressBar value</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    min: 10,
+    max: 20,
+    value: 15
+  });  
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-progressStatus">
+<a href="#fields-progressStatus">progressStatus </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>The jQuery object which represents the progress status fields. This object could be empty if no progress status fields are currently existing in the DOM.</p>
+
+<h4>Example - set custom progress status</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    change: function(e) {
+      this.progressStatus.text("Custom status");
+    }
+  });
+
+  $("#progressbar").data("kendoProgressBar").value(10);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-progressWrapper">
+<a href="#fields-progressWrapper">progressWrapper </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>The jQuery object which represents the progress wrapper. This object could be empty if the progress has not started yet and the value is equal to the minimum value.</p>
+
+<h4>Example - set custom styles to the progress wrapper</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    change: function(e) {
+      this.progressWrapper.css({
+        "background-color": "#EE9F05",
+        "border-color": "#EE9F05"
+      });
+    }
+  });
+
+  $("#progressbar").data("kendoProgressBar").value(10);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables/Disables the <strong>ProgressBar</strong> widget.</p>
+
+<h4>Example - enable the widget</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    enable: false
+  });
+
+  $(function() {
+    var pb = $("#progressbar").data("kendoProgressBar");
+    pb.enable();
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>The argument, which defines whether to enable/disable the <strong>ProgressBar</strong>. If no argument is passed, the widget will be enabled.</p>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets or sets the value of the <strong>ProgressBar</strong>. It accepts a number, a string or <code>false</code> as a parameter. Setting the value to <code>false</code> will set the state of the <strong>ProgressBar</strong> to indeterminate. If no parameter is passed, it returns the underlying value.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The value to be set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> the value of the widget.</p>
+
+<h4>Example - getting the current ProgressBar value</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    min: 10,
+    max: 20,
+    value: 15
+  });
+
+  $(function() {
+    var pb = $("#progressbar").data("kendoProgressBar");
+    alert("The current value is " + pb.value());
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - setting the value of the ProgressBar</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    min: 10,
+    max: 20,
+    value: 15
+  });
+
+  $(function() {
+    var pb = $("#progressbar").data("kendoProgressBar");
+    pb.value(20);
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fired when the value of the <strong>ProgressBar</strong> has changed. If the progress animation is enabled, the event will be fired after the animation has completed (does not applies to chunk <strong>ProgressBar</strong>).</p>
+
+<h4>Event Data</h4>
+
+<h5>e.value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The current value of the <strong>ProgressBar</strong>.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    change: function(e) {
+      console.log("Value is " + e.value);
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  function onChange(e) {
+    console.log("Value is " + e.value);
+  }
+
+  $("#progressbar").kendoProgressBar();
+
+  var progressbar = $("#progressbar").data("kendoProgressBar");
+  progressbar.bind("change", onChange);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-complete"><a href="#events-complete">complete</a></h3>
+
+<p>Fired when the value of the <strong>ProgressBar</strong> reaches the maximum value.</p>
+
+<blockquote>
+<p><strong>Important</strong> The event is not fired during the initialization of the widget, even when the initial value is equal to the maximum value.</p>
+</blockquote>
+
+<h4>Event Data</h4>
+
+<h5>e.value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The current value of the <strong>ProgressBar</strong>.</p>
+
+<h4>Example - subscribe to the "complete" event during initialization</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  $("#progressbar").kendoProgressBar({
+    complete: function(e) {
+      console.log("Value is " + e.value);
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "complete" event after initialization</h4>
+
+<pre><code>&lt;div id="progressbar"&gt;&lt;/div&gt;
+&lt;script&gt;
+  function onComplete(e) {
+    console.log("Value is " + e.value);
+  }
+
+  $("#progressbar").kendoProgressBar();
+
+  var progressbar = $("#progressbar").data("kendoProgressBar");
+  progressbar.bind("complete", onComplete);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

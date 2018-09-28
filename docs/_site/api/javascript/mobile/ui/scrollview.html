@@ -1,0 +1,911 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile ScrollView</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="You will learn how to configure Mobile ScrollView widget, update the scrollview HTML content and scroll to a given page by using methods.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/scrollview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/scrollview.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuiscrollview"><a href="#kendomobileuiscrollview">kendo.mobile.ui.ScrollView</a></h1>
+
+<p>Represents the Kendo UI Mobile ScrollView widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-autoBind">
+<a href="#configuration-autoBind">autoBind </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will not bind to the DataSource during initialization. In this case data binding will occur when the change event of the data source is fired. By default the widget will bind to the DataSource specified in the configuration.</p>
+
+<p><strong>Applicable only in data bound mode.</strong></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-auto-bind="false"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-content-height="120px"
+    data-enable-pager="false"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 30
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-bounceVelocityThreshold">
+<a href="#configuration-bounceVelocityThreshold">bounceVelocityThreshold </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 1.6)</em>
+</h3>
+
+<p>The velocity threshold after which a swipe will result in a bounce effect.</p>
+
+<h4>Example - increase bounce velocity threshold</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-bounce-velocity-threshold="5"&gt;
+    &lt;div data-role="page"&gt;&lt;div style="height: 200px;"&gt;Foo&lt;/div&gt;&lt;/div&gt;
+    &lt;div data-role="page"&gt;&lt;div style="height: 200px;"&gt;Bar&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-contentHeight">
+<a href="#configuration-contentHeight">contentHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "auto")</em>
+</h3>
+
+<p>The height of the ScrollView content. Supports <code>100%</code> if the ScrollView is embedded in a stretched view and the ScrollView element <strong>is an immediate child</strong> of the view element.</p>
+
+<h4>Stretched ScrollView</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview" data-content-height="100%"&gt;
+    &lt;div data-role="page"&gt;This page will stretch to fit the entire view height&lt;/div&gt;
+    &lt;div data-role="page"&gt;This page will stretch to fit the entire view height&lt;/div&gt;
+    &lt;div data-role="page"&gt;This page will stretch to fit the entire view height&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><code>kendo.data.DataSource  |</code><code> Object</code>
+</h3>
+
+<p>Instance of DataSource that the mobile ScrollView will be bound to. <em>If DataSource is set, the widget will operate in data bound mode.</em></p>
+
+<blockquote>
+<p><strong>Important:</strong> In case the total amount of displayed data is large, it is recommended to turn off the pager by setting <code>enablePager: false</code> in the configuration options or via <code>data-enable-pager="false"</code> data attribute.</p>
+</blockquote>
+
+<h4>Example - ScrollView bound to remote DataSource</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-content-height="120px"
+    data-enable-pager="false"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 30
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-duration">
+<a href="#configuration-duration">duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 400)</em>
+</h3>
+
+<p>The milliseconds that take the ScrollView to snap to the current page after released.</p>
+
+<h4>Example - increase the duration of snap transtion</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-duration="500"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-emptyTemplate">
+<a href="#configuration-emptyTemplate">emptyTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The template which is used to render the pages without content. By default the ScrollView renders a blank page.</p>
+
+<p><strong>Applicable only in data bound mode.</strong></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-empty-template="scrollview-empty"
+    data-content-height="120px"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script id="scrollview-empty" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 100%; height: 100%; background-color: red;"&gt;empty&lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 30
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-enablePager">
+<a href="#configuration-enablePager">enablePager </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>true</code> the ScrollView will display a pager. By default pager is enabled.</p>
+
+<blockquote>
+<p><strong>Important:</strong> In case the total amount of displayed data is large, it is recommended to turn off the pager by setting <code>enablePager: false</code> in the configuration options or via <code>data-enable-pager="false"</code> data attribute.</p>
+</blockquote>
+
+<h4>Example - turn off pager (ScrollView in data bound mode)</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-content-height="120px"
+    data-enable-pager="false"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 30
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-itemsPerPage">
+<a href="#configuration-itemsPerPage">itemsPerPage </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 1)</em>
+</h3>
+
+<p>Determines how many data items will be passed to the page template.</p>
+
+<blockquote>
+<p><strong>Important:</strong> In order ensure smooth scrolling the <strong>pageSize of the DataSource should be 6 times itemsPerPage amount</strong> or higher. For example, if <code>itemsPerPage</code> is set to 4, then the <code>pageSize</code> must be 24 (4*6) or higher.</p>
+</blockquote>
+
+<p><strong>Applicable only in data bound mode.</strong></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-items-per-page="2"
+    data-content-height="120px"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(data[0].ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= data[0].ProductName #&lt;/p&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(data[1].ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= data[1].ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 12 //2*6
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-page">
+<a href="#configuration-page">page </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 0)</em>
+</h3>
+
+<p>The initial page to display.</p>
+
+<blockquote>
+<p>If the widget is bound to a DataSource, the initial item to display must be within the records from the first data page. For example if the DataSource has <code>pageSize: 32</code> the page configuration option of the ScrollView should not exceed 30.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-page="1"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pageSize">
+<a href="#configuration-pageSize">pageSize </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 1)</em>
+</h3>
+
+<p>Multiplier applied to the snap amount of the ScrollView. By default, the widget scrolls to the next screen when swipe. If the <code>pageSize</code> property is set to <code>0.5</code>, the ScrollView will scroll by half of the widget width.</p>
+
+<p><strong>Not applicable in data bound mode.</strong></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-page-size="0.5"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-template">
+<a href="#configuration-template">template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "#:data#")</em>
+</h3>
+
+<p>The template which is used to render the content of pages. By default the ScrollView renders a div element for every page.</p>
+
+<p><strong>Applicable only in data bound mode.</strong></p>
+
+<h4>Example: single item template</h4>
+
+<pre><code>&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example: multiple items template (data is accessed via <code>data[index].fieldName</code>)</h4>
+
+<pre><code>&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+    &lt;div&gt;
+        &lt;p&gt;#= data[0].ProductName #&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;p&gt;#= data[1].ProductName #&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/script&gt;
+
+&lt;div data-role="view" data-stretch="true" data-init="onInit"&gt;
+    &lt;div id="scrollview"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onInit() {
+    $("#scrollview").kendoMobileScrollView({
+        dataSource: {
+            type: "odata",
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 30
+        },
+        itemsPerPage: 2,
+        template: $("#scrollview-template").html(),
+        contentHeight: 120,
+        enablePager: false
+    });
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-velocityThreshold">
+<a href="#configuration-velocityThreshold">velocityThreshold </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 0.8)</em>
+</h3>
+
+<p>The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current page).</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-velocity-threshold="2"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-content"><a href="#methods-content">content</a></h3>
+
+<p>Update the ScrollView HTML content.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method is <strong>not</strong> supported in data bound mode.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>content <code>String  |</code><code> jQuery</code>
+</h5>
+
+<p>The new ScrollView content.</p>
+
+<h4>Example - change widget's content after initialization</h4>
+
+<pre><code>&lt;div data-role="view" data-init="changePages"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function changePages() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.content('&lt;div data-role="page"&gt;Item1&lt;/div&gt;&lt;div data-role="page"&gt;Item2&lt;/div&gt;');
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>ScrollView</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the ScrollView element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function destroyScrollView() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.destroy();
+  $("#scrollView").remove();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-next"><a href="#methods-next">next</a></h3>
+
+<p>Switches to the next page with animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;a data-role="button" data-click="next"&gt;Next&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function next() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.next();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-prev"><a href="#methods-prev">prev</a></h3>
+
+<p>Switches to the previous page with animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;a data-role="button" data-click="prev"&gt;Next&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function prev() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.prev();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Redraw the mobile ScrollView pager. Called automatically on device orientation change event.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function refreshScrollView() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.refresh();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-scrollTo"><a href="#methods-scrollTo">scrollTo</a></h3>
+
+<p>Scroll to the given page. Pages are zero-based indexed.</p>
+
+<h4>Parameters</h4>
+
+<h5>page <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The page to scroll to.</p>
+
+<h5>instant <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h5>
+
+<p>If set to true, the ScrollView will jump instantly to the given page without any animation effects.</p>
+
+<h4>Example - scroll instantly (without animation)</h4>
+
+<pre><code>&lt;div data-role="view" data-init="onInit"&gt;
+  &lt;div id="scrollView" data-role="scrollview"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onInit() {
+  var scrollview = $("#scrollView").data("kendoMobileScrollView");
+  scrollview.scrollTo(2); //scrolls to the 3rd page instantly
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the DataSource of an existing ScrollView and rebinds it.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataSource <a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h5>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="home" data-role="view" data-model="viewModel"&gt;
+    &lt;div id="scrollview" data-role="scrollview" data-source="ds" data-template="tmp"&gt;&lt;/div&gt;
+    &lt;a data-role="button" data-click="onClick"&gt;Button&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script id="tmp" type="text/x-kendo-template"&gt;
+    &lt;div&gt;#: foo #&lt;/div&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+    var ds = new kendo.data.DataSource({
+        data: [{foo: 1}, {foo: 2}]
+    });
+
+    function onClick() {
+        //change dataSource
+        $("#scrollview").data("kendoMobileScrollView")
+            .setDataSource([{foo: 3}, {foo: 4}, {foo: 5}]);
+    }
+
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Works in data-bound mode only. If a parameter is passed, the widget scrolls to the given dataItem. If not, the method return currently displayed dataItem.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataItem <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The dataItem to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> The currently displayed dataItem.</p>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-changing"><a href="#events-changing">changing</a></h3>
+
+<p>Fires before the widget page is changed. The change can be prevented by calling the <code>preventDefault</code> method of the event parameter, in which case the widget will snap back to the current page.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.currentPage <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The current page (zero based index)</p>
+
+<h5>e.nextPage <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The page about to be displayed (zero based index)</p>
+
+<h4>Example - prevent scrolling after 3th page</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-changing="changing"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function changing(e) {
+  if(e.nextPage &gt; 2) {
+    e.preventDefault(); //prevent scrolling
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the widget page is changed.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.page <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The current page (zero based index)</p>
+
+<h5>e.element <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The page element. <strong>Available only in data bound mode.</strong> Parameter will be undefined in standard mode.</p>
+
+<h5>e.data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The data collection. <strong>Available only in data bound mode.</strong> Parameter will be undefined in standard mode.</p>
+
+<h4>Example - hook up to the change event</h4>
+
+<pre><code>&lt;div data-role="view" data-stretch="true"&gt;
+  &lt;div data-role="scrollview"
+    data-source="dataSource"
+    data-template="scrollview-template"
+    data-content-height="120px"
+    data-enable-pager="false"
+    data-change="change"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script id="scrollview-template" type="text/x-kendo-template"&gt;
+  &lt;div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"&gt;&lt;/div&gt;
+  &lt;p&gt;#= ProductName #&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+var dataSource = new kendo.data.DataSource({
+  type: "odata",
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+    }
+  },
+  serverPaging: true,
+  pageSize: 30
+});
+
+function setBackground(id) {
+  return "url(http://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
+}
+
+function change(e) {
+  console.log("page ", e.page, "data: ", e.data);
+  //handle event
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-refresh"><a href="#events-refresh">refresh</a></h3>
+
+<p>Fires when widget refreshes</p>
+
+<h4>Event Data</h4>
+
+<h5>e.pageCount <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The number of pages</p>
+
+<h5>e.page <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The current page number (zero based index)</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;div id="scrollView" data-role="scrollview" data-refresh="refresh"&gt;
+    &lt;div data-role="page"&gt;Foo&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bar&lt;/div&gt;
+    &lt;div data-role="page"&gt;Baz&lt;/div&gt;
+    &lt;div data-role="page"&gt;Bat&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function refresh(e) {
+  console.log("Total: ", e.pageCount, " Current: ", e.page);
+  //handle event
+}
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

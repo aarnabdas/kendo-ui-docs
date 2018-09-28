@@ -1,0 +1,1510 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI PanelBar</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Configure the PanelBar UI widget, use methods and explore the events which are triggered upon certain behaviors.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/panelbar.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/panelbar.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouipanelbar"><a href="#kendouipanelbar">kendo.ui.PanelBar</a></h1>
+
+<p>Represents the Kendo UI PanelBar widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>A collection of visual animations used when <strong>PanelBar</strong> items are expand or collapsed through
+user interactions. Setting this option to <strong>false</strong> will disable all animations.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+            // fade-out closing items over 1000 milliseconds
+            collapse: {
+                duration: 1000,
+                effects: "fadeOut"
+            },
+           // fade-in and expand opening items over 500 milliseconds
+           expand: {
+               duration: 500,
+               effects: "expandVertical fadeIn"
+           }
+       }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.collapse">
+<a href="#configuration-animation.collapse">animation.collapse </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The visual animation(s) that will be used when <strong>PanelBar</strong> items are closed.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+            collapse: {
+                duration: 200,
+                effects: "fadeOut"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.collapse.duration">
+<a href="#configuration-animation.collapse.duration">animation.collapse.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The number of milliseconds used for the visual animation when a <strong>PanelBar</strong> item is closed.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+           collapse: {
+                duration: 1000
+           }
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.collapse.effects">
+<a href="#configuration-animation.collapse.effects">animation.collapse.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>A whitespace-delimited string of animation effects that are utilized when a <strong>PanelBar</strong> item
+is closed. Options include <strong>"fadeOut"</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+            collapse: {
+                duration: 1000,
+                effects: "fadeOut"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.expand">
+<a href="#configuration-animation.expand">animation.expand </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The visual animation(s) that will be used when opening items.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+            expand: {
+                duration: 200,
+                effects: "expandVertical"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.expand.duration">
+<a href="#configuration-animation.expand.duration">animation.expand.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The number of milliseconds used for the visual animation when an item is opened.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+     animation: {
+          expand: {
+              duration: 1000
+          }
+       }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.expand.effects">
+<a href="#configuration-animation.expand.effects">animation.expand.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "expandVertical")</em>
+</h3>
+
+<p>A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
+<strong>"expandVertical"</strong> and <strong>"fadeIn"</strong>.</p>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        animation: {
+            expand: {
+                effects: "expandVertical"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-contentUrls">
+<a href="#configuration-contentUrls">contentUrls </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>Sets an array with the URLs from which the <strong>PanelBar</strong> items content to be loaded from. If only specific items should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.   </p>
+
+<h4>Example - specify that the second item should be loaded remotely</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+      &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        Ajax Item
+        &lt;div&gt;&lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        contentUrls: [
+          null,
+          "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;&lt;/ul&gt;
+
+&lt;script&gt;
+  $("#panelbar").kendoPanelBar({
+      dataSource: [
+          {
+              text: "Item 1 (link)",
+              cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
+              url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+          },
+          {
+              text: "&lt;b&gt;Item 2&lt;/b&gt;",
+              encoded: false,                                 // Allows use of HTML for item text
+              content: "text"                                 // content within an item
+          },
+          {
+              text: "Item 3",
+              // content URL to load within an item
+              contentUrl: "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+          },
+          {
+              text: "Item 4",
+              // item image URL, optional
+              imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+              expanded: true,                                 // item is rendered expanded
+              items: [{                                       // Sub item collection.
+                  text: "Sub Item 1"
+              },
+              {
+                  text: "Sub Item 2"
+              }]
+          },
+          {
+              text: "Item 5"
+          }
+      ]
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-expandMode">
+<a href="#configuration-expandMode">expandMode </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "multiple")</em>
+</h3>
+
+<p>Specifies how the <strong>PanelBar</strong> items are displayed when opened and closed. The following values
+are available:</p>
+
+<h4><em>"single"</em></h4>
+
+<p>Display one item at a time when an item is opened; opening an item will close the previously opened item.</p>
+
+<h4><em>"multiple"</em></h4>
+
+<p>Display multiple values at one time; opening an item has no visual impact on any other items in the <strong>PanelBar</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        expandMode: "single"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-append"><a href="#methods-append">append</a></h3>
+
+<p>Appends an item(s) to the PanelBar.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    panelBar.append(
+        [
+            {
+                text: "Item 1",
+                cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
+                url: "http://www.telerik.com/"                  // link URL if navigation is needed, optional.
+            },
+            {
+                text: "&lt;b&gt;Item 2&lt;/b&gt;",
+                encoded: false,                                 // Allows use of HTML for item text
+                content: "text"                                 // content within an item
+            },
+            {
+                text: "Item 3",
+                contentUrl: "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+            },
+            {
+                text: "Item 4",
+                imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+                expanded: true,                                 // item is rendered expanded
+                items: [{                                       // Sub item collection.
+                    text: "Sub Item 1"
+                },
+                {
+                    text: "Sub Item 2"
+                }]
+            },
+            {
+                text: "Item 5",
+                // item image sprite CSS class, optional
+                spriteCssClass: "imageClass3"
+            }
+        ]
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>Target item, specified as the JSON representation of an object. You can pass item <code>text</code>, <code>content</code> or
+<code>contentUrl</code> here. Can handle an HTML string or array of such strings or JSON.</p>
+
+<h5>referenceItem <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A reference item to append the new item in the PanelBar, can be omitted.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.PanelBar</code> Returns the PanelBar object to support chaining.</p>
+
+<h3 id="methods-clearSelection"><a href="#methods-clearSelection">clearSelection</a></h3>
+
+<p>Clears the currently selected PanelBar items.</p>
+
+<h4>Example - clear selection</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="item1"&gt;Item 1&lt;/li&gt;
+    &lt;li id="item2"&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // create a PanelBar instance and get it.
+    var panelBar = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
+
+    // select the element with ID "item1"
+    panelBar.select($("#item1"));
+
+    // select the element with ID "item2"
+    panelBar.select($("#item2"));
+
+    // clear all selection
+    setTimeout(function() {
+      panelBar.clearSelection();
+    }, 2000);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-collapse"><a href="#methods-collapse">collapse</a></h3>
+
+<p>Collapses the specified item(s) of a <strong>PanelBar</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="item1"&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li id="item2"&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // access an existing PanelBar instance
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // collapse the element with ID, "item1"
+    panelBar.collapse($("#item1"));
+    // collapse the element with ID, "item2" without visual animations
+    panelBar.collapse($("#item2"), false);
+    // collapse all list items that start with ID, "item"
+    panelBar.collapse($('[id^="item"]'));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The <strong>PanelBar</strong> item(s) to be collapsed, expressed as a string containing a selector
+expression or represented by a <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</p>
+
+<h5>useAnimation <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>_optional, default: _</p>
+
+<p>Temporarily enables (<strong>true</strong>) or disables (<strong>false</strong>) any visual animation(s)
+when collapsing items.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.PanelBar</code> Returns the PanelBar object to support chaining.</p>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>PanelBar</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the PanelBar element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+
+    // detach events
+    panelBar.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables (<strong>true</strong>) or disables (<strong>false</strong>) the specified item(s) of the
+<strong>PanelBar</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="item1"&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li id="item2"&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // access an existing PanelBar instance
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // enable the item of the PanelBar with ID, "item1"
+    panelBar.enable($("#item1"), true);
+    // disable the currently selected item of the PanelBar
+    var item = panelBar.select();
+    panelBar.enable($("#item2"), false);
+    // disable all list items that start with ID, "item"
+    panelBar.enable($('[id^="item"]'), false);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The <strong>PanelBar</strong> item(s) to be enabled (<strong>true</strong>) or disabled (<strong>false</strong>), expressed as a
+string containing a selector expression or represented by a
+<a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</p>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>The desired state - enabled (<strong>true</strong>) or disabled (<strong>false</strong>) - of the target
+element(s).</p>
+
+<h3 id="methods-expand"><a href="#methods-expand">expand</a></h3>
+
+<p>Expands the specified item(s) of a <strong>PanelBar</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="item1"&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li id="item2"&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // access an existing PanelBar instance
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // expand the element with ID, "item1"
+    panelBar.expand($("#item1"));
+    // expand the element with ID, "item2" without visual animations
+    panelBar.expand($("#item2"), false);
+    // expand all list items that start with ID, "item"
+    panelBar.expand($('[id^="item"]'));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The <strong>PanelBar</strong> item(s) to be expanded, expressed as a selector.</p>
+
+<h5>useAnimation <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>_optional, default: _</p>
+
+<p>Temporarily enables (<strong>true</strong>) or disables (<strong>false</strong>) any visual animation(s) when expanding items.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.PanelBar</code> Returns the PanelBar object to support chaining.</p>
+
+<h3 id="methods-insertAfter"><a href="#methods-insertAfter">insertAfter</a></h3>
+
+<p>Inserts a PanelBar item after the specified referenceItem</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    panelBar.insertAfter(
+        [{
+            text: "Item 1",
+            url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+        },
+        {
+            text: "&lt;b&gt;Item 2&lt;/b&gt;",
+            encoded: false,                              // Allows use of HTML for item text
+            content: "text"                              // Content for the content element
+        },
+        {
+            text: "Item 3",
+            contentUrl: "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+        },
+        {
+            text: "Item 4",
+            imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+            expanded: true,                              // item is rendered expanded
+            items: [{                                    // Sub item collection.
+                 text: "Sub Item 1"
+            },
+            {
+                 text: "Sub Item 2"
+            }]
+        },
+        {
+            text: "Item 5"
+        }],
+        "li:first-child"
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>Target item, specified as a JSON object. You can pass item <code>text</code>, <code>content</code> or <code>contentUrl</code> here. Can handle an HTML string or array of such strings or JSON.</p>
+
+<h5>referenceItem <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A reference item to insert the new item after</p>
+
+<h3 id="methods-insertBefore"><a href="#methods-insertBefore">insertBefore</a></h3>
+
+<p>Inserts a PanelBar item before the specified referenceItem</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    panelBar.insertBefore(
+        [{
+            text: "Item 1",
+            url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+        },
+        {
+            text: "&lt;b&gt;Item 2&lt;/b&gt;",
+            encoded: false,                              // Allows use of HTML for item text
+            content: "text"                              // Content for the content element
+        },
+        {
+            text: "Item 3",
+            contentUrl: "http://demos.telerik.com/kendo-ui/content/web/panelbar/ajax/ajaxContent1.html"
+        },
+        {
+            text: "Item 4",
+            imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+            expanded: true,                              // item is rendered expanded
+            items: [{                                    // Sub item collection.
+                 text: "Sub Item 1"
+            },
+            {
+                 text: "Sub Item 2"
+            }]
+        },
+        {
+            text: "Item 5"
+        }],
+        "li:last-child"
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>Target item, specified as a JSON object. You can pass item <code>text</code>, <code>content</code> or <code>contentUrl</code> here. Can handle an
+TML string or array of such strings or JSON.</p>
+
+<h5>referenceItem <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A reference item to insert the new item before.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.PanelBar</code> Returns the PanelBar object to support chaining.</p>
+
+<h3 id="methods-reload"><a href="#methods-reload">reload</a></h3>
+
+<p>Reloads the content of a <strong>PanelBar</strong> from an AJAX request.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // get a reference to the panel bar
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // reload the panel bar
+    panelBar.reload("&gt; .k-item");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>Target element</p>
+
+<h3 id="methods-remove"><a href="#methods-remove">remove</a></h3>
+
+<p>Removes the specified PanelBar item(s).</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="Item1"&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // get a reference to the panel bar
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // remove Item 1
+    panelBar.remove("#Item1");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The <strong>PanelBar</strong> item(s) to be removed, expressed as a selector string, DOM element or a jQuery object.</p>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Gets or sets the selected item.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li id="item1"&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // access an existing PanelBar instance
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // select the item with ID, "item1"
+    panelBar.select("#item1");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> <em>(optional)</em>
+</h5>
+
+<p>The <strong>PanelBar</strong> item to be selected, expressed as a string containing a selector expression or
+represented by a <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> the selected item if called without arguments. <code>kendo.ui.PanelBar</code> if called with arguments.</p>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-activate"><a href="#events-activate">activate</a></h3>
+
+<p>Triggered when an item of a PanelBar is activated.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The activated item of the PanelBar.</p>
+
+<h4>Attach activate event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // event handler for activate
+    var onActivate = function(e) {
+        // access the activated item via e.item (HTMLElement)
+
+        // detach activate event handler via unbind()
+        panelBar.data("kendoPanelBar").unbind("activate", onActivate);
+    };
+
+    // attach activate event handler during initialization
+    var panelBar = $("#panelbar").kendoPanelBar({
+        activate: onActivate
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach activate event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+
+    // event handler for activate
+    var onActivate = function(e) {
+        // access the activated item via e.item (HTMLElement)
+
+        // detach activate event handler via unbind()
+        $("#panelbar").data("kendoPanelBar").unbind("activate", onActivate);
+    };
+
+    // attach activate event handler via bind()
+    $("#panelbar").data("kendoPanelBar").bind("activate", onActivate);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-collapse"><a href="#events-collapse">collapse</a></h3>
+
+<p>Triggered when an item of a PanelBar is collapsed.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The collapsing item of the PanelBar.</p>
+
+<h4>Attach collapse event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // event handler for collapse
+    var onCollapse = function(e) {
+        // access the collapsed item via e.item (HTMLElement)
+
+        // detach collapse event handler via unbind()
+        panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
+    };
+
+    // attach collapse event handler during initialization
+    var panelBar = $("#panelbar").kendoPanelBar({
+        collapse: onCollapse
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach collapse event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+
+    // event handler for collapse
+    var onCollapse = function(e) {
+        // access the collapsed item via e.item (HTMLElement)
+
+        // detach collapse event handler via unbind()
+        $("#panelbar").data("kendoPanelBar").unbind("collapse", onCollapse);
+    };
+
+    // attach collapse event handler via bind()
+    $("#panelbar").data("kendoPanelBar").bind("collapse", onCollapse);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-contentLoad"><a href="#events-contentLoad">contentLoad</a></h3>
+
+<p>Fires when content is fetched from an AJAX request.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The selected item</p>
+
+<h5>e.contentElement <code>Element</code>
+</h5>
+
+<p>The loaded content element</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        contentLoad: function(e) {
+            // handle event
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>To set after initialization</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // get a reference to the panel bar
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // bind the contentLoad event
+    panelBar.bind("contentLoad", function(e) {
+        // handle event
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-error"><a href="#events-error">error</a></h3>
+
+<p>Fires when AJAX request results in an error.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.xhr <code>jqXHR</code>
+</h5>
+
+<p>The jqXHR object used to load the content</p>
+
+<h5>e.status <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The returned status.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar({
+        error: function(e) {
+            // handle event
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>To set after initialization</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+    // get a reference to the panel bar
+    var panelBar = $("#panelbar").data("kendoPanelBar");
+    // bind the error ajax event
+    panelBar.bind("error", function(e) {
+        // handle event
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-expand"><a href="#events-expand">expand</a></h3>
+
+<p>Triggered when an item of a PanelBar is expanded.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The expanding item of the PanelBar.</p>
+
+<h4>Attach expand event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // event handler for expand
+    var onExpand = function(e) {
+        // access the expanded item via e.item (HTMLElement)
+
+        // detach expand event handler via unbind()
+        panelBar.data("kendoPanelBar").unbind("expand", onExpand);
+    };
+
+    // attach expand event handler during initialization
+    var panelBar = $("#panelbar").kendoPanelBar({
+        expand: onExpand
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach expand event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+
+    // event handler for expand
+    var onExpand = function(e) {
+        // access the expanded item via e.item (HTMLElement)
+
+        // detach expand event handler via unbind()
+        $("#panelbar").data("kendoPanelBar").unbind("expand", onExpand);
+    };
+
+    // attach expand event handler via bind()
+    $("#panelbar").data("kendoPanelBar").bind("expand", onExpand);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-select"><a href="#events-select">select</a></h3>
+
+<p>Triggered when an item of a PanelBar is selected.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The selected item of the PanelBar.</p>
+
+<h4>Attach select event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    // event handler for select
+    var onSelect = function(e) {
+        // access the selected item via e.item (HTMLElement)
+
+        // detach select event handler via unbind()
+        panelBar.data("kendoPanelBar").unbind("select", onSelect);
+    };
+
+    // attach select event handler during initialization
+    var panelBar = $("#panelbar").kendoPanelBar({
+        select: onSelect
+    }).data("kendoPanelBar");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach select event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;ul id="panelbar"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+            &lt;li&gt;Sub Item 3&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+    $("#panelbar").kendoPanelBar();
+
+    // event handler for select
+    var onSelect = function(e) {
+        // access the selected item via e.item (HTMLElement)
+
+        // detach select event handler via unbind()
+        $("#panelbar").data("kendoPanelBar").unbind("select", onSelect);
+    };
+
+    // attach select event handler via bind()
+    $("#panelbar").data("kendoPanelBar").bind("select", onSelect);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,1468 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI TabStrip</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Easily disable all animations, set the parameters, used for the visual animation and the effects used in TabStrip UI widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/tabstrip.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/tabstrip.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouitabstrip"><a href="#kendouitabstrip">kendo.ui.TabStrip</a></h1>
+
+<p>Represents the Kendo UI TabStrip. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>A collection of visual animations used when <strong>TabStrip</strong> tab are selected through
+user interactions. Setting this option to <strong>false</strong> will disable all animations.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            // fade-out current tab over 1000 milliseconds
+            close: {
+                duration: 1000,
+                effects: "fadeOut"
+            },
+           // fade-in new tab over 500 milliseconds
+           open: {
+               duration: 500,
+               effects: "fadeIn"
+           }
+       }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close">
+<a href="#configuration-animation.close">animation.close </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The visual animation(s) that will be used when the current tab is closed.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            close: {
+                duration: 200,
+                effects: "fadeOut"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.duration">
+<a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The number of milliseconds used for the visual animation when the current tab is closed.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            close: {
+                duration: 1000
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.effects">
+<a href="#configuration-animation.close.effects">animation.close.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>A whitespace-delimited string of animation effects that are utilized when the current tab
+is closed. By default not specified - uses the opening animation with reverse.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            close: {
+                duration: 1000,
+                effects: "fadeOut"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open">
+<a href="#configuration-animation.open">animation.open </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The visual animation(s) that will be used when the new tab is shown.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                duration: 200,
+                effects: "expand:vertical"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.duration">
+<a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The number of milliseconds used for the visual animation when a new tab is shown.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+       animation: {
+          open: {
+              duration: 1000
+          }
+       }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.effects">
+<a href="#configuration-animation.open.effects">animation.open.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "expand:vertical fadeIn")</em>
+</h3>
+
+<p>A whitespace-separated string of animation effects that are used when a new tab is shown. Options include
+<strong>"expand:vertical"</strong> and <strong>"fadeIn"</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-collapsible">
+<a href="#configuration-collapsible">collapsible </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        collapsible: true
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-contentUrls">
+<a href="#configuration-contentUrls">contentUrls </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>Sets an array with the URLs from which the tabs content to be loaded from. If only specific tabs should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.</p>
+
+<h4>Example - specify that the second tab should be loaded remotely</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Ajax Tab&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        contentUrls: [
+            null,
+            "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataContentField">
+<a href="#configuration-dataContentField">dataContentField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the text content of the tab content element.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataContentUrlField">
+<a href="#configuration-dataContentUrlField">dataContentUrlField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the URL for the Ajax loaded tab content.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataContentUrlField: "ContentUrl",
+        dataSource: [
+          { Name: "Tab1", ContentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+          { Name: "Tab2", ContentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataImageUrlField">
+<a href="#configuration-dataImageUrlField">dataImageUrlField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the image URL of the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataImageUrlField: "ImageUrl",
+        dataSource: [
+          { Name: "Tab1", ImageUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html" },
+          { Name: "Tab2", ImageUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataSpriteCssClass">
+<a href="#configuration-dataSpriteCssClass">dataSpriteCssClass </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the CSS class of the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataSpriteCssClass: "CssClass",
+        dataSource: [
+          { Name: "Tab1", dataSpriteCssClass: "class1" },
+          { Name: "Tab2", dataSpriteCssClass: "class2" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataTextField">
+<a href="#configuration-dataTextField">dataTextField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the text name of the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataUrlField">
+<a href="#configuration-dataUrlField">dataUrlField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Sets the field of the data item that provides the link URL for the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataUrlField: "Url",
+        dataSource: [
+          { Name: "Telerik", Url: "http://www.telerik.com" },
+          { Name: "Google", Url: "http://www.google.com" }
+        ]
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-navigatable">
+<a href="#configuration-navigatable">navigatable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Specifies whether the TabStrip should be keyboard navigatable.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        navigatable: false
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-scrollable">
+<a href="#configuration-scrollable">scrollable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>If enabled, the TabStrip will display buttons that will scroll the tabs horizontally, when they cannot fit the TabStrip width. By default scrolling is enabled.</p>
+
+<p>The feature requires <code>"top"</code> or <code>"bottom"</code> <a href="#configuration-tabPosition"><code>tabPosition</code></a>.</p>
+
+<p>Unless disabled, <code>scrollable</code> must be set to a JavaScript object, which represents the scrolling configuration.</p>
+
+<h4>Example - disable scrolling</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        scrollable: false
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-scrollable.distance">
+<a href="#configuration-scrollable.distance">scrollable.distance </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
+</h3>
+
+<p>Sets the scroll amount (in pixels) applied when the user clicks on a scroll button.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        scrollable: {
+            distance: 300
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-tabPosition">
+<a href="#configuration-tabPosition">tabPosition </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "top")</em>
+</h3>
+
+<p>Specifies the position of the widget tabs. Valid values are <code>"top"</code> (default), <code>"left"</code>, <code>"right"</code> and <code>"bottom"</code>.
+A <a href="#configuration-animation"><strong>fade animation</strong></a> is highly recommended with any of the non-default tab position settings.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    $("#tabstrip").kendoTabStrip({
+        tabPosition: "left",
+        animation: {
+           open: {
+               effects: "fadeIn"
+           }
+       }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-tabGroup">
+<a href="#fields-tabGroup">tabGroup </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>The jQuery object which contains the TabStrip items.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-activateTab"><a href="#methods-activateTab">activateTab</a></h3>
+
+<p>Activates a tab specified as a selector. Note: Invoking this method will not trigger any events.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li id="tab1"&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabToActivate = $("#tab1");
+    $("#tabstrip").kendoTabStrip().data("kendoTabStrip").activateTab(tabToActivate);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target tab, specified as a selector, to be activated.</p>
+
+<h3 id="methods-append"><a href="#methods-append">append</a></h3>
+
+<p>Appends a tab to the collection of tabs in a <strong>TabStrip</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.append(
+        [{
+            text: "Item 1",
+            url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
+        },
+        {
+            text: "&lt;b&gt;Item 2&lt;/b&gt;",
+            encoded: false,                             // Allows use of HTML for item text
+            content: "text"                             // Content for the content element
+        },
+        {
+            text: "Item 3",
+            contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+        },
+        {
+            text: "Item 4",
+            imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+        },
+        {
+            text: "Item 5",
+            spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+        }]
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>tab <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>Target tab, specified as a JSON object. You can pass tab <code>text</code>, <code>content</code> or <code>contentUrl</code> here. Can handle an HTML string or array of such strings or JSON.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-contentElement"><a href="#methods-contentElement">contentElement</a></h3>
+
+<p>Obtains the DOM element that encloses tab content by its tab index in the <strong>TabStrip</strong>.</p>
+
+<blockquote>
+<p><strong>Important:</strong> To remove the tab contents safely, use <strong>contentHolder</strong> to get the element to empty.</p>
+</blockquote>
+
+<h4>Obtain the content element representing the first tab in a TabStrip</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    console.log(tabStrip.contentElement(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>itemIndex <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The index of the tab in the TabStrip.</p>
+
+<h4>Returns</h4>
+
+<p><code>Element</code> The DOM element enclosing tab content by its tab index in the <strong>TabStrip</strong>.</p>
+
+<h3 id="methods-contentHolder"><a href="#methods-contentHolder">contentHolder</a></h3>
+
+<p>Obtains the DOM element that holds tab content by its tab index in the <strong>TabStrip</strong>.
+The difference between <code>contentElement</code> and <code>contentHolder</code> is that <code>contentHolder</code> returns the DOM element that really holds the content, which on mobile is the scroll container.</p>
+
+<blockquote>
+<p><strong>Important:</strong> To remove the tab contents safely, use this method to get the element to empty.</p>
+</blockquote>
+
+<h4>Obtain the content holder representing the first tab in a TabStrip</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    console.log(tabStrip.contentHolder(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>itemIndex <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The index of the tab in the TabStrip.</p>
+
+<h4>Returns</h4>
+
+<p><code>Element</code> The DOM element holding tab content by its tab index in the <strong>TabStrip</strong>.</p>
+
+<h3 id="methods-deactivateTab"><a href="#methods-deactivateTab">deactivateTab</a></h3>
+
+<p>Deactivates a tab specified as a selector. Note: Invoking this method will not trigger any events.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li id="tab1"&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabToDeactivate = $("#tab1");
+    $("#tabstrip").kendoTabStrip().data("kendoTabStrip").deactivateTab(tabToDeactivate);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target tab, specified as a selector, to be deactivated.</p>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>TabStrip</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the TabStrip element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+
+    // destroy the widget
+    tabStrip.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-disable"><a href="#methods-disable">disable</a></h3>
+
+<p>Disables a tab(s) of a <strong>TabStrip</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.disable(tabStrip.tabGroup.children().eq(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target tab(s), specified as a selector, to be disabled.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Disables (<strong>false</strong>) or enables (<strong>true</strong>) a tab(s) of a <strong>TabStrip</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.enable(tabStrip.tabGroup.children().eq(0), false);
+    tabStrip.enable(tabStrip.tabGroup.children().eq(0), true);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target tab(s), specified as a selector, to be enabled (<strong>true</strong>) or disabled
+(<strong>false</strong>).</p>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(optional)</em>
+</h5>
+
+<p>Desired state of the tab(s) specified by the selector; enabled (<strong>true</strong>) or disabled
+(<strong>false</strong>).</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-insertAfter"><a href="#methods-insertAfter">insertAfter</a></h3>
+
+<p>Inserts a newly-created tab after a specified tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.insertAfter(
+        [{
+            text: "Item 1",
+            url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
+        },
+        {
+            text: "&lt;b&gt;Item 2&lt;/b&gt;",
+            encoded: false,                             // Allows use of HTML for item text
+            content: "text"                             // Content for the content element
+        },
+        {
+            text: "Item 3",
+            contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+        },
+        {
+            text: "Item 4",
+            imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+        },
+        {
+            text: "Item 5",
+            spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+        }],
+        tabStrip.tabGroup.children().eq(0)
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>Target tab, specified as a JSON object. You can pass tab <code>text</code>, <code>content</code> or <code>contentUrl</code> here. Can handle an
+HTML string or array of such strings or JSON.</p>
+
+<h5>referenceTab <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A reference tab to insert the new item after.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-insertBefore"><a href="#methods-insertBefore">insertBefore</a></h3>
+
+<p>Inserts a newly-created tab before a specified tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.insertBefore(
+        [{
+            text: "Item 1",
+            url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
+        },
+        {
+            text: "&lt;b&gt;Item 2&lt;/b&gt;",
+            encoded: false,                             // Allows use of HTML for item text
+            content: "text"                             // Content for the content element
+        },
+        {
+            text: "Item 3",
+            contentUrl: "http://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+        },
+        {
+            text: "Item 4",
+            imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png",
+        },
+        {
+            text: "Item 5",
+            spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+        }],
+        tabStrip.tabGroup.children().eq(0)
+    );
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>Target tab, specified as a JSON object. You can pass tab <code>text</code>, <code>content</code> or <code>contentUrl</code> here. Can handle an
+HTML string or array of such strings or JSON.</p>
+
+<h5>referenceTab <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A reference tab to insert the new item before</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-items"><a href="#methods-items">items</a></h3>
+
+<p>Gets the list of DOM elements that represent the tabs.</p>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    console.log(tabStrip.items());
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><code>HTMLCollection</code> the tabs as an HTML collection of elements.</p>
+
+<h3 id="methods-reload"><a href="#methods-reload">reload</a></h3>
+
+<p>Reloads TabStrip tab(s) via AJAX.</p>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip({
+        dataSource: [{
+            text: "Tab 1",
+            contentUrl: "partialContent1.html"
+        },
+        {
+            text: "Tab 2",
+            contentUrl: "partialContent2.html"
+        }]
+    }).data("kendoTabStrip");
+
+    tabStrip.reload("li:first");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target tab(s), specified as a selector or jQuery object, to be reloaded via AJAX.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-remove"><a href="#methods-remove">remove</a></h3>
+
+<p>Removes a specified tab from a TabStrip.</p>
+
+<h4>Remove a tab with ID, tab1 from a TabStrip</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.remove("li:last");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The target tab(s), specified as a selector or jQuery object, to be removed.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.TabStrip</code> Returns the TabStrip object to support chaining.</p>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Get/set the selected tab. If called without arguments, it returns the
+currently selected tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+
+    tabStrip.select("li:first");        // Select by jQuery selector
+    tabStrip.select(1);                 // Select by index
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>element <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The target tab(s), specified as a selector, jQuery object or index in the tab group.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> the selected tab if called without arguments. <code>kendo.ui.TabStrip</code> if called with arguments.</p>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the data source of the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  $("#tabstrip").kendoTabStrip({
+    dataContentField: "content",
+    dataTextField : "label"
+  })
+  var dataSource = kendo.data.DataSource.create([
+    { label: "Label", content: "Content" }
+  ])
+
+  $("#tabstrip").data("kendoTabStrip").setDataSource(dataSource);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-activate"><a href="#events-activate">activate</a></h3>
+
+<p>Triggered after a tab is being made visible and its animation complete. Before <em>Q2 2014</em> this event was invoked <em>after tab show</em>, but <em>before</em> the end of the animation. This event is triggered only for tabs with associated content.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The activated tab.</p>
+
+<h5>e.contentElement <code>Element</code>
+</h5>
+
+<p>The content element of the activated tab.</p>
+
+<h4>Attach activate event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for activate
+    var onActivate = function(e) {
+        // access the activated item via e.item (Element)
+
+        // detach activate event handler via unbind()
+        tabStrip.unbind("activate", onActivate);
+    };
+
+    // attach activate event handler during initialization
+    var tabStrip = $("#tabStrip").kendoTabStrip({
+        activate: onActivate
+    }).data("kendoTabStrip");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach activate event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for activate
+    var onActivate = function(e) {
+        // access the activated item via e.item (Element)
+
+        // detach activate event handler via unbind()
+        tabStrip.unbind("activate", onActivate);
+    };
+
+    // attach activate event handler via bind()
+    var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.bind("activate", onActivate);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-contentLoad"><a href="#events-contentLoad">contentLoad</a></h3>
+
+<p>Triggered when content is fetched from an AJAX request.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The selected item</p>
+
+<h5>e.contentElement <code>Element</code>
+</h5>
+
+<p>The loaded content element that is retrieved via AJAX.</p>
+
+<h4>Attach contentLoad event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for select
+    var onContentLoad = function(e) {
+        // access the selected item via e.item (Element)
+
+        // detach contentLoad event handler via unbind()
+        tabStrip.unbind("contentLoad", onError);
+    };
+
+    // attach select event handler during initialization
+    var tabStrip = $("#tabstrip").kendoTabStrip({
+        dataSource: [{
+            text: "Tab 1",
+            contentUrl: "partialContent1.html"
+        },
+        {
+            text: "Tab 2",
+            contentUrl: "partialContent2.html"
+        }],
+        contentLoad: onContentLoad
+    }).data("kendoTabStrip");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-error"><a href="#events-error">error</a></h3>
+
+<p>Triggered when an AJAX request results in an error.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.xhr <code>jqXHR</code>
+</h5>
+
+<p>The jqXHR object used to load the content</p>
+
+<h5>e.status <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The returned status.</p>
+
+<h4>Attach error event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for select
+    var onError = function(e) {
+        // access the selected item via e.item (Element)
+
+        // detach error event handler via unbind()
+        tabStrip.unbind("error", onError);
+    };
+
+    // attach select event handler during initialization
+    var tabStrip = $("#tabstrip").kendoTabStrip({
+        error: onError
+    }).data("kendoTabStrip");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-select"><a href="#events-select">select</a></h3>
+
+<p>Triggered before a tab is selected.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The selected item chosen by a user.</p>
+
+<h5>e.contentElement <code>Element</code>
+</h5>
+
+<p>The content element of the tab going to be selected.</p>
+
+<h4>Attach select event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for select
+    var onSelect = function(e) {
+        // access the selected item via e.item (Element)
+
+        // detach select event handler via unbind()
+        tabStrip.unbind("select", onSelect);
+    };
+
+    // attach select event handler during initialization
+    var tabStrip = $("#tabstrip").kendoTabStrip({
+        select: onSelect
+    }).data("kendoTabStrip");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach select event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for select
+    var onSelect = function(e) {
+        // access the selected item via e.item (Element)
+
+        // detach select event handler via unbind()
+        tabStrip.unbind("select", onSelect);
+    };
+
+    // attach select event handler via bind()
+    var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.bind("select", onSelect);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-show"><a href="#events-show">show</a></h3>
+
+<p>Triggered just after a tab is being made visible, but before the end of the animation. Before <em>Q2 2014</em> this event was called <em>activate</em>.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <code>Element</code>
+</h5>
+
+<p>The activated tab.</p>
+
+<h5>e.contentElement <code>Element</code>
+</h5>
+
+<p>The content element of the activated tab.</p>
+
+<h4>Attach show event handler during initialization; detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for show
+    var onShow = function(e) {
+        // access the shown item via e.item (Element)
+
+        // detach show event handler via unbind()
+        tabStrip.unbind("show", onShow);
+    };
+
+    // attach show event handler during initialization
+    var tabStrip = $("#tabStrip").kendoTabStrip({
+        show: onShow
+    }).data("kendoTabStrip");
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach show event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;div id="tabstrip"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Tab 1&lt;/li&gt;
+        &lt;li&gt;Tab 2&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;Content 1&lt;/div&gt;
+    &lt;div&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // event handler for show
+    var onShow = function(e) {
+        // access the shown item via e.item (Element)
+
+        // detach show event handler via unbind()
+        tabStrip.unbind("show", onShow);
+    };
+
+    // attach show event handler via bind()
+    var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
+    tabStrip.bind("show", onShow);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

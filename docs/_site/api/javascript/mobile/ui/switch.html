@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile Switch</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to quickly configure the checked and unchecked state of Mobile Switch widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/switch.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/switch.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuiswitch"><a href="#kendomobileuiswitch">kendo.mobile.ui.Switch</a></h1>
+
+<p>Represents the Kendo UI Mobile Switch widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-checked">
+<a href="#configuration-checked">checked </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>The checked state of the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input type="checkbox" data-role="switch" data-checked="false" /&gt;
+  &lt;input type="checkbox" data-role="switch" data-checked="true" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-enable">
+<a href="#configuration-enable">enable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will be disabled and will not allow the user to change its checked state. The widget is enabled by default.</p>
+
+<h4>Example - initialize disabled switch.</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    &lt;input type="checkbox" data-role="switch" data-enable="false" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-offLabel">
+<a href="#configuration-offLabel">offLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "OFF")</em>
+</h3>
+
+<p>The OFF label.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input type="checkbox" data-role="switch" data-off-label="No" data-on-label="Yes" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-onLabel">
+<a href="#configuration-onLabel">onLabel </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "ON")</em>
+</h3>
+
+<p>The ON label.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input type="checkbox" data-role="switch" data-off-label="No" data-on-label="Yes" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-check"><a href="#methods-check">check</a></h3>
+
+<p>Get/Set the checked state of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>check <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Whether to turn the widget on or off.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> The checked state of the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input id="switch" type="checkbox" data-role="switch" /&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Change status&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onClick() {
+  // get a reference to the switch widget
+  var switchInstance = $("#switch").data("kendoMobileSwitch");
+
+  // get the checked state of the switch.
+  console.log(switchInstance.check());
+  // set the checked state of the switch.
+  switchInstance.check(true);
+  console.log(switchInstance.check());
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>Switch</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the Switch element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input id="switch" type="checkbox" data-role="switch" /&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Destroy&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onClick() {
+  var switchInstance = $("#switch").data("kendoMobileSwitch");
+
+  switchInstance.destroy();
+  switchInstance.wrapper.remove();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Changes the enabled state of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Whether to enable or disable the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    &lt;input id="foo" type="checkbox" data-role="switch" /&gt;
+    &lt;a data-role="button" data-click="disable"&gt;Disable&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+    function disable() {
+        $("#foo").data("kendoMobileSwitch").enable(false);
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Forces the Switch to recalculate its dimensions. Useful when major changes in the interface happen dynamically, like for instance changing the skin.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input id="switch" type="checkbox" data-role="switch" /&gt;
+  &lt;a data-role="button" data-click="changeSkin"&gt;Flat&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+changeSkin = function (e) {
+    if (e.sender.element.text() === "Flat") {
+        e.sender.element.text("Native");
+        mobileSkin = "flat";
+    } else {
+        e.sender.element.text("Flat");
+        mobileSkin = "";
+    }
+
+    app.application.skin(mobileSkin);
+
+    $("#switch").data("kendoMobileSwitch").refresh();
+};
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-toggle"><a href="#methods-toggle">toggle</a></h3>
+
+<p>Toggle the checked state of the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input id="switch" type="checkbox" data-role="switch" /&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Toggle&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onClick() {
+  var switchInstance = $("#switch").data("kendoMobileSwitch");
+  // toggle the checked state of the switch.
+  switchInstance.toggle();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the state of the widget changes</p>
+
+<h4>Event Data</h4>
+
+<h5>e.checked <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The checked state of the widget.</p>
+
+<h4>Handle mobile Switch change event</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;input id="switch" type="checkbox" data-role="switch" data-change="onChange" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onChange(e) {
+  console.log(e.checked);//true of false
+}
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

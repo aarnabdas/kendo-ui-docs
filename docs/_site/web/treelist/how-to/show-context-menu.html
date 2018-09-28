@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Show a context menu</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Show a context menu">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/treelist/how-to/show-context-menu.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/treelist/how-to/show-context-menu.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="show-a-context-menu"><a href="#show-a-context-menu">Show a context menu</a></h1>
+
+<p>The example below demonstrates how to show a context menu for the TreeList rows</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>  &lt;div id="treelist"&gt;&lt;/div&gt;
+
+
+  &lt;ul id="menu"&gt;
+    &lt;li&gt;&lt;span class='k-icon k-add'&gt;&lt;/span&gt;Add&lt;/li&gt;
+    &lt;li&gt;&lt;span class='k-icon k-delete'&gt;&lt;/span&gt;Delete&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;script&gt;
+    $(document).ready(function () {
+      var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+
+      var dataSource = new kendo.data.TreeListDataSource({
+        transport: {
+          read:  {
+            url: crudServiceBaseUrl + "/EmployeeDirectory/All",
+            dataType: "jsonp"
+          },
+          update: {
+            url: crudServiceBaseUrl + "/EmployeeDirectory/Update",
+            dataType: "jsonp"
+          },
+          destroy: {
+            url: crudServiceBaseUrl + "/EmployeeDirectory/Destroy",
+            dataType: "jsonp"
+          },
+          create: {
+            url: crudServiceBaseUrl + "/EmployeeDirectory/Create",
+            dataType: "jsonp"
+          },
+          parameterMap: function(options, operation) {
+            if (operation !== "read" &amp;&amp; options.models) {
+              return {models: kendo.stringify(options.models)};
+            }
+          }
+        },
+        batch: true,
+        schema: {
+          model: {
+            id: "EmployeeId",
+            fields: {
+              EmployeeId: { type: "number", editable: false, nullable: false },
+              parentId: { field: "ReportsTo", nullable: true },
+              FirstName: { validation: { required: true } },
+              LastName: { validation: { required: true } },
+              HireDate: { type: "date" },
+              Phone: { type: "string" },
+              HireDate: { type: "date" },
+              BirthDate: { type: "date" },
+              Extension: { type: "number", validation: { min: 0, required: true } },
+              Position: { type: "string" }
+            },
+            expanded: true
+          }
+        }
+      });
+
+      $("#treelist").kendoTreeList({
+        dataSource: dataSource,
+        toolbar: [ "create" ],
+        editable: true,
+        height: 540,
+        columns: [
+          { field: "FirstName", expandable: true, title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 100 },
+          { field: "Position" },
+          { field: "HireDate", title: "Hire Date", format: "{0:MMMM d, yyyy}" },
+          { field: "Phone", title: "Phone" },
+          { field: "Extension", title: "Ext", format: "{0:#}" }
+        ]
+      });
+
+
+      $("#menu").kendoContextMenu({
+        // listen to right-clicks on the treelist container
+        target: "#treelist",
+
+        // show when a row is clicked
+        filter: "tbody &gt; tr",
+
+        // handle item clicks
+        select: function(e) {
+          var button = $(e.item);
+          var row = $(e.target);
+          var dataItem = $("#treelist").data("kendoTreeList").dataItem(row);
+
+          alert(kendo.format("'{0}' button clicked on '{1}'", button.text(), dataItem.FirstName));
+        }
+      });
+    });
+  &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Use Kendo UI from CDN</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Use Kendo UI in your project by referring the scripts hosted on the Kendo UI CDN">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("install/cdn.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//install/cdn.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <p>The Kendo UI CDN is hosted on Amazon CloudFront. The minified versions of all JavaScript files are available via the following URLs:</p>
+
+<pre><code>http://cdn.kendostatic.com/$VERSION$/js/$FILENAME$.min.js
+http://cdn.kendostatic.com/$VERSION$/styles/$FILENAME$.min.css
+</code></pre>
+
+<p>For example:</p>
+
+<pre><code>http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js
+http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css
+</code></pre>
+
+<p>To access the combined minified javascript for Kendo UI Core (available since Q1 2014 SP1), use the following url:</p>
+
+<pre><code>http://cdn.kendostatic.com/2014.1.416/js/kendo.ui.core.min.js
+</code></pre>
+
+<h2 id="https"><a href="#https">HTTPS</a></h2>
+
+<p>In order to use <strong>HTTPS</strong>, you need to directly access the CloudFront CDN, or <a href="http://aws.amazon.com/cloudfront/custom-ssl-domains/">use your own domain and SSL certificate</a>.</p>
+
+<pre><code>https://da7xgjtj801h2.cloudfront.net/$VERSION$/js/$FILENAME$.min.js
+https://da7xgjtj801h2.cloudfront.net/$VERSION$/styles/$FILENAME$.min.css
+</code></pre>
+
+<p>You can also use a protocol relative url:</p>
+
+<pre><code>&lt;script src="//da7xgjtj801h2.cloudfront.net/2014.1.318/js/kendo.all.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2 id="cdn-fallback-and-troubleshooting"><a href="#cdn-fallback-and-troubleshooting">CDN Fallback and Troubleshooting</a></h2>
+
+<p>Although the Amazon cloud service provides a very reliable level of uptime, disruptions or connection problems are possible.
+You can check the systems' status at <a href="http://status.aws.amazon.com/">http://status.aws.amazon.com/</a>. If the CDN status is reported as healthy and operating normally, but you still have connection problems,
+possible reasons may include:</p>
+
+<ul>
+<li>Internet/network connectivity problems, DNS problems;</li>
+<li>Firewalls, antivirus or other security software, which incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly;</li>
+<li>
+<strong>Kendo UI internal builds are not uploaded on CDN</strong>, because they are intended only for clients with a commercial license. Only <em>major releases</em> and <em>service packs</em> are uploaded on the Kendo UI CDN. For internal builds, please use a private CDN.</li>
+<li>The scripts and stylesheets' URLs <strong>are different when using HTTPS</strong> - see above.</li>
+</ul>
+
+<p>We are unable to investigate connection problems remotely; please contact your system administrators in this case.</p>
+
+<p>When using any kind of CDN, it is recommended to implement a local fallback.</p>
+
+<h3 id="refer-kendo-ui-from-cdn-with-a-local-script-fallback"><a href="#refer-kendo-ui-from-cdn-with-a-local-script-fallback">Refer Kendo UI From CDN With a Local Script Fallback</a></h3>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Welcome to Kendo UI&lt;/title&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" /&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.blueopal.min.css" /&gt;
+
+    &lt;script src="http://cdn.kendostatic.com/2014.1.318/js/jquery.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        if (typeof jQuery == "undefined") {
+            // fallback to local jQuery
+            document.write(decodeURIComponent('%3Cscript src="/path/to/local/jquery.min.js" %3E%3C/script%3E'));
+        }
+    &lt;/script&gt;
+
+    &lt;script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        if (typeof kendo == "undefined") {
+            // checking for loaded CSS files is cumbersome,
+            // that's why we assume that if the scripts have failed, so have the stylesheets
+
+            // fallback to local Kendo UI stylesheets
+            document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
+            document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
+
+            // fallback to local Kendo UI scripts
+            document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
+            // also add kendo.aspnetmvc.min.js or kendo.timezones.min.js, if needed
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    Hello world!
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>More information regarding this approach is available at <a href="http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx">Scott HanselMann - Fallback from CDN to Local Scripts</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

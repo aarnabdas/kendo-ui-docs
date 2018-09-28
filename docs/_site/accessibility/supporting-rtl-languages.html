@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("accessibility/supporting-rtl-languages.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//accessibility/supporting-rtl-languages.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="support-right-to-left-rtl-languages"><a href="#support-right-to-left-rtl-languages">Support Right-To-Left (RTL) Languages</a></h1>
+
+<h2 id="the-value-of-rtl-support"><a href="#the-value-of-rtl-support">The Value of RTL Support</a></h2>
+
+<p>Right-to-Left, or RTL, support is a phrase commonly-used to describe the ability of a library, site or application to handle and respond to users who
+communicate with a right-to-left language, like Arabic, Hebrew, Chinese or Japanese. Left-to-right is the default for most experiences on the web, but
+many sites and applications wish to also provide RTL support for their users.</p>
+
+<p>Admittedly, RTL falls more into the internationalization space, but we like to think of RTL as an accessibility feature, as well. After all, RTL is
+about making user experiences more accessible for users working in Right-to-left languages like.</p>
+
+<h2 id="adding-rtl-styles-to-your-applications"><a href="#adding-rtl-styles-to-your-applications">Adding RTL Styles to Your Applications</a></h2>
+
+<p>Kendo UI provides out of the box RTL support, and adding these features to your apps is simple. All you need to do to get started is grab the
+<code>kendo.rtl.css</code> stylesheet from the Kendo UI <code>styles</code> folder in the latest release and add it into your app. Then, add an additional style
+declaration for the rtl stylesheet after the main Kendo styles:</p>
+
+<pre><code>&lt;link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' /&gt;
+</code></pre>
+
+<p>Now, you'll need to "activate" RTL support be adding the "k-rtl" class to a container element in your application. For example, you could add the class to the body tag:</p>
+
+<pre><code>&lt;body class="k-rtl"&gt;
+    &lt;!-- Your Amazing App --&gt;
+&lt;/body&gt;
+</code></pre>
+
+<p>Once this class is applied my entire application, including all Kendo UI widgets, will have RTL support, includes setting the <code>direction:rtl</code> CSS style and adjusting widget layout and behavior accordingly.</p>
+
+<h2 id="apply-rtl-styles-with-script"><a href="#apply-rtl-styles-with-script">Apply RTL Styles with Script</a></h2>
+
+<p>Of course, unless you're building an app that exclusively uses RTL languages, this feature is no doubt something that you'd want to apply based on
+external input, like a language selection or information from the User Agent of a given visitor. In that case, you can apply the k-rtl class at
+runtime using the jQuery <code>addClass</code> method.</p>
+
+<p>Let's assume, for the sake of argument, that I'd like to allow the user to trigger RTL support by selecting a language from a dropdown or by clicking a button. First, I'll add a button to my page:</p>
+
+<pre><code>&lt;input type="button" id="toggleRTL" value="Activate RTL Support" class="k-button" /&gt;
+</code></pre>
+
+<p>Then, I'll add a click handler for the button and toggle RTL support by adding or removing the "k-rtl" class to a form, in this case a collection of form fields to which I've assigned an id of <code>speakerForm</code> :</p>
+
+<pre><code>$('#toggleRTL').on('click', function(event) {
+    var form = $('#speakerForm');
+
+    if (form.hasClass('k-rtl')) {
+        form.removeClass('k-rtl')
+    } else {
+        form.addClass('k-rtl');
+    }
+})
+</code></pre>
+
+<p>With that handler in place, the user can now trigger RTL support on-demand.</p>
+
+<h2 id="using-the-accept-language-header-to-drive-rtl-support"><a href="#using-the-accept-language-header-to-drive-rtl-support">Using the Accept-Language Header to Drive RTL Support</a></h2>
+
+<p>In some cases, you may want to trigger RTL support automatically, as opposed to on a user action. In these cases, you can inspect the
+<code>[Accept-Language](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4)</code> HTTP Header to determine if an given user prefers and RTL
+language.</p>
+
+<p>The <code>Accept-Language</code> header is provided with every HTTP request, and is typically exposed as a property on a request object in server-side frameworks. If you're using ASP.NET, for instance, you can access the <code>Accept-Language</code> header by calling</p>
+
+<pre><code>userLangs = Request.Headers["Accept-Language"];
+</code></pre>
+
+<p>For PHP, you'll use the <code>$_SERVER</code> object:</p>
+
+<pre><code>userLangs = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+</code></pre>
+
+<p>For Rails apps, you can use the <code>request.env</code> object:</p>
+
+<pre><code>userLangs = request.env["HTTP_ACCEPT_LANGUAGE"]
+</code></pre>
+
+<p>It's important to note that the <code>Accept-Language</code> header may return a comma-separated list of languages, ordered by preference. In these cases, you
+should be prepared to split the returned value into an array or list and inspect the first element to determine if adding the "<code>k-rtl</code>" class to the
+returned markup is necessary.</p>
+
+<p>For additional information on Kendo UI RTL support, including its built-in behavior and layout considerations, see the <a href="/kendo-ui/web/appearance-rtl">RTL Support</a> document in the Getting Started section.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

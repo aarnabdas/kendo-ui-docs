@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Change options dynamically</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Change options dynamically">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("mobile/mobileactionsheet/how-to/change-options-dynamically.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//mobile/mobileactionsheet/how-to/change-options-dynamically.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="change-options-dynamically"><a href="#change-options-dynamically">Change options dynamically</a></h1>
+
+<p>The example below demonstrates how to change ActionSheet options dynamically on demand.</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>    &lt;div data-role="view" data-title="Inbox" id="actionsheet-view"&gt;
+      &lt;h3 id="actionResult"&gt;&lt;/h3&gt;
+      &lt;ul data-role="listview" data-source="inbox" data-template="inboxItem" class="inboxList"&gt;&lt;/ul&gt;
+
+      &lt;ul data-role="actionsheet" id="inboxActions" data-open="onOpen" data-popup='{"direction": "left"}'&gt;
+        &lt;li&gt;&lt;a href="#" data-action="reply"&gt;Reply&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#" data-action="replyAll"&gt;Reply All&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#" data-action="archive"&gt;Archive&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;script type="script/x-kendo-template" id="inboxItem"&gt;
+    &lt;h3 class="time"&gt;#: Time#&lt;/h3&gt;&lt;h3&gt;#: From #&lt;/h3&gt;
+    &lt;a class="reply"
+        data-role="button"
+        data-rel="actionsheet"
+        href="\\#inboxActions"
+        data-actionsheet-context="#:ID#"&gt;Reply&lt;/a&gt;
+    &lt;h2&gt;#: Subject#&lt;/h2&gt;
+    &lt;p&gt;#: Text#&lt;/p&gt;
+    &lt;/script&gt;
+
+    &lt;script&gt;
+      var inbox = [
+        {
+          ID: 1,
+          From: "John Doe",
+          Subject: "Monday meeting",
+          Text: "Hi Tom, Since Monday I'll be out of office, I'm rescheduling the meeting for Tuesday.",
+          Time: "07:56"
+        },
+        {
+          ID: 2,
+          From: "Sarah Connor",
+          Subject: "Regarding org chart changes",
+          Text: "Tom, I checked the new org chart last night and I have some reservations about it...",
+          Time: "08:22"
+        },
+        {
+          ID: 3,
+          From: "Jane Parker",
+          Subject: "Your Costume is ready",
+          Text: "Hi mr. Sawyer, I'm sorry for the delay, your Halloween costume is ready. The bears...",
+          Time: "10:14"
+        },
+        {
+          ID: 4,
+          From: "Joe Harper",
+          Subject: "I'm sorry, Tom",
+          Text: "Hi Tom, my aunt comes for a visit this Saturday, so I can't come back to St. Pete...",
+          Time: "10:14"
+        },
+        {
+          ID: 5,
+          From: "Becky Thatcher",
+          Subject: "Out tonight?",
+          Text: "Honey, wanna go out tonight to grab some chicken? My weekly vouchers for cooking...",
+          Time: "10:14"
+        }
+      ];
+
+      function onOpen(e) {
+        var list = this.element;
+        var cancel = list.children("li:last");
+        var person = e.target.parent().find('h3').eq(1).text();
+
+        list.html('&lt;li&gt;&lt;a data-action="call"&gt;Call '+person+'&lt;/a&gt;&lt;li&gt;');
+        list.append(cancel);
+      }
+
+      function call(e) {
+        $("#actionResult").html("Calling to message #" + e.context);
+      }
+
+      function reply(e) {
+        $("#actionResult").html("Replying to message #" + e.context);
+      }
+
+      function replyAll(e) {
+        $("#actionResult").html("Replying to all in message #" + e.context);
+      }
+
+      function archive(e) {
+        $("#actionResult").html("Archiving message #" + e.context);
+      }
+
+    &lt;/script&gt;
+
+    &lt;style scoped&gt;
+      .reply {
+        float: right;
+      }
+
+      .inboxList
+      {
+        font-size: .8em;
+      }
+
+      .km-ios #actionsheet-view .km-listview
+      {
+        background: url(../content/shared/images/patterns/pattern8.png);
+      }
+
+      .inboxList p,
+      .inboxList h2,
+      .inboxList h3
+      {
+        margin: 5px 2px;
+      }
+
+      .inboxList p,
+      .inboxList h3
+      {
+        color: #777;
+      }
+
+      .inboxList h3.time
+      {
+        color: #369;
+        float: left;
+        margin-right: 10px;
+      }
+
+      #actionResult
+      {
+        padding: 10px;
+        background: rgba(127,127,127,.5);
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        margin: 0;
+      }
+
+      .km-ios #actionsheet-view .km-navbar
+      {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../content/shared/images/patterns/pattern7.png);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../content/shared/images/patterns/pattern7.png);
+      }
+
+      .km-ios #actionsheet-view .km-navbar .km-button
+      {
+        background-color: #4A88B5;
+      }
+
+      .km-ios #actionsheet-view .km-content .km-button {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../content/shared/images/patterns/pattern1.png);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../content/shared/images/patterns/pattern1.png);
+      }
+      .km-tablet .km-ios #actionsheet-view .km-view-title {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+      }
+    &lt;/style&gt;
+
+
+    &lt;script&gt;
+      var app = new kendo.mobile.Application(document.body);
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

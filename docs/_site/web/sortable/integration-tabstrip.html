@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Sortable widget - integration with TabStrip</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to reorder Kendo UI TabStrip tabs with the Sortable widget">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/sortable/integration-tabstrip.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/sortable/integration-tabstrip.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="integration-with-kendo-ui-tabstrip"><a href="#integration-with-kendo-ui-tabstrip">Integration with Kendo UI TabStrip</a></h1>
+
+<p>The Sortable widget may be used for reordering the TabStrip's tabs.</p>
+
+<h2 id="prerequisites"><a href="#prerequisites">Prerequisites</a></h2>
+
+<p>The article assumes that you are familiar with the following:</p>
+
+<ul>
+<li><a href="../../../web/sortable/overview">Kendo UI Sortable</a></li>
+<li><a href="../../../web/tabstrip/overview">Kendo UI TabStrip</a></li>
+</ul>
+
+<h2 id="reorder-kendo-ui-tabstrip-items-using-the-sortable-widget"><a href="#reorder-kendo-ui-tabstrip-items-using-the-sortable-widget">Reorder Kendo UI TabStrip items using the Sortable widget</a></h2>
+
+<p>The Sortable widget should be initialized on TabStrip <code>ul.k-tabstrip-items</code> element. In the general case, the <code>filter</code> property of the widget should select all <code>li.k-item</code> elements. If required the hint movement can be restricted within the <code>ul.k-tabstrip-items</code> element.</p>
+
+<pre><code>$("#tabstrip ul.k-tabstrip-items").kendoSortable({
+    filter: "li.k-item",
+    axis: "x",
+    container: "ul.k-tabstrip-items",
+    hint: function(element) {
+        return $("&lt;div id='hint' class='k-widget k-header k-tabstrip'&gt;&lt;ul class='k-tabstrip-items k-reset'&gt;&lt;li class='k-item k-state-active k-tab-on-top'&gt;" + element.html() + "&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;");
+    },
+    start: function(e) {
+        $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
+    },
+    change: function(e) {
+        var tabstrip = $("#tabstrip").data("kendoTabStrip"),
+            reference = tabstrip.tabGroup.children().eq(e.newIndex);
+
+        if(e.oldIndex &lt; e.newIndex) {
+            tabstrip.insertAfter(e.item, reference);
+        } else {
+            tabstrip.insertBefore(e.item, reference);
+        }
+    }
+});
+</code></pre>
+
+<p>In order to avoid visual glitches, it is recommended to activate the current tab at the <code>start</code> event handler of the Sortable widget.</p>
+
+<pre><code>start: function(e) {
+    $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
+}
+</code></pre>
+
+<p>After a tab is sorted the developer should update its order in the TabStrip widget.</p>
+
+<pre><code>change: function(e) {
+    var tabstrip = $("#tabstrip").data("kendoTabStrip"),
+        reference = tabstrip.tabGroup.children().eq(e.newIndex);
+
+    if(e.oldIndex &lt; e.newIndex) {
+        tabstrip.insertAfter(e.item, reference);
+    } else {
+        tabstrip.insertBefore(e.item, reference);
+    }
+}
+</code></pre>
+
+<p>For more information check <a href="../../../api/web/sortable#events">Sortable's events</a> and <a href="http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html">TabStrip/Sortable integration demo</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

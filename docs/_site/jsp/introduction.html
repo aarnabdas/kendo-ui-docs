@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/jsp-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/jsp-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/jsp-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/jsp-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/jsp-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("jsp/introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//jsp/introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h2 id="downloading-and-installing-telerik-ui-for-jsp"><a href="#downloading-and-installing-telerik-ui-for-jsp">Downloading and Installing Telerik UI for JSP</a></h2>
+
+<p>The distribution files contain the following:</p>
+
+<ul>
+<li>  <strong>\js</strong> - Kendo UI minified JavaScript files.</li>
+<li>  <strong>\styles</strong> - Kendo UI minified CSS files and background images used by the themes.</li>
+<li>  <strong>\wrappers\jsp\kendo-taglib</strong> - Telerik UI for JSP jar files.</li>
+<li>  <strong>\wrappers\jsp\spring-demos</strong> - a sample JSP Spring MVC application.</li>
+</ul>
+
+<h2 id="running-the-sample-application"><a href="#running-the-sample-application">Running the sample application</a></h2>
+
+<h4>Requirements</h4>
+
+<ul>
+<li>  JDK 1.8 or 1.7</li>
+<li>  Eclipse for Enterprise Developers (J2EE support) - Luna, Kepler or newer</li>
+<li>  Maven support for Eclipse - m2e</li>
+<li>  Configured server (tested with Tomcat 7)</li>
+</ul>
+
+<p><img src="images/eclipse.png" alt="Eclipse with Tomcat7 configured"></p>
+
+<p>You can find a sample JSP Spring MVC application in the <strong>\wrappers\jsp\spring-demos</strong> folder.</p>
+
+<h4>Steps to run the project</h4>
+
+<ol>
+<li> Extract the Telerik UI for JSP package.</li>
+<li> Start Eclipse.</li>
+<li> Choose "File -&gt; Import".</li>
+<li>
+<p>Choose "Maven -&gt; Existing Maven Projects". Click "Next". If you don't see that option make sure your Eclipse has Maven support installed.</p>
+
+<p><img src="images/existing_maven_project.png" alt="Import Maven projects"></p>
+</li>
+<li>
+<p>Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".</p>
+
+<p><img src="images/import_maven_project.png" alt="Import Kendo UI JSP demos"></p>
+</li>
+<li> Right-click "spring-demos" in Eclipse Project Explorer. Pick "Properties".</li>
+<li> In the properties window pick "Project Facets".</li>
+<li>
+<p>From the "Project Facets" menu select "Dynamic Web Module".</p>
+
+<p><img src="images/project_facets.png" alt="Project facets"></p>
+</li>
+<li>
+<p>Click the "Runtimes" tab. Pick a runtime (Tomcat 7 for example).</p>
+
+<p><img src="images/project_facets_tomcat.png" alt="Project facets - Tomcat 7"></p>
+</li>
+<li>Press "OK" to close the "Properties" window.</li>
+<li>Right-click "spring-demos" in Eclipse Project Explorer. Pick "Run As -&gt; Run on server".</li>
+</ol>
+
+<h2 id="using-kendo-ui-in-jsp-application"><a href="#using-kendo-ui-in-jsp-application">Using Kendo UI in JSP application</a></h2>
+
+<ol>
+<li> Create a new <strong>"Dynamic Web Project"</strong> from Eclipse or open an existing one.</li>
+<li> Add <strong>\wrappers\jsp\kendo-taglib\kendo-taglib-[version].jar</strong> to project's <strong>/WebContent/WEB-INF/lib folder</strong>.</li>
+<li>
+<p>Copy the Kendo UI JavaScript files from the <strong>\js</strong> folder of the installation to the <strong>WebContent/resources/js</strong> folder of your application.</p>
+
+<p>If you want to use CDN skip steps 3, 4 and 5 and check the <a href="#using-cdn">Using CDN</a> section.</p>
+</li>
+<li> Copy the Kendo UI CSS files and folders from the <strong>\styles</strong> folder of the installation to the <strong>WebContent/resources/styles</strong> folder of your application. If you want to use only one theme copy <strong>kendo.common.min.css</strong>, the theme file (e.g. <strong>kendo.default.min.css</strong>), the theme folder (e.g. <strong>Default</strong>) and the <strong>textures</strong> folder.</li>
+<li>Add a JSP page.
+
+<ul>
+<li>  Right-mouse click on WebContent folder</li>
+<li>  Select New -&gt; JSP file</li>
+<li>  Enter file name and click Finish</li>
+</ul>
+</li>
+<li>
+<p>Configure your page to include the Kendo UI Web JavaScript and CSS files to the page:</p>
+
+<pre><code>&lt;link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" /&gt;
+&lt;link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" /&gt;
+&lt;script src="resources/js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="resources/js/kendo.web.min.js"&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li>
+<p>Configure your page to include the Kendo UI DataViz JavaScript and CSS files. <strong>Important</strong>: If you want to use Kendo UI Web and DataViz at the same time you should include <strong>kendo.all.min.js</strong> instead of <strong>kendo.web.min.js</strong> and <strong>kendo.dataviz.min.js</strong>. You can also create a custom JavaScript file using the <a href="http://www.telerik.com/download/custom-download">Custom Download Builder</a>.</p>
+
+<pre><code>&lt;link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" /&gt;
+&lt;link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" /&gt;
+&lt;link href="resources/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" /&gt;
+
+&lt;script src="resources/js/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="resources/js/kendo.dataviz.min.js"&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li>
+<p>Add taglib mapping to the kendo tags</p>
+
+<pre><code>&lt;%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%&gt;
+</code></pre>
+</li>
+<li>
+<p>Use any Kendo UI HtmlHelper extension:</p>
+
+<pre><code>&lt;kendo:datePicker name="datePicker"&gt;&lt;/kendo:datePicker&gt;
+</code></pre>
+</li>
+</ol>
+
+<h3 id="using-cdn"><a href="#using-cdn">Using CDN</a></h3>
+
+<p>You can include the JavaScript and CSS files from CDN. Don't forget to specify the version (e.g. 2012.2.710)</p>
+
+<pre><code>&lt;link href="http://cdn.kendostatic.com/&lt;VERSION&gt;/styles/kendo.common.min.css" rel="stylesheet" type="text/css" /&gt;
+&lt;link href="http://cdn.kendostatic.com/&lt;VERSION&gt;/styles/kendo.default.min.css" rel="stylesheet" type="text/css" /&gt;
+
+&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://cdn.kendostatic.com/&lt;VERSION&gt;/js/kendo.all.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<h2 id="next-steps"><a href="#next-steps">Next Steps</a></h2>
+
+<p>You can watch the videos in the <a href="http://www.youtube.com/kendouitv">Kendo UI YouTube channel</a>:</p>
+
+<ol>
+<li><a href="http://www.youtube.com/watch?v=3VH75XVhLCI">Getting Started With Telerik UI for JSP - Episode 1</a></li>
+<li><a href="http://www.youtube.com/watch?v=LyGHeRMmq5I">Getting Started With Telerik UI for JSP - Episode 2</a></li>
+<li><a href="http://www.youtube.com/watch?v=sCwqj_ZRGI8">Getting Started With Telerik UI for JSP - Episode 3</a></li>
+<li><a href="http://www.youtube.com/watch?v=fcbw4YR4P2I">Getting Started With Telerik UI for JSP - Episode 4</a></li>
+</ol>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

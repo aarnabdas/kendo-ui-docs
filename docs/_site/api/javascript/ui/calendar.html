@@ -1,0 +1,737 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Calendar</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Find out how to successfully configure calendar UI component, how to use methods to get the max value of the calendar and navigate easily.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/calendar.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/calendar.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouicalendar"><a href="#kendouicalendar">kendo.ui.Calendar</a></h1>
+
+<p>Represents the Kendo UI Calendar widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-culture">
+<a href="#configuration-culture">culture </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "en-US")</em>
+</h3>
+
+<p>Specifies the culture info used by the widget.</p>
+
+<h4>Example - specify German culture internationalization</h4>
+
+<pre><code>&lt;!--
+    TODO: Add the kendo.culture.de-DE.min.js file as it is required!
+
+    Here is a sample script tag:
+    &lt;script src="http://cdn.kendostatic.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"&gt;&lt;/script&gt;
+
+    For more information check this help topic:
+    http://docs.telerik.com/kendo-ui/framework/globalization/overview
+--&gt;
+
+&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        culture: "de-DE"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dates">
+<a href="#configuration-dates">dates </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>Specifies a list of dates, which will be passed to the month template.</p>
+
+<h4>Example - specify a list of dates</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        value: new Date(2000, 10, 1),
+        dates: [
+            new Date(2000, 10, 10, 10, 0, 0),
+            new Date(2000, 10, 10, 30, 0)
+        ] //can manipulate month template depending on this array.
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-depth">
+<a href="#configuration-depth">depth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies the navigation depth. The following
+settings are available for the <strong>depth</strong> value:</p>
+
+<h4><em>"month"</em></h4>
+
+<p>shows the days of the month</p>
+
+<h4><em>"year"</em></h4>
+
+<p>shows the months of the year</p>
+
+<h4><em>"decade"</em></h4>
+
+<p>shows the years of the decade</p>
+
+<h4><em>"century"</em></h4>
+
+<p>shows the decades from the century</p>
+
+<blockquote>
+<p>Note the option will not be applied if <strong>start</strong> option is <em>lower</em> than <strong>depth</strong>. Always set both and <strong>start</strong> and <strong>depth</strong> options.</p>
+</blockquote>
+
+<h4>Example - set navigation depth of the calendar</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        depth: "year"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-footer">
+<a href="#configuration-footer">footer </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the footer. If false, the footer will not be rendered.</p>
+
+<h4>Example - specify footer template as a function</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script id="footer-template" type="text/x-kendo-template"&gt;
+    Today - #: kendo.toString(data, "d") #
+&lt;/script&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        footer: kendo.template($("#footer-template").html())
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify footer template as a string</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        footer: "Today - #: kendo.toString(data, 'd') #"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-format">
+<a href="#configuration-format">format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "MM/dd/yyyy")</em>
+</h3>
+
+<p>Specifies the format, which is used to parse value set with value() method.</p>
+
+<h4>Example - specify a custom date format</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        format: "yyyy/MM/dd"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-max">
+<a href="#configuration-max">max </a><code>Date</code><em>(default: Date(2099, 11, 31))</em>
+</h3>
+
+<p>Specifies the maximum date, which the calendar can show.</p>
+
+<h4>Example - specify the maximum date</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        max: new Date(2013, 0, 1) // set the max date to Jan 1st, 2013
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-min">
+<a href="#configuration-min">min </a><code>Date</code><em>(default: Date(1900, 0, 1))</em>
+</h3>
+
+<p>Specifies the minimum date, which the calendar can show.</p>
+
+<h4>Example - specify the minimum date</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    // set the min date to Jan 1st, 2011
+    $("#calendar").kendoCalendar({
+        min: new Date(2011, 0, 1)
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-month">
+<a href="#configuration-month">month </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Templates for the cells rendered in "month" view.</p>
+
+<h3 id="configuration-month.content">
+<a href="#configuration-month.content">month.content </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The template to be used for rendering the cells in "month" view, which are between the min/max range.
+ By default, the widget renders the value of the corresponding day.</p>
+
+<h4>Example - specify cell template as a string</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script id="cell-template" type="text/x-kendo-template"&gt;
+    &lt;div class="#= data.value &lt; 10 ? 'exhibition' : 'party' #"&gt;&lt;/div&gt;
+    #= data.value #
+&lt;/script&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        month: {
+           content: $("#cell-template").html()
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-month.empty">
+<a href="#configuration-month.empty">month.empty </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+ By default, the widget renders an empty string.</p>
+
+<h4>Example - specify an empty cell template as a string</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        month: {
+           empty: '-'
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-start">
+<a href="#configuration-start">start </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "month")</em>
+</h3>
+
+<p>Specifies the start view.
+The following settings are available for the <strong>start</strong> value:</p>
+
+<h4><em>"month"</em></h4>
+
+<p>shows the days of the month</p>
+
+<h4><em>"year"</em></h4>
+
+<p>shows the months of the year</p>
+
+<h4><em>"decade"</em></h4>
+
+<p>shows the years of the decade</p>
+
+<h4><em>"century"</em></h4>
+
+<p>shows the decades from the century</p>
+
+<h4>Example - specify the initial view, which calendar renders</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        start: "year"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><code>Date</code><em>(default: null)</em>
+</h3>
+
+<p>Specifies the selected date.</p>
+
+<h4>Example - specify the selected value of the widget</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        value: new Date(2012, 0, 1)
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-current"><a href="#methods-current">current</a></h3>
+
+<p>Gets currently focused date.</p>
+
+<h4>Returns</h4>
+
+<p><code>Date</code> The current focused date shown in the calendar.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    var current = calendar.current(); //will be today, because value is `null`
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>Calendar</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the Calendar element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-max"><a href="#methods-max">max</a></h3>
+
+<p>Gets/Sets the max value of the calendar.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Date  |</code><code> String</code>
+</h5>
+
+<p>The max date to set.</p>
+
+<h4>Returns</h4>
+
+<p><code>Date</code> The max value of the calendar.</p>
+
+<h4>Example - get the max value of the calendar</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    var max = calendar.max();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the max value of the calendar</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.max(new Date(2100, 0, 1));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-min"><a href="#methods-min">min</a></h3>
+
+<p>Gets/Sets the min value of the calendar.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Date |</code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The min date to set.</p>
+
+<h4>Returns</h4>
+
+<p><code>Date</code> The min value of the calendar.</p>
+
+<h4>Example - get the min value of the calendar</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    var min = calendar.min();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the min value of the calendar</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.min(new Date(1900, 0, 1));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigate"><a href="#methods-navigate">navigate</a></h3>
+
+<p>Navigates to view.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Date</code>
+</h5>
+
+<p>Desired date.</p>
+
+<h5>view <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>Desired view.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.navigate(new Date(2012, 0, 1), "year");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigateDown"><a href="#methods-navigateDown">navigateDown</a></h3>
+
+<p>Navigates to the lower view.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Date</code>
+</h5>
+
+<p>Desired date.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.navigateDown(new Date(2012, 0, 1));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigateToFuture"><a href="#methods-navigateToFuture">navigateToFuture</a></h3>
+
+<p>Navigates to the future.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.navigateToFuture();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigateToPast"><a href="#methods-navigateToPast">navigateToPast</a></h3>
+
+<p>Navigates to the past.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.navigateToPast();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigateUp"><a href="#methods-navigateUp">navigateUp</a></h3>
+
+<p>Navigates to the upper view.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.navigateUp();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets/Sets the value of the calendar.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Date |</code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The date to set.</p>
+
+<h4>Returns</h4>
+
+<p><code>Date</code> The value of the calendar.</p>
+
+<h4>Example - gets the value of the widget</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        value: new Date(2013, 10, 10)
+    });
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    var value = calendar.value();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - sets the value of the widget</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        value: new Date(2013, 10, 10)
+    });
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.value(new Date());
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-view"><a href="#methods-view">view</a></h3>
+
+<p>Gets an instance of the current view used by the calendar.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> The instance of the current view used by the calendar.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    var view = calendar.view();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the selected date is changed.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        change: function() {
+            var value = this.value();
+            console.log(value); //value is the selected date in the calendar
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.bind("change", function() {
+        var value = this.value();
+        console.log(value); //value is the selected date in the calendar
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-navigate"><a href="#events-navigate">navigate</a></h3>
+
+<p>Fires when calendar navigates.</p>
+
+<h4>Example - subscribe to the "navigate" event during initialization</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar({
+        navigate: function() {
+            var view = this.view();
+            console.log(view.name); //name of the current view
+
+            var current = this.current();
+            console.log(current); //currently focused date
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "navigate" event after initialization</h4>
+
+<pre><code>&lt;div id="calendar"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#calendar").kendoCalendar();
+
+    var calendar = $("#calendar").data("kendoCalendar");
+
+    calendar.bind("navigate", function() {
+        var view = this.view();
+        console.log(view.name); //name of the current view
+
+        var current = this.current();
+        console.log(current); //currently focused date
+    });
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

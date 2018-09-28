@@ -1,0 +1,519 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI MaskedTextBox</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Code examples and tips how to configure MaskedTextBox widget, use available methods and events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/maskedtextbox.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/maskedtextbox.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouimaskedtextbox"><a href="#kendouimaskedtextbox">kendo.ui.MaskedTextBox</a></h1>
+
+<p>Represents the Kendo UI MaskedTextBox widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-clearPromptChar">
+<a href="#configuration-clearPromptChar">clearPromptChar </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Specifies whether the widget will replace the prompt characters with spaces on blur. Prompt chars will be shown again on focus (available since Q2 2014 SP1).</p>
+
+<h4>Example - specify different prompt char</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "000000",
+    clearPromptChar: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-culture">
+<a href="#configuration-culture">culture </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "en-US")</em>
+</h3>
+
+<p>Specifies the culture info used by the widget.</p>
+
+<h4>Example - specify German culture internationalization</h4>
+
+<pre><code>&lt;!--
+    TODO: Add the kendo.culture.de-DE.min.js file as it is required!
+
+    Here is a sample script tag:
+    &lt;script src="http://cdn.kendostatic.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"&gt;&lt;/script&gt;
+
+    For more information check this help topic:
+    http://docs.telerik.com/kendo-ui/framework/globalization/overview
+--&gt;
+
+&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "0,000.00 $",
+    culture: "de-DE"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-mask">
+<a href="#configuration-mask">mask </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Specifies the input mask. The following mask rules are supported:</p>
+
+<ul>
+<li>
+<strong>0</strong> - Digit. Accepts any digit between 0 and 9.</li>
+<li>
+<strong>9</strong> - Digit or space. Accepts any digit between 0 and 9, plus space.</li>
+<li>
+<strong>#</strong> - Digit or space. Like <strong>9</strong> rule, but allows also (+) and (-) signs.</li>
+<li>
+<strong>L</strong> - Letter. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.</li>
+<li>
+<strong>?</strong> - Letter or space. Restricts input to letters a-z and A-Z. This rule is equivalent to [a-zA-Z] in regular expressions.</li>
+<li>
+<strong>&amp;</strong> - Character. Accepts any character. The rule is equivalent to <em>\S</em> in regular expressions.</li>
+<li>
+<strong>C</strong> - Character or space. Accepts any character. The rule is equivalent to <em>.</em> in regular expressions.</li>
+<li>
+<strong>A</strong> - Alphanumeric. Accepts letters and digits only.</li>
+<li>
+<strong>a</strong> - Alphanumeric or space. Accepts letters, digits and space only.</li>
+<li>
+<strong>.</strong> - Decimal placeholder. The decimal separator will be get from the current culture used by Kendo.</li>
+<li>
+<strong>,</strong> - Thousands placeholder. The display character will be get from the current culture used by Kendo.</li>
+<li>
+<strong>$</strong> - Currency symbol. The display character will be get from the current culture used by Kendo.</li>
+</ul>
+
+<h4>Example - specify a phone number mask</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "(000) 000-0000"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-promptChar">
+<a href="#configuration-promptChar">promptChar </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "_")</em>
+</h3>
+
+<p>Specifies the character used to represent the absence of user input in the widget</p>
+
+<h4>Example - specify different prompt char</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "000000",
+    promptChar: " " //specify prompt char as empty char
+});
+&lt;/script&gt;
+</code></pre>
+
+<blockquote>
+<p>Note that the <code>promptChar</code> should not be equal to any of the used mask literals in the mask value.</p>
+</blockquote>
+
+<h3 id="configuration-rules">
+<a href="#configuration-rules">rules </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines an object of custom mask rules.</p>
+
+<h4>Example - specify a custom rule as a RegExp instance</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "~000",
+    rules: {
+        "~": /[+-]/
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify a custom rule as a function</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "^000^",
+    rules: {
+        "^": function (char) {
+            return char === "^"; //allow ony "^" symbol
+        }
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-unmaskOnPost">
+<a href="#configuration-unmaskOnPost">unmaskOnPost </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Specifies whether the widget will unmask the input value on form post (available since Q1 2015).</p>
+
+<h4>Example - unmask value on form post</h4>
+
+<pre><code>&lt;form&gt;
+    &lt;input id="maskedtextbox" /&gt;
+    &lt;button&gt;Post&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "000000",
+    unmaskOnPost: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>Specifies the value of the MaskedTextBox widget.</p>
+
+<h4>Example - specify value option</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "(000) 000-0000",
+    value: "(123) 456-7890"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify value option as a HTML attribute</h4>
+
+<pre><code>&lt;input id="maskedtextbox" value="(123) 456-7890" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "(000) 000-0000"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-options">
+<a href="#fields-options">options </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>An object, which holds the options of the widget.</p>
+
+<h4>Example - get options of the widget</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox();
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+var options = maskedtextbox.options;
+&lt;script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>MaskedTextBox</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the MaskedTextBox element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox();
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+// detach events
+maskedtextbox.destroy();
+&lt;script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables or disables the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will be enabled. If set to <code>false</code> the widget will be disabled.</p>
+
+<h4>Example - enable the widget</h4>
+
+<pre><code>&lt;input id="maskedtextbox" disabled="disabled" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox();
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+maskedtextbox.enable(true);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-readonly"><a href="#methods-readonly">readonly</a></h3>
+
+<p>Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.</p>
+
+<blockquote>
+<p>There is a difference between disabled and readonly mode. The value of a disabled widget is <strong>not</strong> posted as part of a <code>form</code> whereas the value of a readonly widget is posted.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>readonly <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will not allow user input. If set to <code>false</code> the widget will allow user input.</p>
+
+<h4>Example - make the widget readonly</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox();
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+maskedtextbox.readonly();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-raw"><a href="#methods-raw">raw</a></h3>
+
+<p>Gets the unmasked value of the MaskedTextBox.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The raw value of the widget.</p>
+
+<h4>Example - get the raw value of the MaskedTextBox</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "(000)-000",
+    value: "(123)-456"
+});
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+var raw = maskedtextbox.raw(); //the result value will be "123456"
+
+console.log(raw);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets or sets the value of the MaskedTextBox.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The value of the widget.</p>
+
+<h4>Example - get the value of the MaskedTextBox</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "000000",
+    value: "123456"
+});
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+var value = maskedtextbox.value();
+
+console.log(value);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the value of the MaskedTextBox</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    mask: "(000) 000-0000"
+});
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+var value = maskedtextbox.value();
+
+maskedtextbox.value("555 123 1234");
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the value is changed</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.MaskedTextBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox({
+    change: function() {
+        var value = this.value();
+        console.log(value); //value is the selected date in the maskedtextbox
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;input id="maskedtextbox" /&gt;
+&lt;script&gt;
+$("#maskedtextbox").kendoMaskedTextBox();
+
+var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+
+maskedtextbox.bind("change", function() {
+    var value = this.value();
+    console.log(value); //value is the selected date in the maskedtextbox
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

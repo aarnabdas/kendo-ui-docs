@@ -1,0 +1,701 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI NumericTextBox</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Code examples and tips how to configure NumericTextBox widget, use available methods and events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/numerictextbox.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/numerictextbox.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouinumerictextbox"><a href="#kendouinumerictextbox">kendo.ui.NumericTextBox</a></h1>
+
+<p>Represents the Kendo UI NumericTextBox widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-culture">
+<a href="#configuration-culture">culture </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "en-US")</em>
+</h3>
+
+<p>Specifies the culture info used by the widget.</p>
+
+<h4>Example - specify German culture internationalization</h4>
+
+<pre><code>&lt;!--
+    TODO: Add the kendo.culture.de-DE.min.js file as it is required!
+
+    Here is a sample script tag:
+    &lt;script src="http://cdn.kendostatic.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"&gt;&lt;/script&gt;
+
+    For more information check this help topic:
+    http://docs.telerik.com/kendo-ui/framework/globalization/overview
+--&gt;
+
+&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    culture: "de-DE"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-decimals">
+<a href="#configuration-decimals">decimals </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the number precision. If not set precision defined by current culture is used.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    decimals: 1
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-downArrowText">
+<a href="#configuration-downArrowText">downArrowText </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Decrease value")</em>
+</h3>
+
+<p>Specifies the text of the tooltip on the down arrow.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    downArrowText: "Less"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-format">
+<a href="#configuration-format">format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "n")</em>
+</h3>
+
+<p>Specifies the format of the number. Any <a href="/kendo-ui/framework/globalization/numberformatting">valid number format</a> is allowed.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+   format: "c0"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-max">
+<a href="#configuration-max">max </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the largest value the user can enter.</p>
+
+<h4>Example - specify max option</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    max: 100
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify max option as a HTML attribute</h4>
+
+<pre><code>&lt;input id="numerictextbox" max="100" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-min">
+<a href="#configuration-min">min </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the smallest value the user can enter.</p>
+
+<h4>Example - specify min option</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    min: -100
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify min option as a HTML attribute</h4>
+
+<pre><code>&lt;input id="numerictextbox" min="-100" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-placeholder">
+<a href="#configuration-placeholder">placeholder </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The hint displayed by the widget when it is empty. Not set by default.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    placeholder: "Select A Value"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-spinners">
+<a href="#configuration-spinners">spinners </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Specifies whether the up and down spin buttons should be rendered</p>
+
+<h4>Example - hide spin buttons</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    spinners: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-step">
+<a href="#configuration-step">step </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 1)</em>
+</h3>
+
+<p>Specifies the value used to increment or decrement widget value.</p>
+
+<h4>Example - specify step option</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    step: 0.1
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify step option as a HTML attribute</h4>
+
+<pre><code>&lt;input id="numerictextbox" step="0.1" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-upArrowText">
+<a href="#configuration-upArrowText">upArrowText </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Increase value")</em>
+</h3>
+
+<p>Specifies the text of the tooltip on the up arrow.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    upArrowText: "More"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the value of the NumericTextBox widget.</p>
+
+<h4>Example - specify value option</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    value: 10
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify value option as a HTML attribute</h4>
+
+<pre><code>&lt;input id="numerictextbox" value="10" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-options">
+<a href="#fields-options">options </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>An object, which holds the options of the widget.</p>
+
+<h4>Example - get options of the widget</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var options = numerictextbox.options;
+&lt;script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>NumericTextBox</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the NumericTextBox element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+// detach events
+numerictextbox.destroy();
+&lt;script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables or disables the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will be enabled. If set to <code>false</code> the widget will be disabled.</p>
+
+<h4>Example - enable the widget</h4>
+
+<pre><code>&lt;input id="numerictextbox" disabled="disabled" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+numerictextbox.enable(true);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-readonly"><a href="#methods-readonly">readonly</a></h3>
+
+<p>Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.</p>
+
+<blockquote>
+<p>There is a difference between disabled and readonly mode. The value of a disabled widget is <strong>not</strong> posted as part of a <code>form</code> whereas the value of a readonly widget is posted.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>readonly <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will not allow user input. If set to <code>false</code> the widget will allow user input.</p>
+
+<h4>Example - make the widget readonly</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+numerictextbox.readonly();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-focus"><a href="#methods-focus">focus</a></h3>
+
+<p>Focuses the widget.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+numerictextbox.focus();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-max"><a href="#methods-max">max</a></h3>
+
+<p>Gets or sets the max value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Number  |</code><code> String</code>
+</h5>
+
+<p>The max value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The max value of the widget.</p>
+
+<h4>Example - get the max value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var max = numerictextbox.max();
+
+console.log(max);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the max value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var max = numerictextbox.max();
+
+numerictextbox.max(10);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-min"><a href="#methods-min">min</a></h3>
+
+<p>Gets or sets the min value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Number  |</code><code> String</code>
+</h5>
+
+<p>The min value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The min value of the widget.</p>
+
+<h4>Example - get the min value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var min = numerictextbox.min();
+
+console.log(min);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the min value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var min = numerictextbox.min();
+
+numerictextbox.min(10);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-step"><a href="#methods-step">step</a></h3>
+
+<p>Gets or sets the step value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Number  |</code><code> String</code>
+</h5>
+
+<p>The step value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The step value of the widget.</p>
+
+<h4>Example - get the step value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var step = numerictextbox.step();
+
+console.log(step);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the step value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var step = numerictextbox.step();
+
+numerictextbox.step(0.5);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets or sets the value of the NumericTextBox.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <code>Number  |</code><code> String</code>
+</h5>
+
+<p>The value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The value of the widget.</p>
+
+<h4>Example - get the value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var value = numerictextbox.value();
+
+console.log(value);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the value of the NumericTextBox</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+var value = numerictextbox.value();
+
+numerictextbox.value(0.5);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fires when the value is changed</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.NumericTextBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    change: function() {
+        var value = this.value();
+        console.log(value); //value is the selected date in the numerictextbox
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+numerictextbox.bind("change", function() {
+    var value = this.value();
+    console.log(value); //value is the selected date in the numerictextbox
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-spin"><a href="#events-spin">spin</a></h3>
+
+<p>Fires when the value is changed from the spin buttons</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.NumericTextBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "spin" event during initialization</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox({
+    spin: function() {
+        var value = this.value();
+        console.log(value); //value is the selected date in the numerictextbox
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "spin" event after initialization</h4>
+
+<pre><code>&lt;input id="numerictextbox" /&gt;
+&lt;script&gt;
+$("#numerictextbox").kendoNumericTextBox();
+
+var numerictextbox = $("#numerictextbox").data("kendoNumericTextBox");
+
+numerictextbox.bind("spin", function() {
+    var value = this.value();
+    console.log(value); //value is the selected date in the numerictextbox
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

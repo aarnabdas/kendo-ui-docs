@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Data Attribute Initialization and Configuration</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn how to initialize and configure each Kendo UI widget using data attributes.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/data-attribute-initialization.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/data-attribute-initialization.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="data-attribute-initialization"><a href="#data-attribute-initialization">Data Attribute Initialization</a></h1>
+
+<p>In addition to the jQuery plugin initialization, each kendo widget may be initialized and configured via data attributes.
+The mobile application, the SPA view component, and the MVVM <code>kendo.bind</code> method use the declarative approach to automatically instantiate multiple widgets in an existing DOM element.</p>
+
+<p>Data attribute initialization is convenient when there are a lot of Kendo UI widgets in the page, since the widget configuration is declared within the target element.</p>
+
+<h3 id="example---initialize-a-kendo-ui-widget-using-data-attributes"><a href="#example---initialize-a-kendo-ui-widget-using-data-attributes">Example - initialize a Kendo UI widget using data attributes</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="numerictextbox" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+kendo.bind($("#container"), {});
+&lt;/script&gt;
+</code></pre>
+
+<p>The <code>kendo.bind($("#container"))</code> statement finds all elements that have the <code>role</code> data attribute set and initializes the respective Kendo UI widgets.</p>
+
+<blockquote>
+<p>The value of the <code>role</code> data attribute is the name of the widget in lower case e.g. "autocomplete", "dropdownlist" etc.</p>
+</blockquote>
+
+<p>By default, <code>kendo.bind</code> initializes only widgets from the <code>kendo.ui</code> namespace, excluding the mobile widgets to avoid ambiguity. This behavior can be
+changed by passing additional namespaces as parameters.  The Kendo UI mobile <a href="/kendo-ui/mobile/application">Application</a> initializes
+widgets <em>from the <code>kendo.mobile.ui</code> namespace first</em>. This means that an element with <code>data-role="listview"</code> will
+be automatically be initialized as a mobile listview widget in the mobile application context.</p>
+
+<blockquote>
+<p>The data-role attribute also accepts full widget class name (with its namespace) as value.</p>
+</blockquote>
+
+<h3 id="instantiate-a-web-listview-in-a-mobile-application-using-the-widget-full-class-path"><a href="#instantiate-a-web-listview-in-a-mobile-application-using-the-widget-full-class-path">Instantiate a web listview in a mobile application using the widget full class path</a></h3>
+
+<pre><code>&lt;div data-role="view"&gt;
+    &lt;!-- specify the Kendo UI Web ListView widget --&gt;
+    &lt;div data-role="kendo.ui.ListView"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="example---instantiate-mobile-and-web-widgets-in-a-given-element"><a href="#example---instantiate-mobile-and-web-widgets-in-a-given-element">Example - instantiate mobile and web widgets in a given element</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="numerictextbox" /&gt;
+    &lt;button data-role="button"&gt;Mobile button&lt;/button&gt;
+&lt;/div&gt;
+&lt;script&gt;
+kendo.bind($("#container"), {}, kendo.ui, kendo.mobile.ui);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>Each widget configuration option can be set with a data attribute of the target element. <strong>Add the "data-" prefix to the name of the configuration option</strong> and specify the option value e.g. <code>data-delay="100"</code>.</p>
+
+<blockquote>
+<p>Camel-cased options are set via dash-separated attributes. For example, the <a href="/kendo-ui/api/web/autocomplete#configuration-ignoreCase">ignoreCase</a> option of the AutoComplete is set via <code>data-ignore-case</code>.</p>
+</blockquote>
+
+<p>Options, which start with <code>data</code> do not require an additional "data" in the attribute name e.g. the <code>dataTextField</code> option is set via the <code>data-text-field</code> attribute and <code>dataSource</code> is set via the
+<code>data-source</code> attribute.</p>
+
+<p>Complex configuration options are set as JavaScript object literals: <code>data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}"</code>.</p>
+
+<h3 id="configuration-Example"><a href="#configuration-Example">Example - configure Kendo UI Widget with data attributes</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="autocomplete"
+           data-ignore-case="true"
+           data-text-field="name"
+           data-source="{data: [{name: 'John Doe'},{name: 'Jane Doe'}]}" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    kendo.bind($("#container"), {});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<p>You may subscribe to Kendo UI widget events with data attributes. The value of the data attribute will be resolved to a JavaScript function, available in the global scope.</p>
+
+<h3 id="events-Example"><a href="#events-Example">Example - subscribe to a Kendo UI widget event via data attribute</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="numerictextbox" data-change="numerictextbox_change" /&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    function numerictextbox_change(e) {
+        // Handle the "change" event
+    }
+    kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+
+<p>Event handlers can also be set to member functions. For example, an event data attribute can be set to <code>foo.bar</code> which is resolved as the <code>bar</code> method of the <code>foo</code> object available in the global scope.</p>
+
+<h3 id="events-Example"><a href="#events-Example">Example - use member function as event handler</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="numerictextbox" data-change="handler.numerictextbox_change" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var handler = {
+    numerictextbox_change: function (e) {
+        // Handle the "change" event
+    }
+};
+kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="datasource"><a href="#datasource">DataSource</a></h2>
+
+<p>The data source of data-bound Kendo UI widgets can also be set via data attribute. The value can be a JavaScript object, array, or a variable available in the global scope.</p>
+
+<h3 id="example---set-the-data-source-of-a-kendo-ui-widget-to-a-javascript-object"><a href="#example---set-the-data-source-of-a-kendo-ui-widget-to-a-javascript-object">Example - set the data source of a Kendo UI widget to a JavaScript object</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="autocomplete" data-source="{data:['One', 'Two']}" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="example---set-the-data-source-of-a-kendo-ui-widget-to-a-javascript-array"><a href="#example---set-the-data-source-of-a-kendo-ui-widget-to-a-javascript-array">Example - set the data source of a Kendo UI widget to a JavaScript array</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="autocomplete" data-source="['One', 'Two']" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="example---set-the-data-source-of-a-kendo-ui-widget-to-a-variable-available-in-the-global-scope"><a href="#example---set-the-data-source-of-a-kendo-ui-widget-to-a-variable-available-in-the-global-scope">Example - set the data source of a Kendo UI widget to a variable available in the global scope</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="autocomplete" data-source="dataSource" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var dataSource = new kendo.data.DataSource( {
+    data: [ "One", "Two" ]
+});
+kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="templates"><a href="#templates">Templates</a></h2>
+
+<p>Template configuration can be set via data attributes as well. The attribute value will be resolved as the <code>id</code> attribute of a <code>script</code> element with the
+template contents.</p>
+
+<h3 id="example---set-the-template-of-a-kendo-ui-widget"><a href="#example---set-the-template-of-a-kendo-ui-widget">Example - set the template of a Kendo UI widget</a></h3>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input data-role="autocomplete"
+           data-source="[{firstName:'John', lastName: 'Doe'}, {firstName:'Jane', lastName: 'Doe'}]"
+           data-text-field="firstName"
+           data-template="template" /&gt;
+&lt;/div&gt;
+
+&lt;script id="template" type="text/x-kendo-template"&gt;
+    &lt;span&gt;#: firstName # #: lastName #&lt;/span&gt;
+&lt;/script&gt;
+
+&lt;script&gt;
+    kendo.bind($("#container"));
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

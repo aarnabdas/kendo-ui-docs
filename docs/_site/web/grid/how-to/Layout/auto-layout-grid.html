@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Creating and using auto layout</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Creating and using auto layout">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/grid/how-to/Layout/auto-layout-grid.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/grid/how-to/Layout/auto-layout-grid.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="creating-and-using-auto-layout"><a href="#creating-and-using-auto-layout">Creating and using auto layout</a></h1>
+
+<p>The following runnable sample demonstrates how to create auto layout for the Kendo UI Grid. Please note that the auto layout requires disabled Grid scrolling</p>
+
+<h4>Example</h4>
+
+<pre lang="html"><code>    &lt;style&gt;
+      html
+      {
+        font: 12px sans-serif;
+      }
+
+      .k-grid
+      {
+        width: 500px;
+      }
+
+      #grid3
+      {
+        display: inline-block;
+        width: auto;    
+      }
+
+      #grid3 table
+      {
+        width: auto;
+      }
+    &lt;/style&gt;
+    &lt;p&gt;&lt;strong&gt;N.B: Auto layout requires disabled Grid scrolling.&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;h3&gt;No column widths, auto layout&lt;/h3&gt;
+
+    &lt;div id="grid1"&gt;&lt;/div&gt;
+
+    &lt;h3&gt;One narrow column with other wide columns, auto layout&lt;/h3&gt;
+
+    &lt;div id="grid2"&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Minimal Grid with auto layout.&lt;/h3&gt;
+
+    &lt;div id="grid3"&gt;&lt;/div&gt; 
+    &lt;script&gt;
+      var gridConfig = {
+        dataSource: {
+          type: "odata",
+          transport: {
+            read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+          },
+          schema: {
+            model: {
+              fields: {
+                OrderID: { type: "number" },
+                Freight: { type: "number" },
+                OrderDate: { type: "date" }
+              }
+            }
+          },
+          pageSize: 5,
+          serverPaging: true,
+          serverFiltering: true,
+          serverSorting: true
+        },
+        scrollable: false,
+        sortable: true,
+        pageable: {numeric:false, info:false}
+      };
+
+      $("#grid1").kendoGrid($.extend(gridConfig, {
+        columns: [{
+          field: "OrderID"
+        }, {
+          field: "Freight"
+        }, {
+          field: "OrderDate",
+          format: "{0:MM/dd/yyyy}"
+        }]
+      }));
+
+      $("#grid2").kendoGrid($.extend(gridConfig, {
+        columns: [{
+          field: "OrderID"
+        }, {
+          field: "Freight",
+          width: 75
+        }, {
+          field: "OrderDate",
+          format: "{0:MM/dd/yyyy}"
+        }]
+      }));
+
+      $("#grid3").kendoGrid($.extend(gridConfig, {
+        columns: [{
+          field: "OrderID"
+        }, {
+          field: "Freight"
+        }, {
+          field: "OrderDate",
+          format: "{0:MM/dd/yyyy}"
+        }]
+      }));
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

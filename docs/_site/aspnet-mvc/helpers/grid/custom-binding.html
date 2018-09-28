@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Custom binding in Kendo UI Grid for ASP.NET MVC | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to use and configure Kendo UI Grid for ASP.NET MVC for server custom binding.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/helpers/grid/custom-binding.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/helpers/grid/custom-binding.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="custom-binding"><a href="#custom-binding">Custom Binding</a></h1>
+
+<p>Kendo Grid for ASP.NET MVC provides ability for the developer to bypass the built-in data processing and to handle operations such paging, sorting, filtering and grouping by himself. This is supported both for server and ajax binding.</p>
+
+<h2 id="custom-server-binding"><a href="#custom-server-binding">Custom server binding</a></h2>
+
+<p>To configure the Kendo Grid for server custom binding follow these steps:</p>
+
+<ol>
+<li>
+<p>Add a new parameter of type <code>Kendo.UI.DataSourceRequest</code> to the action method.
+It will contain the current grid request information - page, sort, group and filter.
+Decorate that parameter with the <code>Kendo.UI.DataSourceRequestAttribute</code>. That attribute is responsible for populating the <code>DataSourceRequest</code> object.</p>
+
+<pre><code>public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+{
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+}
+</code></pre>
+</li>
+<li>
+<p>Assign a default pageSize:</p>
+
+<pre><code>public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+{
+    if (request.PageSize == 0)
+    {
+       request.PageSize = 10;
+    }
+
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+}
+</code></pre>
+</li>
+<li>
+<p>Handle the appropriate data operations:</p>
+
+<pre><code>public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+{
+    if (request.PageSize == 0)
+    {
+        request.PageSize = 10;
+    }
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+
+    if (request.Sorts.Any())
+    {
+        foreach (SortDescriptor sortDescriptor in request.Sorts)
+        {
+            if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
+            {
+                switch (sortDescriptor.Member)
+                {
+                    case "OrderID":
+                        orders= orders.OrderBy(order =&gt; order.OrderID);
+                        break;
+                    case "ShipAddress":
+                        orders= orders.OrderBy(order =&gt; order.ShipAddress);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortDescriptor.Member)
+                {
+                    case "OrderID":
+                        orders= orders.OrderByDescending(order =&gt; order.OrderID);
+                        break;
+                    case "ShipAddress":
+                        orders= orders.OrderByDescending(order =&gt; order.ShipAddress);
+                        break;
+                }
+            }
+        }
+    }
+    else
+    {
+        // EF can't page unsorted data
+        orders = orders.OrderBy(o =&gt; o.OrderID);
+    }
+
+    // Apply paging
+    if (request.Page &gt; 0) {
+        orders = orders.Skip((request.Page - 1) * request.PageSize);
+    }
+    orders = orders.Take(request.PageSize);
+}
+</code></pre>
+</li>
+<li>
+<p>Calculate the total number of records.</p>
+
+<pre><code>public ActionResult Index([DataSourceRequest(Prefix = "Grid")] DataSourceRequest request)
+{
+    if (request.PageSize == 0)
+    {
+        request.PageSize = 10;
+    }
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+
+    //Apply sorting (code omitted)
+
+    // Calculate the total number of records before paging
+    var total = orders.Count();
+
+    // Apply paging
+
+    ViewData["total"] = total;
+}
+</code></pre>
+</li>
+<li>
+<p>Pass the processed data to the View.</p>
+
+<pre><code>public ActionResult Index([DataSourceRequest]DataSourceRequest request)
+{
+    // Get the data (code omitted)
+    // Apply sorting (code omitted)
+    // Calculate the total number of records (code omitted)
+
+    // Apply paging (code omitted)
+
+    return View(orders);
+}
+</code></pre>
+</li>
+<li>
+<p>Set <code>EnableCustomBinding(true)</code> through the Grid Widget declaration.</p>
+
+<pre><code>@model IEnumerable&lt;KendoGridCustomServerBinding.Models.Order&gt;
+
+@(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .EnableCustomBinding(true)
+    .Columns(columns =&gt; {
+        columns.Bound(o =&gt; o.OrderID);
+        columns.Bound(o =&gt; o.ShipAddress);
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+)
+</code></pre>
+</li>
+<li>
+<p>Assign the total number of records through the <code>DataSource</code>, in case paging is enabled.</p>
+
+<pre><code>@model IEnumerable&lt;KendoGridCustomServerBinding.Models.Order&gt;
+
+@(Html.Kendo().Grid(Model)
+    .Name("Grid")
+    .EnableCustomBinding(true)
+    .Columns(columns =&gt; {
+        columns.Bound(o =&gt; o.OrderID);
+        columns.Bound(o =&gt; o.ShipAddress);
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .DataSource(dataSource =&gt; dataSource
+        .Server()
+        .Total((int)ViewData["total"]) // set the total number of records
+    )
+)
+</code></pre>
+</li>
+</ol>
+
+<p><a href="https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding">Download Visual Studio Project</a></p>
+
+<h2 id="custom-ajax-binding"><a href="#custom-ajax-binding">Custom ajax binding</a></h2>
+
+<p>To configure the Kendo Grid for ajax custom binding follow these steps:</p>
+
+<ol>
+<li>
+<p>Add a new parameter of type <code>Kendo.UI.DataSourceRequest</code> to the action method.
+It will contain the current grid request information - page, sort, group and filter. Decorate that parameter with the
+<code>Kendo.UI.DataSourceRequestAttribute</code>. That attribute is responsible for populating the DataSourceRequest object.</p>
+
+<pre><code>public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+{
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+}
+</code></pre>
+</li>
+<li>
+<p>Handle the appropriate data operations and calculate the total number of records.</p>
+
+<pre><code>public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+{
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+
+    //Apply sorting
+
+    if (request.Sorts.Any())
+    {
+        foreach (SortDescriptor sortDescriptor in request.Sorts)
+        {
+            if (sortDescriptor.SortDirection == ListSortDirection.Ascending)
+            {
+                switch (sortDescriptor.Member)
+                {
+                    case "OrderID":
+                        orders= orders.OrderBy(order =&gt; order.OrderID);
+                        break;
+                    case "ShipAddress":
+                        orders= orders.OrderBy(order =&gt; order.ShipAddress);
+                        break;
+                }
+            }
+            else
+            {
+                switch (sortDescriptor.Member)
+                {
+                    case "OrderID":
+                        orders= orders.OrderByDescending(order =&gt; order.OrderID);
+                        break;
+                    case "ShipAddress":
+                        orders= orders.OrderByDescending(order =&gt; order.ShipAddress);
+                        break;
+                }
+            }
+        }
+    }
+    else
+    {
+        // EF can't page unsorted data
+        orders = orders.OrderBy(o =&gt; o.OrderID);
+    }
+
+    var total = orders.Count();
+
+    // Apply paging
+    if (request.Page &gt; 0) {
+        orders = orders.Skip((request.Page - 1) * request.PageSize);
+    }
+    orders = orders.Take(request.PageSize);
+}
+</code></pre>
+</li>
+<li>
+<p>Create new instance of <code>DataSourceResult</code> and set the <code>Data</code> and <code>Total</code> properties to the processed data and total number of records.</p>
+
+<pre><code>public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+{
+    // Get the data (code omitted)
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+
+    // Apply sorting (code omitted)
+
+    // Apply paging (code omitted)
+
+    // Initialize  the DataSourceResult
+    var result = new DataSourceResult()
+    {
+        Data = orders, // Process data (paging and sorting applied)
+        Total = total // Total number of records
+    };
+}
+</code></pre>
+</li>
+<li>
+<p>Return the <code>DataSourceResult</code> as JSON.</p>
+
+<pre><code>public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
+{
+    // Get the data (code omitted)
+    IQueryable&lt;Order&gt; orders = new NorthwindEntities().Orders;
+
+    // Apply sorting (code omitted)
+
+    // Apply paging (code omitted)
+
+    // Initialize  the DataSourceResult (code omitted)
+
+    var result = new DataSourceResult()
+    {
+        Data = orders, // Process data (paging and sorting applied)
+        Total = total // Total number of records
+    };
+
+    // Return the result as JSON
+    return Json(result);
+}
+</code></pre>
+</li>
+<li>
+<p>Configure the grid for custom ajax binding</p>
+
+<pre><code>@(Html.Kendo().Grid&lt;KendoGridCustomAjaxBinding.Models.Order&gt;()
+    .Name("Grid")
+    .EnableCustomBinding(true)
+    .Columns(columns =&gt; {
+        columns.Bound(o =&gt; o.OrderID);
+        columns.Bound(o =&gt; o.ShipAddress);
+    })
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Read("Orders_Read", "Home")
+    )
+)
+</code></pre>
+</li>
+</ol>
+
+<p><a href="https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-ajax-binding">Download Visual Studio Project</a></p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

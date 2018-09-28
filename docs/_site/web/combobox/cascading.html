@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>jQuery-powered Cascading ComboBox in Kendo UI Web</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="This document provides information how Kendo UI cascading ComboBox works and helps you handle most common scenarios with illustrative examples and FAQ.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/combobox/cascading.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/combobox/cascading.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="cascading-comboboxes"><a href="#cascading-comboboxes">Cascading ComboBoxes</a></h1>
+
+<p>The cascading comboboxes are a series of 2 or more comboboxes in which each combobox is filtered according to the previous combobox.</p>
+
+<h2 id="how-it-works"><a href="#how-it-works">How it works?</a></h2>
+
+<p>Here is a simple example:</p>
+
+<pre><code>&lt;input id="parent" /&gt;
+&lt;input id="child" /&gt;
+
+&lt;script type="text/javascript"&gt;
+     $(function() {
+         $("#parent").kendoComboBox({
+            dataTextField: "parentName",
+            dataValueField: "parentID"
+            //Define the combobox's settings
+         });
+
+         $("#child").kendoComboBox({
+            cascadeFrom: "parent"
+            //Define other settings
+         });
+     });
+&lt;/script&gt;
+</code></pre>
+
+<p>The "child" combobox will cascade from the "parent" combobox if the <a href="/kendo-ui/api/web/combobox#configuration">cascadeFrom</a> option is defined. The <code>cascadeFrom</code> option should point to the parent's ID.</p>
+
+<blockquote>
+<p><strong>Important:</strong> If the <code>cascadeFrom</code> property is not defined or the parent combobox is not initialized then the cascading functionality will not <strong>work</strong>.</p>
+</blockquote>
+
+<p>Here is a list of the actions which the child combobox makes during the initialization:</p>
+
+<ul>
+<li>Checks if the "cascadeFrom" property is set. If not then the cascading is disabled.</li>
+<li>Tries to find the parent combobox object. If the result is null, then the functionality is omitted.</li>
+<li>The child combobox will listen to any changes of the parent's value.</li>
+<li>If the parent does not have a value, then the child will be disabled.</li>
+<li>
+<p>If the parent has a value, then the child will be enabled and will filter its data depending on it. Here is how the filter options will look like:</p>
+
+<pre><code>field: "parentID",  //the dataValueField of the parent
+operator: "eq",
+value: "" //parent's value
+</code></pre>
+</li>
+</ul>
+
+<p>And here are the paramenters of this request:</p>
+
+<pre><code>    filter[logic]: and
+    filter[filters][0][field]: parentID
+    filter[filters][0][operator]: eq
+    filter[filters][0][value]:
+</code></pre>
+
+<blockquote>
+<p>Please note that the filter operator will always be "eq". The child combobox will use the <code>dataValueField</code> option of the parent combobox in order to filter the data.</p>
+</blockquote>
+
+<h4>FAQ</h4>
+
+<p>Q: I am using cascading comboboxes with <code>"autoBind: true"</code> option set and I need to pre-set the selected items. How to do that?</p>
+
+<p>A: You need to set the value of the comboboxes. For instance, you can define it before initialization:</p>
+
+<pre><code>&lt;input id="parent" value="1" /&gt;
+&lt;input id="child" value="36" /&gt;
+
+&lt;script&gt;
+   $("#parent").kendoComboBox();
+
+   $("#child").kendoComboBox({
+            cascadeFrom: "parent"
+   });
+&lt;/script&gt;
+</code></pre>
+
+<p>You also can use the <a href="/kendo-ui/api/web/combobox#configuration">value</a> option.</p>
+
+<p>Q: I am using comboboxes with load on demand (autoBind: false) and I need to pre-set the selected items. How to do that?</p>
+
+<p>A: You need to set the <a href="/kendo-ui/api/web/combobox#configuration">value</a> and <a href="/kendo-ui/api/web/combobox#configuration">text</a> options.</p>
+
+<pre><code>&lt;input id="parent" value="1" /&gt;
+&lt;input id="child" value="36" /&gt;
+
+&lt;script&gt;
+   $(function() {
+        $("#parent").kendoComboBox({
+           value: "1",
+           text: "Parent1",
+           dataTextField: "parentName",
+           dataValueField: "parentID",
+           dataSource: {
+              //dataSource settings
+           },
+           autoBind: false
+        });
+
+        $("#child").kendoComboBox({
+           cascadeFrom: "parent",
+           value: "36",
+           text: "Child36",
+           dataTextField: "childName",
+           dataValueField: "childID",
+           dataSource: {
+              //dataSource settings
+           },
+           autoBind: false
+        });
+   });
+&lt;/script&gt;
+</code></pre>
+
+<p>Q: The serverFiltering is disabled and the child combobox does not work?</p>
+
+<p>A: When <a href="/kendo-ui/api/framework/datasource#configuration">serverFiltering</a> is disabled, then the combobox will not make any additional requests to the server. Hence it will filter the initial data using the parent's dataValueField property. If no items are found, then the child combobox will be left empty. If you need to use child combobox with disabled server filtering, then you will need to provide all neccessary data on the client.</p>
+
+<p>Q: Cannot get the request parameters on the server?</p>
+
+<p>A: Check the format of the request parameters in the end of the "How it works?" section. Modify your server code in order to get them correctly.
+Other option is to pass the ID of the parent combobox manually, using the data callback of the DataSource's Transport.Read object:</p>
+
+<pre><code>&lt;input id="child" /&gt;
+
+&lt;script&gt;
+  $("#child").kendoComboBox({
+    cascadeFrom: "parent",
+    dataTextField: "childName",
+    dataValueField: "childID",
+    dataSource: {
+      transport: {
+        read: {
+          url: "",
+          data: function() {
+            return { parentID: $("#parent").val() };
+          }
+        }
+      }
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

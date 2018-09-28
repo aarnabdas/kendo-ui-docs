@@ -1,0 +1,594 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Popup</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Easy to follow steps guide how to quickly configure Popup UI widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/popup.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/popup.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouipopup"><a href="#kendouipopup">kendo.ui.Popup</a></h1>
+
+<p>Represents the Kendo UI Popup widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the opening and closing animations of the popup. Setting the <code>animation</code> option to <code>false</code> will disable the opening and closing animations. As a result the popup will open and close instantly.</p>
+
+<h4>Example - disable open and close animations</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+  animation: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - configure the animation</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+  animation: {
+   close: {
+     effects: "fadeOut zoom:out",
+     duration: 300
+   },
+   open: {
+     effects: "fadeIn zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close">
+<a href="#configuration-animation.close">animation.close </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation played when the popup is closed.</p>
+
+<h4>Example - configure the close animation</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+  animation: {
+   close: {
+     effects: "zoom:out",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.effects">
+<a href="#configuration-animation.close.effects">animation.close.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-animation.close.duration">
+<a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The duration of the close animation in milliseconds.</p>
+
+<h3 id="configuration-animation.open">
+<a href="#configuration-animation.open">animation.open </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation played when the calendar popup is opened.</p>
+
+<h4>Example - configure the open animation</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+  animation: {
+   open: {
+     effects: "zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.effects">
+<a href="#configuration-animation.open.effects">animation.open.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-animation.open.duration">
+<a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The duration of the open animation in milliseconds.</p>
+
+<h3 id="configuration-anchor">
+<a href="#configuration-anchor">anchor </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>Specifies the element that will be used as an anchor. The widget will open next to that element.</p>
+
+<h4>Example - specify an anchor</h4>
+
+<pre><code>&lt;input id="datepicker" /&gt;
+&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+
+&lt;script&gt;
+    $("#popup").kendoPopup({
+        anchor: $("#datepicker")
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-appendTo">
+<a href="#configuration-appendTo">appendTo </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a><em>(default: document.body)</em>
+</h3>
+
+<p>Which element the popup will be appended to.</p>
+
+<h4>Example - append to different element</h4>
+
+<pre><code>&lt;input id="datepicker" /&gt;
+&lt;div id="container"&gt;&lt;/div&gt;
+
+&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+
+&lt;script&gt;
+    $("#popup").kendoPopup({
+        anchor: $("#datepicker"),
+        appendTo: $("#container")
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-origin">
+<a href="#configuration-origin">origin </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "bottom left")</em>
+</h3>
+
+<p>Specifies how to position the popup element based on achor point. The value is
+space separated "y" plus "x" position.</p>
+
+<p>The available "y" positions are:</p>
+
+<ul>
+<li>"bottom"</li>
+<li>"center"</li>
+<li>"top"</li>
+</ul>
+
+<p>The available "x" positions are:</p>
+
+<ul>
+<li>"left"</li>
+<li>"center"</li>
+<li>"right"</li>
+</ul>
+
+<h4>Example - position the popup on top of the anchor</h4>
+
+<pre><code>&lt;input id="datepicker" /&gt;
+&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+
+&lt;script&gt;
+    $("#popup").kendoPopup({
+        anchor: $("#datepicker"),
+        origin: "top left"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position">
+<a href="#configuration-position">position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "top left")</em>
+</h3>
+
+<p>Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.</p>
+
+<p>The available "y" positions are:</p>
+
+<ul>
+<li>"bottom"</li>
+<li>"center"</li>
+<li>"top"</li>
+</ul>
+
+<p>The available "x" positions are:</p>
+
+<ul>
+<li>"left"</li>
+<li>"center"</li>
+<li>"right"</li>
+</ul>
+
+<h4>Example - position the popup on top of the anchor</h4>
+
+<pre><code>&lt;input id="datepicker" /&gt;
+&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+
+&lt;script&gt;
+    $("#popup").kendoPopup({
+        anchor: $("#datepicker"),
+        position: "bottom left"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes the popup.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;button id="close"&gt;Close&lt;/button&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+popup.open();
+
+$("#close").click(function() {
+    popup.close();
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-open"><a href="#methods-open">open</a></h3>
+
+<p>Opens the popup.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;button id="open"&gt;Open&lt;/button&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+$("#open").click(function() {
+    popup.open();
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-position"><a href="#methods-position">position</a></h3>
+
+<p>Re-positions the popup element</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.position();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setOptions"><a href="#methods-setOptions">setOptions</a></h3>
+
+<p>Changes the initial Popup configuration.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The new configuration options.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.setOptions({
+    origin: "top left"
+    position: "bottom left"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-visible"><a href="#methods-visible">visible</a></h3>
+
+<p>Checks whether the popup is visible</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> True when the popup is visible</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+alert(popup.visible());
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-activate"><a href="#events-activate">activate</a></h3>
+
+<p>Fires when the popup is opened</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Popup</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "activate" event during initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+    activate: function(e) {
+        e.preventDefault(); //prevent popup closing
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "activate" event after initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.bind("activate", function(e) {
+    e.preventDefault(); //prevent popup closing
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Fires when the popup closes</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Popup</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "close" event during initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+    close: function(e) {
+        e.preventDefault(); //prevent popup closing
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "close" event after initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.bind("close", function(e) {
+    e.preventDefault(); //prevent popup closing
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-deactivate"><a href="#events-deactivate">deactivate</a></h3>
+
+<p>Fires when the popup is closed</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Popup</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "deactivate" event during initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+    deactivate: function(e) {
+        e.preventDefault(); //prevent popup closing
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "deactivate" event after initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.bind("deactivate", function(e) {
+    e.preventDefault(); //prevent popup closing
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Fires when the popup opens</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Popup</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "open" event during initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup({
+    open: function(e) {
+        e.preventDefault(); //prevent popup closing
+    }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "open" event after initialization</h4>
+
+<pre><code>&lt;div id="popup"&gt;CONTENT&lt;/div&gt;
+&lt;script&gt;
+$("#popup").kendoPopup();
+
+var popup = $("#popup").data("kendoPopup");
+
+popup.bind("open", function(e) {
+    e.preventDefault(); //prevent popup closing
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

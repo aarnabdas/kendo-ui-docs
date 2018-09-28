@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Sortable widget - integration with Grid/ListView</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to reorder Kendo UI Grid/ListView items with the Sortable widget">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/sortable/integration.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/sortable/integration.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="integration-with-kendo-ui-gridlistview"><a href="#integration-with-kendo-ui-gridlistview">Integration with Kendo UI Grid/ListView</a></h1>
+
+<p>The Sortable widget may be used to reorder Kendo UI Grid/ListView items via drag and drop.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The Sortable widget reorders the HTML DOM elements. It will not automatically update the order of the items in the DataSource. It is up to the developer to implement this behaviour.</p>
+</blockquote>
+
+<h2 id="prerequisites"><a href="#prerequisites">Prerequisites</a></h2>
+
+<p>The article assumes that you are familiar with the following:</p>
+
+<ul>
+<li><a href="../../../web/sortable/overview">Kendo UI Sortable</a></li>
+<li><a href="../../../web/grid/overview">Kendo UI Grid</a></li>
+<li><a href="../../../api/framework/datasource#methods">Kendo UI DataSource API</a></li>
+</ul>
+
+<h2 id="reorder-kendo-ui-grid-table-rows-using-the-sortable-widget"><a href="#reorder-kendo-ui-grid-table-rows-using-the-sortable-widget">Reorder Kendo UI Grid table rows using the Sortable widget</a></h2>
+
+<p>The Sortable widget should be initialized on the Grid's <a href="../../../api/web/grid#fields-table"><code>table element</code></a>.
+In the general case, the <code>filter</code> property of the Sortable widget should select all <code>tr</code> elements that are direct children of the table's <code>tbody</code> element. For example: <code>filter: "&gt;tbody &gt;tr"</code>.</p>
+
+<p><strong>If the Grid's editing is enabled</strong>, you should use a more specific filter selector that excludes the item that is currently in edit mode.
+For example <code>.filter("&gt;tbody &gt;tr:not(.k-grid-edit-row)")</code>. In this way the Sortable functionality will not interfere with Grid's editing feature.</p>
+
+<p><strong>If the Grid is configured to display details</strong>, you should use a selector that matches only the master Grid rows. For example: <code>filter: "&gt;tbody &gt;tr.k-master-row"</code>.
+In this way the detail rows will not be draggable.</p>
+
+<p>For more information check the <a href="../../../api/web/sortable#events">Sortable events</a> and the <a href="http://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html">Grid/Sortable integration demo</a>.</p>
+
+<h2 id="sortable-with-editing"><a href="#sortable-with-editing">Sortable with editing</a></h2>
+
+<p>In order the draggable functionality to work we prevent the mouse down event.
+This causes the editor input to not fire its change event which in turns prevents the MVVM from saving the updated value.</p>
+
+<p>In case you use <code>inline</code> or <code>popup</code> editing mode you should set a more specific filter that excludes the item that is currently in edit mode.</p>
+
+<pre><code>.filter("&gt;tbody &gt;tr:not(.k-grid-edit-rowa)")
+</code></pre>
+
+<p>The above will <strong>not work</strong> in case you use <strong><code>batch</code>/<code>incell</code> editing</strong> mode.
+In such case the solution is to use <a href="http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor">custom editors</a> and configure them to <a href="http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated">update when the input event fires</a> (by default framework listens for the change event).
+To do that you should add <code>data-value-update="input"</code> attribute to the editor inputs. The downside of this approach is that the input event will not work for old IE browsers.</p>
+
+<blockquote>
+<p>Widgets do not support <code>data-value-update</code> attribute! The <code>data-value-update</code> approach <strong>will work with regular inputs but not widgets</strong>. You should update the widget manually.</p>
+</blockquote>
+
+<h2 id="reorder-the-items-in-the-datasource"><a href="#reorder-the-items-in-the-datasource">Reorder the items in the DataSource</a></h2>
+
+<p>The <code>change</code> event of the Sortable widget will fire after a row position is changed. You may bind to the <code>change</code> event to update the order of the items in the DataSource.</p>
+
+<h3 id="example---shift-the-position-of-the-items-in-the-datasource"><a href="#example---shift-the-position-of-the-items-in-the-datasource">Example - shift the position of the items in the DataSource</a></h3>
+
+<pre><code>//the change event handler of the Sortable widget
+function onChange(e) {
+    var grid = e.sender.element.data("kendoGrid"),
+        oldIndex = e.oldIndex , //the old position
+        newIndex = e.newIndex , //the new position
+        view = grid.dataSource.view(),
+        dataItem = grid.dataSource.getByUid(e.item.data("uid")); //retrieve the moved dataItem
+
+    dataItem.Order = newIndex; //update the order
+    dataItem.dirty = true;
+
+    //shift the order of the records
+    if (oldIndex &lt; newIndex) {
+        for (var i = oldIndex + 1; i &lt;= newIndex; i++) {
+            view[i].Order--;
+            view[i].dirty = true;
+        }
+    } else {
+        for (var i = oldIndex - 1; i &gt;= newIndex; i--) {
+            view[i].Order++;
+            view[i].dirty = true;
+        }
+    }
+
+    grid.dataSource.sync(); //submit the changes through the update transport and refresh the Grid
+}
+</code></pre>
+
+<h3 id="example---send-the-newindex-and-oldindex-to-the-server"><a href="#example---send-the-newindex-and-oldindex-to-the-server">Example - send the newIndex and oldIndex to the server</a></h3>
+
+<pre><code>//the change event handler of the Sortable widget
+function onChange(e) {
+    var grid = e.sender.element.data("kendoGrid"),
+        oldIndex = e.oldIndex , //the old position
+        newIndex = e.newIndex , //the new position
+        dataItem = grid.dataSource.getByUid(e.item.data("uid")); //retrieve moved dataItem
+
+    $.ajax({
+        url: "yourUrl",
+        dataType: "json",
+        data: { //send the data and update the order of the items on the server
+            oldIndex: oldIndex,
+            newIndex: newIndex,
+            dataItem: dataItem
+        },
+        success: function (response) {
+            grid.dataSource.read(); //refresh the Grid
+        }
+    });
+}
+</code></pre>
+
+<h2 id="customize-the-hint"><a href="#customize-the-hint">Customize the hint</a></h2>
+
+<p>The hint element is appended to the <code>&lt;body&gt;</code> element and as a result its width will be different from the Grid's one.
+The following example demonstrates how to style the hint element so it <strong>looks like the row element</strong> that is currently dragged.</p>
+
+<pre><code>&lt;div id="grid"&gt;&lt;/div&gt;
+&lt;script&gt;
+
+  $("#grid").kendoGrid({
+    dataSource: {
+      data: [{name: "John", age: 25}, {name: "Jane", age: 25}]
+    }
+  });
+
+  $("#grid").data("kendoGrid").table.kendoSortable({
+    filter: "&gt;tbody &gt;tr",
+    hint: function(element) { //customize the hint
+      var grid = $("#grid").data("kendoGrid"),
+          table = grid.table.clone(), //clone Grid's table
+          wrapperWidth = grid.wrapper.width(), //get Grid's width
+          wrapper = $("&lt;div class='k-grid k-widget'&gt;&lt;/div&gt;").width(wrapperWidth),
+          hint;
+
+      table.find("thead").remove(); //remove Grid's header from the hint
+      table.find("tbody").empty(); //remove the existing rows from the hint
+      table.wrap(wrapper); //wrap the table
+      table.append(element.clone()); //append the dragged element
+
+      hint = table.parent(); //get the wrapper
+
+      return hint; //return the hint element
+    },
+    placeholder: function(element) { //customize the placeholder
+      return element.clone().addClass("k-state-hover").css("opacity", 0.65);
+    },
+    change: function(e) {
+      //handle the change event
+      //update the underlying data according to the DOM position change
+      //see previous examples
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="known-limitations"><a href="#known-limitations">Known limitations</a></h2>
+
+<ul>
+<li>The Sortable widget does not work as expected with Grid that has paging or virtual scrolling.</li>
+</ul>
+
+<p>The Sortable widget operates with the existing DOM. It is not aware of the Grid nor its DataSource.
+If paging or virtual scrolling are turned on, the Grid widget will render only the elements which belong to the current page. As a result, the sorting will be limited to the current page only.</p>
+
+<ul>
+<li>The Sortable widget does not work as expected with a grouped Grid.</li>
+</ul>
+
+<p>The Sortable widget uses the index of the DOM elements.
+When the Grid displays grouped data, the index of the DOM element does not match the index of the corresponding data item in the DataSource. This makes updating the order in the DataSource impossible.</p>
+
+<ul>
+<li>The Sortable widget does not work with Grid that has locked(frozen) columns</li>
+</ul>
+
+<h2 id="reorder-kendo-ui-listview-items-using-the-sortable-widget"><a href="#reorder-kendo-ui-listview-items-using-the-sortable-widget">Reorder Kendo UI ListView Items using the Sortable widget</a></h2>
+
+<blockquote>
+<p><strong>Important:</strong> The Sortable widget reorders the HTML DOM elements. It will not automatically update the order of the items in the DataSource. It is up to the developer to implement this behaviour.</p>
+</blockquote>
+
+<p>Sortable widget should be initialized on the ListView element. In the general case the <code>filter</code> property of the widget should select all elements that are direct children of the ListView's element. For example: <code>.filter("&gt;div")</code>.</p>
+
+<p><strong>If the ListView's editing is enabled</strong> the developer should use a more specific filter selector that excludes the item which is currently in edit mode.
+For example <code>.filter("&gt;div:not(.k-edit-item)"</code>. In this way the Sortable will not interfere with ListView's editing feature.</p>
+
+<p>Reordering the ListView dataItems may be implemented in the same way as with the Grid. See the examples above.
+For more information check the <a href="../../../api/web/sortable#events">Sortable's events</a> and the <a href="http://demos.telerik.com/kendo-ui/web/sortable/integration-listview.html">ListView/Sortable integration demo</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

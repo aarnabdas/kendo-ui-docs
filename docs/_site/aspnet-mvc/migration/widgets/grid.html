@@ -1,0 +1,662 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Server-side API documentation for Kendo UI jQuery Grid widget for ASP.NET MVC</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Documentation and code examples about server-side and client-side API for Kendo UI Grid component.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/migration/widgets/grid.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/migration/widgets/grid.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="server-side-api"><a href="#server-side-api">Server-Side API</a></h1>
+
+<h2 id="datakeys"><a href="#datakeys">DataKeys</a></h2>
+
+<p>DataKeys Are Moved to the Datasource Model Configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")       
+    .DataKeys(dataKeys =&gt; dataKeys.Add(o =&gt; o.OrderID))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()
+    .Name("Grid")
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Model(model =&gt; model.Id(o =&gt; o.OrderID))
+    )
+</code></pre>
+
+<h2 id="databinding"><a href="#databinding">DataBinding</a></h2>
+
+<h3 id="configuration"><a href="#configuration">Configuration</a></h3>
+
+<p>DataBinding Configuration Is Moved to Datasource:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")      
+    .DataBinding(dataBinding =&gt; dataBinding.Ajax().Select("_AjaxBinding", "Grid"))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid")  
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Read(read =&gt; read.Action("AjaxBinding ", "Grid"))
+    )
+</code></pre>
+
+<h3 id="methods"><a href="#methods">Methods</a></h3>
+
+<p><strong>OperationMode</strong> has changed to <strong>ServerOperation</strong>:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")      
+    .DataBinding(dataBinding =&gt; dataBinding.Ajax().OperationMode(GridOperationMode.Client))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()
+    .Name("Grid")
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .ServerOperation(false)
+    )
+</code></pre>
+
+<p><strong>DataBinding.WebService</strong> Is Removed</p>
+
+<p>Databinding "Url" Methods Are Renamed to Match the KendoUI Datasource Client Configuration.</p>
+
+<h4>Old -&gt; New</h4>
+
+<h5>Select</h5>
+
+<p>Read</p>
+
+<h5>Update</h5>
+
+<p>Update</p>
+
+<h5>Delete</h5>
+
+<p>Destroy</p>
+
+<h5>Insert</h5>
+
+<p>Create</p>
+
+<h3 id="detailview"><a href="#detailview">DetailView</a></h3>
+
+<p><strong>DetailView.Clienttemplate</strong> Changed to <strong>ClientDetailTemplateId</strong>:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")
+    .DetailView(details =&gt; details.ClientTemplate(
+        Html.Telerik().TabStrip()
+        .Name("TabStrip_&lt;#= EmployeeID #&gt;")                                                                                                           
+        .ToHtmlString()
+    ))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()
+    .Name("Grid")
+    .ClientDetailTemplateId("employeesTemplate")
+
+&lt;script id="employeesTemplate" type="text/kendo-tmpl"&gt;
+    @(Html.Kendo().TabStrip()
+        .Name("TabStrip_#=EmployeeID#")           
+        .ToClientTemplate())
+&lt;/script&gt;
+</code></pre>
+
+<p><strong>DetailView.Template</strong> changed to <strong>DetailTemplate</strong>:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid(Model)
+    .Name("Employees")  
+    .DetailView(detailView =&gt; detailView.Template(e =&gt;
+    {           
+            Html.Telerik().TabStrip()
+                .Name("TabStrip_" + e.EmployeeID)
+                .Render();
+    }))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid(Model)
+    .Name("Employees")   
+    .DetailTemplate(e =&gt;
+    {            
+        Html.Kendo().TabStrip()
+        .Name("TabStrip_" + e.EmployeeID) 
+        .Render();
+    })
+</code></pre>
+
+<h3 id="editing"><a href="#editing">Editing</a></h3>
+
+<p><strong>InForms</strong> Mode is no longer available.</p>
+
+<p><strong>InsertRowPosition</strong> is renamed to <strong>CreateAt</strong>.</p>
+
+<p><strong>BeginEdit</strong> and <strong>HtmlFormAttributes</strong> options are not available.</p>
+
+<p><strong>DefaultDataItem</strong> is moved to DataSource Model configuration.</p>
+
+<p>Grid editing now uses the Kendo Validator instead of jQuery validate.</p>
+
+<p>During updates the Telerik Extensions for ASP.NET MVC only sent the changed properties during updates. With Kendo IU Complete for ASP.NET MVC the whole model is now sent.</p>
+
+<p>Buttons related to editing now utilize both images and text. There are no text-only or image-only buttons available.</p>
+
+<p>Inline edit forms are immediately closed when the update button is clicked. This means that server validation errors should be handled and displayed in the Error event. For example:</p>
+
+<pre><code>...
+.DataSource(dataSource =&gt; dataSource
+    .Ajax()
+    .Events(events =&gt; events.Error("error_handler"))
+)
+...
+
+&lt;script type="text/javascript"&gt;
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                        });
+                    }
+                });
+            alert(message);
+        }
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")                           
+    .Editable(editable =&gt; editable.DefaultDataItem(new Order {
+        OrderDate = DateTime.Today
+    }))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()    
+    .Name("Grid")     
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Model(model =&gt; model.Field(o =&gt; o.OrderDate).DefaultValue(DateTime.Today)) 
+    )
+</code></pre>
+
+<h2 id="grouping"><a href="#grouping">Grouping</a></h2>
+
+<p>Groups Configuration Is Moved to Datasource:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")                        
+    .Groupable(groupable =&gt; groupable
+        .Groups(groups =&gt; groups.Add(o =&gt; o.OrderDate))
+    )    
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid")    
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()                       
+        .Group(group =&gt; group.Add(o =&gt; o.OrderDate))
+    )     
+</code></pre>
+
+<p><strong>Visible</strong> option is removed. Same functionality can be achieved by setting <strong>Groupable.Enabled</strong> to false and Group descriptors through the DataSource.</p>
+
+<h2 id="sorting"><a href="#sorting">Sorting</a></h2>
+
+<p><strong>OrderBy</strong> Is Moved to The DataSource Configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")   
+    .Sortable(sortable =&gt; sortable.OrderBy(order =&gt; order.Add(o =&gt; o.OrderDate).Ascending()))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid")    
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()                       
+        .Sort(sort =&gt; sort.Add(o =&gt; o.OrderDate).Ascending())
+    )
+</code></pre>
+
+<h2 id="filtering"><a href="#filtering">Filtering</a></h2>
+
+<p><strong>Filters</strong> Is Moved to The DataSource Configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")   
+    .Filterable(filtarable =&gt; filtarable.Filters(filters =&gt; filters.Add(o =&gt; o.OrderDate).IsEqualTo(DateTime.Today))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid")        
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()                        
+        .Filter(filter =&gt; filter.Add(o =&gt; o.OrderDate).IsEqualTo(DateTime.Today))
+    ) 
+</code></pre>
+
+<h2 id="pageable"><a href="#pageable">Pageable</a></h2>
+
+<p><strong>Position</strong> Is Not Available.</p>
+
+<p><strong>PageSize</strong> And Total Is Moved to the DataSource Configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")   
+    .Pageable(pageable =&gt; pageable.PageSize(42).Total(100))
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+.Name("Grid")        
+.DataSource(dataSource =&gt; dataSource
+    .Ajax()                       
+    .PageSize(42)
+    .Total(100)
+) 
+</code></pre>
+
+<p><strong>PageOnScroll</strong> Is Removed (Use <strong>Scrollable.Virtual</strong> Option to Enabled Virtual Scrolling Instead).</p>
+
+<p><strong>Style</strong> Is Removed. Pager Style Can Be Configured by Setting Individual Properties Such As <strong>Input</strong>, <strong>PageSizes</strong>, <strong>Info</strong>, <strong>Numeric</strong>, <strong>PreviousNext</strong>.</p>
+
+<h2 id="columns"><a href="#columns">Columns</a></h2>
+
+<p><strong>Aggregates</strong> are moved to the DataSource configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")   
+    .Columns(columns =&gt;
+    {
+        columns.Bound(o =&gt; o.OrderID)
+        .Aggregate(agg =&gt; agg.Count());          
+    })
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid"
+    .Columns(columns =&gt;
+    {
+        columns.Bound(o =&gt; o.OrderID);
+    })
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()                       
+        .Aggregates(agg =&gt; agg.Add(o =&gt; o.OrderID).Count())
+    )
+</code></pre>
+
+<p><strong>ReadOnly</strong> In Moved To DataSource Model Configuration:</p>
+
+<h4>Old</h4>
+
+<pre><code>Html.Telerik().Grid&lt;Order&gt;()
+    .Name("Grid")   
+    .Columns(columns =&gt;
+    {
+        columns.Bound(o =&gt; o.OrderID).ReadOnly(true);          
+    })
+</code></pre>
+
+<h4>New</h4>
+
+<pre><code>Html.Kendo().Grid&lt;Order&gt;()   
+    .Name("Grid")
+    .Columns(columns =&gt;
+    {
+        columns.Bound(o =&gt; o.OrderID);
+    })
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Model(model =&gt; model.Field(o =&gt; o.OrderID).Editable(false))
+    )
+</code></pre>
+
+<h2 id="keyboardnavigation"><a href="#keyboardnavigation">KeyboardNavigation</a></h2>
+
+<p><strong>KeyboardNavigation</strong> Is Renamed To <strong>Navigatable</strong>.</p>
+
+<p><strong>KeyboardNavigation.EditOnTab</strong> is not available. This is enabled by default.</p>
+
+<h2 id="norecordstemplate"><a href="#norecordstemplate">NoRecordsTemplate</a></h2>
+
+<p><strong>NoRecordsTemplate</strong> Is Not Available. There Will Be a No NoRecords Item but Text Will Be Shown Within the Pager. This Text Is Configurable Through <strong>Pageable.Messages</strong> Configuration</p>
+
+<h2 id="localization"><a href="#localization">Localization</a></h2>
+
+<p>Localization is essentially handled automatically. Changing the current .NET UI culture will load the corresponding localization assembly for the Kendo UI components.</p>
+
+<p>To change the built-in localization strings the following steps need to be taken.</p>
+
+<ol>
+<li>Edit the resource files in the source code project and create a custom build of the assembly.</li>
+<li>
+<p>Set corresponding property of the widget. For example:</p>
+
+<p>grid.Filterable(filter =&gt; filter.Messages(msg =&gt; msg.IsTrue("is true")));</p>
+</li>
+</ol>
+
+<h1 id="client-side-api-changes"><a href="#client-side-api-changes">Client-side API Changes</a></h1>
+
+<h2 id="client-side-api"><a href="#client-side-api">Client-side API</a></h2>
+
+<h4>MVC -&gt; Kendo</h4>
+
+<h5>insertRow</h5>
+
+<p>Removed. Use <strong>grid.dataSource.insert(index, model)</strong></p>
+
+<h5>updateRow</h5>
+
+<p>Renamed. Use <strong>saveRow</strong> instead.</p>
+
+<h5>hasChanges</h5>
+
+<p>Removed.</p>
+
+<h5>submitChanges</h5>
+
+<p>Renamed. Use <strong>saveChanges</strong> instead.</p>
+
+<h5>cancelCell</h5>
+
+<p>Renamed. Use <strong>closeCell</strong> instead.</p>
+
+<h5>saveCell</h5>
+
+<p>Renamed. use *<em>closeCell</em> instead.</p>
+
+<h5>insertedDataItems</h5>
+
+<p>Removed. Use the following code snippet instead:</p>
+
+<pre><code>var inserted = $.grep(grid.DataSource.data(), function(model) {
+    return model.isNew();
+});
+</code></pre>
+
+<h5>updatedDataitems</h5>
+
+<p>Removed. Use the following code snippet instead:</p>
+
+<pre><code>var inserted = $.grep(grid.dataSource.data(), function(model) {
+    return model.dirty;
+});
+</code></pre>
+
+<h5>deletedDataItems</h5>
+
+<p>Removed. Use the following code snippet instead (utilizing private API):</p>
+
+<pre><code>var destroyed = grid.dataSource._destroyed
+</code></pre>
+
+<h5>ajaxRequest</h5>
+
+<p>Removed. Use <strong>grid.dataSource.read()</strong> instead.</p>
+
+<h5>dataBind(data)</h5>
+
+<p>Removed. Use <strong>grid.dataSource.data(data)</strong> instead.</p>
+
+<h5>filter("Name~eq~'foo'");</h5>
+
+<p>Removed. Use the following code snippet instead:</p>
+
+<pre><code>grid.dataSource.filter( { field: "Name", operator: "eq", value: "foo" } )
+</code></pre>
+
+<h5>pageTo</h5>
+
+<p>Removed. Use <strong>grid.dataSource.page</strong> instead.</p>
+
+<h5>grid.rebind(params)</h5>
+
+<p>Removed. Use <strong>grid.dataSource.read(params)</strong> instead.</p>
+
+<h5>sort("Name-desc")</h5>
+
+<p>Removed. Use <strong>grid.dataSource.sort( { field: "Name", dir: "desc" } );</strong> instead.</p>
+
+<h5>serializeData</h5>
+
+<p>Removed.</p>
+
+<h2 id="client-side-events"><a href="#client-side-events">Client-side Events</a></h2>
+
+<p>All events have removed the "On" prefix.</p>
+
+<p>OnLoad no longer exists, please utilize <strong>$(document).ready()</strong> instead.</p>
+
+<h4>MVC -&gt; Kendo</h4>
+
+<h5>OnCommand</h5>
+
+<p>Removed. Utilize click event instead:</p>
+
+<pre><code>command.custom("ViewDetails").Click("showDetails")
+</code></pre>
+
+<h5>OnComplete</h5>
+
+<p>Removed.</p>
+
+<h5>OnDetailViewCollapse</h5>
+
+<p>Renamed to <strong>DetailCollapse</strong></p>
+
+<h5>OnDetailViewExpand</h5>
+
+<p>Renamed to <strong>DetailInit</strong></p>
+
+<h5>OnDelete</h5>
+
+<p>Renamed to <strong>Remove</strong>.</p>
+
+<h5>OnDataBinding</h5>
+
+<p>Removed.</p>
+
+<p>If you want to be notified when an ajax request is being made use the following snippet:</p>
+
+<pre><code>dataSource =&gt; dataSource.Ajax().Events(e =&gt; e.RequestStart("onRequestStart"))
+</code></pre>
+
+<p>If you need to send custom data to the action method use .Data() on the DataSource's operation:</p>
+
+<pre><code>dataSource =&gt; dataSource.Ajax()
+    .Read(read=&gt;read.Action("Action","Controller").Data("sendData"))
+
+function sendData() {
+    return { foo: "bar" };
+}
+</code></pre>
+
+<h5>OnError</h5>
+
+<p>Removed. Use the Error event on the DataSource instead:</p>
+
+<pre><code>dataSource =&gt; dataSource.Ajax().Events(e =&gt; e.Error("onError"))
+</code></pre>
+
+<h5>OnRowDataBound</h5>
+
+<p>Removed. Utilize <strong>DataBound</strong> instead and utilize the following code snippet:</p>
+
+<pre><code>function onDataBound() {
+    var data = this.view();
+
+    for (var i=0; i&lt; data.length; i++) {
+        var dataItem = data[i];
+        var tr = $("#grid").find("[data-uid='" + dataItem.uid + "']");
+        // use the table row (tr) and data item (dataItem)
+    }
+ }
+</code></pre>
+
+<h5>OnRowSelect</h5>
+
+<p>Renamed to <strong>Change</strong></p>
+
+<h5>OnSubmitChanges</h5>
+
+<p>Renamed to <strong>SaveChanges</strong></p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

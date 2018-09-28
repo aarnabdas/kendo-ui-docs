@@ -1,0 +1,641 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI DataViz QRCode</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn the configuration options for QRCode widget, set its options, use methods properly.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/dataviz/ui/qrcode.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/dataviz/ui/qrcode.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatavizuiqrcode"><a href="#kendodatavizuiqrcode">kendo.dataviz.ui.QRCode</a></h1>
+
+<p>Represents the Kendo UI QRCode widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-Example"><a href="#configuration-Example">Example - Render as SVG, if supported</a></h3>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  renderAs: "svg"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-background">
+<a href="#configuration-background">background </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "#fff")</em>
+</h3>
+
+<p>The background color of the QR code. Accepts a valid CSS color string, including hex and rgb.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  background: "red"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-border">
+<a href="#configuration-border">border </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The border of the QR code.</p>
+
+<h3 id="configuration-border.color">
+<a href="#configuration-border.color">border.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The color of the border. Accepts a valid CSS color string, including hex and rgb.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  border: {
+    color: "#FF321C",
+    width: 2
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-border.width">
+<a href="#configuration-border.width">border.width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  border: {
+    width: 5,
+    color: "#FF7D05"
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-color">
+<a href="#configuration-color">color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "#000")</em>
+</h3>
+
+<p>The color of the QR code. Accepts a valid CSS color string, including hex and rgb.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  color: "#aa00bb"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-encoding">
+<a href="#configuration-encoding">encoding </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "ISO_8859_1")</em>
+</h3>
+
+<p>The encoding mode used to encode the value.</p>
+
+<p>The possible values are:</p>
+
+<ul>
+<li>"ISO_8859_1" - supports all characters from the <a href="http://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO/IEC 8859-1</a> character set.</li>
+<li>"UTF_8" - supports all <a href="http://en.wikipedia.org/wiki/List_of_Unicode_characters">Unicode</a> characters.</li>
+</ul>
+
+<blockquote>
+<p><em>Important:</em> The UTF-8 encoding is not included in the specifications and is not supported by all readers.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "丠",
+  encoding: "UTF_8"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-errorCorrection">
+<a href="#configuration-errorCorrection">errorCorrection </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "L")</em>
+</h3>
+
+<p>The error correction level used to encode the value.</p>
+
+<p>The possible values are:</p>
+
+<ul>
+<li>"L" - approximately 7% of the codewords can be restored.</li>
+<li>"M" - approximately 15% of the codewords can be restored.</li>
+<li>"Q" - approximately 25% of the codewords can be restored.</li>
+<li>"H" - approximately 30% of the codewords can be restored.</li>
+</ul>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  errorCorrection: "H"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-padding">
+<a href="#configuration-padding">padding </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Sets the minimum distance in pixels that should be left between the border and the QR modules.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  size: 240,
+  padding: 10
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-renderAs">
+<a href="#configuration-renderAs">renderAs </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "svg")</em>
+</h3>
+
+<p>Sets the preferred rendering engine.
+If it is not supported by the browser, the QRCode will switch to the first available mode.</p>
+
+<p>The supported values are:</p>
+
+<ul>
+<li>"canvas" - renders the widget as a Canvas element, if available.</li>
+<li>"svg" - renders the widget as inline SVG document, if available</li>
+<li>"vml" - renders the widget as VML, if available</li>
+</ul>
+
+<h3 id="configuration-size">
+<a href="#configuration-size">size </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies the size of a QR code in pixels (i.e. "200px"). Numeric values are treated as pixels.
+If no size is specified, it will be determined from the element width and height.
+In case the element has width or height of zero, a default value of 200 pixels will be used.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  size: 300
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+  size: "300px"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The value of the QRCode.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrCode").kendoQRCode({
+  value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the QRCode for safe removal from the DOM.</p>
+
+<p>Removes data entries in order to avoid memory leaks.</p>
+
+<h4>Example</h4>
+
+<pre><code>var qrCode = $("#qrCode").data("kendoQRCode");
+qrCode.destroy();
+</code></pre>
+
+<h3 id="methods-exportImage"><a href="#methods-exportImage">exportImage</a></h3>
+
+<p>Exports the QRCode as an image.
+The result can be saved using <a href="/kendo-ui/api/javascript/kendo#methods-saveAs">kendo.saveAs</a>.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.
+The promise will be resolved with a PNG image encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(optional)</em>
+</h5>
+
+<p>Parameters for the exported image.</p>
+
+<h5>options.width <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The width of the exported image. Defaults to the QRCode width.</p>
+
+<h5>options.height <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The height of the exported image. Defaults to the QRCode height.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a PNG image encoded as a Data URI.</p>
+
+<h4>Example - Exporting a QRCode to an image</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#qrCode").kendoQRCode({
+        value: "mailto:clientservice@kendoui.com"
+    });
+
+    var qrCode = $("#qrCode").getKendoQRCode();
+    qrCode.exportImage().done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "QRCode.png"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-exportPDF"><a href="#methods-exportPDF">exportPDF</a></h3>
+
+<p>Exports the QRCode as a PDF file.
+The result can be saved using <a href="/kendo-ui/api/javascript/kendo#methods-saveAs">kendo.saveAs</a>.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.
+The promise will be resolved with a PDF file encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="/kendo-ui/api/javascript/drawing/pdfoptions" class="type-link"><code>kendo.drawing.PDFOptions</code></a> <em>(optional)</em>
+</h5>
+
+<p>Parameters for the exported PDF file.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a PDF file encoded as a Data URI.</p>
+
+<h4>Example - Exporting a QRCode to a PDF file</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#qrCode").kendoQRCode({
+        value: "mailto:clientservice@kendoui.com"
+    });
+
+    var qrCode = $("#qrCode").getKendoQRCode();
+    qrCode.exportPDF({ paperSize: "A5", landscape: true }).done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "QRCode.pdf"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-exportSVG"><a href="#methods-exportSVG">exportSVG</a></h3>
+
+<p>Exports the QRCode as an SVG document.
+The result can be saved using <a href="/kendo-ui/api/javascript/kendo#methods-saveAs">kendo.saveAs</a>.</p>
+
+<p>The export operation is asynchronous and returns a <a href="http://api.jquery.com/Types/#Promise">promise</a>.
+The promise will be resolved with a SVG document encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URI</a>.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(optional)</em>
+</h5>
+
+<p>Export options.</p>
+
+<h5>options.raw <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h5>
+
+<p>Resolves the promise with the raw SVG document without the Data URI prefix.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#Promise" class="type-link"><code>Promise</code></a> A promise that will be resolved with a SVG document encoded as a Data URI.</p>
+
+<h4>Example - Exporting a QRCode to an SVG document</h4>
+
+<pre><code>&lt;div id="qrCode"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#qrCode").kendoQRCode({
+        value: "mailto:clientservice@kendoui.com"
+    });
+
+    var qrCode = $("#qrCode").getKendoQRCode();
+    qrCode.exportSVG().done(function(data) {
+        kendo.saveAs({
+            dataURI: data,
+            fileName: "QRCode.svg"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-imageDataURL"><a href="#methods-imageDataURL">imageDataURL</a></h3>
+
+<p>Returns a PNG image of the qrcode encoded as a <a href="https://developer.mozilla.org/en-US/docs/data_URIs">Data URL</a>.</p>
+
+<blockquote>
+<p>This method is deprecated and replaced by <a href="#methods-exportImage">exportImage</a>.</p>
+</blockquote>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> A data URL with <code>image/png</code> MIME type. Will be <code>null</code> if the browser does not support the <code>canvas</code> element.</p>
+
+<h4>Example - show a snapshot of the QRCode</h4>
+
+<pre><code>&lt;div id="qrcode"&gt;&lt;/div&gt;
+&lt;a download="export.png" id="export" class="k-button"&gt;Export PNG&lt;/a&gt;
+&lt;script&gt;
+$("#qrcode").kendoQRCode({
+  value: "Some text"
+});
+
+$("#export").on("click", function() {
+  var qrcode = $("#qrcode").data("kendoQRCode");
+  var imageDataURL = qrcode.imageDataURL();
+
+  if (navigator.msSaveBlob) {
+    var blob = toBlob(imageDataURL, "image/png");
+    navigator.msSaveBlob(blob, this.getAttribute("download"));
+  } else {
+    this.href = imageDataURL;
+  }
+});
+
+// See: http://goo.gl/qlg5dd
+function toBlob(base64, type) {
+  var rawData = base64.substring(base64.indexOf("base64,") + 7);
+  var data = atob(rawData);
+  var arr = new Uint8Array(data.length);
+
+  for (var i = 0; i &lt; data.length; ++i) {
+    arr[i] = data.charCodeAt(i);
+  }
+
+  return new Blob([ arr.buffer ], { type: type });
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-redraw"><a href="#methods-redraw">redraw</a></h3>
+
+<p>Redraws the QR code using the current value and options.</p>
+
+<h4>Example</h4>
+
+<pre><code>var qrCode = $("#qrCode").data("kendoQRCode");
+qrCode.redraw();
+</code></pre>
+
+<h3 id="methods-resize"><a href="#methods-resize">resize</a></h3>
+
+<p>Adjusts the widget layout to match the size of the container.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="qrcode" style="width: 150px; height: 150px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#qrcode").kendoQRCode({
+      value: "FOO"
+    });
+
+    $("#qrcode")
+       .css({ width: "600px", height: "300px" })
+       .data("kendoQRCode").resize();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>force <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>optional</em>
+</h5>
+
+<p>Defines whether the widget should proceed with resizing even if the element dimensions have not changed.</p>
+
+<h3 id="methods-setOptions"><a href="#methods-setOptions">setOptions</a></h3>
+
+<p>Sets new options to the QRCode and redraws it.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>An object with the new options. All <a href="qrcode#configuration">configuration</a> options can be set.</p>
+
+<h4>Example</h4>
+
+<pre><code>var qrCode = $("#qrCode").data("kendoQRCode");
+
+qrCode.setOptions({
+  errorCorrection: "H",
+  size: 300,
+  background: "#FFB821",
+  border: {
+    width: 5,
+    color: "#FF7D05"
+  }
+});
+</code></pre>
+
+<h3 id="methods-svg"><a href="#methods-svg">svg</a></h3>
+
+<p>Returns the <a href="http://www.w3.org/Graphics/SVG/">SVG</a> representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like <a href="http://inkscape.org/">Inkscape</a> and
+<a href="http://www.imagemagick.org/">ImageMagick</a>. Both programs provide command-line interface suitable for server-side processing.</p>
+
+<blockquote>
+<p>This method is obsoleted by <a href="#methods-exportSVG">exportSVG</a>, but will remain fully functional.</p>
+</blockquote>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the SVG representation of the qrcode.</p>
+
+<h4>Example - get the SVG representation of the qrcode</h4>
+
+<pre><code>&lt;div id="qrcode"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#qrcode").kendoQRCode({
+  value:"Some value"
+});
+var qrcode = $("#qrcode").data("kendoQRCode");
+var svg = qrcode.svg();
+console.log(svg); // displays the SVG string
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Change the value of the QR code.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The new value to be set.</p>
+
+<h4>Example</h4>
+
+<pre><code>var qrCode = $("#qrCode").data("kendoQRCode");
+qrCode.value("Hello");
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Overview of Editor UI widget | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="The documentation guide will help you initialize Kendo web editor and proceed with its configuration.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/editor/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/editor/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="editor-overview"><a href="#editor-overview">Editor Overview</a></h1>
+
+<p>The Editor allows users to create rich text content by means of a WYSIWYG interfance. The generated widget value is an XHTML markup.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<h3 id="creating-an-editor-from-existing-html-element">
+<a href="#creating-an-editor-from-existing-html-element">Creating an </a><strong>Editor</strong> from existing HTML element</h3>
+
+<pre><code>  &lt;textarea id="editor" rows="10" cols="30"&gt;&lt;/textarea&gt;
+</code></pre>
+
+<h3 id="initialize-the-kendo-editor"><a href="#initialize-the-kendo-editor">Initialize the Kendo Editor</a></h3>
+
+<pre><code>  $(document).ready(function(){
+      $("#editor").kendoEditor();
+  });
+</code></pre>
+
+<h2 id="classic-mode-vs-inline-mode"><a href="#classic-mode-vs-inline-mode">Classic Mode vs Inline Mode</a></h2>
+
+<p>The Editor's mode is determined by the element from which the widget is created.</p>
+
+<ul>
+<li>If the Editor is initialized from a <code>textarea</code>, it will assume its "classic" mode. The <code>textarea</code> will be hidden and it will be used to hold the widget value.
+A <strong>contenteditable iframe</strong> will be created for the user to type in. In the past, iframes were the only element, which allowed content editability in most browsers.</li>
+<li>If the Editor is initialized from a <code>div</code> or any other element (divs are recommended in most cases), it will assume its "inline" mode.
+The originating element will be made <strong>contenteditable</strong> and it will be used by the widget to return its value.</li>
+</ul>
+
+<p>The major differences between the two modes are:</p>
+
+<ul>
+<li>The classic Editor is able to post its value automatically, because it is based on a form element. The Editor tools are always visible. The Editor's content does not reside on the main web page, so the page styling does not
+influence the editable content. If custom styles need to be applied to the editable content, they should be <a href="/kendo-ui/api/web/editor#configuration-stylesheets">injected via the Editor's configuration</a>.
+<a href="http://demos.telerik.com/kendo-ui/web/editor/index.html">Classic Editor Demo</a>
+</li>
+<li>The inline Editor is not able to post its value and <a href="/kendo-ui/web/editor/troubleshooting">this should be taken care of by the developer</a>.
+The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
+<a href="http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html">Inline Editor Demo</a>
+</li>
+</ul>
+
+<h2 id="configuring-the-editor"><a href="#configuring-the-editor">Configuring the Editor</a></h2>
+
+<p>The editor tools can be configured through the <a href="/kendo-ui/api/web/editor#tools"><code>tools</code> configuration option</a>.</p>
+
+<h3 id="specifying-a-set-of-editor-tools"><a href="#specifying-a-set-of-editor-tools">Specifying a set of Editor tools</a></h3>
+
+<pre><code>   $(document).ready(function(){
+      $("#editor").kendoEditor({
+         tools: [
+             "bold",
+             "italic",
+             "underline",
+             "foreColor"
+         ]
+      });
+  });
+</code></pre>
+
+<p>If no specific tools are defined, the Editor will create its default set of tools for text formatting.</p>
+
+<h2 id="specifying-custom-tools"><a href="#specifying-custom-tools">Specifying custom tools</a></h2>
+
+<p>The Editor functionality can be extended through custom tools, defined in the <code>tools</code> array alongside built-in tools.</p>
+
+<h3 id="adding-a-custom-tool-button"><a href="#adding-a-custom-tool-button">Adding a custom tool button</a></h3>
+
+<pre><code>   $("#editor").kendoEditor({
+       tools: [
+           {
+               name: "toolName",
+               tooltip: "Custom editor tool",
+               exec: function(e) {
+                   var editor = $(this).data("kendoEditor");
+
+                   // execute command
+               }
+           }
+       ]
+   });
+</code></pre>
+
+<p>The custom buttons get a <strong>k-toolName</strong> CSS class to allow styling (where <code>toolName</code> is the name specified in the custom tool configuration). <strong>Please note that "undo" and "redo" are reserved tool names.</strong></p>
+
+<h2 id="sizing"><a href="#sizing">Sizing</a></h2>
+
+<p>Until version <strong>2012.3.1114 (Q3 2012)</strong> the Editor assumed the pixel offset width of the <code>textarea</code> from which it was created. From this moment on, the widget behaves in the following way:</p>
+
+<ul>
+<li>If explicit width or height is set to the <code>textarea</code> via inline style, the Editor will apply the same</li>
+<li>Otherwise, the Editor will be 100% wide and will apply its default height of 250px</li>
+</ul>
+
+<p>If the <code>textarea</code> has width and height applied via external CSS styles, a similar approach should be used for the Editor, e.g. by using its <code>k-editor</code> CSS class.</p>
+
+<p>Textarea <code>cols</code> and <code>rows</code> attributes are required and they also can incluence the dimensions of a <code>textarea</code> element, however, these attributes are not applied in a consistent manner by browsers,
+so the Editor ignores them when determining its size.</p>
+
+<h2 id="making-the-editor-readonly"><a href="#making-the-editor-readonly">Making the Editor readonly</a></h2>
+
+<p>The Editor can be made temporarily readonly by using the following approach:</p>
+
+<pre><code>var editor = $("#editor").data("kendoEditor"),
+    editorBody = $(editor.body);
+
+// make readonly
+editorBody.add("td", editorBody).removeAttr("contenteditable");
+
+// make editable
+editorBody.add("td", editorBody).attr("contenteditable", true);
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

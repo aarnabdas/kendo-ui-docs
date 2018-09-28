@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Troubleshooting guide for Upload UI widget | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Most common issues, associated with Upload UI Widget and suggested solutions in quick steps.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/upload/troubleshooting.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/upload/troubleshooting.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h2 id="problem-the-select-button-is-partially-visible-and-has-no-text"><a href="#problem-the-select-button-is-partially-visible-and-has-no-text">Problem: The "Select..." button is partially visible and has no text</a></h2>
+
+<p>The Upload uses an opacity filter to overlay the default file input's Select button.
+This filter is implemented as an ActiveX control in IE versions 8 and below.
+As such, it is subject to security settings and can be disabled.</p>
+
+<p>Sample image of an affected component:</p>
+
+<p><img src="/kendo-ui/web/upload/upload-activex.png" alt=""></p>
+
+<h4>Solution</h4>
+
+<p>Set the following option to "Enable" in Internet Explorer: "Internet Options -&gt; Security -&gt; Internet (or Local intranet) -&gt; Custom Level -&gt; Binary and script behaviors"</p>
+
+<p><img src="/kendo-ui/web/upload/upload-ie-script-behaviors.png" alt=""></p>
+
+<h2 id="problem-async-uploads-randomly-fail-when-using-ie1011-with-windows-authentication"><a href="#problem-async-uploads-randomly-fail-when-using-ie1011-with-windows-authentication">Problem: Async uploads randomly fail when using IE10/11 with Windows Authentication</a></h2>
+
+<p>The upload either freezes indefinitely or times out if a 401 challenge is received on the HTTP POST.</p>
+
+<h4>Solution</h4>
+
+<p>For IE10 see <a href="http://support.microsoft.com/kb/2980019">KB2980019</a></p>
+
+<p>No official fix for IE 11 as of November 6, 2014.
+See bug ID <a href="https://connect.microsoft.com/IE/feedback/details/819941/file-upload-stop-working-on-ie-with-windows-authentication">819941</a></p>
+
+<h2 id="problem-incorrect-progress-readings-when-using-ie1011-with-windows-authentication"><a href="#problem-incorrect-progress-readings-when-using-ie1011-with-windows-authentication">Problem: Incorrect progress readings when using IE10/11 with Windows Authentication</a></h2>
+
+<p>The upload progress indicator can go over 100% or freeze. This doesn't indicate that the request has completed.
+It seems that the issue only occurs when accessing a web server on localhost.</p>
+
+<h4>Solution</h4>
+
+<p>Deploy the application on a remote web server.</p>
+
+<h2 id="problem-incorrect-behavior-in-the-opera-browser"><a href="#problem-incorrect-behavior-in-the-opera-browser">Problem: Incorrect behavior in the Opera browser</a></h2>
+
+<p>Symptom include:</p>
+
+<ul>
+<li>The <code>success</code> is fired when the file upload fails</li>
+<li>The server response cannot be accessed in the <code>success</code> event</li>
+<li>The <code>success</code> event fires before the upload is complete</li>
+</ul>
+
+<h4>Solution</h4>
+
+<p>Turn off Opera Dragonfly. This debugging tool will interfere with the upload by firing an extra Load event for the IFRAME.</p>
+
+<h2 id="tip-how-to-see-a-message-logged-in-the-console"><a href="#tip-how-to-see-a-message-logged-in-the-console">Tip: How to see a message logged in the console</a></h2>
+
+<p>When a server error occurs the complete server response is logged in the console.
+The console is accessible in a manner specific for each browser:</p>
+
+<ul>
+<li>  Internet Explorer - Open the developer tools (F12) and choose the Script tab. The console is visible on the right.</li>
+<li>  Firefox - Install <a href="http://getfirebug.com/downloads">Firebug</a> and enable the Console tab.</li>
+<li>  Chrome - Open the JavaScript console (Ctrl + Shift + J).</li>
+<li>  Safari - Enable the Develop menu from the Preferences / Advanced dialog. Open the error console from the Develop menu.</li>
+<li>  Any browser - Use a debugging proxy like <a href="http://www.telerik.com/fiddler">Fiddler</a> or <a href="http://www.charlesproxy.com/">Charles</a> to obtain the server response.</li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

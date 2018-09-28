@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Use Kendo UI Grid with AngularJS">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("AngularJS/the-grid-widget.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//AngularJS/the-grid-widget.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="the-grid-widget-in-angular-kendo"><a href="#the-grid-widget-in-angular-kendo">The Grid widget in Angular-Kendo</a></h1>
+
+<p>The Grid is one of Kendo's most complex widgets. On this page we will outline some particularities.</p>
+
+<h2 id="the-k-on-change-attribute">
+<a href="#the-k-on-change-attribute">The </a><code>k-on-change</code> attribute</h2>
+
+<p>If you assign a <code>k-on-change</code> event handler, it will be evaluated in a scope containing additional local variables:</p>
+
+<ul>
+<li><p><code>kendoEvent</code> — the "change" event as triggered by Kendo UI;</p></li>
+<li><p><code>selected</code> — the selected elements (jQuery object);</p></li>
+<li><p><code>data</code> — the selected data items (array of models);</p></li>
+</ul>
+
+<blockquote>
+<p>Note: <code>selected</code> is a jQuery object which references DOM elements.  As of AngularJS 1.2.24 this is disallowed in
+template expressions “<a href="https://docs.angularjs.org/error/%24parse/isecdom">for security reasons</a>”.  The following will
+<em>not</em> work with Angular 1.2.24:</p>
+
+<pre><code>k-on-change="myChangeHandler(selected)"
+</code></pre>
+
+<p>The workaround is to pass it in an object or in an array, for example:</p>
+
+<pre><code>k-on-change="myChangeHandler({ selected: selected })"
+</code></pre>
+
+<p>Obviously, the handler function needs to take that into account.</p>
+</blockquote>
+
+<p>When the grid is not in multiple selection mode, the <code>data</code> above will not be an array but a single data item, and that item is also accessible as <code>dataItem</code>.</p>
+
+<p>When cell selection is allowed, an additional <code>columns</code> variable will be present. It is an array containing the indexes of the columns where cells are selected.</p>
+
+<p>The following example allows you to choose the grid's selection mode and then select items in the grid and see what variables are available.</p>
+
+<h4>Handle the change event in AngularJS</h4>
+
+<pre lang="html"><code>&lt;div ng-app="app" ng-controller="MyCtrl"&gt;
+  &lt;label&gt;Select mode: &lt;select kendo-dropdownlist ng-model="gridOptions.selectable"&gt;
+    &lt;option value="row"&gt;Row&lt;/option&gt;
+    &lt;option value="cell"&gt;Cell&lt;/option&gt;
+    &lt;option value="multiple, row"&gt;Multiple, row&lt;/option&gt;
+    &lt;option value="multiple, cell"&gt;Multiple, cell&lt;/option&gt;
+  &lt;/select&gt;&lt;/label&gt;
+
+  &lt;div kendo-grid k-options="gridOptions" k-rebind="gridOptions.selectable"
+       k-on-change="handleChange(data, dataItem, columns)"&gt;&lt;/div&gt;
+  &lt;pre&gt;
+  data: {{ data | json }}
+  columns: {{ columns | json }}
+  &lt;span ng-show="gridOptions.selectable == 'row' || gridOptions.selectable == 'cell'"&gt;DataItem: {{ dataItem | json }}&lt;/span&gt;
+  &lt;/pre&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope) {
+    var data = new kendo.data.DataSource({
+      data: [
+        { text: "Foo", id: 1 },
+        { text: "Bar", id: 2 },
+        { text: "Baz", id: 3 }
+      ]
+    });
+    $scope.handleChange = function(data, dataItem, columns) {
+      $scope.data = data;
+      $scope.columns = columns;
+      $scope.dataItem = dataItem;
+    };
+    $scope.gridOptions = {
+      dataSource: data,
+      selectable: "row",
+      columns: [
+        { field: "text", title: "Text" },
+        { field: "id", title: "Id" }
+      ]
+    };
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="dynamically-set-columns"><a href="#dynamically-set-columns">Dynamically set columns</a></h2>
+
+<p>When you need to, say, load columns definition from the server, you need to postpone the widget initialization until the data is available, because the Grid doesn't support defining columns after the widget is created. For this, the <code>k-ng-delay</code> attribute comes in handy. Here is an example (using <code>$timeout</code> to emulate networking — the data is set in scope asynchronously):</p>
+
+<h4>Dynamically set the grid columns in AngularJS</h4>
+
+<pre lang="html"><code>&lt;div ng-app="app" ng-controller="MyCtrl"&gt;
+  &lt;div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $timeout) {
+  $timeout(function(){
+    $scope.gridOptions = {
+      sortable: true,
+      selectable: true,
+      dataSource: [
+        { text: "Foo", id: 1 },
+        { text: "Bar", id: 2 },
+        { text: "Baz", id: 3 }
+      ],
+      columns: [
+        { field: "text", title: "Text" }
+      ]
+    };
+  }, 500);
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="templates"><a href="#templates">Templates</a></h2>
+
+<p>The Grid supports a lot of user-customizable templates. You can define the <code>rowTemplate</code> if you want to completely customize how each row is displayed, or individual cell templates by adding a <code>template</code> property in your column definitions. The difference versus plain Kendo is that when the Grid is created with the Angular directive the templates can contain live <code>\{\{angular\}\}</code> bits. Both <code>rowTemplate</code> and <code>columns.template</code> are compiled with Angular in a scope containing a <code>dataItem</code> variable which points to the data model of the current item. Here is an example for <code>rowTemplate</code>:</p>
+
+<h4>Set the grid row template in AngularJS</h4>
+
+<pre lang="html"><code>&lt;div ng-app="app" ng-controller="MyCtrl"&gt;
+  &lt;div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope) {
+  var data = new kendo.data.DataSource({
+    data: [
+      { text: "Foo", id: 1 },
+      { text: "Bar", id: 2 },
+      { text: "Baz", id: 3 }
+    ]
+  });
+  $scope.gridOptions = {
+    dataSource: data,
+    sortable: true,
+    selectable: true,
+    columns: [
+      { field: "text", title: "Text" },
+      { field: "id", title: "Id" }
+    ],
+    rowTemplate: "&lt;tr data-uid='#: uid #'&gt;&lt;td colspan='2' style='text-align: center'&gt;" +
+      "This is &lt;b&gt;{{dataItem.text}}&lt;/b&gt; and has ID={{dataItem.id}}" +
+      "&lt;/td&gt;&lt;/tr&gt;"
+  };
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>In the above example if you select an item it will display two input fields bound to the selected data model. You can notice that if you edit the data, the text in the grid will be updated seamlessly, thanks to Angular. Grid functions like sorting will still work properly.</p>
+
+<p>The one thing you must be careful about when using <code>rowTemplate</code> is to include the attribute <code>data-uid="#: uid #"</code> on the toplevel row element, as described in the Grid documentation. That cannot use an Angular template like <code>data-uid="{{dataItem.uid}}"</code>, because that is compiled after the grid was displayed and the widget will not be able to tell which row belongs to which data item.</p>
+
+<h2 id="how-to-bind-the-grid-using-the-http-service"><a href="#how-to-bind-the-grid-using-the-http-service">How to bind the Grid using the $http service</a></h2>
+
+<p>In order to take full control on the logic that performs the request to the server all you have to do is to define the different transport operations as functions. Inside the function you can use the $http or the $.ajax methods to perform the needed. When done (inside the success callback) you just need to pass the result to the <code>success</code> function part of the events arguments object.</p>
+
+<h4>Use $http to bind the grid</h4>
+
+<pre lang="html"><code>&lt;div ng-app="app" ng-controller="MyCtrl"&gt;
+    &lt;div kendo-grid k-options="gridOptions"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $http) {
+    $scope.gridOptions = {
+        columns: [ { field: "FirstName" }, { field: "LastName" } ],
+        dataSource: {
+            schema: {
+                data: "d"
+            },
+            transport: {
+                read: function (e) {
+                  $http({method: 'GET', url: 'http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees'}).
+                  success(function(data, status, headers, config) {
+                      e.success(data)
+                  }).
+                  error(function(data, status, headers, config) {
+                      alert('something went wrong')
+                      console.log(status);
+                  });
+              }
+           },
+          pageSize: 5
+        }
+    }
+});
+&lt;/script&gt;
+
+
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

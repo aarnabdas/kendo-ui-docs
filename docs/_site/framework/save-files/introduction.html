@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Save files on the client machine</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="This article shows how save files on the client machine using Kendo UI">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/save-files/introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/save-files/introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="introduction"><a href="#introduction">Introduction</a></h1>
+
+<p>Kendo UI allows developers to save files on the client machine since the 2014 Q3 release. This is done via the <a href="/kendo-ui/api/javascript/kendo#methods-saveAs">kendo.saveAs</a> method.</p>
+
+<h2 id="save-files"><a href="#save-files">Save files</a></h2>
+
+<p>To save a file on the client machine call the <code>kendo.saveAs</code> method and pass a valid <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs">data URI</a> and a file name.</p>
+
+<h4>Example - save a text file</h4>
+
+<pre lang="html"><code>&lt;script&gt;
+var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
+kendo.saveAs({
+    dataURI: dataURI,
+    fileName: "test.txt"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="browser-support"><a href="#browser-support">Browser Support</a></h2>
+
+<p>The <code>kendo.saveAs</code> will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and FireFox).
+If the browser doesn't implement an API for saving files then <code>kendo.saveAs</code> could POST the content to a server-side proxy which will stream the file back to the end user.
+The server-side proxy approach works in all <a href="/kendo-ui/browsers-support">supported browsers</a>. Set the <code>proxyURL</code> option to enable the server proxy. You can make <code>kendo.saveAs</code> always use the server proxy
+by setting the <code>forceProxy</code> option to <code>true</code>.</p>
+
+<h4>Example - set server proxy</h4>
+
+<pre><code>&lt;script&gt;
+var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
+kendo.saveAs({
+    dataURI: dataURI,
+    fileName: "test.txt",
+    proxyURL: "/path/to/proxy"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - force proxy usage</h4>
+
+<pre><code>&lt;script&gt;
+var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
+kendo.saveAs({
+    dataURI: dataURI,
+    fileName: "test.txt",
+    proxyURL: "/path/to/proxy",
+    forceProxy: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="server-proxy-implementations"><a href="#server-proxy-implementations">Server Proxy Implementations</a></h2>
+
+<p>The proxy will receive a POST request with the following parameters in the request body:</p>
+
+<ul>
+<li>contentType: The MIME type of the file</li>
+<li>base64: The base-64 encoded file content</li>
+<li>fileName: The file name, as requested by the caller.</li>
+</ul>
+
+<p>The proxy should return the decoded file with set "Content-Disposition" header.</p>
+
+<p>Here are a few sample implementations of a server-side proxy for different platforms.</p>
+
+<h3 id="aspnet-webforms"><a href="#aspnet-webforms">ASP.NET WebForms</a></h3>
+
+<h4>ASPX</h4>
+
+<pre><code>&lt;%@ Page Language="C#" AutoEventWireup="true" CodeFile="SaveFile.aspx.cs" Inherits="SaveFile" %&gt;
+</code></pre>
+
+<h4>Code-behind</h4>
+
+<pre><code>public partial class SaveFile : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        string contentType = Request.Form["contentType"];
+        string base64 = Request.Form["base64"];
+        string fileName = Request.Form["fileName"];
+
+        byte[] fileContents = Convert.FromBase64String(base64);
+
+        Response.ContentType = contentType;
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+        Response.BinaryWrite(fileContents);
+        Response.End();
+    }
+}
+</code></pre>
+
+<h4>Usage</h4>
+
+<pre><code>&lt;script&gt;
+var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
+kendo.saveAs({
+    dataURI: dataURI,
+    fileName: "test.txt",
+    proxyURL: "&lt;%= ResolveUrl("~/SaveFile.aspx") %&gt;"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="aspnet-webapi-controller"><a href="#aspnet-webapi-controller">ASP.NET WebAPI Controller</a></h3>
+
+<pre><code>public class SaveFile : ApiController
+{
+    public class FileData
+    {
+        public string ContentType { get; set; }
+        public string Base64 { get; set; }
+        public string FileName { get; set; }
+    }
+
+    // POST api/savefile
+    public HttpResponseMessage Post([FromBody]FileData file)
+    {
+        var data = Convert.FromBase64String(file.Base64);
+
+        var result = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StreamContent(new MemoryStream(data))
+        };
+
+        result.Content.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+
+        result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+        {
+            FileName = file.FileName
+        };
+
+        return result;
+    }
+}
+</code></pre>
+
+<h3 id="aspnet-mvc-proxy"><a href="#aspnet-mvc-proxy">ASP.NET MVC Proxy</a></h3>
+
+<h4>Controller</h4>
+
+<pre><code>public class HomeController
+{
+    [HttpPost]
+    public ActionResult Save(string contentType, string base64, string fileName)
+    {
+        var fileContents = Convert.FromBase64String(base64);
+
+        return File(fileContents, contentType, fileName);
+    }
+}
+</code></pre>
+
+<h4>View (Razor)</h4>
+
+<pre><code>&lt;script&gt;
+var dataURI = "data:text/plain;base64," + kendo.util.encodeBase64("Hello World!");
+kendo.saveAs({
+    dataURI: dataURI,
+    fileName: "test.txt",
+    proxyURL: "@Url.Action("Save", "Home")"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="php-proxy"><a href="#php-proxy">PHP Proxy</a></h3>
+
+<pre><code>if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fileName = $_POST['fileName'];
+    $contentType = $_POST['contentType'];
+    $base64 = $_POST['base64'];
+
+    $data = base64_decode($base64);
+
+    header('Content-Type:' . $contentType);
+    header('Content-Length:' . strlen($data));
+    header('Content-Disposition: attachment; filename=' . $fileName);
+
+    echo $data;
+}
+</code></pre>
+
+<h3 id="java-spring-mvc"><a href="#java-spring-mvc">Java (Spring MVC)</a></h3>
+
+<pre><code>@RequestMapping(value = "/save", method = RequestMethod.POST)
+public @ResponseBody void save(String fileName, String base64, String contentType, HttpServletResponse response) throws IOException {
+
+    response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
+
+    response.setContentType(contentType);
+
+    byte[] data = DatatypeConverter.parseBase64Binary(base64);
+
+    response.setContentLength(data.length);
+    response.getOutputStream().write(data);
+    response.flushBuffer();
+}
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

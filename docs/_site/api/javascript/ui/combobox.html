@@ -1,0 +1,1855 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI ComboBox</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn to configure Kendo UI ComboBox widget, use the documentation guide to operate different types of methods and get familiar with all events, used in ComboBox UI widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/combobox.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/combobox.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouicombobox"><a href="#kendouicombobox">kendo.ui.ComboBox</a></h1>
+
+<p>Represents the Kendo UI ComboBox widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the opening and closing animations of the suggestion popup. Setting the <code>animation</code> option to <code>false</code> will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</p>
+
+<h4>Example - disable open and close animations</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  animation: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - configure the animation</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  animation: {
+   close: {
+     effects: "fadeOut zoom:out",
+     duration: 300
+   },
+   open: {
+     effects: "fadeIn zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close">
+<a href="#configuration-animation.close">animation.close </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<h4>Example - configure the close animation</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  animation: {
+   close: {
+     effects: "zoom:out",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.effects">
+<a href="#configuration-animation.close.effects">animation.close.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-animation.close.duration">
+<a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
+</h3>
+
+<p>The duration of the close animation in milliseconds.</p>
+
+<h3 id="configuration-animation.open">
+<a href="#configuration-animation.open">animation.open </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation played when the suggestion popup is opened.</p>
+
+<h4>Example - configure the open animation</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  animation: {
+   open: {
+     effects: "zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.effects">
+<a href="#configuration-animation.open.effects">animation.open.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-animation.open.duration">
+<a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
+</h3>
+
+<p>The duration of the open animation in milliseconds.</p>
+
+<h3 id="configuration-autoBind">
+<a href="#configuration-autoBind">autoBind </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Controls whether to bind the widget to the data source on initialization.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+    autoBind: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-cascadeFrom">
+<a href="#configuration-cascadeFrom">cascadeFrom </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Use it to set the Id of the parent ComboBox widget.
+<a href="/kendo-ui/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="parent" /&gt;
+&lt;input id="child" /&gt;
+&lt;script&gt;
+$("#parent").kendoComboBox({
+    dataTextField: "parentName",
+    dataValueField: "parentId",
+    dataSource: [
+        { parentName: "Parent1", parentId: 1 },
+        { parentName: "Parent2", parentId: 2 }
+    ]
+});
+
+$("#child").kendoComboBox({
+    cascadeFrom: "parent",
+    dataTextField: "childName",
+    dataValueField: "childId",
+    dataSource: [
+        { childName: "Child1", childId: 1, parentId: 1 },
+        { childName: "Child2", childId: 2, parentId: 2 },
+        { childName: "Child3", childId: 3, parentId: 1 },
+        { childName: "Child4", childId: 4, parentId: 2 }
+    ]
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-cascadeFromField">
+<a href="#configuration-cascadeFromField">cascadeFromField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Defines the field to be used to filter the data source. If not defined the <a href="/kendo-ui/api/web/combobox#configuration-dataValueField">parent's dataValueField option will be used</a>.
+<a href="/kendo-ui/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="parent" /&gt;
+&lt;input id="child" /&gt;
+&lt;script&gt;
+$("#parent").kendoComboBox({
+    dataTextField: "name",
+    dataValueField: "id",
+    dataSource: [
+        { name: "Parent1", id: 1 },
+        { name: "Parent2", id: 2 }
+    ]
+});
+
+$("#child").kendoComboBox({
+    cascadeFrom: "parent",
+    cascadeFromField: "parentId",
+    dataTextField: "name",
+    dataValueField: "id",
+    dataSource: [
+        { name: "Child1", id: 1, parentId: 1 },
+        { name: "Child2", id: 2, parentId: 2 },
+        { name: "Child3", id: 3, parentId: 1 },
+        { name: "Child4", id: 4, parentId: 2 }
+    ]
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h3>
+
+<p>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a>
+instance.</p>
+
+<p>If the <code>dataSource</code> option is set to a JavaScript object or array the widget will initialize a new <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a> instance using that value as data source configuration.</p>
+
+<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+
+<h4>Example - set dataSource as a JavaScript object</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: {
+    data: ["One", "Two"]
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as a JavaScript array</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+var data = ["One", "Two"];
+$("#combobox").kendoComboBox({
+  dataSource: data
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as an existing kendo.data.DataSource instance</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/products",
+      dataType: "jsonp"
+    }
+  }
+});
+$("#combobox").kendoComboBox({
+  dataSource: dataSource,
+  dataTextField: "ProductName",
+  dataValueField: "ProductID"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataTextField">
+<a href="#configuration-dataTextField">dataTextField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.</p>
+
+<blockquote>
+<p><strong>Important</strong> When <code>dataTextField</code> is defined, the<code>dataValueField</code> option also should be set.</p>
+</blockquote>
+
+<h4>Example - set the dataTextField</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+    dataSource: [
+        { Name: "Parent1", Id: 1 },
+        { Name: "Parent2", Id: 2 }
+    ],
+    dataTextField: "Name",
+    dataValueField: "Id"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataValueField">
+<a href="#configuration-dataValueField">dataValueField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The field of the data item that provides the value of the widget.</p>
+
+<blockquote>
+<p><strong>Important</strong> When <code>dataValueField</code> is defined, the<code>dataTextField</code> option also should be set.</p>
+</blockquote>
+
+<h4>Example - set the dataValueField</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#comboBox").kendoComboBox({
+    dataSource: [{
+        { Name: "Parent1", Id: 1 },
+        { Name: "Parent2", Id: 2 }
+    }]
+    dataTextField: "Name",
+    dataValueField: "Id"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-delay">
+<a href="#configuration-delay">delay </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The delay in milliseconds between a keystroke and when the widget displays the popup.</p>
+
+<h4>Example - set the delay</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  delay: 500
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-enable">
+<a href="#configuration-enable">enable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</p>
+
+<h4>Example - disable the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  enable: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-filter">
+<a href="#configuration-filter">filter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "none")</em>
+</h3>
+
+<p>The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
+The supported filter values are <code>startswith</code>, <code>endswith</code> and <code>contains</code>.</p>
+
+<h4>Example - set the filter</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  filter: "contains"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-fixedGroupTemplate">
+<a href="#configuration-fixedGroupTemplate">fixedGroupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the fixed header group. By default the widget displays only the value of the current group.</p>
+
+<pre><code>&lt;input id="customers" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#customers").kendoComboBox({
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            fixedGroupTemplate: "Fixed group: #:data#",
+            height: 400,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-groupTemplate">
+<a href="#configuration-groupTemplate">groupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the groups. By default the widget displays only the value of the group.</p>
+
+<pre><code>&lt;input id="customers" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#customers").kendoComboBox({
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            groupTemplate: "Group: #:data#",
+            height: 400,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 200)</em>
+</h3>
+
+<p>The height of the suggestion popup in pixels. The default value is 200 pixels.</p>
+
+<h4>Example - set the height</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  height: 500
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-highlightFirst">
+<a href="#configuration-highlightFirst">highlightFirst </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>true</code> the first suggestion will be automatically highlighted.</p>
+
+<h4>Example - set highlightFirst</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  highlightFirst: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-ignoreCase">
+<a href="#configuration-ignoreCase">ignoreCase </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</p>
+
+<h4>Example - disable case-insensitive suggestions</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  ignoreCase: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-index">
+<a href="#configuration-index">index </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: -1)</em>
+</h3>
+
+<p>The index of the initially selected item. The index is <code>0</code> based.</p>
+
+<h4>Example - select second item</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+$("#combobox").kendoComboBox({
+    dataTextField: "text",
+    dataValueField: "value",
+    dataSource: items,
+    index: 1
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-minLength">
+<a href="#configuration-minLength">minLength </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 1)</em>
+</h3>
+
+<p>The minimum number of characters the user must type before a search is performed. Set to higher value than <code>1</code> if the search could match a lot of items.</p>
+
+<blockquote>
+<p>Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the <a href="#events-filtering">filtering</a> event for more details.</p>
+</blockquote>
+
+<h4>Example - set minLength</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  minLength: 3
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-placeholder">
+<a href="#configuration-placeholder">placeholder </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The hint displayed by the widget when it is empty. Not set by default.</p>
+
+<h4>Example - specify placeholder option</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  placeholder: "Select..."
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify placeholder as HTML attribute</h4>
+
+<pre><code>&lt;input id="combobox" placeholder="Select..." /&gt;
+
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+    dataSource: ["Item1", "Item2"]
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-popup">
+<a href="#configuration-popup">popup </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The options that will be used for the popup initialization. For more details about the available options
+refer to <a href="/kendo-ui/api/javascript/ui/popup">Popup</a> documentation.</p>
+
+<h4>Example - append the popup to a specific element</h4>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input id="combobox" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+$("#combobox").kendoCombobox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  popup: {
+    appendTo: $("#container")
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-suggest">
+<a href="#configuration-suggest">suggest </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the widget will automatically use the first suggestion as its value.</p>
+
+<h4>Example - enable automatic suggestion</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  suggest: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-headerTemplate">
+<a href="#configuration-headerTemplate">headerTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>Specifies a static HTML content, which will be rendered as a header of the popup element.</p>
+
+<blockquote>
+<p><strong>Important</strong> Widget does not pass a model data to the header template. Use this option only with static HTML.</p>
+</blockquote>
+
+<h4>Example - specify headerTemplate as a string</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  headerTemplate: '&lt;div&gt;&lt;h2&gt;Fruits&lt;/h2&gt;&lt;/div&gt;'
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-template">
+<a href="#configuration-template">template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the items. By default the widget displays only the text of the data item (configured via <code>dataTextField</code>).</p>
+
+<h4>Example - specify template as a function</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script id="template" type="text/x-kendo-template"&gt;
+  &lt;span&gt;
+    &lt;img src="/img/#: id #.png" alt="#: name #" /&gt;
+    #: name #
+  &lt;/span&gt;
+&lt;/script&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  template: kendo.template($("#template").html())
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify template as a string</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  template: '&lt;span&gt;&lt;img src="/img/#: id #.png" alt="#: name #" /&gt;#: name #&lt;/span&gt;'
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-text">
+<a href="#configuration-text">text </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The text of the widget used when the <code>autoBind</code> is set to <code>false</code>.</p>
+
+<h4>Example - specify text of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+     autoBind: false,
+     text: "Chai"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-value">
+<a href="#configuration-value">value </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "")</em>
+</h3>
+
+<p>The value of the widget.</p>
+
+<h4>Example - specify value of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+     dataSource: ["Item1", "Item2"],
+     value: "Item1"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-valuePrimitive">
+<a href="#configuration-valuePrimitive">valuePrimitive </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Specifies the <a href="/kendo-ui/framework/mvvm/bindings/value">value binding</a> behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</p>
+
+<h4>Example - specify that the View-Model field should be updated with the selected item value</h4>
+
+<pre><code>&lt;input id="combobox" data-bind="value: selectedProductId, source: products" /&gt;
+
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  valuePrimitive: true,
+  dataTextField: "name",
+  dataValueField: "id"
+});
+var viewModel = kendo.observable({
+  selectedProductId: null,
+  products: [
+    { id: 1, name: "Coffee" },
+    { id: 2, name: "Tea" },
+    { id: 3, name: "Juice" }
+  ]
+});
+
+kendo.bind($("#combobox"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual">
+<a href="#configuration-virtual">virtual </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a><em>(default: false)</em>
+</h3>
+
+<p>Enables the virtualization feature of the widget.</p>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoComboBox({
+            template: '&lt;span class="order-id"&gt;#= OrderID #&lt;/span&gt; #= ShipName #, #= ShipCountry #',
+            dataTextField: "ShipName",
+            dataValueField: "OrderID",
+            virtual: true
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual.itemHeight">
+<a href="#configuration-virtual.itemHeight">virtual.itemHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the height of the virtual item. All items in the virtualized list <strong>must</strong> have the same height.
+If the developer does not specify one, the framework will automatically set <code>itemHeight</code> based on the current theme and font size.</p>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoComboBox({
+            template: '&lt;span class="order-id"&gt;#= OrderID #&lt;/span&gt; #= ShipName #, #= ShipCountry #',
+            dataTextField: "ShipName",
+            dataValueField: "OrderID",
+            virtual: {
+                itemHeight: 26,
+                valueMapper: function(options) {
+                    $.ajax({
+                        url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                        type: "GET",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            options.success(data);
+                        }
+                    })
+                }
+            },
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+
+    function convertValues(value) {
+        var data = {};
+
+        value = $.isArray(value) ? value : [value];
+
+        for (var idx = 0; idx &lt; value.length; idx++) {
+            data["values[" + idx + "]"] = value[idx];
+        }
+
+        return data;
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual.valueMapper">
+<a href="#configuration-virtual.valueMapper">virtual.valueMapper </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a><em>(default: null)</em>
+</h3>
+
+<p>The <code>valueMapper</code> function is <strong>mandatory</strong> for the functionality of the virtualized widget.
+The widget calls the <code>valueMapper</code> function when the widget receives a value, that is not fetched from the remote server yet.
+The widget will pass the selected value(s) in the <code>valueMapper</code> function. In turn, the valueMapper implementation should return the <strong>respective data item(s) index/indices</strong>.</p>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoComboBox({
+            template: '&lt;span class="order-id"&gt;#= OrderID #&lt;/span&gt; #= ShipName #, #= ShipCountry #',
+            dataTextField: "ShipName",
+            dataValueField: "OrderID",
+            virtual: {
+                itemHeight: 26,
+                valueMapper: function(options) {
+                    $.ajax({
+                        url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                        type: "GET",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            //the **data** is either index or array of indices.
+                            //Example:
+                            // 10258 -&gt; 10 (index in the Orders collection)
+                            // [10258, 10261] -&gt; [10, 14] (indices in the Orders collection)
+
+                            options.success(data);
+                        }
+                    })
+                }
+            },
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+
+    function convertValues(value) {
+        var data = {};
+
+        value = $.isArray(value) ? value : [value];
+
+        for (var idx = 0; idx &lt; value.length; idx++) {
+            data["values[" + idx + "]"] = value[idx];
+        }
+
+        return data;
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-dataSource">
+<a href="#fields-dataSource">dataSource </a><a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/datasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+
+<blockquote>
+<p>Changes of the data source will be reflected in the widget.</p>
+
+<p><strong>Important:</strong> Assigning a new data source would have no effect. Use the <a href="#methods-setDataSource">setDataSource</a> method instead.</p>
+</blockquote>
+
+<h4>Example - add a data item to the data source</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { name: "Apples" },
+    { name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "name"
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.dataSource.add({ name: "Appricot" });
+combobox.search("A");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-input">
+<a href="#fields-input">input </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>A jQuery object of the visible input element, where the user types.</p>
+
+<h4>Example - get input element</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+var input = combobox.input;
+&lt;script&gt;
+</code></pre>
+
+<h3 id="fields-options">
+<a href="#fields-options">options </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>An object, which holds the options of the widget.</p>
+
+<h4>Example - get options of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+var options = combobox.options;
+&lt;script&gt;
+</code></pre>
+
+<h3 id="fields-list">
+<a href="#fields-list">list </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>A jQuery object of the drop-down list element.</p>
+
+<h4>Example - get list element</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+var list = combobox.list;
+&lt;script&gt;
+</code></pre>
+
+<h3 id="fields-ul">
+<a href="#fields-ul">ul </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>A jQuery object of the <code>ul</code> element, which holds the available options.</p>
+
+<h4>Example - get ul element</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+var ul = combobox.ul;
+&lt;script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes the widget popup.</p>
+
+<h4>Example - close the suggestion popup</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+// Search for items starting with "A" - will open the suggestion popup and show "Apples"
+combobox.search("A");
+// Close the suggestion popup
+combobox.close();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-dataItem"><a href="#methods-dataItem">dataItem</a></h3>
+
+<p>Returns the data item at the specified index. If the index is not specified, the selected index will be used.</p>
+
+<h4>Parameters</h4>
+
+<h5>index <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(optional)</em>
+</h5>
+
+<p>The zero-based index of the data record.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> The raw data record. Returns <em>undefined</em> if no data.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  index: 1
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+// get the dataItem corresponding to the selectedIndex.
+var dataItem = combobox.dataItem();
+
+// get the dataItem corresponding to the passed index.
+var dataItem = combobox.dataItem(0);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>ComboBox</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the ComboBox element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables or disables the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will be enabled. If set to <code>false</code> the widget will be disabled.</p>
+
+<h4>Example - enable the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  enable: false
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.enable(true);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-readonly"><a href="#methods-readonly">readonly</a></h3>
+
+<p>Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.</p>
+
+<blockquote>
+<p>There is a difference between disabled and readonly mode. The value of a disabled widget is <strong>not</strong> posted as part of a <code>form</code> whereas the value of a readonly widget is posted.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>readonly <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will not allow user input. If set to <code>false</code> the widget will allow user input.</p>
+
+<h4>Example - make the widget readonly</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.readonly(true);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-focus"><a href="#methods-focus">focus</a></h3>
+
+<p>Focuses the widget.</p>
+
+<h4>Example - focus the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox();
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.focus();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-open"><a href="#methods-open">open</a></h3>
+
+<p>Opens the popup.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  index: 1
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.open();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Refresh the popup by rendering all items again.</p>
+
+<h4>Example - refresh the popup items</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  index: 1
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.refresh();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-search"><a href="#methods-search">search</a></h3>
+
+<p>Searches the data source for the provided value and displays any matches as suggestions.</p>
+
+<h4>Parameters</h4>
+
+<h5>word <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The filter value.</p>
+
+<h4>Example - search the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  index: 1
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.search("App");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>li <code>jQuery  |</code><code> Number  |</code><code> Function</code>
+</h5>
+
+<p>A string, DOM element or jQuery object which represents the item to be selected. A string is treated as a jQuery selector.
+A number representing the index of the item or function predicate which returns the correct data item.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> The index of the selected item, if called with no parameters. If a custom value is entered, the returned selected index is <code>-1</code>.</p>
+
+<p><code>undefined</code> If called with a parameter as a setter.</p>
+
+<h4>Example - select item based on jQuery object</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id"
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.select(combobox.ul.children().eq(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - select item based on index</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id"
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.select(1);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - select item based on function predicate</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id"
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.select(function(dataItem) {
+    return dataItem.text === "Apples";
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get selected index of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  dataValueField: "id",
+  index: 1
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+var selectedIndex = combobox.select();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the dataSource of an existing ComboBox and rebinds it.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataSource <a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h5>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var dataSource = new kendo.data.DataSource({
+  data: [ "Bananas", "Cherries" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.setDataSource(dataSource);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-suggest"><a href="#methods-suggest">suggest</a></h3>
+
+<p>Sets the value of the widget to the specified argument and visually selects the text.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>Characters to force a suggestion.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.suggest("Apples");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-text"><a href="#methods-text">text</a></h3>
+
+<p>Gets or sets the text of the ComboBox. Widget will select the item with same text. If
+there are no matches then the text will be considered as a custom value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>text <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The text to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The text of the ComboBox.</p>
+
+<h4>Example - set text of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.text("Apples");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-toggle"><a href="#methods-toggle">toggle</a></h3>
+
+<p>Opens or closes the widget popup.</p>
+
+<h4>Parameters</h4>
+
+<h5>toggle <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Defines the whether to open/close the drop-down list.</p>
+
+<h4>Example - set text of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.toggle();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets or sets the value of the ComboBox.</p>
+
+<blockquote>
+<p><strong>Important:</strong> If the widget is not bound, value method will pre-fetch the data before continue with the value setting.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> The value of the ComboBox.</p>
+
+<h4>Example - set value of the widget</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+
+var combobox = $("#combobox").data("kendoComboBox");
+
+combobox.value("Oranges");
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fired when the value of the widget is changed by the user.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The event is not fired when the value of the widget is changed from code.
+<strong>Important:</strong> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the <a href="/kendo-ui/api/web/combobox#events-cascade">cascade</a> event.</p>
+</blockquote>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  change: function(e) {
+    var value = this.value();
+    // Use the value of the widget
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_change(e) {
+  var value = this.value();
+  // Use the value of the widget
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("change", combobox_change);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Fired when the popup of the widget is closed.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "close" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  close: function(e) {
+    // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "close" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_close(e) {
+  // handle the event
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("close", combobox_close);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-dataBound"><a href="#events-dataBound">dataBound</a></h3>
+
+<p>Fired when the widget is bound to data from its data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "dataBound" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  dataBound: function(e) {
+      // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dataBound" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_dataBound(e) {
+  // handle the event
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("dataBound", combobox_dataBound);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-filtering"><a href="#events-filtering">filtering</a></h3>
+
+<p>Fired when the widget is about to filter the data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.filter <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The filter descriptor that will be used to filter the data source.</p>
+
+<blockquote>
+<p>The data source filters the data items client-side unless the <a href="/kendo-ui/api/framework/datasource#configuration-serverFiltering">data source serverFiltering</a> option is set to <code>true</code>.</p>
+</blockquote>
+
+<h4>Example - subscribe to the "filtering" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  filter: "startswith",
+  filtering: function(e) {
+      //get filter descriptor
+      var filter = e.filter;
+
+      // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "filtering" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_filtering(e) {
+  //get filter descriptor
+  var filter = e.filter;
+
+  // handle the event
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  filter: "startswith"
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("filtering", combobox_filtering);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - prevent filtering event when filter value is empty</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  filter: "startswith",
+  filtering: function(e) {
+      var filter = e.filter;
+
+      if (!filter.value) {
+        //prevent filtering if the filter does not value
+        e.preventDefault();
+      }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Fired when the popup of the widget is opened by the user.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "open" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  open: function(e) {
+    // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "open" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_open(e) {
+  // handle the event
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("open", combobox_open);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-select"><a href="#events-select">select</a></h3>
+
+<p>Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The event is not fired when an item is selected programmatically.</p>
+</blockquote>
+
+<h4>Event Data</h4>
+
+<h5>e.item <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The jQuery object which represents the selected item.</p>
+
+<h5>e.preventDefault <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h5>
+
+<p>If invoked prevents the select action. The widget will retain the previous selected item.</p>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "select" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  select: function(e) {
+    var item = e.item;
+    var text = item.text();
+    // Use the selected item or its text
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "select" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_select(e) {
+  var item = e.item;
+  var text = item.text();
+  // Use the selected item or its text
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("select", combobox_select);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-cascade"><a href="#events-cascade">cascade</a></h3>
+
+<p>Fired when the value of the widget is changed via API or user interaction.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.ComboBox</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "cascade" event during initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ],
+  cascade: function() {
+    // Handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "cascade" event after initialization</h4>
+
+<pre><code>&lt;input id="combobox" /&gt;
+&lt;script&gt;
+function combobox_cascade(e) {
+    // Handle the event
+}
+$("#combobox").kendoComboBox({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var combobox = $("#combobox").data("kendoComboBox");
+combobox.bind("cascade", combobox_cascade);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

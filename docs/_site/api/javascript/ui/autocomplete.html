@@ -1,0 +1,1460 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI AutoComplete</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure and control methods in Autocomplete UI widget, which events to use to open, close, change, select.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/autocomplete.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/autocomplete.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouiautocomplete"><a href="#kendouiautocomplete">kendo.ui.AutoComplete</a></h1>
+
+<p>Represents the Kendo UI AutoComplete widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The Kendo UI AutoComplete should be created from an <em>input</em> HTML element.</p>
+</blockquote>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Configures the opening and closing animations of the suggestion popup. Setting the <code>animation</code> option to <code>false</code> will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</p>
+
+<h4>Example - disable open and close animations</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  animation: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - configure the animation</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  animation: {
+   close: {
+     effects: "fadeOut zoom:out",
+     duration: 300
+   },
+   open: {
+     effects: "fadeIn zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close">
+<a href="#configuration-animation.close">animation.close </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation played when the suggestion popup is closed.</p>
+
+<h4>Example - configure the close animation</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  animation: {
+   close: {
+     effects: "zoom:out",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.duration">
+<a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
+</h3>
+
+<p>The duration of the close animation in milliseconds.</p>
+
+<h3 id="configuration-animation.close.effects">
+<a href="#configuration-animation.close.effects">animation.close.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-animation.open">
+<a href="#configuration-animation.open">animation.open </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation played when the suggestion popup is opened.</p>
+
+<h4>Example - configure the open animation</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  animation: {
+   open: {
+     effects: "zoom:in",
+     duration: 300
+   }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.duration">
+<a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
+</h3>
+
+<p>The duration of the open animation in milliseconds.</p>
+
+<h3 id="configuration-animation.open.effects">
+<a href="#configuration-animation.open.effects">animation.open.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</p>
+
+<p><a href="/kendo-ui/api/framework/fx/common">Complete list of available animations</a></p>
+
+<h3 id="configuration-dataSource">
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h3>
+
+<p>The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a>
+instance.</p>
+
+<p>If the <code>dataSource</code> option is set to a JavaScript object or array the widget will initialize a new <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a> instance using that value as data source configuration.</p>
+
+<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+
+<h4>Example - set dataSource as a JavaScript object</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autoComplete").kendoAutoComplete({
+  dataSource: {
+    data: ["One", "Two"]
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as a JavaScript array</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+var data = ["One", "Two"];
+$("#autoComplete").kendoAutoComplete({
+  dataSource: data
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set dataSource as an existing kendo.data.DataSource instance</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+var dataSource = new kendo.data.DataSource({
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/products",
+      dataType: "jsonp"
+    }
+  }
+});
+$("#autocomplete").kendoAutoComplete({
+  dataSource: dataSource,
+  dataTextField: "ProductName"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-dataTextField">
+<a href="#configuration-dataTextField">dataTextField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.</p>
+
+<h4>Example - set the dataTextField</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+var data = [
+  { id: 1, name: "Apples" },
+  { id: 2, name: "Oranges" }
+];
+$("#autocomplete").kendoAutoComplete({
+  dataTextField: "name", // The widget is bound to the "name" field
+  dataSource: data
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-delay">
+<a href="#configuration-delay">delay </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
+</h3>
+
+<p>The delay in milliseconds between a keystroke and when the widget displays the suggestion popup.</p>
+
+<h4>Example - set the delay</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  delay: 500
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-enable">
+<a href="#configuration-enable">enable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</p>
+
+<h4>Example - disable the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  enable: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-filter">
+<a href="#configuration-filter">filter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "startswith")</em>
+</h3>
+
+<p>The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
+all data items which begin with the current widget value are displayed in the suggestion popup. The supported filter values are <code>startswith</code>, <code>endswith</code> and <code>contains</code>.</p>
+
+<h4>Example - set the filter</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  filter: "contains"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-fixedGroupTemplate">
+<a href="#configuration-fixedGroupTemplate">fixedGroupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the fixed header group. By default the widget displays only the value of the current group.</p>
+
+<pre><code>&lt;input id="customers" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#customers").kendoAutoComplete({
+            dataTextField: "ContactName",
+            fixedGroupTemplate: "Fixed group: #:data#",
+            height: 400,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-groupTemplate">
+<a href="#configuration-groupTemplate">groupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the groups. By default the widget displays only the value of the group.</p>
+
+<pre><code>&lt;input id="customers" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#customers").kendoAutoComplete({
+            dataTextField: "ContactName",
+            groupTemplate: "Group: #:data#",
+            height: 400,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                },
+                group: { field: "Country" }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
+</h3>
+
+<p>The height of the suggestion popup in pixels. The default value is 200 pixels.</p>
+
+<h4>Example - set the height</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  height: 500
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-highlightFirst">
+<a href="#configuration-highlightFirst">highlightFirst </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>true</code> the first suggestion will be automatically highlighted.</p>
+
+<h4>Example - set highlightFirst</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  highlightFirst: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-ignoreCase">
+<a href="#configuration-ignoreCase">ignoreCase </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</p>
+
+<h4>Example - disable case-insensitive suggestions</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  ignoreCase: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-minLength">
+<a href="#configuration-minLength">minLength </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>The minimum number of characters the user must type before a search is performed. Set to higher value than <code>1</code> if the search could match a lot of items.</p>
+
+<blockquote>
+<p>Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the <a href="#events-filtering">filtering</a> event for more details.</p>
+</blockquote>
+
+<h4>Example - set minLength</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  minLength: 3
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-placeholder">
+<a href="#configuration-placeholder">placeholder </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "")</em>
+</h3>
+
+<p>The hint displayed by the widget when it is empty. Not set by default.</p>
+
+<h4>Example - specify placeholder</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  placeholder: "Enter value ..."
+});
+&lt;/script&gt;
+</code></pre>
+
+<p>The Kendo UI AutoComplete widget could also use the value of the <code>placeholder</code> HTML attribute as hint.</p>
+
+<h4>Example - use the placeholder HTML attribute</h4>
+
+<pre><code>&lt;input id="autocomplete" placeholder="Enter value..." /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-popup">
+<a href="#configuration-popup">popup </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The options that will be used for the popup initialization. For more details about the available options
+refer to <a href="/kendo-ui/api/javascript/ui/popup">Popup</a> documentation.</p>
+
+<h4>Example - append the popup to a specific element</h4>
+
+<pre><code>&lt;div id="container"&gt;
+    &lt;input id="autocomplete" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  popup: {
+    appendTo: $("#container")
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-separator">
+<a href="#configuration-separator">separator </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "")</em>
+</h3>
+
+<p>The character used to separate multiple values. Empty by default.</p>
+
+<h4>Example - set separator to allow multiple values</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  separator: ", "
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-suggest">
+<a href="#configuration-suggest">suggest </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code> the widget will automatically use the first suggestion as its value.</p>
+
+<h4>Example - enable automatic suggestion</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  suggest: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-headerTemplate">
+<a href="#configuration-headerTemplate">headerTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>Specifies a static HTML content, which will be rendered as a header of the popup element.</p>
+
+<blockquote>
+<p><strong>Important</strong> Widget does not pass a model data to the header template. Use this option only with static HTML.</p>
+</blockquote>
+
+<h4>Example - specify headerTemplate as a string</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  headerTemplate: '&lt;div&gt;&lt;h2&gt;Fruits&lt;/h2&gt;&lt;/div&gt;'
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-template">
+<a href="#configuration-template">template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> used to render the suggestions. By default the widget displays only the text of the suggestion (configured via <code>dataTextField</code>).</p>
+
+<h4>Example - specify template as a function</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script id="template" type="text/x-kendo-template"&gt;
+  &lt;span&gt;
+    &lt;img src="/img/#: id #.png" alt="#: name #" /&gt;
+    #: name #
+  &lt;/span&gt;
+&lt;/script&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  template: kendo.template($("#template").html())
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify template as a string</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [
+    { id: 1, name: "Apples" },
+    { id: 2, name: "Oranges" }
+  ],
+  dataTextField: "name",
+  template: '&lt;span&gt;&lt;img src="/img/#: id #.png" alt="#: name #" /&gt;#: name #&lt;/span&gt;'
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-valuePrimitive">
+<a href="#configuration-valuePrimitive">valuePrimitive </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>Specifies the <a href="/kendo-ui/framework/mvvm/bindings/value">value binding</a> behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</p>
+
+<h4>Example - specify that the View-Model field should be updated with the selected item text</h4>
+
+<pre><code>&lt;input id="autocomplete" data-bind="value: productName, source: products" /&gt;
+
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  valuePrimitive: true,
+  dataTextField: "name"
+});
+var viewModel = kendo.observable({
+  productName: null,
+  products: [
+    { id: 1, name: "Coffee" },
+    { id: 2, name: "Tea" },
+    { id: 3, name: "Juice" }
+  ]
+});
+
+kendo.bind($("#autocomplete"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual">
+<a href="#configuration-virtual">virtual </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a><em>(default: false)</em>
+</h3>
+
+<p>Enables the virtualization feature of the widget.</p>
+
+<h4>Example - AutoComplete with virtualized list</h4>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoAutoComplete({
+            template: "#= OrderID # | For: #= ShipName #, #= ShipCountry #",
+            dataTextField: "ShipName",
+            virtual: true,
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            OrderID: { type: "number" },
+                            Freight: { type: "number" },
+                            ShipName: { type: "string" },
+                            OrderDate: { type: "date" },
+                            ShipCity: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual.itemHeight">
+<a href="#configuration-virtual.itemHeight">virtual.itemHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: null)</em>
+</h3>
+
+<p>Specifies the height of the virtual item. All items in the virtualized list <strong>must</strong> have the same height.
+If the developer does not specify one, the framework will automatically set <code>itemHeight</code> based on the current theme and font size.</p>
+
+<h4>Example - AutoComplete with virtualized list</h4>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoAutoComplete({
+            template: "#= OrderID # | For: #= ShipName #, #= ShipCountry #",
+            dataTextField: "ShipName",
+            virtual: {
+                itemHeight: 26
+            },
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            OrderID: { type: "number" },
+                            Freight: { type: "number" },
+                            ShipName: { type: "string" },
+                            OrderDate: { type: "date" },
+                            ShipCity: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-virtual.valueMapper">
+<a href="#configuration-virtual.valueMapper">virtual.valueMapper </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a><em>(default: null)</em>
+</h3>
+
+<p>The <code>valueMapper</code> function is <strong>mandatory</strong> for the functionality of the virtualized widget.
+The widget calls the <code>valueMapper</code> function when the widget receives a value, that is not fetched from the remote server yet.
+The widget will pass the selected value(s) in the <code>valueMapper</code> function. In turn, the valueMapper implementation should return the <strong>respective data item(s) index/indices</strong>.</p>
+
+<pre><code>&lt;input id="orders" style="width: 400px" /&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#orders").kendoAutoComplete({
+            template: '&lt;span class="order-id"&gt;#= OrderID #&lt;/span&gt; #= ShipName #, #= ShipCountry #',
+            dataTextField: "ShipName",
+            virtual: {
+                itemHeight: 26,
+                valueMapper: function(options) {
+                    $.ajax({
+                        url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                        type: "GET",
+                        data: convertValues(options.value),
+                        success: function (data) {
+                            //the **data** is either index or array of indices.
+                            //Example:
+                            // "Ernst Handel" -&gt; 10 (index in the Orders collection)
+                            // ["Ernst Handel", "Que Delícia"] -&gt; [10, 14] (indices in the Orders collection)
+
+                            options.success(data);
+                        }
+                    })
+                }
+            },
+            height: 520,
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+            }
+        });
+    });
+
+    function convertValues(value) {
+        var data = {};
+
+        value = $.isArray(value) ? value : [value];
+
+        for (var idx = 0; idx &lt; value.length; idx++) {
+            data["values[" + idx + "]"] = value[idx];
+        }
+
+        return data;
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-dataSource">
+<a href="#fields-dataSource">dataSource </a><a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/datasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+
+<blockquote>
+<p>Changes of the data source will be reflected in the widget.</p>
+
+<p><strong>Important:</strong> Assigning a new data source would have no effect. Use the <a href="#methods-setDataSource">setDataSource</a> method instead.</p>
+</blockquote>
+
+<h4>Example - add a data item to the data source</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [
+    { name: "Apples" },
+    { name: "Oranges" }
+  ],
+  dataTextField: "name"
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.dataSource.read();
+autocomplete.dataSource.add({ name: "Appricot" });
+autocomplete.search("A");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-options">
+<a href="#fields-options">options </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>An object, which holds the options of the widget.</p>
+
+<h4>Example - get options of the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+
+var element = autocomplete.element;
+
+var options = autocomplete.options;
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-list">
+<a href="#fields-list">list </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>A jQuery object of the drop-down list element.</p>
+
+<h4>Example - get list element</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+
+var list = autocomplete.list;
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-ul">
+<a href="#fields-ul">ul </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>A jQuery object of the <code>ul</code> element, which holds the available options.</p>
+
+<h4>Example - get ul element</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+
+var ul = autocomplete.ul;
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes the widget suggestion popup.</p>
+
+<h4>Example - close the suggestion popup</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+// Search for items starting with "A" - will open the suggestion popup and show "Apples"
+autocomplete.search("A");
+// Close the suggestion popup
+autocomplete.close();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-dataItem"><a href="#methods-dataItem">dataItem</a></h3>
+
+<p>Returns the data item at the specified index.</p>
+
+<h4>Parameters</h4>
+
+<h5>index <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(required)</em>
+</h5>
+
+<p>The zero-based index of of the data item.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> the data item at the specified index. Returns <code>undefined</code> if the index is not within bounds.</p>
+
+<h4>Example - get the item at certain index</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+    dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+// Search for items starting with "A" - will open the suggestion popup and show "Apples"
+autocomplete.search("A");
+console.log(autocomplete.dataItem(0)); // Displays "Apples" in the browser console
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the widget element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables or disables the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>enable <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will be enabled. If set to <code>false</code> the widget will be disabled.</p>
+
+<h4>Example - enable the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  enable: false
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.enable(true);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - disable the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.enable(false);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-focus"><a href="#methods-focus">focus</a></h3>
+
+<p>Focuses the widget.</p>
+
+<h4>Example - focus the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.focus();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-readonly"><a href="#methods-readonly">readonly</a></h3>
+
+<p>Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.</p>
+
+<blockquote>
+<p>There is a difference between disabled and readonly mode. The value of a disabled widget is <strong>not</strong> posted as part of a <code>form</code> whereas the value of a readonly widget is posted.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>readonly <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>If set to <code>true</code> the widget will not allow user input. If set to <code>false</code> the widget will allow user input.</p>
+
+<h4>Example - make the widget readonly</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.readonly(true);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Refresh the suggestion popup by rendering all items again.</p>
+
+<h4>Example - refresh the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.refresh();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-search"><a href="#methods-search">search</a></h3>
+
+<p>Searches the data source for the provided value and displays any matches as suggestions.</p>
+
+<h4>Parameters</h4>
+
+<h5>word <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The value to search for. All matches are displayed in the suggestion popup.</p>
+
+<h4>Example - search the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.search("A"); // Displays "Apples" in the suggestion popup
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-select"><a href="#methods-select">select</a></h3>
+
+<p>Selects the item provided as an argument and updates the value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>item <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>A string, DOM element or jQuery object which represents the item to be selected. A string is treated as a jQuery selector.</p>
+
+<h4>Example - select item</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "John", "Jane" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.search("J");
+autocomplete.select(autocomplete.ul.children().eq(1)); // Selects the second suggestion which is "Jane"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setDataSource"><a href="#methods-setDataSource">setDataSource</a></h3>
+
+<p>Sets the data source of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>dataSource <a href="/kendo-ui/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+</h5>
+
+<p>The data source to which the widget should be bound.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var dataSource = new kendo.data.DataSource({
+  data: [ "Bananas", "Cherries" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.setDataSource(dataSource);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-suggest"><a href="#methods-suggest">suggest</a></h3>
+
+<p>Sets the value of the widget to the specified argument and visually selects the text.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The value to set.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.suggest("Apples");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-value"><a href="#methods-value">value</a></h3>
+
+<p>Gets or sets the value of the widget.</p>
+
+<h4>Parameters</h4>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The value to set.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the value of the widget.</p>
+
+<h4>Example - set and get the value of the widget</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.value("Apples");
+var value = autocomplete.value();
+console.log(value); // Displays "Apples"
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-change"><a href="#events-change">change</a></h3>
+
+<p>Fired when the value of the widget is changed by the user.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The event is not fired when the value of the widget is changed from code.</p>
+</blockquote>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "change" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  change: function(e) {
+    var value = this.value();
+    // Use the value of the widget
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "change" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_change(e) {
+  var value = this.value();
+  // Use the value of the widget
+}
+$("#autocomplete").kendoAutoComplete();
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("change", autocomplete_change);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Fired when the suggestion popup of the widget is closed by the user.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "close" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  close: function(e) {
+    // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "close" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_close(e) {
+  // handle the event
+}
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("close", autocomplete_close);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-dataBound"><a href="#events-dataBound">dataBound</a></h3>
+
+<p>Fired when the widget is bound to data from its data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "dataBound" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  dataBound: function(e) {
+      // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dataBound" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_dataBound(e) {
+  // handle the event
+}
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("dataBound", autocomplete_dataBound);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-filtering"><a href="#events-filtering">filtering</a></h3>
+
+<p>Fired when the widget is about to filter the data source.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h5>e.filter <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The filter descriptor that will be used to filter the data source.</p>
+
+<blockquote>
+<p>The data source filters the data items client-side unless the <a href="/kendo-ui/api/framework/datasource#configuration-serverFiltering">data source serverFiltering</a> option is set to <code>true</code>.</p>
+</blockquote>
+
+<h4>Example - subscribe to the "filtering" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  filtering: function(e) {
+      //get filter descriptor
+      var filter = e.filter;
+
+      // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "filtering" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_filtering(e) {
+  //get filter descriptor
+  var filter = e.filter;
+
+  // handle the event
+}
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("filtering", autocomplete_filtering);
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - prevent filtering event when filter value is empty</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  filtering: function(e) {
+      var filter = e.filter;
+
+      if (!filter.value) {
+        //prevent filtering if the filter does not value
+        e.preventDefault();
+      }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Fired when the suggestion popup of the widget is opened by the user.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the widget instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "open" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  open: function(e) {
+    // handle the event
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "open" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_open(e) {
+  // handle the event
+}
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("open", autocomplete_open);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-select"><a href="#events-select">select</a></h3>
+
+<p>Fired when an item from the suggestion popup is selected by the user.</p>
+
+<blockquote>
+<p><strong>Important:</strong> The event is not fired when an item is selected programmatically.</p>
+</blockquote>
+
+<h4>Event Data</h4>
+
+<h5>e.item <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The jQuery object which represents the selected item.</p>
+
+<h5>e.sender <code>kendo.ui.AutoComplete</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example - subscribe to the "select" event during initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ],
+  select: function(e) {
+    var item = e.item;
+    var text = item.text();
+    // Use the selected item or its text
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "select" event after initialization</h4>
+
+<pre><code>&lt;input id="autocomplete" /&gt;
+&lt;script&gt;
+function autocomplete_select(e) {
+  var item = e.item;
+  var text = item.text();
+  // Use the selected item or its text
+}
+$("#autocomplete").kendoAutoComplete({
+  dataSource: [ "Apples", "Oranges" ]
+});
+var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+autocomplete.bind("select", autocomplete_select);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

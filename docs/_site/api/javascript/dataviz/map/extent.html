@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API reference for Kendo UI Map Location</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/dataviz/map/extent.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/dataviz/map/extent.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodatavizmapextent--kendoclass">
+<a href="#kendodatavizmapextent--kendoclass">kendo.dataviz.map.Extent</a><span class="type-link">Inherits from <a class="type-link" href="/kendo-ui/api/javascript/class">kendo.Class</a></span>
+</h1>
+
+<p>Represents a geographic region defined by two extreme locations (North West and South East).</p>
+
+<h2 id="constructor-parameters"><a href="#constructor-parameters">Constructor Parameters</a></h2>
+
+<h3 id="nw-kendodatavizmaplocationarray">
+<a href="#nw-kendodatavizmaplocationarray">nw </a><a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The North West extreme location.</p>
+
+<h3 id="se-kendodatavizmaplocationarray">
+<a href="#se-kendodatavizmaplocationarray">se </a><a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The South East extreme location.</p>
+
+<h2 id="class-methods"><a href="#class-methods">Class methods</a></h2>
+
+<h3 id="create"><a href="#create">create</a></h3>
+
+<p>Creates a Location instance.</p>
+
+<h4>Parameters</h4>
+
+<h5>a <a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The extent North West extreme location or a [latitude, longitude] array.</p>
+
+<p>Alternatively, specify the full extent as an array of four elements
+([NW lat, NW long, SE lat, SE long]) and omit the second parameter:</p>
+
+<h5>b <a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>optional</em>
+</h5>
+
+<p>The extent South East extreme location,
+or an [latitude, longitude] array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a> The Extent instance, if valid.</p>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-nw">
+<a href="#fields-nw">nw </a><a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+</h3>
+
+<p>The North West extreme location.</p>
+
+<h3 id="fields-se">
+<a href="#fields-se">se </a><a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+</h3>
+
+<p>The South East extreme location.</p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-contains"><a href="#methods-contains">contains</a></h3>
+
+<p>Tests if a location is contained within the extent.</p>
+
+<h4>Parameters</h4>
+
+<h5>location <a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+</h5>
+
+<p>The location to test for.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> true if the extent contains the location, false otherwise.</p>
+
+<h3 id="methods-containsAny"><a href="#methods-containsAny">containsAny</a></h3>
+
+<p>Tests if any of the locations is contained within the extent.</p>
+
+<h4>Parameters</h4>
+
+<h5>locations <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>An array of <a href="location">locations</a> to test for.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> true if the extent contains any of the locations, false otherwise.</p>
+
+<h3 id="methods-center"><a href="#methods-center">center</a></h3>
+
+<p>Returns the center of the extent.</p>
+
+<h4>Returns</h4>
+
+<p><a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a> The extent center location.</p>
+
+<h3 id="methods-include"><a href="#methods-include">include</a></h3>
+
+<p>Grows the extent, if required, to contain the specified location.</p>
+
+<h4>Parameters</h4>
+
+<h5>location <a href="/kendo-ui/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+</h5>
+
+<p>The location to include in the extent.</p>
+
+<h3 id="methods-includeAll"><a href="#methods-includeAll">includeAll</a></h3>
+
+<p>Grows the extent, if required, to contain all specified locations.</p>
+
+<h4>Parameters</h4>
+
+<h5>locations <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h5>
+
+<p>The locations to include in the extent.</p>
+
+<h3 id="methods-edges"><a href="#methods-edges">edges</a></h3>
+
+<p>Returns the four extreme locations of the extent.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> An object with <code>nw</code>, <code>ne</code>, <code>se</code> and <code>sw</code> <a href="location">locations</a>.</p>
+
+<h3 id="methods-toArray"><a href="#methods-toArray">toArray</a></h3>
+
+<p>Returns the four extreme locations of the extent as an array.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> An array with [NW, NE, SE, SW] <a href="location">locations</a>.</p>
+
+<h3 id="methods-overlaps"><a href="#methods-overlaps">overlaps</a></h3>
+
+<p>Tests if the given extent overlaps with this instance.</p>
+
+<h4>Parameters</h4>
+
+<h5>extent <a href="/kendo-ui/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a>
+</h5>
+
+<p>The extent to test with.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> true if the extents overlap, false otherwise.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

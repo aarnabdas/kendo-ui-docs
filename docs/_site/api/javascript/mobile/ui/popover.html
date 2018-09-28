@@ -1,0 +1,493 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile PopOver</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Guide to Kendo UI Mobile PopOver configuration options: set width and height of the popup in pixels and direction to which the popup will expand.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/popover.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/popover.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuipopover"><a href="#kendomobileuipopover">kendo.mobile.ui.PopOver</a></h1>
+
+<p>Represents the Kendo UI Mobile PopOver widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-pane">
+<a href="#configuration-pane">pane </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The pane configuration options.</p>
+
+<h3 id="configuration-pane.initial">
+<a href="#configuration-pane.initial">pane.initial </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The id of the initial mobile View to display.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-pane='{ "initial": "#view2" }'&gt;
+    &lt;div data-role="view" id="view1" data-title="view1"&gt;
+      View 1
+    &lt;/div&gt;
+    &lt;div data-role="view" id="view2" data-title="view2"&gt;
+      View 2
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pane.layout">
+<a href="#configuration-pane.layout">pane.layout </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The id of the default Pane Layout.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-pane='{ "layout": "popoverLayout" }'&gt;
+    &lt;div data-role="view" id="view1" data-title="view1"&gt;
+      View 1
+    &lt;/div&gt;
+    &lt;div data-role="view" id="view2" data-title="view2"&gt;
+      View 2
+    &lt;/div&gt;
+
+    &lt;div data-role="layout" data-id="popoverLayout"&gt;
+      &lt;header data-role="header"&gt;
+        &lt;div data-role="navbar"&gt;
+          &lt;span data-role="view-title"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+      &lt;div data-role="footer"&gt;
+        &lt;div data-role="tabstrip"&gt;
+          &lt;a href="#view1"&gt;view1&lt;/a&gt;
+          &lt;a href="#view2"&gt;view2&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pane.loading">
+<a href="#configuration-pane.loading">pane.loading </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "Loading...")</em>
+</h3>
+
+<p>The text displayed in the loading popup. Setting this value to false will disable the loading popup.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-pane='{ "loading": "sample text" }'&gt;
+    &lt;div data-role="view" data-show="showLoading"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function showLoading(e) {
+  var pane = $("#foo").data("kendoMobilePopOver").pane;
+  pane.showLoading();
+
+  setTimeout(function() {
+    pane.hideLoading();
+  }, 3000);
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pane.transition">
+<a href="#configuration-pane.transition">pane.transition </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The default View transition.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-pane='{ "transition": "slide" }'&gt;
+    &lt;div data-role="view" id="view1"&gt;
+      View 1
+    &lt;/div&gt;
+    &lt;div data-role="view" id="view2"&gt;
+      View 2
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-popup">
+<a href="#configuration-popup">popup </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The popup configuration options.</p>
+
+<h3 id="configuration-popup.direction">
+<a href="#configuration-popup.direction">popup.direction String`</a><em>(default: "down")</em>
+</h3>
+
+<p>The direction to which the popup will expand, relative to the target that opened it.
+Supported directions are <code>up</code>, <code>right</code>, <code>down</code>, and <code>left</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-popup='{ "direction": "right" }'&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-popup.height">
+<a href="#configuration-popup.height">popup.height </a><code>Number  |</code><code> String</code><em>(default: 320)</em>
+</h3>
+
+<p>The height of the popup in pixels.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-popup='{ "height": "500" }'&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-popup.width">
+<a href="#configuration-popup.width">popup.width </a><code>Number  |</code><code> String</code><em>(default: 240)</em>
+</h3>
+
+<p>The width of the popup in pixels.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-popup='{ "width": "500" }'&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Close the popover.</p>
+
+<h4>Close a popover when a button is clicked</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover"&gt;
+    &lt;div data-role="view"&gt;
+      &lt;a data-role="button" data-click="close"&gt;Close me&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function close() {
+  $("#foo").data("kendoMobilePopOver").close();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>PopOver</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the PopOver element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+  &lt;a data-role="button" data-click="destroy"&gt;Destroy&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover"&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function destroy() {
+  $("#foo").data("kendoMobilePopOver").destroy(); //detach events
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-open"><a href="#methods-open">open</a></h3>
+
+<p>Open the PopOver.</p>
+
+<h4>Parameters</h4>
+
+<h5>target <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The target of the Popover, to which the visual arrow will point to. <strong>This parameter is required for a tablet OS.</strong></p>
+
+<h4>Example - opens the PopOver initially on view show</h4>
+
+<pre><code>&lt;div data-role="view" data-show="showPopOver"&gt;
+  &lt;a id="target" data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover"&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function showPopOver() {
+  $("#foo").data("kendoMobilePopOver").open("#target");
+}
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Fires when popover is closed.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.mobile.ui.PopOver</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-show="showPopOver"&gt;
+  &lt;a id="target" data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-close="onClose"&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onClose(e) {
+  console.log("close");
+  //handle event
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Fires when popover is opened.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.target <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The DOM element, which triggered the popover opening.</p>
+
+<h5>e.sender <code>kendo.mobile.ui.PopOver</code>
+</h5>
+
+<p>The widget instance which fired the event.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-show="showPopOver"&gt;
+  &lt;a id="target" data-role="button" href="#foo" data-rel="popover"&gt;Open PopOver&lt;/a&gt;
+
+  &lt;div id="foo" data-role="popover" data-open="onOpen"&gt;
+    &lt;div data-role="view"&gt;
+      View 1
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+
+function onOpen(e) {
+  console.log("open");
+  //handle event
+}
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

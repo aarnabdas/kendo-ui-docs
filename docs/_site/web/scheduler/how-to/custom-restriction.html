@@ -1,0 +1,322 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Custom restriction</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Custom restriction">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/scheduler/how-to/custom-restriction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/scheduler/how-to/custom-restriction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="custom-restriction"><a href="#custom-restriction">Custom restriction</a></h1>
+
+<p>The example below demonstrates how to create custom restriction for Scheduler events.</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>     &lt;div id="scheduler"&gt;&lt;/div&gt;
+    &lt;script&gt;
+      $(function() {
+        $("#scheduler").kendoScheduler({
+          date: kendo.date.today(),
+          dateHeaderTemplate: "&lt;strong class='k-nav-day'&gt;#=kendo.toString(date, 'ddd d/M')#&lt;/strong&gt;",
+          views: [
+            "day",
+            { type: "week", selected: true },
+            "month"
+          ],
+          timezone: "Etc/UTC",
+          allDaySlot: true,
+          majorTick: 720,
+          majorTimeHeader: "&lt;strong&gt;#=kendo.toString(date, 'tt')#&lt;/strong&gt;",
+          editable: {
+            update: false,
+            destroy: false
+          },
+          dataBound: appointment_databound,
+          save: appointment_save,
+          add: appointment_add,
+          edit: appointment_edit,
+          dataSource: {
+            batch: true,
+            transport: {
+              read: {
+                url: "http://demos.telerik.com/kendo-ui/service/meetings",
+                dataType: "jsonp"
+              },
+              update: {
+                url: "http://demos.telerik.com/kendo-ui/service/meetings/update",
+                dataType: "jsonp"
+              },
+              create: {
+                url: "http://demos.telerik.com/kendo-ui/service/meetings/create",
+                dataType: "jsonp"
+              },
+              destroy: {
+                url: "http://demos.telerik.com/kendo-ui/service/meetings/destroy",
+                dataType: "jsonp"
+              },
+              parameterMap: function(options, operation) {
+                if (operation !== "read" &amp;&amp; options.models) {
+                  return {models: kendo.stringify(options.models)};
+                }
+              }
+            },
+            schema: {
+              model: {
+                id: "meetingID",
+                fields: {
+                  meetingID: { from: "MeetingID", type: "number" },
+                  title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                  start: { type: "date", from: "Start" },
+                  end: { type: "date", from: "End" },
+                  startTimezone: { from: "StartTimezone" },
+                  endTimezone: { from: "EndTimezone" },
+                  description: { from: "Description" },
+                  recurrenceId: { from: "RecurrenceID" },
+                  recurrenceRule: { from: "RecurrenceRule" },
+                  recurrenceException: { from: "RecurrenceException" },
+                  roomId: { from: "RoomID", nullable: true },
+                  attendees: { from: "Attendees", nullable: true },
+                  isAllDay: { type: "boolean", from: "IsAllDay" }
+                }
+              }
+            }
+          }
+        });
+      });
+
+      var saving = false;
+      function appointment_databound(e) {
+        if (saving == true) {
+          //Ingore this functionality for simplicity
+          return;
+
+          if ('@Model.IsEdit.ToString()' == 'True') {
+            window.location.href = "/Repairs/Job/Details?repairId=" + $("#ID").val();
+          }
+          else {
+            $.ajax({
+              url: '@Url.Action("AppointmentList", "Job")',
+              type: "Get",
+              success: function (result) {
+
+                var count = $("#appointmentListCount").val();
+                count++;
+                $("#appointmentListCount").val(count);
+                $("#appointmentList").html(result);
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + " " + thrownError + " " + ajaxOptions);
+              }
+            });
+            saving = false;
+          }
+        }
+      }
+
+      function appointment_save(e) {
+        saving = true;
+        $("#addAppointmentView").hide();
+        $("#addAppointmentButton").hide();
+        $("#mostRecentJobView").hide();
+        $("#newContractorView").hide();
+        $('#newApointmentButton').show();
+      }
+
+      function appointment_edit(e) {
+        if (e.event.isNew) {
+          var scheduler = $("#scheduler").data("kendoScheduler");
+          var startDate = new Date(e.event.start.getFullYear(), e.event.start.getMonth(), e.event.start.getDate());
+          var endDate = new Date(e.event.start.getFullYear(), e.event.start.getMonth(), e.event.start.getDate(), 23, 59, 59);
+          var events = scheduler.occurrencesInRange(startDate, endDate);
+          var morningTotalEstimatedTime = 0;
+          var afternoonTotalEstimatedTime = 0;
+          var allDayTotalEstimatedTime = 0;
+          var jobPriorityId = $("#JobPriorityID").val();
+          var outOfHour = 4;
+          var estimate = $("#NewEstimatedTime").val();
+
+          for (var i = 0; i &lt; events.length; i++) {
+            if (events[i].Timeslot == 1) {
+              morningTotalEstimatedTime += events[i].EstimatedTime;
+            } else if (events[i].Timeslot == 2) {
+              afternoonTotalEstimatedTime += events[i].EstimatedTime;
+            } else if (events[i].Timeslot == 3) {
+              allDayTotalEstimatedTime += events[i].EstimatedTime;
+            }
+          }
+
+          var totalEstimateTime = afternoonTotalEstimatedTime + morningTotalEstimatedTime + allDayTotalEstimatedTime;
+
+          if (totalEstimateTime == 0) {
+            e.container.find("#allDayRadioButton").show();
+            e.container.find("#allDayLabel").show();
+          }
+          else {
+            e.container.find("#allDayRadioButton").hide();
+            e.container.find("#allDayLabel").hide();
+          }
+
+          var totalMorning = morningTotalEstimatedTime + parseInt(estimate);
+          var totalAfternoon = afternoonTotalEstimatedTime + parseInt(estimate);
+
+          if (jobPriorityId != outOfHour &amp;&amp; allDayTotalEstimatedTime &gt;= 480) {
+            alert("An all-day appointment has already been logged");
+            e.preventDefault();
+          } else if (jobPriorityId != outOfHour &amp;&amp; totalAfternoon &gt; 240 &amp;&amp; totalMorning &gt; 240 &amp;&amp; totalEstimateTime &gt; 0 || allDayTotalEstimatedTime &gt;= 480) {
+            alert("You are exceeding total number of minutes for this day. " + "\nMorning: " + morningTotalEstimatedTime + "\nAfternon: " + afternoonTotalEstimatedTime + "\nNew Estimate: " + estimate);
+            e.preventDefault();
+          } else if (jobPriorityId != outOfHour &amp;&amp; parseInt(estimate) &gt; 240 &amp;&amp; totalEstimateTime == 0) {
+            e.container.find("#afternoonRadioButton").hide();
+            e.container.find("#afternoonLabel").hide();
+            e.container.find("#morningRadioButton").hide();
+            e.container.find("#morningLabel").hide();
+          } else if (jobPriorityId != outOfHour &amp;&amp; totalMorning &gt; 240) {
+            alert("Morning schedule are already full." + "\nMorning: " + morningTotalEstimatedTime + "\nNew Estimate: " + estimate);
+            e.container.find("#morningRadioButton").hide();
+            e.container.find("#morningLabel").hide();
+          } else if (jobPriorityId != outOfHour &amp;&amp; totalAfternoon &gt; 240) {
+            alert("Afternoon schedule are already full. " + "\nAfternon: " + afternoonTotalEstimatedTime + "\nNew Estimate: " + estimate);
+            e.container.find("#afternoonRadioButton").hide();
+            e.container.find("#afternoonLabel").hide();
+          }
+
+        }
+        else {
+          alert("Appointment can't be edited");
+          e.preventDefault();
+        }
+      }
+
+      function appointment_add(e) {
+        //skip for simplicity
+        return;
+        var list = []; //repairCodeMultiSelect.value();
+        var operativeId = $("#NewOperativeID").val().toString();
+        var estimate = $("#NewEstimatedTime").val();
+
+        if (list.toString() == "") {
+          alert("Please select Repair Code first");
+          e.preventDefault();
+        }
+        else if (operativeId.length == 0) {
+          alert("Please select Operative first");
+          e.preventDefault();
+        }
+        else if (estimate &lt; 30) {
+          alert("Estimated time should not be less than 30 mins");
+          e.preventDefault();
+        }
+      }
+
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

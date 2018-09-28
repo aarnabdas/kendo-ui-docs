@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile TabStrip</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure Mobile Tabstrip widget with a few clicks, change its behavior and use supported events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/tabstrip.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/tabstrip.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuitabstrip"><a href="#kendomobileuitabstrip">kendo.mobile.ui.TabStrip</a></h1>
+
+<p>Represents the Kendo UI Mobile TabStrip widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-selectedIndex">
+<a href="#configuration-selectedIndex">selectedIndex </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 0)</em>
+</h3>
+
+<p>The index of the initially selected tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view" data-layout="default"&gt;
+  foo
+&lt;/div&gt;
+
+&lt;div data-role="layout" data-id="default"&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip" data-selected-index="1"&gt;
+      &lt;a data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a data-icon="contacts"&gt;bar&lt;/a&gt;
+      &lt;a data-icon="info"&gt;baz&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-badge"><a href="#methods-badge">badge</a></h3>
+
+<p><strong>Introduced in Q1 2013 SP</strong> Sets a badge on one of the <strong>tabs</strong> with the specified value. If invoked without second parameter, returns the tab's current badge value. Set the value to false to remove the badge.</p>
+
+<h4>Parameters</h4>
+
+<h5>tab <code>Selector |</code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The target tab specified either as a jQuery selector/object or as an item index.</p>
+
+<h5>value <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>The target value to be set or false to be removed.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><code>kendo.mobile.ui.TabStrip</code> Returns the badge value if invoked without parameters, otherwise returns the TabStrip object.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view" data-init="onInit"&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a data-icon="contacts"&gt;bar&lt;/a&gt;
+      &lt;a data-icon="info"&gt;baz&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onInit(e) {
+  var tabstrip = e.view.footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+
+  // Set the first tab badge value to 5
+  tabstrip.badge(0, 5);
+  // Get the current badge value on the first tab.
+  console.log(tabstrip.badge(0));
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-currentItem"><a href="#methods-currentItem">currentItem</a></h3>
+
+<p>Get the currently selected tab DOM element.</p>
+
+<h4>Returns</h4>
+
+<p><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a> the currently selected tab DOM element.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view" data-init="onInit"&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a data-icon="contacts"&gt;bar&lt;/a&gt;
+      &lt;a data-icon="info"&gt;baz&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onInit(e) {
+  var tabstrip = e.view.footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  var currentItem = tabstrip.currentItem();
+  console.log(currentItem);
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>TabStrip</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the TabStrip element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Button&lt;/a&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a data-icon="contacts"&gt;bar&lt;/a&gt;
+      &lt;a data-icon="info"&gt;baz&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onClick() {
+  var tabstrip = app.view().footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  tabstrip.destroy(); //detach events
+  tabstrip.wrapper.remove(); //remove DOM elements
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-switchTo"><a href="#methods-switchTo">switchTo</a></h3>
+
+<p>Set the mobile TabStrip active tab to the tab with the specified URL. This method doesn't change the current View. To change the View, use Application's <a href="/kendo-ui/api/mobile/application#navigate">navigate</a> method instead.</p>
+
+<h4>Parameters</h4>
+
+<h5>url <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The URL or zero based index of the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Button&lt;/a&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a href="#foo" data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a href="#bar" data-icon="contacts"&gt;bar&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onClick() {
+  var tabstrip = app.view().footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  tabstrip.switchTo("#bar"); //activate "bar" tab
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-switchByFullUrl"><a href="#methods-switchByFullUrl">switchByFullUrl</a></h3>
+
+<p>Set the mobile TabStrip active tab to the tab with the specified full URL. This method doesn't change the current View. To change the View, use Application's <a href="/kendo-ui/api/mobile/application#navigate">navigate</a> method instead.</p>
+
+<blockquote>
+<p>Use switchByFullUrl when you want to active a tab that has URL with query string parameters.</p>
+</blockquote>
+
+<h4>Parameters</h4>
+
+<h5>url <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The URL of the tab.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Button&lt;/a&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a href="#foo" data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a href="#foo?bar=qux" data-icon="contacts"&gt;bar&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onClick() {
+  var tabstrip = app.view().footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  tabstrip.switchByFullUrl("#foo?bar=qux"); //activate second tab
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-clear"><a href="#methods-clear">clear</a></h3>
+
+<p>Clear the currently selected tab.</p>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;a data-role="button" data-click="onClick"&gt;Button&lt;/a&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip"&gt;
+      &lt;a href="#foo" data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a href="#bar" data-icon="contacts"&gt;bar&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onClick() {
+  var tabstrip = app.view().footer.find(".km-tabstrip").data("kendoMobileTabStrip");
+  tabstrip.clear();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-select"><a href="#events-select">select</a></h3>
+
+<p>Fires when tab is selected.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.item <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The selected tab</p>
+
+<h4>Example - prevent tab selection</h4>
+
+<pre><code>&lt;div id="foo" data-role="view"&gt;
+  &lt;div data-role="footer"&gt;
+    &lt;div data-role="tabstrip" data-select="onSelect"&gt;
+      &lt;a data-icon="contacts"&gt;foo&lt;/a&gt;
+      &lt;a data-icon="contacts"&gt;bar&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+var app = new kendo.mobile.Application();
+function onSelect(e) {
+  e.preventDefault(); //prevent the tab selection
+}
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

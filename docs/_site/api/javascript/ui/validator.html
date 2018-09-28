@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Validator configuration and methods | Kendo UI Framework</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure the Validator in Kendo UI Framework, get error messages and ensure the validation of the input elements in supported methods.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/validator.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/validator.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouivalidator"><a href="#kendouivalidator">kendo.ui.Validator</a></h1>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-errorTemplate">
+<a href="#configuration-errorTemplate">errorTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The <a href="/kendo-ui/api/framework/kendo#methods-template">template</a> which renders the validation message.</p>
+
+<h4>Defining custom error template</h4>
+
+<pre><code>&lt;form id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button&gt;Validate&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    $("#myform").kendoValidator({
+        errorTemplate: "&lt;span&gt;#=message#&lt;/span&gt;"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages">
+<a href="#configuration-messages">messages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Set of messages (either strings or functions) which will be shown when given validation rule fails.
+By setting already existing key the appropriate built-in message will be overridden.</p>
+
+<h4>Defining custom messages</h4>
+
+<pre><code>&lt;form id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;input type="email" name="userEmail" required data-message="My custom email message" /&gt; &lt;br /&gt;
+    &lt;button&gt;Validate&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    $("#myform").kendoValidator({
+         messages: {
+             // defines a message for the 'custom' validation rule
+             custom: "Please enter valid value for my custom rule",
+
+             // overrides the built-in message for the required rule
+             required: "My custom required message",
+
+             // overrides the built-in message for the email rule
+             // with a custom function that returns the actual message
+             email: function(input) {
+                 return getMessage(input);
+             }
+         },
+         rules: {
+           custom: function(input) {
+             if (input.is("[name=username]")) {
+                 return input.val() === "Tom";
+             }
+             return true;
+           }
+         }
+    });
+
+    function getMessage(input) {
+      return input.data("message");
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-rules">
+<a href="#configuration-rules">rules </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Set of custom validation rules. Those rules will extend the <a href="/kendo-ui/framework/validator/overview#default-validation-rules">built-in ones</a>.</p>
+
+<h4>Defining custom rules</h4>
+
+<pre><code>&lt;form id="myform"&gt;
+    &lt;input name="username"/&gt; &lt;br /&gt;
+    &lt;input name="town" /&gt; &lt;br /&gt;
+    &lt;button&gt;Validate&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    $("#myform").kendoValidator({
+      rules: {
+        customRule1: function(input){
+          // all of the input must have a value
+          return $.trim(input.val()) !== "";
+        },
+        customRule2: function(input) {
+          //only 'Tom' will be valid value for the username input
+          if (input.is("[name=username]")) {
+            return input.val() === "Tom";
+          }
+          return true;
+        }
+      },
+      messages: {
+        customRule1: "All fields are required",
+        customRule2: "Your UserName must be Tom"
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-validateOnBlur">
+<a href="#configuration-validateOnBlur">validateOnBlur </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>Determines if validation will be triggered when element loses focus. Default value is true.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;form id="myform"&gt;
+    &lt;input name="username"/&gt; &lt;br /&gt;
+    &lt;button&gt;Validate&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    $("#myform").kendoValidator({
+      validateOnBlur: false
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-errors"><a href="#methods-errors">errors</a></h3>
+
+<p>Get the error messages if any.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button id="save"&gt;Save&lt;/button&gt;
+    &lt;div id="errors"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // attach a validator to the container and get a reference
+    var validatable = $("#myform").kendoValidator().data("kendoValidator");
+
+    $("#save").click(function() {
+      //validate the input elements and check if there are any errors
+      if (validatable.validate() === false) {
+        // get the errors and write them out to the "errors" html container
+        var errors = validatable.errors();
+        $(errors).each(function() {
+          $("#errors").html(this);
+        });
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> Messages for the failed validation rules.</p>
+
+<h3 id="methods-hideMessages"><a href="#methods-hideMessages">hideMessages</a></h3>
+
+<p>Hides the validation messages.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;form id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button&gt;Save&lt;/button&gt;
+    &lt;button id="hide" type="button"&gt;Hide Messages&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    // attach a validator to the container and get a reference
+    var validator = $("#myform").kendoValidator().data("kendoValidator");
+
+    //hide the validation messages when hide button is clicked
+    $("#hide").click(function() {
+        validator.hideMessages();
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-validate"><a href="#methods-validate">validate</a></h3>
+
+<p>Validates the input element(s) against the declared validation rules.</p>
+
+<h4>Example</h4>
+
+<pre><code>  &lt;div id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button id="save"&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    // attach a validator to the container and get a reference
+    var validatable = $("#myform").kendoValidator().data("kendoValidator");
+
+    //validate the state on button click
+    $("#save").click(function() {
+      //validate the input elements and check if there are any errors
+      if (validatable.validate()) {
+        //save the form
+      }
+    });
+  &lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <code>true</code> if all validation rules passed successfully.</p>
+
+<p>Note that if a HTML form element is set as validation container, the form submits will be automatically prevented if validation fails.</p>
+
+<h3 id="methods-validateInput"><a href="#methods-validateInput">validateInput</a></h3>
+
+<p>Validates the input element against the declared validation rules.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="myform"&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;input name="location" required /&gt; &lt;br /&gt;
+
+    &lt;button&gt;Validate only userName field&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // attach a validator to the container and get a reference
+    var validator = $("#myform").kendoValidator().data("kendoValidator");
+
+    //validate the userName input state on button click
+    $("button").click(function() {
+      if (!validator.validateInput($("input[name=username]"))) {
+        alert("UserName is not valid!");
+      } else {
+        alert("UserName is valid!");
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>input <code>Element |</code><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>Input element to be validated.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <code>true</code> if all validation rules passed successfully.</p>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-validate"><a href="#events-validate">validate</a></h3>
+
+<p>Fired when validation completes.</p>
+
+<p>The event handler function context (available via the <code>this</code> keyword) will be set to the data source instance.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.sender <code>kendo.ui.Validator</code>
+</h5>
+
+<p>The validator instance which fired the event.</p>
+
+<h4>Example - subscribe to the "validate" event during initialization</h4>
+
+<pre><code>  &lt;form&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button id="save"&gt;Save&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;script&gt;
+    // attach a validator to the container
+    $("form").kendoValidator({
+        validate: function(e) {
+            console.log("valid" + e.valid);
+        }
+    });
+  &lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "validate" event after initialization</h4>
+
+<pre><code>  &lt;form&gt;
+    &lt;input name="username" required /&gt; &lt;br /&gt;
+    &lt;button id="save"&gt;Save&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;script&gt;
+    // attach a validator to the container and get a reference
+    var validatable = $("form").kendoValidator().data("kendoValidator");
+
+    validatable.bind("validate", function(e) {
+        console.log("valid" + e.valid);
+    });
+  &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

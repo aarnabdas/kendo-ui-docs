@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Getting started with Telerik UI for ASP.NET MVC 6</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure a project to use Telerik UI for ASP.NET MVC 6.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/mvc-6/getting-started.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/mvc-6/getting-started.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="using-telerik-ui-for-aspnet-mvc-in-mvc-6-applications"><a href="#using-telerik-ui-for-aspnet-mvc-in-mvc-6-applications">Using Telerik UI for ASP.NET MVC in MVC 6 applications</a></h1>
+
+<p>This tutorial shows how to configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC.</p>
+
+<p>The tutorial uses Visual Studio 2015 RC.</p>
+
+<h3 id="1-create-an-aspnet-mvc-6-web-site"><a href="#1-create-an-aspnet-mvc-6-web-site">1. Create an ASP.NET MVC 6 Web Site</a></h3>
+
+<p>Please skip this step if you're configuring an existing project.</p>
+
+<ol>
+<li>Select <code>File -&gt; New Project</code>
+</li>
+<li>Choose <code>Templates / Visual C# / Web / ASP.NET Web Application</code>
+</li>
+<li>Set a name and location for the project</li>
+<li>From the project templates select <code>ASP.NET 5 Preview Templates / Web Site</code>
+</li>
+<li>Hit OK to create the project.</li>
+</ol>
+
+<h3 id="2-add-nuget-package"><a href="#2-add-nuget-package">2. Add NuGet package</a></h3>
+
+<ol>
+<li>
+<p>Open the NuGet Package Manager</p>
+
+<p><img src="images/manage-nuget-packages.png" alt="NuGet package manager"></p>
+</li>
+<li>Choose <code>nuget.org</code> as a package source and search for <code>Kendo.Mvc</code>
+</li>
+<li>
+<p>Install the <code>Kendo.Mvc</code> package version 2015.2.602 or later.
+This should add a similar line in your <code>project.json</code>:</p>
+
+<pre><code>"dependencies": {
+    ...
+    "Kendo.Mvc": "2015.2.602"
+}
+</code></pre>
+</li>
+<li>
+<p>Open <code>Startup.cs</code> and locate the <code>ConfigureServices</code> method. Add the following snippet:</p>
+
+<pre><code>// Register UI for ASP.NET MVC helpers
+services.AddKendo();
+</code></pre>
+</li>
+<li>
+<p>Import the <code>Kendo.Mvc.UI</code> namespace in <code>~/Views/_GlobalImport.cshtml</code></p>
+
+<pre><code>@using Kendo.Mvc.UI
+</code></pre>
+</li>
+<li>
+<p>Copy the Kendo UI client-side resources</p>
+
+<ol>
+<li>
+<p>Manual installation</p>
+
+<p>Copy the <code>js</code> and <code>styles</code> folders from the <code>telerik.ui.for.aspnetmvc</code> archive to <code>wwwroot\kendo-ui</code></p>
+
+<p><img src="images/kendo-ui-wwwroot.png" alt="Kendo UI resources"></p>
+</li>
+<li>
+<p><a href="/kendo-ui/install/bower">Install Kendo UI as a Bower package</a></p>
+
+<p>After installing the Bower package edit the <code>gulpfile.js</code>
+ to copy the resources to <code>wwwroot\lib</code> on build.</p>
+
+<pre><code>gulp.task("copy", ["clean"], function () {
+    var bower = {
+        ...
+        "kendo-ui": "kendo-ui/{styles,js}/**/*"
+    };
+
+    ...
+});
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Register the Kendo UI styles and scripts in <code>~/Views/Shared/Layout.cshtml</code></p>
+
+<pre><code>...
+
+&lt;link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-bootstrap.min.css" /&gt;
+&lt;link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.bootstrap.min.css" /&gt;
+&lt;link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.dataviz.bootstrap.min.css" /&gt;
+
+...
+
+&lt;script src="~/lib/kendo-ui/js/kendo.all.min.js"&gt;&lt;/script&gt;
+&lt;script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"&gt;&lt;/script&gt;
+
+@RenderSection("scripts", required: false)
+</code></pre>
+</li>
+<li>
+<p>Use a Kendo UI Widget</p>
+
+<p>Add the following snippet to <code>~/Views/Home/Index.cshtml</code></p>
+
+<pre><code>    &lt;h2&gt;Kendo UI DatePicker&lt;/h2&gt;
+
+    @(Html.Kendo().DatePicker()
+            .Name("datepicker")
+            .Deferred()
+    )
+
+    @section scripts {
+        @Html.Kendo().DeferredScripts()
+    }
+</code></pre>
+</li>
+<li>
+<p>All done</p>
+
+<p><img src="images/sample-page.png" alt="Sample page"></p>
+</li>
+</ol>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

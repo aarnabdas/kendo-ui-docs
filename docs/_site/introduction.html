@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>HTML5, jQuery-based framework | Kendo UI</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Kendo UI framework overview: UI components, rich data visualization framework, auto-adaptive mobile widgets and all tools for building rich web applications.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="welcome-to-kendo-ui"><a href="#welcome-to-kendo-ui">Welcome to Kendo UI</a></h1>
+
+<p>Kendo UI is an HTML5, jQuery-based framework for building modern web apps. The framework features lots of UI widgets, a
+rich data visualization framework, an auto-adaptive mobile framework, and all the tools needed for HTML5 app
+development, such as data source, templates, MVVM, drag-and-drop component, and more.</p>
+
+<p>Kendo UI comes in several different bundles:</p>
+
+<ul>
+<li>Kendo UI Core - free open source version of Kendo UI, licensed under Apache 2.0. Includes web, mobile widgets, and
+framework features.</li>
+<li>Kendo UI Professional - includes web, data visualisation, mobile widgets, and framework features.</li>
+<li>Telerik UI for ASP.NET MVC - Kendo UI Professional plus ASP.NET MVC wrappers for all available widgets.</li>
+<li>Telerik UI for JSP - Kendo UI Professional plus JSP wrappers for the available web and dataviz widgets.</li>
+<li>Telerik UI for PHP - Kendo UI Professional plus PHP wrappers for the available web and dataviz widgets.</li>
+</ul>
+
+<h2 id="server-side-wrappers"><a href="#server-side-wrappers">Server-Side Wrappers</a></h2>
+
+<p>Kendo UI provides server-side wrappers for ASP.NET, PHP and JSP. Those are classes (ASP.NET and PHP) or XML tags (JSP)
+which generate the Kendo UI widgets from a server-side code.</p>
+
+<p>You can find more info about the server-side wrappers here:</p>
+
+<ul>
+<li><a href="/kendo-ui/aspnet-mvc/introduction">Get Started with Telerik UI for ASP.NET MVC</a></li>
+<li><a href="/kendo-ui/jsp/introduction">Get Started with Telerik UI for JSP</a></li>
+<li><a href="/kendo-ui/php/introduction">Get Started with Telerik UI for PHP</a></li>
+</ul>
+
+<h2 id="next-steps"><a href="#next-steps">Next Steps</a></h2>
+
+<h3 id="kendo-ui-videos"><a href="#kendo-ui-videos">Kendo UI videos</a></h3>
+
+<p>You can watch the videos in the <a href="http://www.youtube.com/kendouitv">Kendo UI YouTube channel</a>.</p>
+
+<h3 id="kendo-ui-dojo"><a href="#kendo-ui-dojo">Kendo UI Dojo</a></h3>
+
+<p>Several interactive tutorials are available in the <a href="http://dojo.telerik.com">Kendo UI Dojo</a>.</p>
+
+<h3 id="further-reading"><a href="#further-reading">Further Reading</a></h3>
+
+<ol>
+<li><a href="/kendo-ui/install/cdn">Use Kendo UI from CDN</a></li>
+<li><a href="/kendo-ui/install/onsite">Host Kendo UI in your project</a></li>
+</ol>
+
+<h3 id="examples"><a href="#examples">Examples</a></h3>
+
+<ol>
+<li><a href="http://demos.telerik.com/kendo-ui">Online demos</a></li>
+<li><a href="http://www.telerik.com/support/code-library">Code library projects</a></li>
+</ol>
+
+<h3 id="github-public-example-repositories"><a href="#github-public-example-repositories">GitHub Public Example Repositories</a></h3>
+
+<ul>
+<li>  <a href="https://github.com/telerik/kendo-examples-asp-net-mvc/">ASP.NET MVC examples</a>
+</li>
+<li>  <a href="https://github.com/telerik/kendo-examples-asp-net/">ASP.NET WebForms examples</a>
+</li>
+<li>  <a href="https://github.com/telerik/kendo-examples-java">JSP examples</a>
+</li>
+<li>  <a href="https://github.com/telerik/kendo-mobile-sushi">Kendo Mobile Sushi</a>
+</li>
+<li>  <a href="https://github.com/telerik/kendo-examples-php">PHP examples</a>
+</li>
+</ul>
+
+<h2 id="help-us-improve-kendo-ui-documentation-samples-tutorials-and-demos"><a href="#help-us-improve-kendo-ui-documentation-samples-tutorials-and-demos">Help Us Improve Kendo UI Documentation, Samples, Tutorials and Demos</a></h2>
+
+<p>The Kendo UI team would love your help to improve the documentation. We encourage you to contribute in the way that you
+choose:</p>
+
+<h3 id="submit-a-new-issue-at-github"><a href="#submit-a-new-issue-at-github">Submit a New Issue at GitHub</a></h3>
+
+<p><a href="https://github.com/telerik/kendo-docs/issues?state=open">Open</a> a new issue on the topic if it does not exist already.</p>
+
+<p>When creating an issue, please provide a descriptive title, be as specific as possible and link to the document in
+question. If you can provide a link to the closest anchor to the issue, that is even better.</p>
+
+<h3 id="update-the-documentation-at-github"><a href="#update-the-documentation-at-github">Update the Documentation at GitHub</a></h3>
+
+<p>This is the most direct method. Follow <a href="https://github.com/telerik/kendo-docs/blob/master/README.md">the contribution instructions</a>. The basic steps
+are that you fork our documentation and submit a pull request. That way you may contribute to exactly where you found the error. After that, our technical
+writing team just needs to approve your change request. Please use only standard markdown and follow the directions at the link. If you find an issue
+in the docs, or even feel like creating new content, we are happy to have your contributions!</p>
+
+<h3 id="forums"><a href="#forums">Forums</a></h3>
+
+<p>You can visit the <a href="http://www.telerik.com/forums">Kendo UI Forums</a> and leave feedback. This method will take a bit longer to reach our documentation
+team, but if you like the accountability of forums and need a fast reply from our support team, leaving feedback in the Kendo UI forums guarantees
+that your suggestion has a support number and that we will follow up on it.</p>
+
+<p>Thank you for contributing to the Kendo UI community!</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

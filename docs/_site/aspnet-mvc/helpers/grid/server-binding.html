@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Server binding in Telerik UI for ASP.NET MVC | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Set the data source and render the view to bind Kendo UI Grid for ASP.NET MVC with data by using server binding.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/helpers/grid/server-binding.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/helpers/grid/server-binding.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="server-binding"><a href="#server-binding">Server Binding</a></h1>
+
+<p>By default the Kendo Grid for ASP.NET MVC will perform server side requests (HTTP GET) when doing paging, sorting and filtering.</p>
+
+<p>To bind the grid with data you just need to set its data source and render the view. There are a few ways to do this:</p>
+
+<h2 id="bind-to-the-model-of-the-view">
+<a href="#bind-to-the-model-of-the-view">Bind to the </a><code>Model</code> of the view:</h2>
+
+<h3 id="controller"><a href="#controller">Controller</a></h3>
+
+<pre><code>public ActionResult Index()
+{
+    var northwind = new NorthwindEntities();
+    var products = northwind.Products;
+    return View(products);
+}
+</code></pre>
+
+<h3 id="view"><a href="#view">View</a></h3>
+
+<pre lang="Razor"><code>@model IEnumerable&lt;KendoGridServerBinding.Models.Product&gt;
+
+@(Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
+      .Name("Grid")
+      .Columns(columns =&gt;
+      {
+          columns.Bound(p =&gt; p.ProductID);   //Create a column bound to the "ProductID" property
+          columns.Bound(p =&gt; p.ProductName); //Create a column bound to the "ProductName" property
+          columns.Bound(p =&gt; p.UnitPrice);   //Create a column bound to the "UnitPrice" property
+          columns.Bound(p =&gt; p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
+      })
+     .Pageable() //Enable paging
+)
+</code></pre>
+
+<pre lang="ASPX"><code>&lt;%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+   Inherits="System.Web.Mvc.ViewPage&lt;IEnumerable&lt;KendoGridServerBinding.Models.Product&gt;&gt;" %&gt;
+
+&lt;%: Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
+        .Name("Grid")
+        .Columns(columns =&gt;
+        {
+            columns.Bound(p =&gt; p.ProductID);   //Create a column bound to the "ProductID" property
+            columns.Bound(p =&gt; p.ProductName); //Create a column bound to the "ProductName" property
+            columns.Bound(p =&gt; p.UnitPrice);   //Create a column bound to the "UnitPrice" property
+            columns.Bound(p =&gt; p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
+        })
+        .Pageable() //Enable paging
+%&gt;
+</code></pre>
+
+<p><a href="https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-binding">Download Visual Studio Project</a></p>
+
+<h2 id="bind-to-an-item-from-the-viewdata-or-viewbag">
+<a href="#bind-to-an-item-from-the-viewdata-or-viewbag">Bind to an item from the </a><code>ViewData</code> or <code>ViewBag</code>:</h2>
+
+<h3 id="action"><a href="#action">Action</a></h3>
+
+<pre><code>public ActionResult Index()
+{
+    var products = new NorthwindDataContext().Products;
+
+    ViewData["products"] = products;
+
+    return View();
+}
+</code></pre>
+
+<h3 id="webforms-view"><a href="#webforms-view">WebForms View</a></h3>
+
+<pre><code>&lt;%: Html.Kendo().Grid((IEnumerable&lt;MvcApplication1.Models.Product&gt;)ViewData["products"])
+        .Name("Grid")
+        .Columns(columns =&gt;
+        {
+            columns.Bound(p =&gt; p.ProductID);
+            columns.Bound(p =&gt; p.ProductName);
+            columns.Bound(p =&gt; p.UnitPrice);
+            columns.Bound(p =&gt; p.UnitsInStock);
+        })
+%&gt;
+</code></pre>
+
+<h3 id="razor-view"><a href="#razor-view">Razor View</a></h3>
+
+<pre><code>@(Html.Kendo().Grid((IEnumerable&lt;MvcApplication1.Models.Product&gt;)ViewData["products"])
+      .Name("Grid")
+      .Columns(columns =&gt;
+      {
+          columns.Bound(p =&gt; p.ProductID);
+          columns.Bound(p =&gt; p.ProductName);
+          columns.Bound(p =&gt; p.UnitPrice);
+          columns.Bound(p =&gt; p.UnitsInStock);
+      })
+)
+</code></pre>
+
+<h2 id="use-the-bindto-method">
+<a href="#use-the-bindto-method">Use the </a><code>BindTo</code> method:</h2>
+
+<h3 id="action"><a href="#action">Action</a></h3>
+
+<pre><code>public ActionResult Index()
+{
+    var products = new NorthwindDataContext().Products;
+
+    ViewBag.Products = products;
+
+    return View();
+}
+</code></pre>
+
+<h3 id="webforms-view"><a href="#webforms-view">WebForms View</a></h3>
+
+<pre><code>&lt;%: Html.Kendo().Grid&lt;MvcApplication1.Models.Product&gt;() // Specify the type of the grid
+        .Name("Grid")
+        .BindTo((IEnumerable&lt;MvcApplication1.Models.Product&gt;)ViewBag.Products)
+        .Columns(columns =&gt;
+        {
+            columns.Bound(p =&gt; p.ProductID);
+            columns.Bound(p =&gt; p.ProductName);
+            columns.Bound(p =&gt; p.UnitPrice);
+            columns.Bound(p =&gt; p.UnitsInStock);
+        })
+%&gt;
+</code></pre>
+
+<h3 id="razor-view"><a href="#razor-view">Razor View</a></h3>
+
+<pre><code>@(Html.Kendo().Grid&lt;MvcApplication1.Models.Product&gt;() // Specify the type of the grid
+    .Name("Grid")
+    .BindTo((IEnumerable&lt;MvcApplication1.Models.Product&gt;)ViewBag.Products)
+    .Columns(columns =&gt;
+    {
+        columns.Bound(p =&gt; p.ProductID);
+        columns.Bound(p =&gt; p.ProductName);
+        columns.Bound(p =&gt; p.UnitPrice);
+        columns.Bound(p =&gt; p.UnitsInStock);
+    })
+)
+</code></pre>
+
+<p>The grid will make HTTP GET requests to the action method which rendered the view initially. The grid page, sort, filter and group info will be passed as query string parameters
+Here is how a typical URL would look like: http://localhost:4939/?Grid-sort=ProductName-asc&amp;Grid-page=2. The <code>Name</code> of the grid will be used as a prefix of the query string
+parameters. Thus more than one server-boud grid can coexist in the same view. The prefix can be disabled via the <code>PrefixUrlParameters</code> method:</p>
+
+<pre><code>&lt;%: Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .PrefixUrlParameters(false)
+%&gt;
+</code></pre>
+
+<h2 id="pass-additional-data-to-action-method"><a href="#pass-additional-data-to-action-method">Pass Additional Data to Action Method</a></h2>
+
+<p>Sometimes the action method which renders the view containing the grid may need additional data. Here is how to pass them:</p>
+
+<h3 id="action"><a href="#action">Action</a></h3>
+
+<pre><code>public ActionResult Index(string firstName, string lastName)
+{
+    var products = new NorthwindDataContext().Products;
+
+    return View(products);
+}
+</code></pre>
+
+<h3 id="webforms-view"><a href="#webforms-view">WebForms View</a></h3>
+
+<pre><code>&lt;%: Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .DataSource(dataSource =&gt; dataSource
+            .Server() //specify server type
+            .Read(read =&gt; read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
+        )
+%&gt;
+</code></pre>
+
+<h3 id="razor-view"><a href="#razor-view">Razor View</a></h3>
+
+<pre><code>@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .DataSource(dataSource =&gt; dataSource
+          .Server() //specify server type
+          .Read(read =&gt; read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
+      )
+)
+</code></pre>
+
+<h2 id="client-side-events-and-server-binding"><a href="#client-side-events-and-server-binding">Client-Side Events And Server Binding</a></h2>
+
+<p>The following events are supported in server binding mode:</p>
+
+<ul>
+<li>Change</li>
+<li>ColumnHide</li>
+<li>ColumnLock</li>
+<li>ColumnMenuInit</li>
+<li>ColumnReorder</li>
+<li>ColumnResize</li>
+<li>ColumnShow</li>
+<li>ColumnUnlock</li>
+<li>DetailCollapse</li>
+<li>DetailExpand</li>
+<li>ExcelExport</li>
+<li>FilterMenuInit</li>
+<li>PdfExport</li>
+</ul>
+
+<p>The other client-side events (which are related to data-binding and CRUD operations) will <strong>not</strong> be raised when the grid is configured for server binding.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

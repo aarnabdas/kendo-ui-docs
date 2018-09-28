@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Overview of Grid UI widget | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Quick steps to help you create Kendo UI Grid">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/grid/introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/grid/introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="grid-introduction"><a href="#grid-introduction">Grid Introduction</a></h1>
+
+<p>The Grid is a powerful widget for displaying tabular data. It provides a lot of options that define how the data is presented and manipulated,
+including paging, sorting, filtering, grouping and editing. The Grid can be bound to local or remote data using the Kendo DataSource component.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>There are two primary ways to create a Kendo UI Grid:</p>
+
+<ul>
+<li>From an empty <code>div</code> element. In this case all the Grid settings are provided in the initialization script statement.</li>
+<li>From an existing HTML <code>table</code> element. In this case some of the Grid settings can be inferred from the table structure and elements' HTML attributes.</li>
+</ul>
+
+<h3 id="create-a-grid-from-an-empty-div"><a href="#create-a-grid-from-an-empty-div">Create a Grid from an empty div</a></h3>
+
+<pre><code>&lt;!-- Define the HTML div that will hold the Grid --&gt;
+&lt;div id="grid"&gt;&lt;/div&gt;
+
+&lt;!-- Initialize the Grid --&gt;
+&lt;script&gt;
+
+    $(document).ready(function(){
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "FirstName",
+                title: "First Name"
+            },
+            {
+                field: "LastName",
+                title: "Last Name"
+            }],
+            dataSource: {
+                data: [{
+                    FirstName: "Joe",
+                    LastName: "Smith"
+                },
+                {
+                    FirstName: "Jane",
+                    LastName: "Smith"
+                }]
+            }
+        });
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="create-a-grid-from-an-existing-html-table"><a href="#create-a-grid-from-an-existing-html-table">Create a Grid from an existing HTML table</a></h3>
+
+<p>When creating the Grid from a table, it is usually already populated with data. This improves the accessibility and search engine optimization,
+and ensures that the user will see data even if Javascript is disabled or there is a Javascript error on the page.</p>
+
+<pre><code>&lt;!-- Define the HTML table, with rows, columns, and data --&gt;
+&lt;table id="grid"&gt;
+    &lt;colgroup&gt;
+        &lt;col /&gt;
+        &lt;col style="width:100px" /&gt;
+    &lt;/colgroup&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-field="title" data-filterable="false"&gt;Title&lt;/th&gt;
+            &lt;th data-field="year" data-type="number" data-template="&lt;strong&gt;#=year#&lt;/strong&gt;"&gt;Year&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Star Wars: A New Hope&lt;/td&gt;
+            &lt;td&gt;1977&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Star Wars: The Empire Strikes Back&lt;/td&gt;
+            &lt;td&gt;1980&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;!-- Initialize the Grid --&gt;
+&lt;script&gt;
+
+    $(document).ready(function(){
+      $("#grid").kendoGrid({
+        sortable: true,
+        filterable: true
+      });
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>It is important to know that the Grid uses a Kendo UI DataSource instance even when it is created from a table. The cell content is extracted and thus the DataSource is populated.
+The data field names in the DataSource are either created from the header cell content or the <code>data-field</code> attributes of the header cells.
+The data field names should be valid Javascript identifiers, that's why it is recommended to use <code>data-field</code> attributes, otherwise the header cell content must obey several limitations:</p>
+
+<ul>
+<li>no spaces</li>
+<li>no special characters</li>
+<li>the first character should be a letter</li>
+</ul>
+
+<p>When creating the Grid from an existing table, the following <strong>column</strong> settings can be defined via HTML attributes:</p>
+
+<ul>
+<li>data field names via <code>data-field</code> attributes</li>
+<li>column widths via <code>width</code> styles applied to the respective <code>&lt;col&gt;</code> elements</li>
+<li>define data type via <code>data-type</code> attributes</li>
+<li>define a column template via <code>data-template</code> attributes</li>
+<li>enable or disable the column menu via <code>data-menu</code> attributes</li>
+<li>enable or disable sorting via <code>data-sortable</code> attributes</li>
+<li>enable or disable filtering via <code>data-filterable</code> attributes</li>
+<li>enable or disable grouping via <code>data-groupable</code> attributes</li>
+</ul>
+
+<p>All attributes should be applied to the <code>&lt;th&gt;</code> elements, except the column width styles.</p>
+
+<p>All other column-related settings cannot be defined via HTML attributes in the </p><table>. If such settings must be used (e.g. commands, locking, editors, etc.)
+then the above attribute configuration should be abandoned and all settings should be included in the Grid's Javascript initialization statement
+(when using declarative widget initialization, the column properties should be set via the <code>data-columns</code> attribute).
+
+<p>As seen from the above code snippets, in one case the Grid client object is attached to a <code>div</code>, while in the other case, the object is attached to a <code>table</code>.
+However, the generated resulting HTML output of the Grid depends entirely on the widget settings and it will always be the same, no matter how the widget is initialized.</p>
+</table>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

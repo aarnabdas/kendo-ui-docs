@@ -1,0 +1,743 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>API Reference for Kendo UI GanttDataSource</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Learn more about the configuration of Kendo UI GanttDataSource, methods and events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/data/ganttdatasource.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/data/ganttdatasource.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendodataganttdatasource"><a href="#kendodataganttdatasource">kendo.data.GanttDataSource</a></h1>
+
+<p>The data source used by the <a href="/kendo-ui/api/web/gantt">kendo.ui.Gantt</a> widget.
+Inherits from <a href="/kendo-ui/api/framework/datasource">kendo.data.DataSource</a>. The GanttDataSource contains instances of the
+<a href="/kendo-ui/api/framework/gantttask">kendo.data.GanttTask</a> class.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
+
+<h3 id="configuration-schema">
+<a href="#configuration-schema">schema </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The schema configuration of the GanttDataSource.</p>
+
+<h3 id="configuration-schema.model">
+<a href="#configuration-schema.model">schema.model </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The model configuration of the GanttDataSource. See <a href="/kendo-ui/api/framework/gantttask#configuration">GanttTask</a> for more info.</p>
+
+<h4>Example - configure the data source model schema</h4>
+
+<pre><code>&lt;script&gt;
+var dataSource = new kendo.data.GanttDataSource({
+  transport: {
+    read: {
+      url: "http://demos.telerik.com/kendo-ui/service/GanttTasks",
+      dataType: "jsonp"
+    },
+    update: {
+      url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Update",
+      dataType: "jsonp"
+    },
+    destroy: {
+      url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Destroy",
+      dataType: "jsonp"
+    },
+    create: {
+      url: "http://demos.telerik.com/kendo-ui/service/GanttTasks/Create",
+      dataType: "jsonp"
+    }
+  },
+  schema: {
+    model: {
+      id: "id",
+      fields: {
+        id: { from: "ID", type: "number" },
+        orderId: { from: "OrderID", type: "number", validation: { required: true } },
+        parentId: { from: "ParentID", type: "number", validation: { required: true } },
+        start: { from: "Start", type: "date" },
+        end: { from: "End", type: "date" },
+        title: { from: "Title", defaultValue: "", type: "string" },
+        percentComplete: { from: "PercentComplete", type: "number" },
+        summary: { from: "Summary" },
+        expanded: { from: "Expanded" }
+      }
+    }
+  }
+});
+dataSource.fetch(function() {
+  var task = this.at(0);
+  console.log(task.title);
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<p>See the <a href="/kendo-ui/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+
+<h3 id="methods-taskAllChildren"><a href="#methods-taskAllChildren">taskAllChildren</a></h3>
+
+<p>Returns a list of all child tasks. The search is recursive.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code> <em>(optional)</em>
+</h5>
+
+<p>The parent task. If this parameter is not specified, all gantt tasks will be returned.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the list of all child tasks.</p>
+
+<h4>Example - get all children of a task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 0,
+        parentId: 2,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list of the two child tasks.
+  var childTasks = dataSource.taskAllChildren(dataSource.at(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get all gantt tasks</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 0,
+        parentId: 2,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list of all three tasks.
+  var childTasks = dataSource.taskAllChildren();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-taskChildren"><a href="#methods-taskChildren">taskChildren</a></h3>
+
+<p>Returns a list of all direct child tasks.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code> <em>(optional)</em>
+</h5>
+
+<p>The parent task. If this parameter is not specified, all root level tasks will be returned.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the list of all direct child tasks.</p>
+
+<h4>Example - get direct children of a task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 0,
+        parentId: 2,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with all child tasks of Task1.
+  var childTasks = dataSource.taskChildren(dataSource.at(0));
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get root level tasks</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with all root level tasks.
+  var childTasks = dataSource.taskChildren();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-taskLevel"><a href="#methods-taskLevel">taskLevel</a></h3>
+
+<p>Returns the level of the task in the hierrarchy. 0 for root level taks.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code>
+</h5>
+
+<p>The reference task.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> the level of the task in the hierarchy.</p>
+
+<h4>Example - get the level of a task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  console.log(dataSource.taskLevel(dataSource.at(1))) // outputs "1"
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-taskParent"><a href="#methods-taskParent">taskParent</a></h3>
+
+<p>Returns the parent task of a certain task.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code>
+</h5>
+
+<p>The reference task.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.data.GanttTask</code> the parent task.</p>
+
+<h4>Example - get the parent of a task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  console.log(dataSource.taskParent(dataSource.at(1)).title) // outputs "Task1"
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get the parent of a root level task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  console.log(dataSource.taskParent(dataSource.at(0))) // outputs "null"`
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-taskSiblings"><a href="#methods-taskSiblings">taskSiblings</a></h3>
+
+<p>Returns a list of all tasks that have the same parent.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code>
+</h5>
+
+<p>The reference task.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the list of all tasks with the same parent as the parameter task. If the parameter task is a root level task, all root level tasks are returned.</p>
+
+<h4>Example - get the siblings of a task</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 1,
+        parentId: 1,
+        title: "Task3",
+        start: new Date("2014/6/17 12:00"),
+        end: new Date("2014/6/17 13:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with the two sibling tasks.
+  var childTasks = dataSource.taskSiblings(dataSource.at(1));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-taskTree"><a href="#methods-taskTree">taskTree</a></h3>
+
+<p>Returns a list of all child gantt tasks, ordered by their hierarchical index (Depth-First). a parent is collapsed, it's children are not returned.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code> <em>(optional)</em>
+</h5>
+
+<p>The reference task. If this parameter is specified, the result will be all child tasks of this task, ordered by their hierarchical index. </p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> the list of all child gantt tasks, ordered by their hierarchical index (Depth-First).</p>
+
+<h4>Example - get all gantt tasks</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        expanded: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 1,
+        parentId: null,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 0,
+        parentId: 1,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with all tasks in the following order: [Task1, Task3, Task2]
+  var childTasks = dataSource.taskTree();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get all gantt tasks, when parent is collapsed</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        expanded: false,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 1,
+        parentId: null,
+        title: "Task2",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 0,
+        parentId: 1,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with two tasks in the following order: [Task1, Task2]
+  var childTasks = dataSource.taskTree();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - get all child tasks of the first task, ordered by their hierarchical index</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        expanded: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 2,
+        orderId: 0,
+        parentId: 1,
+        title: "Task2",
+        summary: true,
+        expanded: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 3,
+        orderId: 1,
+        parentId: 1,
+        title: "Task3",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      },
+      {
+        id: 4,
+        orderId: 0,
+        parentId: 2,
+        title: "Task4",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  // returns a list with all tasks in the following order: [Task2, Task4, Task3]
+  var childTasks = dataSource.taskTree(dataSource.at(0));
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-update"><a href="#methods-update">update</a></h3>
+
+<p>Updates a gantt task.</p>
+
+<h4>Parameters</h4>
+
+<h5>task <code>kendo.data.GanttTask</code>
+</h5>
+
+<p>The task to be updated.</p>
+
+<h5>taskInfo <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The new values, which will be used to update the task.</p>
+
+<h4>Example - update a task's title</h4>
+
+<pre><code>&lt;script&gt;
+  var dataSource = new kendo.data.GanttDataSource({
+    data: [
+      {
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        summary: true,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+      }
+    ]
+  });
+
+  dataSource.fetch();
+
+  var task = dataSource.at(0);
+  dataSource.update(task, { title: "New Title" });
+  console.log(task.title); // outputs "New Title"
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

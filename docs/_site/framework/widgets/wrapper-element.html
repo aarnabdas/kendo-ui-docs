@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/widgets/wrapper-element.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/widgets/wrapper-element.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="widget-wrapper-and-widget-element"><a href="#widget-wrapper-and-widget-element">Widget wrapper and widget element</a></h1>
+
+<p>Each Kendo UI <strong>Web</strong> and <strong>DataViz</strong> widget instance keeps references to two elements - <code>element</code> and <code>wrapper</code>. Kendo UI <strong>Mobile</strong> widgets have an <code>element</code> reference only.</p>
+
+<h2 id="element"><a href="#element">Element</a></h2>
+
+<p><strong><code>element</code></strong> is the element from which the widget was initialized. Depending on the widget, it may be visible (e.g. AutoComplete, Calendar, DatePicker, etc.) or hidden (e.g. DropDownList, Upload).
+A reference to this element is also returned by the initialization statement.</p>
+
+<h2 id="wrapper"><a href="#wrapper">Wrapper</a></h2>
+
+<p><strong><code>wrapper</code></strong> is the outermost element, which is part of the widget. Depending on the widget and exact scenario, the wrapper and the element may match.
+For example, if the Grid is initialized from a <code>&lt;div&gt;</code>, the two references match. But if the Grid is initialized from a <code>&lt;table&gt;</code>, then <code>element</code> points to the <code>&lt;table&gt;</code>, while <code>wrapper</code> points to the wrapper <code>&lt;div&gt;</code>.</p>
+
+<h3 id="example---using-element-and-wrapper-references"><a href="#example---using-element-and-wrapper-references">Example - using element and wrapper references</a></h3>
+
+<pre><code>&lt;div id="myWindow"&gt;...window content...&lt;/div&gt;
+&lt;script&gt;
+    var winElement1 = $("#myWindow").kendoWindow( { /*...*/ } ); // returns div#myWindow as a jQuery object
+    var winElement2 = $("#myWindow").data("kendoWindow").element; // returns div#myWindow as a jQuery object
+
+    var winWrapper = $("#myWindow").data("kendoWindow").wrapper; // returns div.k-window as a jQuery object
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="usage"><a href="#usage">Usage</a></h2>
+
+<p>A reference to the widget wrapper may be needed when doing DOM or CSS manipulations. For example, in order to hide a widget, one must hide the <strong>wrapper</strong>. Hiding the element may hide the widget partially or not hide it at all.
+The wrapper is also the most suitable HTML node for appending custom CSS classes.</p>
+
+<p>Obtaining a reference to the widget element from the widget object is a relatively rare scenario, but may be helpful in some cases, especially when hard-coding IDs in jQuery selectors is not desired.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

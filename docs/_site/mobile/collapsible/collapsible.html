@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Using Kendo UI Mobile Collapsible widget</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Kendo UI Mobile Collapsible widget allows the developer to create collapsible blocks of content.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("mobile/collapsible/collapsible.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//mobile/collapsible/collapsible.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="collapsible"><a href="#collapsible">Collapsible</a></h1>
+
+<p>Kendo UI Mobile Collapsible widget allows the developer to create collapsible blocks of content.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>The Kendo mobile Application will automatically initialize a mobile Collapsible for every element with <code>role</code> data attribute set to <code>collapsible</code> present in the views markup.
+Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>. </p>
+
+<p>The Collapsible element should be a <code>div</code> element. Directly inside this container, add a header element <code>h1</code> - <code>h6</code>. The framework will style the header as a click-able button with icon to indicate that it is expandable.
+After the header, add any HTML markup you want to be collapsible. The framework will wrap this content in a container that will be hidden/shown when user taps on the Collapsible header.</p>
+
+<p>By default the content is initially hidden.</p>
+
+<h3 id="initialize-kendo-ui-mobile-collapsible-based-on-role-data-attribute"><a href="#initialize-kendo-ui-mobile-collapsible-based-on-role-data-attribute">Initialize Kendo UI Mobile Collapsible based on role data attribute.</a></h3>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="initialize-kendo-ui-mobile-collapsible-using-jquery-plugin-syntax"><a href="#initialize-kendo-ui-mobile-collapsible-using-jquery-plugin-syntax">Initialize Kendo UI Mobile Collapsible using jQuery plugin syntax</a></h3>
+
+<pre><code>var collapsible = $("#collapsible").kendoMobileButtonGroup();
+</code></pre>
+
+<h2 id="creating-a-scrollable-collapsible-content"><a href="#creating-a-scrollable-collapsible-content">Creating a scrollable collapsible content</a></h2>
+
+<p>To create a scrollable collapsible content wrap the content in a <code>div</code> element with <code>data-role="scroller"</code> and specify its <code>height</code>.</p>
+
+<h3 id="example---scrollable-collapsible-content"><a href="#example---scrollable-collapsible-content">Example - scrollable collapsible content</a></h3>
+
+<pre><code>&lt;div id="home" data-role="view"&gt;
+    &lt;div id="collapsible" data-role="collapsible"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+        &lt;div data-role="scroller" style="height: 200px"&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="nested-collapsible-panels"><a href="#nested-collapsible-panels">Nested Collapsible panels</a></h2>
+
+<p>Collapsible widgets can be nested inside each other.</p>
+
+<blockquote>
+<p>In this scenario the animation of the parent Collapsible content should be disabled.</p>
+</blockquote>
+
+<h3 id="example---nested-collapsible-widgets"><a href="#example---nested-collapsible-widgets">Example - nested Collapsible widgets</a></h3>
+
+<pre><code>&lt;div id="home" data-role="view" data-init="onInit"&gt;
+    &lt;div id="collapsible" data-role="collapsible" data-animation="false" data-collapsed="false"&gt;
+        &lt;h2&gt;Header&lt;/h2&gt;
+
+        &lt;p&gt;Nested collapsibles&lt;/p&gt;
+        &lt;div id="collapsible" data-role="collapsible"&gt;
+            &lt;h3&gt;Scrollable ListView&lt;/h3&gt;
+            &lt;div data-role="scroller" style="height: 150px;"&gt;
+                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt faucibus mauris at pellentesque. Aenean vel est eu ante bibendum faucibus. Praesent pharetra nibh est, vitae scelerisque odio porta vel. Nunc in sagittis ipsum. Vivamus sit amet faucibus ex. Donec nec nisl cursus, consectetur odio et, vehicula est. Quisque sollicitudin ultricies imperdiet. Aenean et felis ante. Fusce ligula urna, maximus ac feugiat vel, placerat in nibh. Suspendisse leo neque, scelerisque ut mattis quis, imperdiet vel orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer ut accumsan ante, at fermentum nunc. Suspendisse posuere diam sit amet mauris pulvinar, eget porttitor augue sagittis.&lt;/p&gt;
+                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt faucibus mauris at pellentesque. Aenean vel est eu ante bibendum faucibus. Praesent pharetra nibh est, vitae scelerisque odio porta vel. Nunc in sagittis ipsum. Vivamus sit amet faucibus ex. Donec nec nisl cursus, consectetur odio et, vehicula est. Quisque sollicitudin ultricies imperdiet. Aenean et felis ante. Fusce ligula urna, maximus ac feugiat vel, placerat in nibh. Suspendisse leo neque, scelerisque ut mattis quis, imperdiet vel orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer ut accumsan ante, at fermentum nunc. Suspendisse posuere diam sit amet mauris pulvinar, eget porttitor augue sagittis.&lt;/p&gt;
+                &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt faucibus mauris at pellentesque. Aenean vel est eu ante bibendum faucibus. Praesent pharetra nibh est, vitae scelerisque odio porta vel. Nunc in sagittis ipsum. Vivamus sit amet faucibus ex. Donec nec nisl cursus, consectetur odio et, vehicula est. Quisque sollicitudin ultricies imperdiet. Aenean et felis ante. Fusce ligula urna, maximus ac feugiat vel, placerat in nibh. Suspendisse leo neque, scelerisque ut mattis quis, imperdiet vel orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer ut accumsan ante, at fermentum nunc. Suspendisse posuere diam sit amet mauris pulvinar, eget porttitor augue sagittis.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div id="collapsible" data-role="collapsible"&gt;
+            &lt;h3&gt;Form elements&lt;/h3&gt;
+            &lt;ul data-role="listview" data-style="inset"&gt;
+                &lt;li&gt;
+                    &lt;label&gt;Type text
+                        &lt;input type="text" value="Text" /&gt;
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt; Type password
+                        &lt;input type="password" value="password" /&gt;
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt; Type email
+                        &lt;input type="email" value="kendoui@telerik.com" /&gt;
+                    &lt;/label&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;label&gt; Textarea
+                        &lt;textarea style="resize: none"&gt;Multiline Text&lt;/textarea&gt;
+                    &lt;/label&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div id="collapsible" data-role="collapsible"&gt;
+            &lt;h3&gt;Nested 3&lt;/h3&gt;
+            &lt;p&gt;Nested content 3&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var app = new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

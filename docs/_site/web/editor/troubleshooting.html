@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Troubleshooting of Kendo UI Editor widget</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to deal with the troubleshooting of Editor UI widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/editor/troubleshooting.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/editor/troubleshooting.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="editor-troubleshooting"><a href="#editor-troubleshooting">Editor troubleshooting</a></h1>
+
+<h2 id="pasting-content-in-the-editor-when-using-ie-does-not-display-anything"><a href="#pasting-content-in-the-editor-when-using-ie-does-not-display-anything">Pasting content in the editor when using IE does not display anything</a></h2>
+
+<p>Pasting in the editor requires permission to access clipboard data. This may require users with strict security settings to add the site in the trusted sites zone, or to adjust their Internet options so that the "Allow Programmatic clipboard access" setting is set to either "Allowed" or "Prompt".</p>
+
+<h2 id="editor-inside-a-popup-is-readonly-in-firefox"><a href="#editor-inside-a-popup-is-readonly-in-firefox">Editor inside a popup is readonly in Firefox</a></h2>
+
+<p>Firefox cannot handle iframes properly when they are moved in the DOM. When an Editor will be used inside a popup, which moves elements in the DOM, the popup (e.g. Kendo UI Window, jQuery dialog, etc) should be initialized first, or you should call the <a href="/kendo-ui/kendo-ui/api/web/editor#methods-refresh">refresh method</a>.</p>
+
+<h2 id="editor-inside-ipad-expands-instead-of-being-scrollable"><a href="#editor-inside-ipad-expands-instead-of-being-scrollable">Editor inside iPad expands instead of being scrollable</a></h2>
+
+<p>Iframes cannot be scrollable in iOS and always expand to display all their content. A possible solution is to use the Editor's inline editing mode, which does not include an iframe.
+In this mode the Editor's value should be posted manually (see below).</p>
+
+<h2 id="inline-editor-value-is-not-posted-to-the-server"><a href="#inline-editor-value-is-not-posted-to-the-server">Inline editor value is not posted to the server</a></h2>
+
+<p>Since the inline editor is initialized from a non-form element, it is not posted to the server by design. If you need to submit the editor value along with the form, use the following approach:</p>
+
+<pre><code>&lt;form&gt;
+  &lt;div id="comment" contentEditable&gt;&lt;/div&gt;
+
+  &lt;button class="k-button"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+  $("form").on("submit", function() {
+    var form = $(this);
+
+    // for each editor in the form
+    form.find("[data-role=editor]").each(function() {
+      var editor = $(this).data("kendoEditor");
+
+      // ... append a hidden input that holds the editor value
+      $("&lt;input type='hidden' /&gt;")
+        .attr("name", editor.element.attr("id"))
+        .val(editor.value())
+        .appendTo(form);
+    });
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="images-inside-the-editor-are-not-resizable-in-some-scenarios"><a href="#images-inside-the-editor-are-not-resizable-in-some-scenarios">Images inside the Editor are not resizable in some scenarios</a></h2>
+
+<p>To begin with, image resizing inside contenteditable elements depends on the browser and is not an Editor feature. In addition, there is a browser issue, which is exhibited in the following way -
+if a "classic" Editor (which uses an <code>iframe</code>) is created while hidden, or is hidden after initialization and then displayed back, then images become non-resizable. This problem is not related to Kendo UI.
+It can be resolved by calling the Editor's <a href="/kendo-ui/api/web/editor#methods-refresh"><code>refresh</code></a> method after the Editor becomes visible. Refreshing the widget will recreate the iframe.
+Another possible approach is to use the Editor's "inline" mode, i.e. create the Editor from a <code>div</code>.</p>
+
+<h2 id="editor-displays-raw-html-content-when-using-the-browsers-back-and-forward-buttons"><a href="#editor-displays-raw-html-content-when-using-the-browsers-back-and-forward-buttons">Editor displays raw HTML content when using the browser's Back and Forward buttons</a></h2>
+
+<p>The Editor stores its value encoded by default. When the page is retrieved from the <em>bfcache</em> (back-forward cache), the textarea value is persisted encoded and the Editor encodes it again. This process can be easily observed if one navigates several times back and forth - on each navigation, the Editor value will be encoded once more.</p>
+
+<p>To resolve the problem, set the <a href="/kendo-ui/api/web/editor#configuration-encoded"><code>encoded</code></a> property to <code>false</code>, and expect the editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation or set the <code>AllowHtml</code> attribute on the model field that will receive the HTML string. Here is some more <a href="http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute">information about request validation in ASP.NET</a>.</p>
+
+<p>Another option is to enable the <a href="/kendo-ui/web/editor/overview#classic-mode-vs-inline-mode">inline Editor mode</a>, which does not use an <code>iframe</code> and a <code>textarea</code>. In this case, however, the Editor's value should be <a href="/kendo-ui/getting-started/web/editor/troubleshooting#inline-editor-value-is-not-posted-to-the-server">submitted manually</a>.</p>
+
+<h2 id="pasted-styles-from-ms-word-are-not-retained"><a href="#pasted-styles-from-ms-word-are-not-retained">Pasted styles from MS Word are not retained</a></h2>
+
+<p>By design, the Editor widget strives to output clean, XHTML-compatible markup. Because of that, the widget cleans up invalid styles set by Microsoft Word, and removes most presentational styles. Such styles include the colors applied by the current theme, and the default MS Word font and size. Ideally, the output of the editor should be styled via a stylesheet provided through the <a href="/kendo-ui/kendo-ui/api/web/editor#configuration-stylesheets">stylesheets configuration option</a>. This allows all pasted content to be styled in a consistent manner across your site.</p>
+
+<p>If pasting wrongly removes semantics or actual content along with the styles, please submit a bug report and attach a MS Word document that reproduces the problem.</p>
+
+<h2 id="bom-characters-are-shown-in-the-editable-area-when-applying-formats"><a href="#bom-characters-are-shown-in-the-editable-area-when-applying-formats">BOM characters are shown in the editable area when applying formats</a></h2>
+
+<p>The Editor uses BOM characters to handle some ranges correctly. These characters become visible if there is a problem with the page encoding. To debug this, follow the following steps:</p>
+
+<ol>
+<li><p>If you observe the problem in the <a href="http://demos.telerik.com/kendo-ui/editor">online demos</a>, this might mean that your browser has enforced an encoding that is not UTF-8. This scenario is not supported.</p></li>
+<li><p>If the online demos behave properly, change the Kendo UI script references so that they are loaded from the CDN, <code>http://cdn.kendostatic.com/2014.2.716/js/kendo.all.min.js</code>. If your page now works correctly, then your local script files are served with the wrong encoding or are corrupted. Copy over the scripts (the files, not their content) from the official distribution and see if the problem persists.</p></li>
+<li><p>If the problem is still visible on your page, and the scripts are loaded via the CDN, then it is likely that the page is served with the wrong formatting. Make sure the page, as well as its layout pages, are saved and served in UTF-8.</p></li>
+</ol>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

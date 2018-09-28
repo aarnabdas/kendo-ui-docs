@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Work offline with the Kendo DataSource</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Kendo offline support">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/datasource/offline.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/datasource/offline.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="work-offline-with-the-kendo-ui-datasource"><a href="#work-offline-with-the-kendo-ui-datasource">Work offline with the Kendo UI DataSource</a></h1>
+
+<p>Offline support allows data-bound Kendo UI widgets to function without active server connection.
+Users can continue working with the available data until network connectivity resumes.</p>
+
+<p>The Kendo UI DataSource syncs all changes with the remote service when a connection becomes available.</p>
+
+<blockquote>
+<p>Offline storage support is available since the 2014 Q2 SP1 release.</p>
+</blockquote>
+
+<h2 id="configure-offline-storage"><a href="#configure-offline-storage">Configure offline storage</a></h2>
+
+<p>Set the <a href="/kendo-ui/api/framework/datasource#configuration-offlineStorage">offlineStorage</a> option to enable offline storage. The DataSource uses this value as a key when saving and loading its state.</p>
+
+<p>By default the Kendo UI DataSource uses <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage#localStorage">localStorage</a> to persist its offline state.</p>
+
+<blockquote>
+<p>In order to use offline storage, the model must have a designated ID field.</p>
+</blockquote>
+
+<h3 id="example---set-offline-storage-key"><a href="#example---set-offline-storage-key">Example - set offline storage key</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    offlineStorage: "products-offline",
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        }
+    },
+    schema: {
+        model: {
+            id: "ProductID"
+        }
+    }
+});
+</code></pre>
+
+<h2 id="go-offline-and-online"><a href="#go-offline-and-online">Go offline and online</a></h2>
+
+<p>The DataSource is "online" by default. All data item changes (create, update, destroy) go to the remote service configured via the <a href="/kendo-ui/api/framework/datasource#configuration-transport">transport</a> option.</p>
+
+<p>To switch to "offline" mode call the <a href="/kendo-ui/api/framework/datasource#methods-online">online</a> method  with <code>false</code> as an argument. From now on the DataSource will persist all data item changes in offline storage.</p>
+
+<p>To go back in "online" mode call the <code>online</code> method with <code>true</code> as an argument. The DataSource immediately calls the <a href="/kendo-ui/api/framework/datasource#methods-sync">sync</a> method to send all offline changes to the remote service.</p>
+
+<h3 id="example---go-in-offline-mode"><a href="#example---go-in-offline-mode">Example - go in offline mode</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    offlineStorage: "products-offline",
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        },
+        update: {
+            url: "http://demos.telerik.com/kendo-ui/service/products/update",
+            dataType: "jsonp"
+        },
+        parameterMap: function(options, operation) {
+            if (operation !== "read" &amp;&amp; options.models) {
+                return {models: kendo.stringify(options.models)};
+            }
+        }
+    },
+    schema: {
+        model: {
+            id: "ProductID"
+        }
+    }
+});
+// fetch the data from the remote service
+dataSource.fetch(function() {
+    // go in offline mode
+    dataSource.online(false);
+    // make some changes
+    dataSource.at(0).set("ProductName", "Updated");
+    // sync to accept the changes (the data source persists the change in localStorage)
+    dataSource.sync();
+    // optionally go back online (the data source syncs the change with the remote service)
+    dataSource.online(true);
+});
+</code></pre>
+
+<h2 id="get-the-offline-state"><a href="#get-the-offline-state">Get the offline state</a></h2>
+
+<p>The <a href="/kendo-ui/api/framework/datasource#methods-offlineData">offlineData</a> method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items.
+Changed data items have a <code>__state__</code> field attached. That field indicates the type of change: "create", "update" or "destroy". Unmodified data items don't have a <code>__state__</code> field.</p>
+
+<h3 id="example---get-the-offline-state"><a href="#example---get-the-offline-state">Example - get the offline state</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    offlineStorage: "products-offline",
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        },
+        update: {
+            url: "http://demos.telerik.com/kendo-ui/service/products/update",
+            dataType: "jsonp"
+        },
+        parameterMap: function(options, operation) {
+            if (operation !== "read" &amp;&amp; options.models) {
+                return {models: kendo.stringify(options.models)};
+            }
+        }
+    },
+    schema: {
+        model: {
+            id: "ProductID"
+        }
+    }
+});
+
+dataSource.fetch(function() {
+    // go in offline mode
+    dataSource.online(false);
+    // change the ProductName field of the first data item
+    dataSource.at(0).set("ProductName", "Updated");
+    // sync to accept the changes
+    dataSource.sync();
+    // get the offline data
+    var offlineData = dataSource.offlineData();
+    console.log(offlineData[0].__state__); // displays "update"
+});
+</code></pre>
+
+<blockquote>
+<p>If the <a href="/kendo-ui/api/framework/datasource#configuration-serverGrouping">serverGrouping</a> option is set to <code>true</code> the <code>offlineData</code> will return array of groups: <code>{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }</code>.</p>
+</blockquote>
+
+<h2 id="use-custom-offline-storage"><a href="#use-custom-offline-storage">Use custom offline storage</a></h2>
+
+<p>To use custom offline storage set the <code>offlineStorage</code> option to a JavaScript object that has two methods: <code>getItem</code> and <code>setItem</code>. The <code>setItem</code> method saves the sate and <code>getItem</code> returns it.</p>
+
+<h3 id="example---use-custom-offline-storage"><a href="#example---use-custom-offline-storage">Example - use custom offline storage</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    // use sessionStorage instead of localStorage
+    offlineStorage: {
+        getItem: function() {
+            return JSON.parse(sessionStorage.getItem("products-key"));
+        },
+        setItem: function(item) {
+            sessionStorage.setItem("products-key", JSON.stringify(item));
+        }
+    },
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        }
+    }
+});
+</code></pre>
+
+<h2 id="detect-browser-internet-connection"><a href="#detect-browser-internet-connection">Detect browser Internet connection</a></h2>
+
+<p>At the time of this writing there isn't a cross-browser way to determine whether a web application has Internet access or not. In addition some browsers treat online mode differently than the rest.
+More info about browser online mode is available in <a href="https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine.onLine">MDN</a>.</p>
+
+<p>This is why the Kendo UI DataSource does not attempt to automatically detect offline mode. The developer could implement that by either handlng the <a href="https://developer.mozilla.org/en-US/docs/Online_and_offline_events">"online" and "offline"</a> events or via Ajax polling.</p>
+
+<h3 id="example---detect-offline-mode-via-the-online-and-offline-events"><a href="#example---detect-offline-mode-via-the-online-and-offline-events">Example - detect offline mode via the online and offline events</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    offlineStorage: "products-offline",
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        }
+    }
+});
+dataSource.online(navigator.onLine);
+$(window).on("offline", function() {
+   dataSource.online(false);
+});
+$(window).on("online", function() {
+   dataSource.online(true);
+});
+</code></pre>
+
+<h3 id="example---detect-offline-mode-via-ajax-polling"><a href="#example---detect-offline-mode-via-ajax-polling">Example - detect offline mode via Ajax polling</a></h3>
+
+<pre><code>var dataSource = kendo.data.DataSource({
+    offlineStorage: "products-offline",
+    transport: {
+        read: {
+            url: "http://demos.telerik.com/kendo-ui/service/products",
+            type: "jsonp"
+        }
+    }
+});
+// make a request to some URL every 5 seconds to see if Internet access is available
+var pollId = setInterval(function() {
+    $.ajax({
+        // use an URL from the same domain to adhere to the same origin policy
+        url: "/"
+    })
+    .done(function() {
+        // the ajax request succeeded - we are probably online.
+        dataSource.online(true);
+    })
+    .fail(function() {
+        // the ajax request failed - we are probably offline.
+        dataSource.offline(false);
+    });
+}, 5000);)
+</code></pre>
+
+<p>Both approaches have their pros and cons. The "online" and "offline" events behave differently among the browsers -
+Firefox and Internet Explorer fire those events when the user switches between offline and online mode.</p>
+
+<p>Ajax polling is more robust but leads to constant HTTP requests (CPU and bandwidth usage).
+In addition Ajax requests could fail for other reasons than not having Internet connection - server error, timeout.</p>
+
+<p>The online and offline events work as expected in mobile devices and Phonegap applications. The ajax polling approach works best for desktop browsers.</p>
+
+<h2 id="offline-storage-considerations-and-faq"><a href="#offline-storage-considerations-and-faq">Offline Storage Considerations and FAQ</a></h2>
+
+<ul>
+<li><p><strong>What is the available offline storage space?</strong> The default localStorage space is normally around 5MB per <em>origin</em> (i.e. specific domain, port and protocol),
+but this should not be relied on, because it can depend on the browser and the browser settings, controlled by the user.
+Theoretically, it is possible to measure the maximum available storage space by trying to save large chunks of data via the localStorage API,
+but this may cause the browser to become temporarily irresponsive and is not recommended.</p></li>
+<li><p><strong>Can the web application request allocation of more offline storage space by the browser?</strong> No.</p></li>
+<li><p><strong>Do several Kendo UI DataSource instances share the same offline storage space?</strong> Yes. Moreover, different Kendo UI DataSource instances must use
+different <code>offlineStorage</code> keys, otherwise they will overwrite one another's saved data.</p></li>
+<li>
+<p><strong>How do I check the currently used local storage space?</strong> There are different ways to do that, depending on how you store your data and what exactly you want to check.
+One possible option to measure the amount of data stored by a Kendo UI DataSource instance is:</p>
+
+<pre><code>// check amount of used offline storage space for a specific key
+JSON.stringify(localStorage.getItem("your-offlineStorage-key-here")).length
+// check overall used offline storage space
+JSON.stringify(localStorage).length
+</code></pre>
+</li>
+<li><p><strong>What happens when the offline storage quota is exceeded?</strong> The data saving will fail and the browser will trigger an unhandled exception.
+If you want to handle these, it is possible to use a <a href="#use-custom-offline-storage">customized offlineStorage</a> implementation with <code>try ... catch</code> blocks.</p></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

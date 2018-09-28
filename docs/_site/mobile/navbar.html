@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>User Guide for Kendo UI Mobile NavBar widget</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Step-by-step instructions how to use Mobile NavBar widget, align the widgets inside the NavBar and customize Mobile NavBar appearance.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("mobile/navbar.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//mobile/navbar.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="navbar"><a href="#navbar">NavBar</a></h1>
+
+<p>The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.
+The mobile NavBar may display the current view title in the center, and optionally some additional left and right aligned widgets (a back button, settings button, etc.).</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>The Kendo mobile Application will automatically initialize the mobile NavBar for every element with <code>role</code> data attribute set to <code>navbar</code> present in the views/layouts markup.
+Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View <strong>init event handler</strong>.</p>
+
+<h3 id="initialize-kendo-mobile-navbar-based-on-role-data-attribute"><a href="#initialize-kendo-mobile-navbar-based-on-role-data-attribute">Initialize Kendo mobile NavBar based on role data attribute</a></h3>
+
+<pre><code>&lt;div data-role="navbar"&gt;My View Title&lt;/div&gt;
+</code></pre>
+
+<h3 id="initialize-kendo-mobile-navbar-using-jquery-plugin-syntax"><a href="#initialize-kendo-mobile-navbar-using-jquery-plugin-syntax">Initialize Kendo mobile NavBar using jQuery plugin syntax</a></h3>
+
+<pre><code>var navbar = $("#navbar").kendoMobileNavBar();
+</code></pre>
+
+<h2 id="aligning-widgets-inside-the-navbar"><a href="#aligning-widgets-inside-the-navbar">Aligning Widgets Inside the NavBar</a></h2>
+
+<p>After initialization, the mobile NavBar positions its child elements based on the specified <code>align</code> data attribute (either <code>left</code> or <code>right</code>).
+By default, elements without any align are centered.</p>
+
+<h3 id="use-the-align-data-attribute-to-specify-the-elements-position-inside-the-navbar">
+<a href="#use-the-align-data-attribute-to-specify-the-elements-position-inside-the-navbar">Use the </a><code>align</code> data attribute to specify the elements position inside the NavBar</h3>
+
+<pre><code>&lt;div data-role="navbar"&gt;
+    &lt;a data-role="backbutton" data-align="left"&gt;Back&lt;/a&gt;
+    My View Title
+    &lt;a data-role="button" data-align="right"&gt;About&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<h2 id="automatically-update-navbar-title-based-on-current-views-title"><a href="#automatically-update-navbar-title-based-on-current-views-title">Automatically Update NavBar Title Based on Current View's Title</a></h2>
+
+<p>If an element with <code>role</code> data attribute set to <code>view-title</code> is present inside the mobile NavBar,
+the Kendo mobile Application instance will update its text to the current View's title when changing views.
+The View title is specified by setting the <code>title</code> data attribute of the View element.</p>
+
+<p>This feature is particularly useful if the mobile NavBar is inside a layout.</p>
+
+<h3 id="use-the-view-title-data-attribute-to-auto-update-the-mobile-navbar-title">
+<a href="#use-the-view-title-data-attribute-to-auto-update-the-mobile-navbar-title">Use the </a><code>view-title</code> data attribute to auto-update the mobile NavBar title</h3>
+
+<pre><code>&lt;div data-role="layout" data-id="foo"&gt;
+    &lt;div data-role="header"&gt;
+        &lt;div data-role="navbar"&gt;
+           &lt;span data-role="view-title"&gt;My View Title&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div data-role="view" data-layout="foo" data-title="bar"&gt; ... &lt;/div&gt;
+&lt;div data-role="view" data-layout="foo" data-title="baz"&gt; ... &lt;/div&gt;
+</code></pre>
+
+<h2 id="customizing-mobile-navbar-appearance"><a href="#customizing-mobile-navbar-appearance">Customizing Mobile NavBar Appearance</a></h2>
+
+<p>The mobile NavBar background color can be customized by setting its background-color CSS property either inline or using a CSS selector with specificity of 20+.
+Different platforms can be styled separately with their respective root classes.</p>
+
+<h3 id="green-kendo-mobile-navbar"><a href="#green-kendo-mobile-navbar">Green Kendo mobile NavBar</a></h3>
+
+<pre><code>&lt;div data-role="navbar" style="background-color: green"&gt;My View Title&lt;/div&gt;
+</code></pre>
+
+<h3 id="green-kendo-mobile-navbar-in-ios-and-a-red-one-in-android"><a href="#green-kendo-mobile-navbar-in-ios-and-a-red-one-in-android">Green Kendo mobile NavBar in iOS and a red one in Android</a></h3>
+
+<pre><code>&lt;style&gt;
+    .km-ios .checkout { background-color: green; }
+    .km-android .checkout { background-color: red; }
+&lt;/style&gt;
+
+&lt;div data-role="navbar" class="checkout"&gt;My View Title&lt;/div&gt;
+</code></pre>
+
+<h2 id="showing-hidden-view-title"><a href="#showing-hidden-view-title">Showing Hidden View Title</a></h2>
+
+<p>By default the NavBar View Title is visible only in iOS and hidden in the rest of the platforms. In order to be visible on a specific platform, a single CSS rule is needed:</p>
+
+<h3 id="show-navbar-view-title-on-android-platform"><a href="#show-navbar-view-title-on-android-platform">Show NavBar View Title on Android platform</a></h3>
+
+<pre><code>.km-android .km-navbar .km-view-title /* Before Q2 2012 SP1 */
+{
+    display: inline-block;
+}
+
+.km-android .km-navbar .km-view-title /* After Q2 2012 SP1 */
+{
+    visibility: visible;
+}
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

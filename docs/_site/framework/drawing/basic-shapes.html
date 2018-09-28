@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Draw basic shapes with the Kendo UI Drawing API</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/drawing/basic-shapes.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/drawing/basic-shapes.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="draw-basic-shapes"><a href="#draw-basic-shapes">Draw Basic Shapes</a></h1>
+
+<ul>
+<li><a href="#our-goal">Our goal</a></li>
+<li>
+<a href="#walk-through">Walk-through</a>
+
+<ul>
+<li><a href="#import-namespaces">Import namespaces</a></li>
+<li><a href="#draw-the-path">Draw the path</a></li>
+<li><a href="#draw-the-image">Draw the image</a></li>
+<li><a href="#draw-the-text">Draw the text</a></li>
+<li><a href="#group-the-shapes">Group the shapes</a></li>
+<li><a href="#render-the-scene">Render the scene</a></li>
+</ul>
+</li>
+</ul>
+
+<h2 id="our-goal"><a href="#our-goal">Our goal</a></h2>
+
+<p>Scenes are constructed from a set of built-in basic shapes.
+Let's take a simple, static scene and try to replicate it.</p>
+
+<p><img src="images/basic-scene.png" alt="Basic Scene"></p>
+
+<p>In terms of the Drawing API this scene consists of a path (the violet border),
+text and an image. We'll also add an enclosing group for positioning.</p>
+
+<p>This is the full code required to render this scene.
+You'll notice a number of structures that define the
+position, size and appearance of each element.</p>
+
+<p>We'll go into detail in the following sections.</p>
+
+<pre><code>&lt;div id="surface" style="width: 250px; height: 165px;"&gt;&lt;/div&gt;
+&lt;script&gt;
+    // Import the Drawing API namespaces
+    var geom = kendo.geometry;
+    var draw = kendo.drawing;
+
+    // Create the square border by drawing a straight path
+    var path = new draw.Path({
+        stroke: {
+            color: "#9999b6",
+            width: 2
+        }
+    });
+
+    // The path is constructed using a chain of commands
+    path.moveTo(0, 0)
+        .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
+        .close();
+
+    // This rectangle defines the image position and size
+    var imageRect = new geom.Rect(
+        new geom.Point(5, 5),
+        new geom.Size(50, 50)
+    );
+
+    // Create the image
+    var imageUrl = "http://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/diego.jpg";
+    var image = new draw.Image(imageUrl, imageRect);
+
+    // Create the text
+    var text = new draw.Text(
+        "Diego Roel",
+        new geom.Point(60, 25),
+        { font: "bold 15px Arial" }
+    );
+
+    // Place all the shapes in a group
+    var group = new draw.Group();
+    group.append(path, image, text);
+
+    // Translate the group
+    group.transform(
+        geom.transform().translate(50, 50)
+    );
+
+    // Create a drawing surface and render the scene
+    var surface = draw.Surface.create($("#surface"));
+    surface.draw(group);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="walk-through"><a href="#walk-through">Walk-through</a></h2>
+
+<h3 id="import-namespaces"><a href="#import-namespaces">Import namespaces</a></h3>
+
+<p>We'll start by importing two name spaces:</p>
+
+<pre><code>var geom = kendo.geometry;
+var draw = kendo.drawing;
+</code></pre>
+
+<p>The <code>kendo.geometry</code> namespace contains primitives such as
+<a href="/kendo-ui/api/dataviz/geometry/point">Point</a>,
+<a href="/kendo-ui/api/dataviz/geometry/rect">Rect</a> and
+<a href="/kendo-ui/api/dataviz/geometry/size">Size</a>.</p>
+
+<p>Drawing elements such as
+<a href="/kendo-ui/api/dataviz/drawing/path">Path</a>,
+<a href="/kendo-ui/api/dataviz/drawing/image">Image</a> and
+<a href="/kendo-ui/api/dataviz/drawing/group">Group</a>
+live in the <code>kendo.drawing</code> namespace.</p>
+
+<h3 id="draw-the-path"><a href="#draw-the-path">Draw the path</a></h3>
+
+<p>A <a href="/kendo-ui/api/dataviz/drawing/path">Path</a> element is used to
+draw straight lines, curves or a combination of both.</p>
+
+<p>We'll set the stroke (line) color and width to match the picture:</p>
+
+<pre><code>var path = new draw.Path({
+    stroke: {
+        color: "#9999b6",
+        width: 2
+    }
+});
+</code></pre>
+
+<p>The <a href="/kendo-ui/api/dataviz/drawing/path#configuration">configuration</a> object
+can contain other appearance options as well.</p>
+
+<p>We can now construct the path by issuing commands:</p>
+
+<pre><code>path.moveTo(0, 0)
+    .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
+    .close();
+</code></pre>
+
+<p>We set the line initial position with a
+<a href="/kendo-ui/api/dataviz/drawing/path#methods-moveTo">moveTo</a> command.
+The three sides are drawn using
+<a href="/kendo-ui/kendo-ui/api/dataviz/drawing/path#methods-lineTo">lineTo</a> commands.
+The last command
+<a href="/kendo-ui/api/dataviz/drawing/path#methods-close">closes</a>
+the path, drawing a straight line to the initial position.</p>
+
+<p>Since this is a rectangle we can use the alternative
+<a href="/kendo-ui/api/dataviz/drawing/path#fromrect">fromRect</a>
+static method:</p>
+
+<pre><code>var borderRect = new geom.Rect(
+    new geom.Point(0, 0),
+    new geom.Size(150, 65)
+);
+var path = draw.Path.fromRect(borderRect, {
+    stroke: {
+        color: "#9999b6",
+        width: 2
+    }
+});
+</code></pre>
+
+<h3 id="draw-the-image"><a href="#draw-the-image">Draw the image</a></h3>
+
+<p>The <a href="/kendo-ui/api/dataviz/drawing/image">Image</a> element draws a bitmap image from a given URL.
+The image position and size is defined as a <a href="/kendo-ui/api/dataviz/geometry/rect">Rect</a>.</p>
+
+<pre><code>var imageRect = new geom.Rect(
+    new geom.Point(5, 5),
+    new geom.Size(50, 50)
+);
+</code></pre>
+
+<p>This statement can be shortened to:</p>
+
+<pre><code>var imageRect = new geom.Rect([5, 5], [50, 50]);
+</code></pre>
+
+<blockquote>
+<p>Any method that expects Point and Size will also accept [x, y] and [width, height] arrays.</p>
+</blockquote>
+
+<p>We can now create the image:</p>
+
+<pre><code>var imageUrl = "http://demos.telerik.com/content/dataviz/diagram/people/diego.jpg";
+var image = new draw.Image(imageUrl, imageRect);
+</code></pre>
+
+<h3 id="draw-the-text"><a href="#draw-the-text">Draw the text</a></h3>
+
+<p>The <a href="/kendo-ui/api/dataviz/drawing/text">Text</a> element draws a single line of text.
+Appearance options, such as font are set through
+<a href="/kendo-ui/api/dataviz/drawing/text#configuration">configuration</a>.</p>
+
+<pre><code>    var text = new draw.Text(
+        "Diego Roel",
+        new geom.Point(60, 25),
+        { font: "bold 15px Arial" }
+    );
+</code></pre>
+
+<p>The point defines the position of the top left corner.</p>
+
+<h3 id="group-the-shapes"><a href="#group-the-shapes">Group the shapes</a></h3>
+
+<p>It's often convenient to treat a group of shapes as a single entity.
+In this case we'll use a group to set the position of all elements at once.</p>
+
+<p>Create a <a href="/kendo-ui/api/dataviz/drawing/group">Group</a> element and append the rest of the elements as children:</p>
+
+<pre><code>    var group = new draw.Group();
+    group.append(path, image, text);
+</code></pre>
+
+<p>A transformation applies to all group children. In this case it's a fairly simple translate.
+We effectively make the element coordinates relative by translating their parent group.</p>
+
+<pre><code>    group.transform(
+        geom.transform().translate(50, 50)
+    );
+</code></pre>
+
+<h3 id="render-the-scene"><a href="#render-the-scene">Render the scene</a></h3>
+
+<p>All that is left is to render the scene on the screen.
+The <a href="/kendo-ui/api/dataviz/drawing/surface#create">Surface.create</a> method will
+choose an implementation that matches the capabilities of the browser:</p>
+
+<pre><code>    &lt;div id="surface" style="width: 250px; height: 165px;"&gt;&lt;/div&gt;
+    &lt;script&gt;
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(group);
+    &lt;/script&gt;
+</code></pre>
+
+<p>The default is SVG with fallback to Canvas or VML.
+See <a href="supported-browsers">Supported Browsers</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

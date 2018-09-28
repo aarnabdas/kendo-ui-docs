@@ -1,0 +1,793 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration and methods of kendo.ooxml.Workbook</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ooxml/workbook.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ooxml/workbook.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendoooxmlworkbook"><a href="#kendoooxmlworkbook">kendo.ooxml.Workbook</a></h1>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-sheets">
+<a href="#fields-sheets">sheets </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The sheets of the workbook. Every sheet represents a page from the final Excel file.</p>
+
+<p>See <a href="#configuration-sheets">sheets configuration</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-creator">
+<a href="#configuration-creator">creator </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Kendo UI")</em>
+</h3>
+
+<p>The creator of the workbook.</p>
+
+<h4>Example - set the creator</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  creator: "John Doe",
+  sheets: [
+      {
+          rows: [
+              { cells: [ { value: "foo" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-date">
+<a href="#configuration-date">date </a><code>Date</code>
+</h3>
+
+<p>The date when the workbook is created. The default value is <code>new Date()</code>.</p>
+
+<h4>Example - set the date</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  date: new Date(2014, 5, 18)
+  sheets: [
+      {
+          rows: [
+              { cells: [ { value: "foo" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets">
+<a href="#configuration-sheets">sheets </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The sheets of the workbook. Every sheet represents a page from the final Excel file.</p>
+
+<h3 id="configuration-sheets.columns">
+<a href="#configuration-sheets.columns">sheets.columns </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The column configuration.</p>
+
+<h3 id="configuration-sheets.columns.autoWidth">
+<a href="#configuration-sheets.columns.autoWidth">sheets.columns.autoWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to true the column will stretch to fit the contents of all cells.</p>
+
+<h4>Example - enable auto width</h4>
+
+<pre><code>  &lt;script&gt;
+  var workbook = new kendo.ooxml.Workbook({
+    sheets: [
+        {
+            columns: [ { autoWidth: true } ],
+            rows: [
+              { cells: [ { value: "short" } ] },
+              { cells: [ { value: "longer text value" } ] }
+            ]
+        }
+    ]
+  });
+  kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+  });
+  &lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.columns.width">
+<a href="#configuration-sheets.columns.width">sheets.columns.width </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The width of the column in pixels.</p>
+
+<h4>Example - set the column widths</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { width: 100 }, { width: 200 } ],
+          rows: [
+            {
+              cells: [
+                { value: "this column is 100px" }, { value: "this column is 200px" }
+              ]
+            }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.freezePane">
+<a href="#configuration-sheets.freezePane">sheets.freezePane </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Frozen rows and columns configuration.</p>
+
+<h4>Example - freeze rows and columns</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { autoWidth: true }, { autoWidth: true }, { autoWidth: true } ],
+          freezePane: { colSplit: 2, rowSplit: 1 },
+          rows: [
+            { cells: [ { value: "Frozen row" }, { value: "Frozen row" }, { value: "Frozen row" }  ] },
+            { cells: [ { value: "Frozen column" }, { value: "Frozen column" }, { value: "Free column" }  ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.freezePane.colSplit">
+<a href="#configuration-sheets.freezePane.colSplit">sheets.freezePane.colSplit </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Number of columns to freeze from the left.</p>
+
+<h3 id="configuration-sheets.freezePane.rowSplit">
+<a href="#configuration-sheets.freezePane.rowSplit">sheets.freezePane.rowSplit </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 0)</em>
+</h3>
+
+<p>Number of rows to freeze from the top.</p>
+
+<h3 id="configuration-sheets.filter">
+<a href="#configuration-sheets.filter">sheets.filter </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Excel auto filter configuration. When set the final document will have auto filtering enabled.</p>
+
+<h4>Example - enable filtering</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          filter: { from: 0, to: 1 },
+          rows: [
+            { cells: [ { value: "First Name" }, { value: "Last Name" } ] },
+            { cells: [ { value: "John" }, { value: "Doe" } ] },
+            { cells: [ { value: "Jane" }, { value: "Doe" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.filter.from">
+<a href="#configuration-sheets.filter.from">sheets.filter.from </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The index of the first filterable column.</p>
+
+<h3 id="configuration-sheets.filter.to">
+<a href="#configuration-sheets.filter.to">sheets.filter.to </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The index of the last filterable column.</p>
+
+<h3 id="configuration-sheets.rows">
+<a href="#configuration-sheets.rows">sheets.rows </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The array of rows of the sheet.</p>
+
+<h4>Example - specify the rows of the sheet</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "John" }, { value: "Doe" } ] },
+            { cells: [ { value: "Jane" }, { value: "Doe" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells">
+<a href="#configuration-sheets.rows.cells">sheets.rows.cells </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+</h3>
+
+<p>The cells of the every row. Each cell represents a cell from the final Excel document.</p>
+
+<h3 id="configuration-sheets.rows.cells.background">
+<a href="#configuration-sheets.rows.cells.background">sheets.rows.cells.background </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>Sets the background color of the cell. Supports hex CSS-like values that start with "#" e.g. "#ff00ff".</p>
+
+<h4>Example - set the cell background color</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Red", background: "#ff0000" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.bold">
+<a href="#configuration-sheets.rows.cells.bold">sheets.rows.cells.bold </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Setting it to <code>true</code> makes the cell value bold.</p>
+
+<h4>Example - make the cell text bold</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Bold", bold: true } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.color">
+<a href="#configuration-sheets.rows.cells.color">sheets.rows.cells.color </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: null)</em>
+</h3>
+
+<p>The text color of the cell. Supports hex CSS-like values that start with "#" e.g. "#ff00ff".</p>
+
+<h4>Example - set the cell text color</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "red", color: "#ff0000" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.colSpan">
+<a href="#configuration-sheets.rows.cells.colSpan">sheets.rows.cells.colSpan </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>Sets the number of columns that a cell occupies.</p>
+
+<h4>Example - make a cell span over two columns</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { width: 100}, { width: 100 } ],
+          rows: [
+            { cells: [ { value: "Occupies two columns", colSpan: 2 } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.fontName">
+<a href="#configuration-sheets.rows.cells.fontName">sheets.rows.cells.fontName </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Calibri")</em>
+</h3>
+
+<p>Sets the font used to display the cell value.</p>
+
+<h4>Example - set the font name</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Arial", fontName: "Arial" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.fontSize">
+<a href="#configuration-sheets.rows.cells.fontSize">sheets.rows.cells.fontSize </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 11)</em>
+</h3>
+
+<p>Sets the font size in pixels.</p>
+
+<h4>Example - set the font size</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "20px", fontSize: 20 } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.format">
+<a href="#configuration-sheets.rows.cells.format">sheets.rows.cells.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Sets the format that Excel uses to display the cell value.</p>
+
+<blockquote>
+<p>The format option does not follow the <code>{0:}</code> syntax that <code>kendo.format</code> uses.</p>
+</blockquote>
+
+<p>The <a href="https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4">Create a custom number format</a> page describes the formats that Excel supports.</p>
+
+<h4>Example - set the cell format</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: new Date(), format: "yy-MM-dd" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.hAlign">
+<a href="#configuration-sheets.rows.cells.hAlign">sheets.rows.cells.hAlign </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Sets the horizontal alignment of the cell value. Supported values are <code>"left"</code>, <code>"center"</code> and <code>"right"</code>.</p>
+
+<h4>Example - set the horizontal alignment</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { width: 200 } ],
+          rows: [
+            { cells: [ { value: "Left", hAlign: "left" } ] },
+            { cells: [ { value: "Center", hAlign: "center" } ] },
+            { cells: [ { value: "Right", hAlign: "right" } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.italic">
+<a href="#configuration-sheets.rows.cells.italic">sheets.rows.cells.italic </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Setting it to <code>true</code> italicizes the cell value.</p>
+
+<h4>Example - make the cell text italic</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Italic", italic: true } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.rowSpan">
+<a href="#configuration-sheets.rows.cells.rowSpan">sheets.rows.cells.rowSpan </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 1)</em>
+</h3>
+
+<p>Sets the number of rows that a cell occupies.</p>
+
+<h4>Example - make a cell span over two rows</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { width: 200 } ],
+          rows: [
+            { cells: [ { value: "Occupies two rows", rowSpan: 2 } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.underline">
+<a href="#configuration-sheets.rows.cells.underline">sheets.rows.cells.underline </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Setting it to <code>true</code> underlines the cell value.</p>
+
+<h4>Example - make the cell text underline</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Uderline", underline: true } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.wrap">
+<a href="#configuration-sheets.rows.cells.wrap">sheets.rows.cells.wrap </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Setting it to <code>true</code> wraps the cell value.</p>
+
+<h4>Example - make the cell text underline</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Long value", wrap: true } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.vAlign">
+<a href="#configuration-sheets.rows.cells.vAlign">sheets.rows.cells.vAlign </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "bottom")</em>
+</h3>
+
+<p>Sets the vertical alignment of the cell value. Supported values are <code>"top"</code>, <code>"center"</code> and <code>"bottom"</code>.</p>
+
+<h4>Example - set the horizontal alignment</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          columns: [ { width: 200 } ],
+          rows: [
+            { cells: [
+              { rowSpan: 2, value: "Top", vAlign: "top" },
+              { rowSpan: 2, value: "Middle", vAlign: "center" },
+              { rowSpan: 2, value: "Bottom", vAlign: "bottom" }
+             ]
+            }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.rows.cells.value">
+<a href="#configuration-sheets.rows.cells.value">sheets.rows.cells.value </a><code>Date |</code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>The value of the cell. Numbers and dates will be formatted as strings. String values are HTML encoded.</p>
+
+<h4>Example - set the cell values</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+            { cells: [ { value: "Name" }, { value: "Birthday" }, { value: "Age" } ] },
+            { cells: [ { value: "John" }, { value: new Date(1980, 1, 5) }, { value: 34 } ] }
+          ]
+      }
+  ]
+});
+kendo.saveAs({
+  dataURI: workbook.toDataURL(),
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-sheets.title">
+<a href="#configuration-sheets.title">sheets.title </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Sets the title of the exported workbook sheet.</p>
+
+<h4>Example - set the sheet title</h4>
+
+<pre><code>&lt;script&gt;
+    var workbook = new kendo.ooxml.Workbook({
+     sheets: [
+        {
+            columns: [ { autoWidth: true } ],
+            title: "My custom sheet title",
+            rows: [
+                { cells: [ { value: "short" } ] },
+                { cells: [ { value: "longer text value" } ] }
+            ]
+        }
+    ]
+});
+kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+});
+</code></pre>
+
+<p></p>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-toDataURL"><a href="#methods-toDataURL">toDataURL</a></h3>
+
+<p>Creates an Excel file that represents the current workbook and returns it as a data URL.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> the Excel file as data URL.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+      {
+          rows: [
+              { cells: [ { value: "foo" } ] }
+          ]
+      }
+  ]
+});
+var dataURL = workbook.toDataURL()
+kendo.saveAs({
+  dataURI: dataURL,
+  fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

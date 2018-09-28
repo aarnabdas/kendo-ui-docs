@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Drag and Drop reordering using Kendo UI Touch</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Drag and Drop reordering using Kendo UI Touch">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/listview/how-to/drag-n-drop-reordering-using-kendo-touch.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/listview/how-to/drag-n-drop-reordering-using-kendo-touch.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <p>The following runnable sample demonstrates implementation for drag'n'drop reordering in ListView using kendoTouch tap event. The approach is suitable for mobile devices as it does not prevent the scrolling of the page/widget.</p>
+
+<pre lang="html"><code>    &lt;!-- kendo Web ListView --&gt;
+    &lt;div id="listview"&gt;&lt;/div&gt;
+    &lt;script id="tmp" type="text/x-kendo-template"&gt;
+        &lt;div class="item"&gt;
+            &lt;p&gt;#: item #&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/script&gt;
+
+    &lt;script&gt;
+        var touchStartEvent, //variable that will hold the original "down" event
+            dataSource = new kendo.data.DataSource({ //dataSource configuration
+                data: [
+                    { id: 1, item: "Item 1", order: 1 },
+                    { id: 2, item: "Item 2", order: 2 },
+                    { id: 3, item: "Item 3", order: 3 },
+                    { id: 4, item: "Item 4", order: 4 },
+                    { id: 5, item: "Item 5", order: 5 },
+                    { id: 6, item: "Item 6", order: 6 },
+                    { id: 7, item: "Item 7", order: 7 },
+                    { id: 8, item: "Item 8", order: 8 },
+                    { id: 9, item: "Item 9", order: 9 },
+                    { id: 10, item: "Item 10", order: 10 },
+                    { id: 11, item: "Item 11", order: 11 },
+                    { id: 12, item: "Item 12", order: 12 }
+                ],
+                sort: { field: "order", dir: "asc" },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { type: "number" },
+                            item: { type: "string" },
+                            order: { type: "number" }
+                        }
+                    }
+                }
+            });
+
+        //initialize the ListView
+        $("#listview").kendoListView({
+            dataSource: dataSource,
+            template: $("#tmp").html(),
+            dataBound: createTouchables //initialize KendoTouch for ListView's items
+        });
+
+        function createTouchables() {
+            this.element.find(".item").kendoTouch({
+                touchstart: function(e) {
+                    //store the original event, required in order to start dragging the element immediately
+                    touchStartEvent = e.event;
+                },
+                hold: function(e) {
+                    this.element.addClass("draggable");
+                    this.element.kendoDraggable({
+                        group: "listviewItems",
+                        hint: generateHint,
+                        //destroy the component when dragging is finished or canceled
+                        dragend: destroyDraggable,
+                        cancel: destroyDraggable
+                    });
+
+                    //the following code forces draggable element to start dragging immediately (without lifting the finder)
+                    this.element.data("kendoDraggable").userEvents._start(touchStartEvent);
+                }
+            });
+        }
+
+        //create drop targets
+        $("#listview").kendoDropTargetArea({
+            filter: ".item:not(.draggable)",
+            group: "listviewItems",
+            dragenter: function(e) {
+                e.dropTarget.addClass("red");
+            },
+            dragleave: function(e) {
+                e.dropTarget.removeClass("red");
+            },
+            drop: function(e) {
+                var draggableDataItem = dataSource.getByUid(e.draggable.element.data("uid")),
+                    dropTargetDataItem = dataSource.getByUid(e.dropTarget.data("uid")),
+                    temp;
+                //logic for swapping the items position
+                temp = draggableDataItem.order;
+                draggableDataItem.set("order", dropTargetDataItem.order);
+                dropTargetDataItem.set("order", temp);
+                dataSource.sort({ field: "order", dir: "asc" });
+
+                e.dropTarget.removeClass("red");
+            }
+        })
+
+        function generateHint(element) {
+            var hint = element.clone();
+            hint.css({
+                "width": element.width(),
+                "height": element.height()
+            });
+
+            this.element.css("opacity", 0.5);
+
+            return hint;
+        }
+
+        function destroyDraggable(e) {
+            e.currentTarget.css("opacity", 1);
+            e.currentTarget.removeClass("draggable");
+            this.destroy();
+        }
+
+    &lt;/script&gt;
+
+    &lt;style&gt;
+        .item { 
+            border: 2px solid green;
+            border-radius: 0.5em;
+            margin: 5px;
+            padding-left: 1em;
+        }
+
+        .draggable {
+            background-color: yellow;
+        }
+
+        .dragged { 
+            padding: 1em;
+            background-color: orange;
+            border: 2px solid orange;
+            border-radius: 0.5em;
+         }
+
+         .red { background-color: red; }
+
+         #listview {
+             -webkit-user-select: none;
+             -moz-user-select: none;
+             -ms-user-select: none;
+             user-select: none;
+         }
+    &lt;/style&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

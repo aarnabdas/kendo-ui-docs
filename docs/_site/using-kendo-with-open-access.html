@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Use Kendo UI With The Open Access ORM Tool</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("using-kendo-with-open-access.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//using-kendo-with-open-access.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <p>In this article you will learn how <a href="http://www.telerik.%06/com/products/orm.aspx">OpenAccess ORM</a> can be leveraged on the backend, and <a href="http://www.telerik.com/kendo-ui">Kendo UI</a> can take care of the UI.</p>
+
+<h2 id="set-up-the-project"><a href="#set-up-the-project">Set up the project</a></h2>
+
+<p>To get started create a new <strong>Telerik MVC Web Application.</strong></p>
+
+<p><img src="/kendo-ui/images/oa1.png" alt="New Web Project"></p>
+
+<p>When you are asked about the Data Access approach you can select <em>Skip creating a Telerik Data Access Model Library Project</em></p>
+
+<p>This will create an empty Telerik UI for MVC project.</p>
+
+<p>Now we are ready to build the OpenAccess ORM model!</p>
+
+<h2 id="build-the-model"><a href="#build-the-model">Build The Model</a></h2>
+
+<p>To build an OpenAccess ORM data model, select the Telerik menu item, select <strong>Telerik Data Access--&gt;Add Domain Model</strong></p>
+
+<p><em>Note: If you do not have OpenAccess ORM installed, you can get the trial
+edition <a href="http://www.telerik.com/download-trial-file.aspx?pid=638">here</a>.</em></p>
+
+<p><img src="/kendo-ui/images/oa3.png" alt="Build The Model"></p>
+
+<p>In the next window select <strong>Populate from Database</strong>, and click <strong>Next</strong>.</p>
+
+<p><img src="/kendo-ui/images/oa4.png" alt="Populate From Data"></p>
+
+<p>Set up a connection to NorthwindOA, which is installed with OpenAccess, and
+then click next.</p>
+
+<p><img src="/kendo-ui/images/oa5.png" alt="Connect To NorthwindOA"></p>
+
+<p>At this point go ahead and include all tables from the database in the data
+model.</p>
+
+<p><img src="/kendo-ui/images/oa6.png" alt="Include All Tables"></p>
+
+<p>Click finish, and step 2 is done!  The data model is ready to be used.  The
+next step is to expose this data model through a service layer.</p>
+
+<h2 id="build-the-service-layer"><a href="#build-the-service-layer">Build The Service Layer</a></h2>
+
+<p>Perform a <strong>build</strong> on the application, and right click on the <code>.rlinq</code> file in the
+solution explorer. Select <strong>Add Telerik Data Access Service</strong>, and the domain service wizard will fire up.</p>
+
+<p><img src="/kendo-ui/images/oa7.png" alt="Generate OpenAccess Domain Model"></p>
+
+<p>Select the EntitiesModel context in the wizard, and click Next.</p>
+
+<p><img src="/kendo-ui/images/oa9.png" alt="Select Northwind OA"></p>
+
+<p>This screen allows you to configure the service that will be created.  Select the ** WCF Service - OData v3**, option and then click Next.</p>
+
+<p><img src="/kendo-ui/images/oa10.png" alt="Configure The Service"></p>
+
+<p>On this screen you can change the name of the service and select which tables to be included. Click <strong>Finish</strong> and your service will be created.</p>
+
+<p><img src="/kendo-ui/images/oa11.png" alt="Configure The entitites"></p>
+
+<h2 id="connect-the-odata-service-to-a-kendo-grid"><a href="#connect-the-odata-service-to-a-kendo-grid">Connect the OData Service to a Kendo Grid</a></h2>
+
+<p>Now all that is left to do is configure the front end.  For now we will wire up the Orders to a Kendo UI grid, but feel free to take it even further! Kendo UI has a lot of cool features to play around with.</p>
+
+<p>First thing we need to do is edit the <em>Global.asax.cs</em> file and add the following route configuration in RegisterRoutes method:</p>
+
+<pre><code>RouteTable.Routes.IgnoreRoute("EntitiesModelService.svc/{*pathInfo}"); //here you need to specify the correct service path
+</code></pre>
+
+<p>Next, we need to set up the grid.  Kendo UI's web site provides many <a href="http://demos.telerik.com/kendo-ui/web/grid/index.html">great examples</a> of how to configure binding; so I won't go into too much detail here.  The basic idea is that we need a div that will be used as the container for the Kendo UI grid, and then we just have to configure the grid in script.</p>
+
+<p>The code needed is here:</p>
+
+<pre><code>&lt;!--Will be turned into a kendo-ized grid! --&gt;
+&lt;div id="grid"&gt;&lt;/div&gt;
+
+&lt;!-- configure grid--&gt;
+&lt;script&gt;
+
+    // document ready fires when the whole page is ready
+    // and all elements, scripts, styles have been loaded
+    $(function () {
+
+        // regex for some date parsing
+        // select the div and create the grid element
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "/EntitiesModelService.svc/Orders"
+                },
+                schema: {
+                    data: "value",
+                    total: "['odata.count']",
+                    model: {
+                        fields: {
+                            OrderID: { type: "number" },
+                            Freight: { type: "number" },
+                            ShipName: { type: "string" },
+                            OrderDate: { type: "date" },
+                            ShipCity: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            filterable: true,
+            sortable: true,
+            pageable: true,
+            columns: [
+                {
+                    field: "OrderID",
+                    filterable: false
+                },
+                "Freight",
+                {
+                    field: "OrderDate"
+                },
+                "ShipName",
+                "ShipCity"
+            ]
+        });
+
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Now run the application. If all went well you should be presented with a great looking grid:</p>
+
+<p><img src="/kendo-ui/images/oa12.png" alt="Grid"></p>
+
+<h2 id="conclusions"><a href="#conclusions">Conclusions</a></h2>
+
+<p>The OpenAccess ORM Visual Designer and Service Layer Generator make it extremely easy to get started working with Kendo UI.  In fact, we only had to write 1 line of server side code thanks to these great tools!</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

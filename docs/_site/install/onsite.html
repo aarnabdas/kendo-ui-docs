@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>HTML5, jQuery-based framework | Kendo UI</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to download and host the necessary Kendo UI files in your project file structure">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("install/onsite.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//install/onsite.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="host-kendo-ui-in-your-project"><a href="#host-kendo-ui-in-your-project">Host Kendo UI in your project</a></h1>
+
+<h2 id="download-kendo-ui"><a href="#download-kendo-ui">Download Kendo UI</a></h2>
+
+<p>You can download all Kendo UI bundles from the <a href="http://www.telerik.com/download/kendo-ui">download page</a>.</p>
+
+<p>The distribution archive contains:</p>
+
+<ul>
+<li>
+<strong>/examples</strong> - quick start demos;</li>
+<li>
+<strong>/js</strong> - minified JavaScript files;</li>
+<li>
+<strong>/src</strong> - complete source code. Not available in the trial distribution;</li>
+<li>
+<strong>/styles</strong> - minified CSS files and theme images;</li>
+<li>
+<strong>/wrappers</strong> - server-side wrappers. Available in Telerik UI for ASP.NET MVC, JSP or PHP;</li>
+<li>
+<strong>changelog.html</strong> - Kendo UI release notes.</li>
+</ul>
+
+<h2 id="add-kendo-ui-css-and-javascript-references-to-your-project"><a href="#add-kendo-ui-css-and-javascript-references-to-your-project">Add Kendo UI CSS and JavaScript References to Your Project</a></h2>
+
+<p>To use Kendo UI in your project, you need to include the required JavaScript and CSS files.</p>
+
+<ol>
+<li>Extract the <strong>/js</strong> and <strong>/styles</strong> directories from the bundle archive and copy them to your web application root directory.</li>
+<li>
+<p>Include the Kendo UI JavaScript and CSS files in the <code>head</code> tag of your HTML document. <strong>Make sure the common CSS file is registered before the theme CSS file</strong>.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Welcome to Kendo UI!&lt;/title&gt;
+    &lt;!-- Common Kendo UI CSS --&gt;
+    &lt;link href="styles/kendo.common.min.css" rel="stylesheet" /&gt;
+
+    &lt;!-- Default Kendo UI theme CSS --&gt;
+    &lt;link href="styles/kendo.default.min.css" rel="stylesheet" /&gt;
+
+    &lt;!-- (optional) Kendo UI DataViz CSS, include only if you will use the data visualisation features --&gt;
+    &lt;link href="styles/kendo.dataviz.min.css" rel="stylesheet" /&gt;
+
+    &lt;!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features --&gt;
+    &lt;link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" /&gt;
+
+    &lt;!-- jQuery JavaScript --&gt;
+    &lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+
+    &lt;!-- Kendo UI combined JavaScript --&gt;
+    &lt;script src="js/kendo.all.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    Hello World!
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+</ol>
+
+<blockquote>
+<p>The rest of the code examples assume that the Kendo UI scripts and stylesheets are present in the document.</p>
+</blockquote>
+
+<ol>
+<li>
+<p>Initialize a Kendo UI Widget (in this case, the DatePicker):</p>
+
+<pre><code>&lt;!-- HTML element from which the DatePicker would be initialized --&gt;
+&lt;input id="datepicker" /&gt;
+&lt;script&gt;
+$(function() {
+    // Initialize the Kendo DatePicker by calling the kendoDatePicker jQuery plugin
+    $("#datepicker").kendoDatePicker();
+});
+&lt;/script&gt;
+</code></pre>
+</li>
+</ol>
+
+<p>Here is the complete example:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Welcome to Kendo UI!&lt;/title&gt;
+        &lt;link href="styles/kendo.common.min.css" rel="stylesheet" /&gt;
+        &lt;link href="styles/kendo.default.min.css" rel="stylesheet" /&gt;
+        &lt;script src="js/jquery.min.js"&gt;&lt;/script&gt;
+        &lt;script src="js/kendo.all.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;input id="datepicker" /&gt;
+        &lt;script&gt;
+            $(function() {
+                $("#datepicker").kendoDatePicker();
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

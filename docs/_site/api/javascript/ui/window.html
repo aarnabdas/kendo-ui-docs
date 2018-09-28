@@ -1,0 +1,1294 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Window</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to initialize a Window UI widget and configure its behaviors, center a window, set its content and toggle the state of the UI widget.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/window.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/window.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouiwindow"><a href="#kendouiwindow">kendo.ui.Window</a></h1>
+
+<p>Represents the Kendo UI Window. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-actions">
+<a href="#configuration-actions">actions </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>(default: ["Close"])</em>
+</h3>
+
+<p>The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize",
+and "Maximize".</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  actions: [ "Minimize", "Maximize" ]
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation">
+<a href="#configuration-animation">animation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>A collection of {Animation} objects, used to change default animations. A value of <strong>false</strong>
+will disable all animations in the widget.</p>
+
+<h4>Example - disable animation</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close">
+<a href="#configuration-animation.close">animation.close </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation that will be used when a Window closes.</p>
+
+<h4>Example - disable close animation</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    close: false
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.effects">
+<a href="#configuration-animation.close.effects">animation.close.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Effect to be used for closing of the popup.</p>
+
+<h4>Example - use only fade out animation when closing window</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    close: {
+      effects: "fade:out"
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.close.duration">
+<a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>Defines the close animation duration.</p>
+
+<h4>Example - make the close animation 2 seconds long</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    close: {
+      duration: 2000
+    }
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open">
+<a href="#configuration-animation.open">animation.open </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>The animation that will be used when a Window opens.</p>
+
+<h4>Example - disable open animation</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    open: false
+  },
+  visible: false
+});
+$("#dialog").data("kendoWindow").open();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.effects">
+<a href="#configuration-animation.open.effects">animation.open.effects </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Effect to be used for opening of the popup.</p>
+
+<h4>Example - use only fade animation when opening window</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    open: {
+      effects: "fade:in"
+    }
+  },
+  visible: false
+});
+$("#dialog").data("kendoWindow").open();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-animation.open.duration">
+<a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>Defines the open animation duration.</p>
+
+<h4>Example - make the open animation 100 milliseconds long</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  animation: {
+    open: {
+      duration: 100
+    }
+  },
+  visible: false
+});
+$("#dialog").data("kendoWindow").open();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-appendTo">
+<a href="#configuration-appendTo">appendTo </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: document.body)</em>
+</h3>
+
+<p>The element that the Window will be appended to. Beneficial if the <a href="/kendo-ui/web/window/overview#using-kendo-ui-window-with-a-form">Window is used together with a form</a>.
+Note that this <em>does not</em> constrain the window dragging within the given element.</p>
+
+<h4>Example - set the window container to be the form with id="mainForm"</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  appendTo: "form#mainForm"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-autoFocus">
+<a href="#configuration-autoFocus">autoFocus </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Determines whether the Window will be focused automatically when opened. The property also influences the focus behavior when the Window is clicked when already opened.</p>
+
+<h4>Example - set the autoFocus property</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  autoFocus: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-content">
+<a href="#configuration-content">content </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies a URL or request options that the window should load its content from.</p>
+
+<p>Note: For URLs starting with a protocol (e.g. http://),
+a container iframe element is automatically created. This behavior may change in future
+versions, so it is advisable to always use the <a href="#iframe">iframe configuration option</a>.</p>
+
+<h4>Example - fetch content from the server</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  content: "/details"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-content.template">
+<a href="#configuration-content.template">content.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Template for the content of a <strong>Window</strong>. Returned data from the server will be given as the <code>data</code> of this template.
+Note that if the returned data is JSON, the <a href="http://api.jquery.com/jQuery.ajax/"><code>dataType</code> parameter</a> should be passed, so that the data gets parsed by jQuery.</p>
+
+<p>If the URL contains a protocol, set <code>iframe</code> to <code>false</code>, otherwise the JSON response will be injected "as is" in the Window content area.</p>
+
+<h4>Example - fetch JSON and display it through a template</h4>
+
+<pre><code>&lt;div id="dialog"&gt;
+    &lt;p&gt;&lt;strong&gt;This example will not work, unless you define a valid JSON service URL for `content.url`.&lt;/p&gt;
+    &lt;p&gt;The expected JSON response is:
+        &lt;pre&gt;
+
+        { username: "...my username here..." }
+
+        &lt;/pre&gt;
+    &lt;/strong&gt;&lt;/p&gt;    
+&lt;/div&gt;
+
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  content: {
+    url: "/userDetails",
+    dataType: "json",
+    iframe: false,
+    template: "User name: #= data.username #"
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-draggable">
+<a href="#configuration-draggable">draggable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability for users to move/drag the widget.</p>
+
+<h4>Example - disable window dragging</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  draggable: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-iframe">
+<a href="#configuration-iframe">iframe </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h3>
+
+<p>Explicitly states whether a content iframe should be created. For more information, please read <a href="/kendo-ui/web/window/overview#using-iframes">Using iframes</a>.</p>
+
+<h4>Example - load full page</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  content: "http://www.telerik.com/",
+  iframe: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-maxHeight">
+<a href="#configuration-maxHeight">maxHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: Infinity)</em>
+</h3>
+
+<p>The maximum height (in pixels) that may be achieved by resizing the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  maxHeight: 300
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-maxWidth">
+<a href="#configuration-maxWidth">maxWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: Infinity)</em>
+</h3>
+
+<p>The maximum width (in pixels) that may be achieved by resizing the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  maxWidth: 300
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-minHeight">
+<a href="#configuration-minHeight">minHeight </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 50)</em>
+</h3>
+
+<p>The minimum height (in pixels) that may be achieved by resizing the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  minHeight: 100
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-minWidth">
+<a href="#configuration-minWidth">minWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 50)</em>
+</h3>
+
+<p>The minimum width (in pixels) that may be achieved by resizing the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  minWidth: 100
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-modal">
+<a href="#configuration-modal">modal </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Specifies whether the window should show a modal overlay over the page.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  modal: true
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pinned">
+<a href="#configuration-pinned">pinned </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Specifies whether the window should be pinned, i.e. it will not move together with the page content during scrolling.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div style="height: 5000px;"&gt;&lt;/div&gt;
+&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  pinned: true,
+  position: { top: 100 }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position">
+<a href="#configuration-position">position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>A collection of one or two members, which define the initial Window's top and/or left position on the page.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  position: {
+    top: 100, // or "100px"
+    left: "20%"
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-position.top">
+<a href="#configuration-position.top">position.top </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies the initial top position of the window. Numeric values are treated as pixels. String values can specify pixels, percentages, ems or other valid values.</p>
+
+<h3 id="configuration-position.left">
+<a href="#configuration-position.left">position.left </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>Specifies the initial left position of the window. Numeric values are treated as pixels. String values can specify pixels or percentages, ems or other valid values.</p>
+
+<h3 id="configuration-resizable">
+<a href="#configuration-resizable">resizable </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability for users to resize a <strong>Window</strong>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  resizable: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-title">
+<a href="#configuration-title">title </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>default: ""</em>
+</h3>
+
+<p>The text in the window title bar. If <code>false</code>, the window will be displayed without a title bar. Note that this will prevent the window from being dragged, and the window titlebar buttons will not be shown.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  title: "Customer details"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - create a window without a title</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  title: false
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-visible">
+<a href="#configuration-visible">visible </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>Specifies whether the window will be initially visible.</p>
+
+<h4>Example - show a dialog after one second delay</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  visible: false
+});
+setTimeout(function() {
+  $("#dialog").data("kendoWindow").open();
+}, 1000);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-width">
+<a href="#configuration-width">width </a><code>Number  |</code><code> String</code>
+</h3>
+
+<p>Specifies width of the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  width: 400
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify window width in percent</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  width: "50%"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-height">
+<a href="#configuration-height">height </a><code>Number  |</code><code> String</code>
+</h3>
+
+<p>Specifies height of the window.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  height: 400
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - specify window height in percent</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  height: "50%"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-center"><a href="#methods-center">center</a></h3>
+
+<p>Centers the window within the viewport.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.center();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes a Window.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example - close a window after one second</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+setTimeout(function() {
+  dialog.close();
+}, 1000);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-content"><a href="#methods-content">content</a></h3>
+
+<p>Gets or set the content of a window.</p>
+
+<h4>Parameters</h4>
+
+<h5>content <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(optional)</em>
+</h5>
+
+<p>The content of the Window.</p>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> If the content parameter is provided, this method will return the widget object to support chaining. Otherwise, it will return the current content of the widget.</p>
+
+<h4>Example - get the window content</h4>
+
+<pre><code>&lt;div id="dialog"&gt;foo&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+console.log(dialog.content()); // logs "foo"
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example = set the window content</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.content("Kendo UI all the things!");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Destroys the window and its modal overlay, if necessary. Removes the widget HTML elements from the DOM.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-maximize"><a href="#methods-maximize">maximize</a></h3>
+
+<p>Maximizes a Window to the entire viewing area of the user agent. Triggers the resize event.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.maximize();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-minimize"><a href="#methods-minimize">minimize</a></h3>
+
+<p>Maximizes a Window to its title bar.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.minimize();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-open"><a href="#methods-open">open</a></h3>
+
+<p>Opens a Window.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  visible: false
+});
+var dialog = $("#dialog").data("kendoWindow");
+dialog.open();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-pin"><a href="#methods-pin">pin</a></h3>
+
+<p>Pins the Window at its current position with a position:fixed style, i.e. the widget stops moving together with the other page content when the page is scrolled.
+The user will still be able to move the Window with the mouse or keyboard.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div style="height: 5000px;"&gt;&lt;/div&gt;
+&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  position: { top: 100 }
+});
+var dialog = $("#dialog").data("kendoWindow");
+dialog.pin();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
+
+<p>Refreshes the content of a Window from a remote URL or the initially defined <a href="/kendo-ui/api/web/window#configuration-content.template">content template</a>.
+<strong>Note that passing <code>data</code> and non-GET requests cannot be sent to an iframe</strong>, as they require a form with a target attribute.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>Options for requesting data from the server.
+If omitted, the window uses the <code>content</code> property
+that was supplied when the window was created.
+Any options specified here are passed to jQuery.ajax().</p>
+
+<h5>options.url <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The server URL that will be requested.</p>
+
+<h5>options.data <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>A JSON object containing the data that will be passed to the server.</p>
+
+<h5>options.type <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The HTTP request method ("GET", "POST").</p>
+
+<h5>options.template <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>A template to be used for displaying the requested data.</p>
+
+<h5>options.iframe <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Indicates whether the content should be fetched within an iframe, or with AJAX and rendered in the same page.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.refresh("/feedbackForm");
+
+dialog.refresh({
+    url: "/feedbackForm",
+    data: { userId: 42 }
+});
+
+dialog.refresh({
+    url: "/userInfo",
+    data: { userId: 42 },
+    template: "Hello, #= firstName # #= lastName #"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-restore"><a href="#methods-restore">restore</a></h3>
+
+<p>Restores a maximized or minimized Window to its previous state. Triggers the resize event.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+
+// maximize the window
+dialog.maximize();
+
+setTimeout(function() {
+  // restore its original size
+  dialog.restore();
+}, 1000);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-setOptions"><a href="#methods-setOptions">setOptions</a></h3>
+
+<p>Allows the window to be configured with new options. If you change the <a href="#configuration-content">content url</a>, call <a href="#methods-refresh"><code>refresh</code></a> afterwards.
+Another option is to execute the <code>refresh</code> method with the new URL directly.</p>
+
+<h4>Parameters</h4>
+
+<h5>options <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h5>
+
+<p>The configuration options to be set.</p>
+
+<h4>Example - set new dimensions to the window</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.setOptions({
+  width: 180,
+  height: 225
+});
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-title"><a href="#methods-title">title</a></h3>
+
+<p>Gets or set the title of a <strong>Window</strong>.</p>
+
+<h4>Parameters</h4>
+
+<h5>text <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(optional)</em>
+</h5>
+
+<p>The title of the Window.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> If a title is provided, this method will return the window object to support chaining. Otherwise, it will return the current title of the window.</p>
+
+<h4>Example - get the title of the window</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+var title = dialog.title();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - set the title of a window</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.title("Hello");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-toFront"><a href="#methods-toFront">toFront</a></h3>
+
+<p>Brings forward a Window to the top of the z-index.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.toFront();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-toggleMaximization"><a href="#methods-toggleMaximization">toggleMaximization</a></h3>
+
+<p>Toggles a Window between a maximized and restored state. Triggers the resize event.</p>
+
+<h4>Returns</h4>
+
+<p><code>kendo.ui.Window</code> Returns the window object to support chaining.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.toggleMaximization();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-unpin"><a href="#methods-unpin">unpin</a></h3>
+
+<p>Disables the Window's pinned state, so that the widget will move together with the other page content when the page is scrolled.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div style="height: 5000px;"&gt;&lt;/div&gt;
+&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  pinned: true,
+  position: { top: 100 }
+});
+var dialog = $("#dialog").data("kendoWindow");
+dialog.unpin();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-activate"><a href="#events-activate">activate</a></h3>
+
+<p>Triggered when a Window has finished its opening animation.</p>
+
+<h4>Example - subscribe to the "activate" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  activate: function() {
+    // open animation has finished playing
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "activate" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_activate() {
+  // open animation has finished playing
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("activate", window_activate);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Triggered when a Window is closed (by a user or through the close() method).</p>
+
+<h4>Event Data</h4>
+
+<h5>e.userTriggered <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
+</h5>
+
+<p>Indicates whether the close action has been triggered by the user (by clicking the close button or hitting the escape key). When the close method has been called, this field is <strong>false</strong>.</p>
+
+<h4>Example - subscribe to the "close" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  close: function(e) {
+    // close animation has finished playing
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "close" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_close(e) {
+  // close animation has finished playing
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("close", window_close);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-deactivate"><a href="#events-deactivate">deactivate</a></h3>
+
+<p>Triggered when a Window has finished its closing animation.</p>
+
+<h4>Example - subscribe to the "deactivate" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  deactivate: function() {
+    // close animation will start soon
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "deactivate" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_deactivate() {
+  // close animation will start soon
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("deactivate", window_deactivate);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-dragend"><a href="#events-dragend">dragend</a></h3>
+
+<p>Triggered when a Window has been moved by a user.</p>
+
+<h4>Example - subscribe to the "dragend" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  dragend: function() {
+    // user has released the window after dragging
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dragend" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_dragend() {
+  // user has released the window after dragging
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("dragend", window_dragend);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-dragstart"><a href="#events-dragstart">dragstart</a></h3>
+
+<p>Triggered when the user starts to move the window.</p>
+
+<h4>Example - subscribe to the "dragstart" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  dragstart: function() {
+    // user has started dragging the window
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "dragstart" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_dragstart() {
+  // user has started dragging the window
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("dragstart", window_dragstart);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-error"><a href="#events-error">error</a></h3>
+
+<p>Triggered when an AJAX request for content fails.</p>
+
+<h4>Event Data</h4>
+
+<h5>e.xhr <code>jqXHR</code>
+</h5>
+
+<p>The XHR request object, as returned from <a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax</a></p>
+
+<h5>e.status <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The status of the request, as returned from <a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax</a></p>
+
+<h4>Example - subscribe to the "error" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  error: function(e) {
+    console.log("Request failed with status " + e.status)
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "error" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_error(e) {
+  console.log("Request failed with status " + e.status)
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("error", window_error);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Triggered when a Window is opened (i.e. the open() method is called).</p>
+
+<h4>Example - subscribe to the "open" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  open: function() {
+    // open animation will start soon
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "open" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_open() {
+  // open animation will start soon
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("open", window_open);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-refresh"><a href="#events-refresh">refresh</a></h3>
+
+<p>Triggered when the content of a Window has finished loading via AJAX,
+when the window iframe has finished loading, or when the refresh button
+has been clicked on a window with static content.</p>
+
+<h4>Example - subscribe to the "refresh" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  refresh: function() {
+    // new content has been fetched
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "refresh" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_refresh() {
+  // new content has been fetched
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("refresh", window_refresh);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-resize"><a href="#events-resize">resize</a></h3>
+
+<p>Triggered when a window has been resized by a user.</p>
+
+<h4>Example - subscribe to the "resize" event during initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+$("#dialog").kendoWindow({
+  resize: function() {
+    // user has finished resizing the window
+  }
+});
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example - subscribe to the "resize" event after initialization</h4>
+
+<pre><code>&lt;div id="dialog"&gt;&lt;/div&gt;
+&lt;script&gt;
+function window_resize() {
+  // user has finished resizing the window
+}
+$("#dialog").kendoWindow();
+var dialog = $("#dialog").data("kendoWindow");
+dialog.bind("resize", window_resize);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

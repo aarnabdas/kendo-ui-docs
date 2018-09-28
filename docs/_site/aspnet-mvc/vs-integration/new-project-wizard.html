@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/vs-integration/new-project-wizard.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/vs-integration/new-project-wizard.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="new-project-wizard"><a href="#new-project-wizard">New Project Wizard</a></h1>
+
+<p>This help topic shows how to create a new Telerik UI for ASP.NET MVC Application.</p>
+
+<p>The New Project wizard is used for creation of a new Telerik UI for ASP.NET MVC Application (Telerik | UI for ASP.NET MVC | Create New Telerik Project). The wizard consists of two steps. On the first page the user can specify some project-wide settings while on the second page he can configure the data access layer.</p>
+
+<h2 id="project-settings"><a href="#project-settings">Project Settings</a></h2>
+
+<p><img src="/kendo-ui/aspnet-mvc/vs-integration/images/new1.png" alt="New Project Wizard"></p>
+
+<p>Using the options in the Telerik UI for ASP.NET MVC Project Settings page you can modify various project-wide settings:</p>
+
+<ul>
+<li>  <strong>Choose project type</strong> - Choose what project type to create: Empty, Standard, Grid and Menu, Mobile with Ajax Navigation or Mobile with Server Navigation</li>
+<li>  <strong>Version</strong> - Choose which version of Telerik UI for ASP.NET MVC to use</li>
+<li>  <strong>Add referenced assemblies to solution</strong> - Choose whether to copy referenced assemblies to your solution folder. The assemblies will automatically get added to source control when using Microsoft Team Foundation Server.</li>
+<li>  <strong>Target ASP.NET MVC Version</strong> - Choose the targeted ASP.NET MVC version</li>
+<li>  <strong>View Engine</strong> - Choose between Razor and WebForms</li>
+<li>  <strong>Theme</strong> – Choose the visual theme for your Telerik UI for ASP.NET MVC Application</li>
+<li>  <strong>Copy Editor Templates</strong> - Copy the predefined editor templates to ~/Views/Shared/EditorTemplates</li>
+<li>  <strong>Use CDN Support</strong> - Enable or disable <a href="/kendo-ui/javascript-dependencies#cdn">CDN</a> support.</li>
+<li>  <strong>Copy Global Resources</strong> - Copy the localization files to ~/Scripts/kendo/{version}/cultures</li>
+<li>  <strong>Add Test Project</strong> - Choose whether to add a test project to the solution.</li>
+</ul>
+
+<h2 id="data-access-settings"><a href="#data-access-settings">Data Access Settings</a></h2>
+
+<p><img src="/kendo-ui/aspnet-mvc/vs-integration/images/data_access.png" alt="Data Access Settings"></p>
+
+<p>On the next step the New Project wizard's Data Access page offers you initialize the creation of your data access layer using Telerik OpenAccess ORM. You are given the following options:</p>
+
+<ul>
+<li>
+<strong>Create OpenAccess Fluent Library Project</strong> - After you choose this option an OpenAccess ORM project will be added, enabling you to create your object mapping in a declarative way. With this Code-Only approach all the necessary persistent classes and mappings are defined manually – the project will initially contain only a sample declaration to get you started. You can find more information about the Fluent Library project type <a href="http://www.telerik.com/help/openaccess-orm/getting-started-fluent-mapping-overview.html">here</a>.</li>
+<li>
+<p><strong>Create OpenAccess Domain Model Library Project</strong> - The Domain Model is an auto-generated and editable diagram of your persistent classes. This option will start the Add Domain Model wizard after exiting Project Configuration Wizard, so that you can configure your data layer without writing a single line of code. You can create a new model and define you classes later using the tools that OpenAccess Visual Designer is offering, or retrieve the schema of an already designed database and generate classes for the selected tables and views. The different scenarios are described in the articles below:</p>
+
+<ul>
+<li><a href="http://www.telerik.com/help/openaccess-orm/getting-started-root-getting-started-with-update-schema-tools.html">Create an empty model - Model First</a></li>
+<li><a href="http://www.telerik.com/help/openaccess-orm/getting-started-root-generating-model-mappings-taking-database-first-approach.html">Generate the domain model from a database - Database First</a></li>
+</ul>
+</li>
+<li><p><strong>Skip creating an OpenAccess Model Library Project</strong> - No data access project will be added.</p></li>
+</ul>
+
+<h2 id="creation-of-new-kendo-ui-web-application"><a href="#creation-of-new-kendo-ui-web-application">Creation of New Kendo UI web application</a></h2>
+
+<p>When you click 'Finish', the creation of new Kendo UI web application will begin. The wizard will:</p>
+
+<ul>
+<li>Create new ASP.NET MVC application</li>
+<li>Copy all Kendo UI scripts, including the vsdoc script that enables the VS Intellisense feature (if CDN support is not enabled)</li>
+<li>Copy all Kendo UI content files (if CDN support is not enabled)</li>
+<li>Copy all Kendo UI global resources (optional)</li>
+<li>Copy all Kendo UI editor templates (optional)</li>
+<li>Copy the Kendo UI assembly to your solution folder (optional)</li>
+<li>Add reference to the Kendo.Mvc assembly</li>
+<li>Apply the pre-selected theme</li>
+<li>Create test project (optional)</li>
+</ul>
+
+<h2 id="modernizr-inclusion"><a href="#modernizr-inclusion">Modernizr inclusion</a></h2>
+
+<p>The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr in a file called <code>kendo.modernizr.custom.js</code>. Its goal is to provide HTML5 element support for old browsers, specifically Internet Explorer.
+If you need Modernizr in your application, you may want to remove the existing Modernizr and register another version, which includes more components and features. In this case, if HTML5 element support is required,
+make sure that the newly registered Modernizr <a href="http://modernizr.com/docs/#html5inie">provides such support</a> by including the <strong>html5shiv</strong> component.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

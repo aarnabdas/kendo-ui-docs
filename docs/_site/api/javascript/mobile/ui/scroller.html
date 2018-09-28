@@ -1,0 +1,800 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile Scroller</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to configure a mobile scroller in Kendo UI HTML5 mobile framework, use methods to scroll the container to a specified location and control behavior with events.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/scroller.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/scroller.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuiscroller"><a href="#kendomobileuiscroller">kendo.mobile.ui.Scroller</a></h1>
+
+<p>Represents the Kendo UI Mobile Scroller widget. Inherits from <a href="/kendo-ui/api/framework/mobilewidget">kendo.mobile.ui.Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-elastic">
+<a href="#configuration-elastic">elastic </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: true)</em>
+</h3>
+
+<p>Weather or not to allow out of bounds dragging and easing.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+  &lt;div data-role="scroller" style="width: 200px; height: 200px" data-elastic="false"&gt;
+    &lt;div style="width: 500px; height: 500px"&gt;Content&lt;/div&gt;
+  &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages">
+<a href="#configuration-messages">messages </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
+</h3>
+
+<p>Defines the text of the Scroller pull to refresh messages. Used primary for localization.</p>
+
+<h3 id="configuration-messages.pullTemplate">
+<a href="#configuration-messages.pullTemplate">messages.pullTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Pull to refresh")</em>
+</h3>
+
+<p>The message template displayed when the user pulls the scroller.
+Has effect only when the <code>pullToRefresh</code> option is set to <code>true</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "pullTemplate": "Go" }'&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script id="go" type="text/x-kendo-template"&gt;
+    Go!
+&lt;/script&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.refreshTemplate">
+<a href="#configuration-messages.refreshTemplate">messages.refreshTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Refreshing")</em>
+</h3>
+
+<p>The message template displayed during the refresh.
+Has effect only when the <code>pullToRefresh</code> option is set to <code>true</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "refreshTemplate": "progress" }'&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script id="progress" type="text/x-kendo-template"&gt;
+    In progress...
+&lt;/script&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-messages.releaseTemplate">
+<a href="#configuration-messages.releaseTemplate">messages.releaseTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Release to refresh")</em>
+</h3>
+
+<p>The message template displayed when the user pulls the scroller below the <code>pullOffset</code>, indicating that <code>pullToRefresh</code> will occur.
+Has effect only when the <code>pullToRefresh</code> option is set to <code>true</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-messages='{ "releaseTemplate": "release" }'&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script id="progress" type="text/x-kendo-template"&gt;
+    Let it go now...
+&lt;/script&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pullOffset">
+<a href="#configuration-pullOffset">pullOffset </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a><em>(default: 140)</em>
+</h3>
+
+<p>The threshold below which releasing the scroller will trigger the pull event.
+Has effect only when the <code>pullToRefresh</code> option is set to true.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-pull-offset="20"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-pullToRefresh">
+<a href="#configuration-pullToRefresh">pullToRefresh </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
+</h3>
+
+<p>If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
+If a pull beyond the specified <code>pullOffset</code> occurs, a pull event will be triggered.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-useNative">
+<a href="#configuration-useNative">useNative </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to true, the scroller will use the native scrolling available in the current platform. This should help with form issues on some platforms (namely Android and WP8).
+Native scrolling is only enabled on platforms that support it: iOS &gt; 4, Android &gt; 2, WP8. BlackBerry devices do support it, but the native scroller is flaky.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-use-native="true"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-visibleScrollHints">
+<a href="#configuration-visibleScrollHints">visibleScrollHints </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to <code>true</code>, the scroller scroll hints will always be displayed.</p>
+
+<blockquote>
+<p>The configuration option does not have any effect if the <code>useNative</code> option is set to <code>true</code>.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-visible-scroll-hints="true"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-zoom">
+<a href="#configuration-zoom">zoom </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>If set to true, the user can zoom in/out the contents of the widget using the pinch/zoom gesture.</p>
+
+<blockquote>
+<p>The configuration option does not have any effect if the <code>useNative</code> option is set to <code>true</code>.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+  &lt;div data-role="scroller" style="width: 200px; height: 200px" data-zoom="true"&gt;
+    &lt;div style="width: 500px; height: 500px"&gt;Zoomable Content&lt;/div&gt;
+  &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-animatedScrollTo"><a href="#methods-animatedScrollTo">animatedScrollTo</a></h3>
+
+<p>Scrolls the scroll container to the specified location with animation. The arguments should be negative numbers.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    &lt;a data-role="button" data-click="scrollTo"&gt;Scroll To&lt;/a&gt;
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+         &lt;div style="height: 500px; width: 500px"&gt; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    function scrollTo() {
+        $("#scroller").data("kendoMobileScroller").animatedScrollTo(-100, -100);
+    }
+
+    new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>x <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The horizontal offset in pixels to scroll to.</p>
+
+<h5>y <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The vertical offset in pixels to scroll to.</p>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>Scroller</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the Scroller element from DOM.</p>
+</blockquote>
+
+<h3 id="methods-disable"><a href="#methods-disable">disable</a></h3>
+
+<p>Disables the scrolling of the element.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="disableScrolling"&gt;Disable Scrolling&lt;/a&gt;
+        &lt;a data-role="button" data-click="enableScrolling"&gt;Enable Scrolling&lt;/a&gt;
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function enableScrolling() {
+  $("#scroller").data("kendoMobileScroller").enable();
+}
+
+function disableScrolling() {
+  $("#scroller").data("kendoMobileScroller").disable();
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-enable"><a href="#methods-enable">enable</a></h3>
+
+<p>Enables the scrolling of the element after it has been disabled by calling <code>disable</code>.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="disableScrolling"&gt;Disable Scrolling&lt;/a&gt;
+        &lt;a data-role="button" data-click="enableScrolling"&gt;Enable Scrolling&lt;/a&gt;
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function enableScrolling() {
+  $("#scroller").data("kendoMobileScroller").enable();
+}
+
+function disableScrolling() {
+  $("#scroller").data("kendoMobileScroller").disable();
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-height"><a href="#methods-height">height</a></h3>
+
+<p>Returns the viewport height of the scrollable element.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="getHeight"&gt;Get Height&lt;/a&gt;
+   &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function getHeight() {
+  console.log($("#scroller").data("kendoMobileScroller").height());
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> the viewport height in pixels.</p>
+
+<h3 id="methods-pullHandled"><a href="#methods-pullHandled">pullHandled</a></h3>
+
+<p>Indicate that the pull event is handled (i.e. data from the server has been retrieved).</p>
+
+<h4>Custom pull to refresh view scroll handling</h4>
+
+<pre><code> &lt;div data-role="view" data-init="initPullToRefreshScroller"&gt;
+     &lt;h2 id="pull-to-refresh-clock"&gt;&lt;/h2&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+ function updateClock() {
+     pullTime = kendo.toString(new Date(), "hh:mm:ss tt" );
+     $("#pull-to-refresh-clock").html("Last update at " + pullTime + ". &lt;br /&gt; Pull to refresh.");
+ }
+
+ function initPullToRefreshScroller(e) {
+     var scroller = e.view.scroller;
+
+     scroller.setOptions({
+         pullToRefresh: true,
+         pull: function() {
+             updateClock();
+             setTimeout(function() { scroller.pullHandled(); }, 400);
+         }
+     })
+ }
+
+  new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-reset"><a href="#methods-reset">reset</a></h3>
+
+<p>Scrolls the container to the top.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="reset"&gt;Reset&lt;/a&gt;
+   &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function reset() {
+    $("#scroller").data("kendoMobileScroller").reset();
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Example</h4>
+
+<pre><code> &lt;div data-role="view"&gt;
+
+     &lt;div style="height: 1500px"&gt;
+        Content
+     &lt;/div&gt;
+     &lt;a data-role="button" data-click="reset"&gt;Reset&lt;/a&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+function reset() {
+   kendo.mobile.application.scroller().reset();
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-scrollHeight"><a href="#methods-scrollHeight">scrollHeight</a></h3>
+
+<p>Returns the height in pixels of the scroller content.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="getHeight"&gt;Get Scroll Height&lt;/a&gt;
+   &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function getHeight() {
+  console.log($("#scroller").data("kendoMobileScroller").scrollHeight());
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-scrollTo"><a href="#methods-scrollTo">scrollTo</a></h3>
+
+<p>Scrolls the container to the specified location. The arguments should be negative numbers.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+
+&lt;a data-role="button" data-click="scrollTo"&gt;Scroll To&lt;/a&gt;
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+         &lt;div style="height: 500px; width: 500px"&gt; Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function scrollTo() {
+    $("#scroller").data("kendoMobileScroller").scrollTo(-30, -30);
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>x <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The horizontal offset in pixels to scroll to.</p>
+
+<h5>y <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The vertical offset in pixels to scroll to.</p>
+
+<h3 id="methods-scrollWidth"><a href="#methods-scrollWidth">scrollWidth</a></h3>
+
+<p>Returns the width in pixels of the scroller content.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+  &lt;a data-role="button" data-click="getWidth"&gt;Get Scroll Height&lt;/a&gt;
+   &lt;div data-role="scroller" style="width: 200px; height: 200px" id="scroller"&gt;
+      &lt;div style="height: 500px"&gt;
+        Content
+      &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+ &lt;/div&gt;
+
+&lt;script&gt;
+function getWidth() {
+  console.log($("#scroller").data("kendoMobileScroller").scrollWidth());
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-zoomOut"><a href="#methods-zoomOut">zoomOut</a></h3>
+
+<p>Zooms the scroller out to the minimum zoom level possible.</p>
+
+<blockquote>
+<p>The scroller widget is when the mobile view is resized or displayed initially. You can use the after-show event for the zoomOut call.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view" data-after-show="zoomOut"&gt;
+foo
+    &lt;div data-role="scroller" id="myScroller" style="width: 200px; height: 200px" data-zoom="true"&gt;
+    &lt;div style="width: 500px; height: 500px"&gt;Zoomable Content&lt;/div&gt;
+    &lt;/div&gt;
+bar
+&lt;/div&gt;
+
+&lt;script&gt;
+    function zoomOut(e) {
+        $("#myScroller").data("kendoMobileScroller").zoomOut();
+    }
+    new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-pull"><a href="#events-pull">pull</a></h3>
+
+<p>Fires when the pull option is set to true, and the user pulls the scrolling container beyond the specified pullThreshold.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-pull-offset="20" data-pull="foo"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+function foo() {
+    console.log("foo!");
+}
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-resize"><a href="#events-resize">resize</a></h3>
+
+<p>Fires when the scroller dimensions change (e.g. orientation change or resize)</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="view"&gt;
+    foo
+    &lt;div data-role="scroller" style="width: 200px; height: 200px" data-pull-to-refresh="true" data-pull-offset="20" data-resize="foo"&gt;
+        &lt;div style="height: 500px"&gt;
+            Content
+        &lt;/div&gt;
+    &lt;/div&gt;
+    bar
+&lt;/div&gt;
+
+&lt;script&gt;
+function foo() {
+    console.log("foo!");
+}
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-scroll"><a href="#events-scroll">scroll</a></h3>
+
+<p>Fires when the user scrolls through the content.</p>
+
+<h4>Bind to scroller scroll event in view init</h4>
+
+<pre><code>&lt;div data-role="view" data-init="attachToScroller"&gt;
+    &lt;div style="height: 2000px"&gt;Foo&lt;/div&gt;
+&lt;/div&gt;
+ &lt;script&gt;
+    function attachToScroller(e) {
+      var scroller = e.view.scroller;
+      scroller.bind("scroll", function(e) {
+         console.log(e.scrollTop);
+         console.log(e.scrollLeft);
+      });
+    }
+
+    new kendo.mobile.Application();
+ &lt;/script&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.scrollTop <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The number of pixels that are hidden from view above the scrollable area.</p>
+
+<h5>e.scrollLeft <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h5>
+
+<p>The number of pixels that are hidden from view to the left of the scrollable area.</p>
+
+<h2 id="fields"><a href="#fields">Fields</a></h2>
+
+<h3 id="fields-scrollElement">
+<a href="#fields-scrollElement">scrollElement </a><a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h3>
+
+<p>The inner <strong>Scroller</strong> element that holds the scrolling content. Use this field if you wish to change the element contents after the Scroller is initialized on it.</p>
+
+<h4>Replace the Scroller contents</h4>
+
+<pre><code>&lt;div data-role="view" data-init="viewInit"&gt;
+    &lt;div id="scroller" data-role="scroller"&gt;Foo&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function viewInit(e) {
+  var scroller = $("#scroller").data("kendoMobileScroller");
+  scroller.scrollElement.html("&lt;b&gt;New content&lt;/b&gt;");
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="fields-scrollTop">
+<a href="#fields-scrollTop">scrollTop </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The number of pixels that are hidden from view above the scrollable area.</p>
+
+<h3 id="fields-scrollLeft">
+<a href="#fields-scrollLeft">scrollLeft </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>The number of pixels that are hidden from view to the left of the scrollable area.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Memory Usage Leaks with Kendo UI and AngularJS</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("AngularJS/leak.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//AngularJS/leak.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="memory-usage-leaks-with-kendo-ui-and-angularjs"><a href="#memory-usage-leaks-with-kendo-ui-and-angularjs">Memory Usage Leaks with Kendo UI and AngularJS</a></h1>
+
+<p>Under certain conditions, several Kendo UI users have discovered that the browser memory usage continuously increases when data-bound widgets (like the Grid) are created and destroyed in the AngularJS context.
+Usually this occurs in conjunction with the AngularJS routing.</p>
+
+<h2 id="the-right-way-to-look-for-memory-leaks"><a href="#the-right-way-to-look-for-memory-leaks">The "right way" to look for memory leaks</a></h2>
+
+<p>Such reports are not unique to the Kendo UI directives.
+The <a href="https://github.com/angular/angular.js">Angular JS repository</a> features several threads which dig into various aspects of the problem, <a href="https://github.com/angular/angular.js/issues/4864">Issue #4864</a> being one of the most prominent ones.
+The <a href="https://github.com/angular/angular.js/issues/4864#issuecomment-29394307">post from Igor Minar</a> offers several insights which highlight most of the problems our team has stumbled upon too. The takeaways are the following:</p>
+
+<ul>
+<li>Use new, "clean" chrome profile for testing, since extensions may cause false leaks. Incognito mode works, too. From our experience, ad blockers are quite common causes.</li>
+<li>Triggering the garbage collect will cause many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.</li>
+<li>According to Igor, the Chrome browser should be started with <code>--js-flags="--nocrankshaft --noopt"</code>. We did not notice any effect of these flags in our test cases, though.</li>
+</ul>
+
+<h2 id="create-a-simple-test-case"><a href="#create-a-simple-test-case">Create a simple test case</a></h2>
+
+<p>In order to verify that our implementation does not differ from the default AngularJS behavior, we created a simplified test case which uses the <code>ng-repeat</code> directive and the router:</p>
+
+<pre lang="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src="https://code.jquery.com/jquery-2.1.3.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"&gt;&lt;/script&gt;
+
+    &lt;div ng-app="KendoDemos"&gt;
+    &lt;div ng-view&gt;
+    &lt;/div&gt;
+
+    &lt;script type="text/javascript" charset="utf-8"&gt;
+        angular.module("KendoDemos", [ 'ngRoute' ])
+        .config(['$routeProvider', function($routeProvider) {
+            $routeProvider.
+            when('/blank', {
+                template: 'Blank template',
+                controller: 'blank'
+            }).
+            when('/', {
+                template: '&lt;div ng-repeat="item in items"&gt;&lt;/div&gt;',
+                controller: 'main'
+            });
+        }]).controller("main", function($scope, $timeout, $location){
+            $scope.items = [];
+            for (var i = 0; i &lt; 100; i++) {
+                $scope.items.push("item" + i);
+            }
+
+            $timeout(function() {
+                $location.url("/blank");
+            }, 1000);
+        })
+        .controller("blank", function($scope, $timeout, $location){
+            $timeout(function() {
+                $location.url("/");
+            }, 1000);
+        });
+    &lt;/script&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>The code is available in <a href="http://dojo.telerik.com/@petyosi/ipaJE">the Dojo</a>, too.</p>
+
+<p>Let's observe how the page performs in the Chrome timeline by recording the sample above:</p>
+
+<p><img src="leak-ng-repeat.png" width="600"></p>
+
+<p>The DOM count increases as the routes toggle with each other. This looks like a leak. Let's perform the same, but we will force the garbage collect during the recording:</p>
+
+<p><img src="leak-ng-repeat-gc.png" width="600"></p>
+
+<p>The seemingly retained detached nodes are getting collected by the garbage collector.</p>
+
+<h2 id="extend-the-test-to-kendo-ui-grid"><a href="#extend-the-test-to-kendo-ui-grid">Extend the test to Kendo UI Grid</a></h2>
+
+<p>Let's replace the repeat directive above with a Kendo UI Grid.</p>
+
+<pre lang="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.common.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.rtl.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.default.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.dataviz.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.dataviz.default.min.css"&gt;
+    &lt;link rel="stylesheet" href="http://cdn.kendostatic.com/2015.1.318/styles/kendo.mobile.all.min.css"&gt;
+
+    &lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://cdn.kendostatic.com/2015.1.318/js/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://cdn.kendostatic.com/2015.1.318/js/jszip.min.js"&gt;&lt;/script&gt;
+    &lt;script src="http://cdn.kendostatic.com/2015.1.318/js/kendo.all.min.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+
+
+    &lt;div ng-app="KendoDemos"&gt;
+      &lt;div ng-view&gt;
+      &lt;/div&gt;
+
+      &lt;script type="text/javascript" charset="utf-8"&gt;
+        angular.module("KendoDemos", [ 'kendo.directives', 'ngRoute' ])
+        .config(['$routeProvider', function($routeProvider) {
+          $routeProvider.
+          when('/blank', {
+            template: 'Blank template',
+            controller: 'blank'
+          }).
+          when('/', {
+            template: '&lt;table kendo-grid k-data-source="items"&gt;&lt;tr k-row-template&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;Foo&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;',
+            controller: 'main'
+          });
+        }]).controller("main", function($scope, $timeout, $location){
+          $scope.items = [];
+          for (var i = 0; i &lt; 100; i++) {
+            $scope.items.push("item" + i);
+          }
+
+          $timeout(function() {
+            $location.url("/blank");
+          }, 1000);
+        })
+        .controller("blank", function($scope, $timeout, $location){
+          $timeout(function() {
+            $location.url("/");
+          }, 1000);
+        });
+      &lt;/script&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>The sample above performs in the same way. Nodes are retained, but collecting the garbage drops the node count back to its original state.</p>
+
+<p><img src="leak-kendo-grid-gc.png" width="600"></p>
+
+<p>Based on this research, we consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.</p>
+
+<blockquote>
+<p>Worth noticing is that the majority of the Kendo UI Widgets do not exhibit such leaks outside of the AngularJS context.</p>
+</blockquote>
+
+<p>One fix that has worked has been to clean up before a route change. So wherever we change to a new route via $location.path('/my/new/route'), we execute some extra code to clear out the HTML in the prior view using: </p>
+
+<pre><code>kendo.destroy(document.body);
+$('.view-root-node').html('');
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

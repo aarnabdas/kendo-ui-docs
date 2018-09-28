@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Introduction to Telerik UI for ASP.NET MVC 6</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="How to download, install Telerik UI for ASP.NET MVC 6 and run the sample application.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/mvc-6/introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/mvc-6/introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="telerik-ui-for-aspnet-mvc-6---beta-4"><a href="#telerik-ui-for-aspnet-mvc-6---beta-4">Telerik UI for ASP.NET MVC 6 - Beta 4</a></h1>
+
+<p>This tutorial shows how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications.</p>
+
+<blockquote>
+<p>The ASP.NET 5 Framework is still actively developed. Tooling and APIs change frequently, often requiring extensive changes.
+See <a href="known-issues">Known Issues</a> for up-to-date information.</p>
+</blockquote>
+
+<h1 id="requirements-and-supported-environments"><a href="#requirements-and-supported-environments">Requirements and Supported Environments</a></h1>
+
+<p>We target the stable release of the ASP.NET 5 framework. At the time of this writing this is Beta 4.</p>
+
+<p>The target runtime is <a href="https://github.com/dotnet/coreclr">CoreCLR</a>. The full desktop CLR is also supported.</p>
+
+<h1 id="aspnet-on-github"><a href="#aspnet-on-github">ASP.NET on GitHub</a></h1>
+
+<p>The following repositories contain source code, instructions and issue trackers for the ASP.NET project.
+These are immensely useful when you need to track down particular issues or behaviors.</p>
+
+<ul>
+<li>ASP.NET <a href="https://github.com/aspnet/home">Home on GitHub</a>
+</li>
+<li>ASP.NET <a href="https://github.com/aspnet/Mvc">MVC on GitHub</a>
+</li>
+</ul>
+
+<h1 id="running-the-sample-application-on-windows"><a href="#running-the-sample-application-on-windows">Running the Sample Application on Windows</a></h1>
+
+<ul>
+<li>Install <a href="https://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs.aspx">Visual Studio 2015 RC</a>
+</li>
+<li>Download the <code>telerik.ui.for.aspnetmvc</code> commercial or trial package.</li>
+<li>Extract the <code>wrappers\aspnetmvc\Examples\VS2015</code> folder into <code>C:\MVC6</code> or similar.</li>
+<li>Open the <code>C:\MVC6\Kendo.Mvc.Examples\Kendo.Mvc.Examples.xproj</code> project in Visual Studio.</li>
+<li>Wait for the packages to restore and run the application.</li>
+</ul>
+
+<h1 id="see-also"><a href="#see-also">See Also</a></h1>
+
+<ul>
+<li><a href="getting-started">Installing Telerik UI for ASP.NET MVC in an MVC 6 project</a></li>
+<li><a href="http://docs.asp.net/en/latest/index.html">ASP.NET 5 Documentation</a></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

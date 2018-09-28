@@ -1,0 +1,415 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Value binding in Kendo UI MVVM | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Keep the value of a DOM widget and the value of a View-Model field in sync by using value binding in Kendo UI MVVM.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/mvvm/bindings/value.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/mvvm/bindings/value.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="value-binding"><a href="#value-binding">Value binding</a></h1>
+
+<p>The <code>value</code> binding keeps the value of a DOM element or widget and the value of a View-Model field in sync.
+When the end-user changes the value of the DOM element (or widget) the bound View-Model value is updated. If the
+View-Model value is updated from code the value of the bound DOM element (or widget) is updated visually.</p>
+
+<p>** Important: the value binding supports only DOM elements or widgets that have a "value" **</p>
+
+<p>Supported elements are <code>input</code>, <code>textarea</code> and
+<code>select</code>. All widgets that have the notion of a value are supported i.e. <code>AutoComplete</code>,
+<code>DropDownList</code>, <code>ComboBox</code>, <code>DatePicker</code>, <code>TimePicker</code>, <code>NumericTextBox</code>, <code>Slider</code>.</p>
+
+<p>If you want to set the text or html content of a DOM element use the <code>text</code> or <code>html</code>
+bindings instead of the <code>value</code> binding.</p>
+
+<p>Checkboxes (<code>&lt;input type="checkbox" /&gt;</code>) and radio buttons (<code>&lt;input type="radio" /&gt;</code>) should use
+the <a href="checked">checked</a> binding instead.</p>
+
+<h2 id="input-and-textarea-value-binding"><a href="#input-and-textarea-value-binding">Input and textarea value binding</a></h2>
+
+<p>Kendo MVVM will display the View-Model value as the value of an <code>input</code> or <code>textarea</code> element.</p>
+
+<h3 id="use-the-value-binding-with-an-input-and-a-textarea"><a href="#use-the-value-binding-with-an-input-and-a-textarea">Use the value binding with an input and a textarea</a></h3>
+
+<pre><code>&lt;div id="view"&gt;
+    &lt;input data-bind="value: inputValue" /&gt;
+    &lt;textarea data-bind="value: textareaValue"&gt;&lt;/textarea&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    inputValue: "Input value",
+    textareaValue: "Textarea value"
+});
+
+kendo.bind($("#view"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>After calling <code>kendo.bind</code> the <code>input</code> element would display the value of the <code>inputValue</code> field.
+The <code>textarea</code> will display the value of the <code>textareaValue</code> field. If the value of the <code>input</code>
+changes the <code>inputValue</code> field will change as well.
+Likewise, if the value of the <code>textarea</code> changes so will <code>textareaValue</code>. Changing <code>inputValue</code> or
+<code>textareaValue</code> View-Model fields from code will visually update the value of the bound elements.</p>
+
+<h3 id="controlling-when-the-view-model-is-updated"><a href="#controlling-when-the-view-model-is-updated">Controlling when the View-Model is updated</a></h3>
+
+<p>By default the <code>value</code> binding relies on the <code>change</code> DOM event which is raised after blurring the element whose value has changed. This means that the value from the View-Model will be updated when the element loses focus. The <code>data-value-update</code> attribute can be used to specify a different DOM event e.g. <code>keyup</code> or <code>keypress</code>. The <code>keydown</code> event is <strong>not</strong> supported because the DOM element value is not yet updated when that event triggers.</p>
+
+<blockquote>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/Events/input">input DOM event</a> may be used in case you need to update the viewmodel value on each keypress <em>and</em> when the user pastes content in the field. Keep in mind that the input event is supported in IE9+.</p>
+</blockquote>
+
+<h3 id="using-the-data-value-update-attribute"><a href="#using-the-data-value-update-attribute">Using the data-value-update attribute</a></h3>
+
+<pre><code>&lt;div id="view"&gt;
+    &lt;input data-value-update="keyup" data-bind="value: inputValue" /&gt;
+&lt;/div&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    inputValue: "Input value"
+});
+
+kendo.bind($("#view"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="select-value-binding"><a href="#select-value-binding">Select value binding</a></h2>
+
+<p>When the <code>select</code> element has a set of predefined options
+Kendo MVVM will select the <code>option</code> whose <code>value</code> attribute is equal to value of the View-Model field.</p>
+
+<h3 id="use-the-value-binding-with-a-select-with-predefined-options"><a href="#use-the-value-binding-with-a-select-with-predefined-options">Use the value binding with a select with predefined options</a></h3>
+
+<pre><code>&lt;select data-bind="value: selectedColor"&gt;
+    &lt;option value="red"&gt;Red&lt;/option&gt;
+    &lt;option value="green"&gt;Green&lt;/option&gt;
+    &lt;option value="blue"&gt;Blue&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedColor: "green"
+});
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>In this example the second <code>option</code> will be selected because its <code>value</code> attribute is equal to the value of the <code>selectedColor</code> View-Model field.
+Changing the selected <code>option</code> will update the value of the <code>selectedColor</code> View-Model field.</p>
+
+<p>If the <code>value</code> attribute of an <code>option</code> is not set its text content will be used instead:</p>
+
+<h3 id="use-the-value-binding-with-a-select-with-predefined-options-that-dont-have-a-value"><a href="#use-the-value-binding-with-a-select-with-predefined-options-that-dont-have-a-value">Use the value binding with a select with predefined options that don't have a value</a></h3>
+
+<pre><code>&lt;select data-bind="value: selectedColor"&gt;
+    &lt;option&gt;Red&lt;/option&gt;
+    &lt;option&gt;Green&lt;/option&gt;
+    &lt;option&gt;Blue&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedColor: "Blue"
+});
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>In this case the third <code>option</code> will be selected because its text content is equal to the value of the <code>selectedColor</code> View-Model field.</p>
+
+<p>When the <code>select</code> element options are created by the <a href="source">source</a> binding
+Kendo MVVM will select the <code>option</code> which corresponds to the View-Model value specified by the <code>value</code> binding.
+The <code>data-value-field</code> attribute specifies the field of the current item to which the <code>option</code> value is bound.</p>
+
+<h3 id="use-the-value-binding-with-a-select-whose-options-are-created-by-the-source-binding"><a href="#use-the-value-binding-with-a-select-whose-options-are-created-by-the-source-binding">Use the value binding with a select whose options are created by the source binding</a></h3>
+
+<pre><code>&lt;select data-value-field="id" data-text-field="name"
+       data-bind="value: selectedProduct, source: products"&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedProduct: null,
+    products: [
+        { id: 1, name: "Coffee" },
+        { id: 2, name: "Tea" },
+        { id: 3, name: "Juice" }
+    ]
+});
+
+viewModel.selectedProduct = viewModel.products[1];
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>In this example the second <code>option</code> will be selected after calling <code>kendo.bind</code>. It's <code>value</code> attribute is equal to the value of the <code>id</code>
+field of the <code>selectedProduct</code>. If the user selects another option the <code>selectedProduct</code> will be set to the corresponding item from the <code>products</code> array.</p>
+
+<p>You can also use the <code>value</code> binding with a View-Model field which is of primitive type.</p>
+
+<h3 id="use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null"><a href="#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null">Use the value binding with a select widget to update the View-Model field with the value field when the initial value is null.</a></h3>
+
+<pre><code>&lt;select data-role="dropdownlist" data-option-label="Select product..." data-value-primitive="true"
+  data-value-field="id" data-text-field="name" data-bind="value: selectedProductId, source: products"&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedProductId: null,
+    products: [
+        { id: 1, name: "Coffee" },
+        { id: 2, name: "Tea" },
+        { id: 3, name: "Juice" }
+    ]
+});
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>By default the value binding for the select widgets(<code>AutoComplete</code>, <code>DropDownList</code>, <code>ComboBox</code>, <code>MultiSelect</code>) uses the selected item from the data to update the View-Model field when the initial value is <code>null</code>. The <code>data-value-primitive</code> attribute can be used to specify that the View-Model field should be updated with the item value field instead.</p>
+
+<h3 id="use-the-value-binding-with-a-select-whose-options-are-created-by-the-source-binding"><a href="#use-the-value-binding-with-a-select-whose-options-are-created-by-the-source-binding">Use the value binding with a select whose options are created by the source binding</a></h3>
+
+<pre><code>&lt;select data-value-field="id" data-text-field="name"
+    data-bind="value: selectedProduct, source: products"&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedProduct: 2, // note that the "id" of the second product is 2\. Thus the second product will be selected
+    products: [
+        { id: 1, name: "Coffee" },
+        { id: 2, name: "Tea" },
+        { id: 3, name: "Juice" }
+    ]
+});
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>Again the second <code>option</code> will be selected because its <code>value</code> is equal to the <code>selectedProduct</code> View-Model field.
+If the user selects another option the <code>id</code> field of the corresponding item from the <code>products</code> array will be set as the <code>selectedProduct</code>.</p>
+
+<h3 id="multiple-selection"><a href="#multiple-selection">Multiple selection</a></h3>
+
+<p>Kendo MVVM supports select elements with multiple selection enabled. The bound View-Model field should be an array. Here are a few examples
+showing different configuration scenarios - with and without the <code>source</code> binding.</p>
+
+<h4>Multiple selection with predefined options</h4>
+
+<pre><code>&lt;select data-bind="value: selectedColors" multiple="multiple"&gt;
+    &lt;option&gt;Red&lt;/option&gt;
+    &lt;option&gt;Green&lt;/option&gt;
+    &lt;option&gt;Blue&lt;/option&gt;
+&lt;/select&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    selectedColors: ["Blue"];
+});
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>The third <code>option</code> will be displayed as selected. Selecting another <code>option</code> will append its <code>value</code> (or text content if the value is not set) to the
+<code>selectedColors</code> array. Unselecting an <code>option</code> will remove it from the <code>selectedColors</code> array.</p>
+
+<h4>Multiple selection with options created by the source binding</h4>
+
+<pre><code>&lt;select data-value-field="id" data-text-field="name"
+   data-bind="value: selectedProducts, source: products" multiple="multiple"&gt;
+&lt;/select&gt;
+var viewModel = kendo.observable({
+    selectedProducts: [],
+    products: [
+        { id: 1, name: "Coffee" },
+        { id: 2, name: "Tea" },
+        { id: 3, name: "Juice" }
+    ]
+});
+
+viewModel.selectedProducts.push(viewModel.products[1]);
+
+kendo.bind($("select"), viewModel);
+&lt;/script&gt;
+</code></pre>
+
+<p>The second <code>option</code> will be displayed as selected. Selecting another <code>option</code> will append the corresponding item from the <code>products</code> array to the
+<code>selectedProducts</code> array. Unselecting an <code>option</code> will remove its corresponding item from the <code>selectedProducts</code> array.</p>
+
+<h2 id="strongly-typed-value-binding"><a href="#strongly-typed-value-binding">Strongly typed value binding</a></h2>
+
+<p>By default the View-Model fields are updated with string values, as this is what the DOM element's value property contains. Since the 2015 Q1 release, Kendo MVVM allows strongly typed value binding by parsing the element's value before updating the View-Model field bound to it. Supported types are <code>text</code>, <code>number</code>, <code>date</code>, <code>datetime-local</code> and <code>boolean</code>.  </p>
+
+<blockquote>
+<p>To be correctly parsed, the <code>date</code> and <code>datetime-local</code> values should use strict formatting rules, including the leading zeroes:</p>
+
+<ul>
+<li>
+<code>date</code> - "yyyy-MM-dd"</li>
+<li>
+<code>datetime-local</code> - "yyyy-MM-ddTHH:mm:ss"</li>
+</ul>
+</blockquote>
+
+<h3 id="using-the-type-attribute"><a href="#using-the-type-attribute">Using the type attribute</a></h3>
+
+<p>Kendo MVVM automatically uses strongly typed value binding based on the input element's <code>type</code> attribute.</p>
+
+<pre lang="html"><code>    &lt;div id="view"&gt;
+        &lt;input type="number" data-bind="value: Quantity"/&gt;
+        &lt;input type="date" data-bind="value: ArrivalDate"/&gt; 
+    &lt;/div&gt;
+    &lt;script&gt;
+        var viewModel = kendo.observable({
+            Quantity: 22,
+            ArrivalDate : new Date()
+        });
+        kendo.bind($("#view"), viewModel);
+        viewModel.bind("change", function(e){
+            console.log(e.field, "=", this.get(e.field));
+        });
+    &lt;/script&gt;
+</code></pre>
+
+<h3 id="using-the-data-type-attribute"><a href="#using-the-data-type-attribute">Using the data-type attribute</a></h3>
+
+<p>Explicitly specifying the data type is also supported, via the <code>data-type</code> attribute.</p>
+
+<pre lang="html"><code>    &lt;div id="view"&gt;
+        &lt;input type="text" data-type="number" data-bind="value: Quantity"/&gt;
+        &lt;input type="date" data-type="text" data-bind="value: ArrivalDate"/&gt; 
+
+        &lt;select multiple="multiple" data-type="number" data-bind="value: number"&gt;
+            &lt;option value="3.14"&gt;Pi&lt;/option&gt;
+            &lt;option value="1.41"&gt;Pythagoras' constant&lt;/option&gt;
+            &lt;option value="1.61"&gt;Golden ratio&lt;/option&gt;
+        &lt;/select&gt;
+
+        &lt;select data-type="date" data-bind="value: Birthday"&gt;
+            &lt;option value="2015-01-01"&gt;John&lt;/option&gt;
+            &lt;option value="2014-12-31"&gt;Jane&lt;/option&gt; 
+        &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        var viewModel = kendo.observable({
+            Quantity: 22,
+            ArrivalDate : kendo.toString(new Date(), "yyyy-MM-dd"),
+            Birthday: kendo.parseDate("2014-12-31", "yyyy-MM-dd"),
+            number: [1.61, 3.14]
+        });
+        kendo.bind($("#view"), viewModel);
+        viewModel.bind("change", function(e){
+            console.log(e.field, "=", this.get(e.field));
+        });
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

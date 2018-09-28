@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/colorpicker/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/colorpicker/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="colorpicker-overview"><a href="#colorpicker-overview">ColorPicker Overview</a></h1>
+
+<p>The ColorPicker is a drop-down widget for selecting colors.  It is
+designed to replace the HTML5 <code>&lt;input type="color"&gt;</code> tag, which is not
+widely supported in browsers.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<h3 id="initialize-the-colorpicker-via-a-jquery-id-selector"><a href="#initialize-the-colorpicker-via-a-jquery-id-selector">Initialize the ColorPicker via a jQuery ID selector</a></h3>
+
+<pre><code>&lt;input type="color" id="myColorField" /&gt;
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#myColorField").kendoColorPicker();
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>The original <code>INPUT</code> element is kept in the DOM. The element <code>value</code>
+attribute gets updated as the user selects a color. This allows forms with ColorPicker widgets to be submitted.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<p>The default pop-up will contain a HSV (hue /
+saturation / value) selector and looks like this:</p>
+
+<p><img src="/kendo-ui/web/colorpicker/hsv-dropdown.png" alt="HSV picker"></p>
+
+<h3 id="configuration-Get"><a href="#configuration-Get">Get a simple color picker</a></h3>
+
+<pre><code>&lt;input type="color" id="myColorField" /&gt;
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#myColorField").kendoColorPicker({ palette: "basic" });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>This renders a basic ColorPicker that contains 20 colors:</p>
+
+<p><img src="/kendo-ui/web/colorpicker/simple-basic.png" alt="Simple picker with basic palette"></p>
+
+<h3 id="configuration-Get"><a href="#configuration-Get">Get the "web-safe" color palette</a></h3>
+
+<pre><code>&lt;input type="color" id="myColorField" /&gt;
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#myColorField").kendoColorPicker({ palette: "websafe" });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>This renders the 216 colors "web-safe" palette that looks
+like this:</p>
+
+<p><img src="/kendo-ui/web/colorpicker/simple-web.png" alt="Simple picker with web-safe palette"></p>
+
+<h3 id="configuration-Use"><a href="#configuration-Use">Use custom colors for the basic palette picker</a></h3>
+
+<p>You can get the simple picker to display a custom list of colors,
+by just passing them in the <code>palette</code> argument, for example:</p>
+
+<pre><code>&lt;input type="color" id="myColorField" /&gt;
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#myColorField").kendoColorPicker({
+            palette: "#fff,#000,#f00"
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>This shows only white, black and red.  You can use any color in either short (3 digits) or long (6
+digits) hex notation.  The <code>#</code> sign can be omitted.</p>
+
+<h3 id="configuration-More"><a href="#configuration-More">More options</a></h3>
+
+<p>For more options please see the <a href="../../api/javascript/color">API page</a>.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("using-kendo-with-twitter-bootstrap.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//using-kendo-with-twitter-bootstrap.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="using-kendo-ui-widgets-with-twitter-bootstrap"><a href="#using-kendo-ui-widgets-with-twitter-bootstrap">Using Kendo UI widgets with Twitter Bootstrap</a></h1>
+
+<p>Kendo UI widgets can be used seamlessly alongside <a href="http://getbootstrap.com/">Twitter Bootstrap</a>. This can be seen in the <a href="http://demos.telerik.com/kendo-ui/bootstrap">Kendo UI + Twitter Bootstrap demo</a> (<a href="https://github.com/telerik/kendo-bootstrap-demo">source on GitHub</a>).</p>
+
+<p>To replicate the look and feel of Bootstrap in Kendo UI, take the following steps:</p>
+
+<ol>
+<li>Use the kendo.common-bootstrap.min.css instead of kendo.common.css. This ensures that the dimensions of Kendo UI will match the ones in Bootstrap.</li>
+<li>Use the kendo.bootstrap.min.css theme, which applies the Bootstrap colors to the Kendo UI widgets.</li>
+</ol>
+
+<p>The following example demonstrates the necessary links to these stylesheets (replace VERSION with the Kendo UI version that you want to use):</p>
+
+<pre><code>&lt;link rel="stylesheet" href="http://cdn.kendostatic.com/VERSION/styles/kendo.common-bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="http://cdn.kendostatic.com/VERSION/styles/kendo.bootstrap.min.css"&gt;
+</code></pre>
+
+<p>While these files will ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them.
+The default Kendo UI common.css and any other theme will style the widgets differently, but they will continue to function properly.</p>
+
+<p>Please note that the <code>kendo.bootstrap.min.css</code> theme styles Kendo UI to match the <strong>default</strong> Bootstrap look and feel.
+Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme  (e.g. created with the <a href="/kendo-ui/themebuilder">Kendo UI ThemeBuilder</a>).</p>
+
+<h2 id="using-the-responsive-features-of-bootstrap"><a href="#using-the-responsive-features-of-bootstrap">Using the responsive features of Bootstrap</a></h2>
+
+<p>Using the responsive features of Bootstrap does not differ from other responsive sites;
+refer to the help topic on <a href="./using-kendo-in-responsive-web-pages">how to use Kendo UI in responsive web pages</a>.</p>
+
+<h2 id="using-a-customized-version-of-bootstrap"><a href="#using-a-customized-version-of-bootstrap">Using a customized version of Bootstrap</a></h2>
+
+<p>If you have customized the colors of Bootstrap before using it, and need Kendo UI to match the newly chosen colors,
+you will need to customize Kendo UI's bootstrap theme through the <a href="http://demos.telerik.com/kendo-ui/themebuilder/web.html">Kendo UI ThemeBuilder</a>.</p>
+
+<h2 id="nesting-kendo-ui-widgets-and-bootstrap-grid-layout"><a href="#nesting-kendo-ui-widgets-and-bootstrap-grid-layout">Nesting Kendo UI widgets and Bootstrap Grid layout</a></h2>
+
+<p>Kendo UI uses the default <code>content-box</code> box model (<code>box-sizing</code> CSS property), while Bootstrap uses the non-default <code>bordex-box</code> model and applies it to all elements on the page,
+including ones that are unrelated to Bootstrap. This breaks the layout of the Kendo UI widgets, which are placed inside a Bootstrap grid layout,
+forcing us to override the Bootstrap CSS and reapply the <code>content-box</code> box model to Kendo UI widgets. As a result, a Bootstrap grid layout placed inside a Kendo UI widget
+will not work as expected. In general, multiple level nesting of the two products is bound to break the one that is on the inside, unless an additional CSS rule is used for each new level of nesting.</p>
+
+<p>A possible easy workaround is to override the Bootstrap CSS, apply <code>content-box</code> box model to all elements on the page and use a <code>border-box</code> box model only to selected Bootstrap elements, which need it
+(these are all <code>.col-...</code> classes, <code>.row</code>, <code>.container</code>, <code>.container-fluid</code> and <code>form-control</code>). You can add the following CSS rules <strong>after</strong> the Bootstrap and Kendo UI stylesheets.</p>
+
+<pre><code>/* reset everything to the default box model */
+
+*, :before, :after
+{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+/* set a border-box model only to elements that need it */
+
+.form-control, /* if this class is applied to a Kendo UI widget, its layout may change */
+.container,
+.container-fluid,
+.row,
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+.col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+.col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+.col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+.col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</code></pre>
+
+<h2 id="using-fontawesome-icons-in-kendo-ui-widgets"><a href="#using-fontawesome-icons-in-kendo-ui-widgets">Using FontAwesome icons in Kendo UI widgets</a></h2>
+
+<p>FontAwesome icons can be used alongside the Kendo UI widgets, by adjusting the font-size of the generated content:</p>
+
+<pre><code>&lt;link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"&gt;
+
+&lt;style&gt;
+  .fa.k-sprite,
+  .fa.k-sprite::before {
+    font-size: 12px;
+    line-height: 12px;
+  }
+&lt;/style&gt;
+
+// use spriteCssClass: "fa fa-some-great-icon"
+</code></pre>
+
+<h2 id="using-the-form-control-bootstrap-css-class-with-kendo-ui-widgets"><a href="#using-the-form-control-bootstrap-css-class-with-kendo-ui-widgets">Using the form-control Bootstrap CSS class with Kendo UI widgets</a></h2>
+
+<p>The <code>form-control</code> Bootstrap CSS class is normally added to textboxes in order to apply some border, padding, background and font styles.
+The problem is that some Kendo UI widgets copy the custom CSS classes of their originating <code>&lt;input&gt;</code> elements to the widget wrapper element.
+This results in an incorrect padding style applied to a widget element that should not have a padding.
+Also, <code>.form-control</code> defines a 100% width style, which the Kendo UI widgets may override. The resolution is to use:</p>
+
+<pre><code>.form-control.k-widget
+{
+    padding: 0;
+    width: 100%;
+}
+</code></pre>
+
+<h2 id="known-limitations"><a href="#known-limitations">Known limitations</a></h2>
+
+<p>With the latest version of the Bootstrap library, a code that prevents the input in elements with <code>data-role=filter</code> has been introduced in the bootstrap.js file. This causes a problem with data input in filter menu
+input elements.</p>
+
+<h2 id="see-also"><a href="#see-also">See Also</a></h2>
+
+<p><a href="http://docs.telerik.com/kendo-ui/using-kendo-in-responsive-web-pages">Responsive Web Design</a></p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

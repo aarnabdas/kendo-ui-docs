@@ -1,0 +1,377 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Overview of jQuery UI multiselect | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Create MultiSelect UI widget, use Kendo UI templates, instructions how to use MultiSelect.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/multiselect/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/multiselect/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="multiselect-overview"><a href="#multiselect-overview">MultiSelect Overview</a></h1>
+
+<p>The MultiSelect widget displays a list of options and allows multiple selection from this list.</p>
+
+<p>The MultiSelect represents a richer version of the <code>SELECT</code> element, providing support for
+local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>There are two ways to create a MultiSelect from a <code>SELECT</code> element:</p>
+
+<ol>
+<li> Using its <code>&lt;option&gt;</code> tag to define a list of items.</li>
+<li> With databinding to remote data service.</li>
+</ol>
+
+<p>The MultiSelect will look and operate consistently regardless of the initialization type.</p>
+
+<h3 id="creating-a-multiselect-from-an-existing-select-element-with-defined-data-items"><a href="#creating-a-multiselect-from-an-existing-select-element-with-defined-data-items">Creating a MultiSelect from an existing &lt;select&gt; element with defined data items</a></h3>
+
+<pre><code>&lt;select id="multiselect"&gt;
+    &lt;option&gt;Item 1&lt;/option&gt;
+    &lt;option&gt;Item 2&lt;/option&gt;
+    &lt;option&gt;Item 3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $('#multiselect').kendoMultiSelect();
+&lt;/script&gt;
+</code></pre>
+
+<p>The MultiSelect should be initialized after the DOM is fully loaded. It is recommended
+that initialization is done within $(document).ready() statement.</p>
+
+<blockquote>
+<p>Widget copies any styles and CSS classes from the input element to the wrapper element and visible input.</p>
+</blockquote>
+
+<h3 id="initialize-a-multiselect-using-a-selector-within-documentready"><a href="#initialize-a-multiselect-using-a-selector-within-documentready">Initialize a MultiSelect using a selector within $(document).ready()</a></h3>
+
+<pre><code>&lt;select id="multiselect"&gt;&lt;/select&gt;
+
+&lt;script&gt;
+  $(document).ready(function(){
+    $("#multiselect").kendoMultiSelect({
+      dataTextField: "text",
+      dataValueField: "value",
+      dataSource: [
+        { text: "Item1", value: "1" },
+        { text: "Item2", value: "2" }
+      ]
+    });
+  });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="create-a-multiselect-from-existing-select-element-with-a-pre-defined-structure">
+<a href="#create-a-multiselect-from-existing-select-element-with-a-pre-defined-structure">Create a MultiSelect from existing </a><code>&lt;select&gt;</code> element with a pre-defined structure</h3>
+
+<pre><code>&lt;select id="multiselect" multiple&gt;
+    &lt;option&gt;Item 1&lt;/option&gt;
+    &lt;option&gt;Item 2&lt;/option&gt;
+    &lt;option&gt;Item 3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#multiselect").kendoMultiSelect();
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="bind-to-local-or-remote-data"><a href="#bind-to-local-or-remote-data">Bind to Local or Remote Data</a></h2>
+
+<p>The MultiSelect can be bound to both local arrays and remote data via the
+DataSource component; an abstraction for local and
+remote data. Local arrays are appropriate for limited value options, while remote data binding is better for
+larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed.
+The DataSource component can be used to serve data from a variety of data services,
+such as
+<a href="http://en.wikipedia.org/wiki/XML">XML</a>,
+<a href="http://en.wikipedia.org/wiki/JSON">JSON</a>, and
+<a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>.</p>
+
+<h3 id="bind-to-a-remote-service"><a href="#bind-to-a-remote-service">Bind to a remote service</a></h3>
+
+<pre><code>&lt;select id="multiselect" multiple&gt;&lt;/select&gt;
+
+&lt;script&gt;
+$(document).ready(function() {
+    $("#multiselect").kendoMultiSelect({
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        dataSource: {
+            transport: {
+                read: {
+                    dataType: "jsonp",
+                    url: "http://demos.telerik.com/kendo-ui/service/Products"
+                }
+            }
+        }
+    });
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="customize-templates"><a href="#customize-templates">Customize Templates</a></h2>
+
+<p>The MultiSelect uses Kendo UI templates to enable you to control how item, tag or header is rendered. For more
+detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the
+<a href="/kendo-ui/framework/templates/overview">Kendo UI Templates documentation</a>.</p>
+
+<h3 id="item-template-customization"><a href="#item-template-customization">Item template customization</a></h3>
+
+<h4>Example - define an item template</h4>
+
+<pre><code>&lt;select id="multiselect" multiple&gt;&lt;/select&gt;
+&lt;!-- Item Template --&gt;
+&lt;script id="itemTemplate" type="text/x-kendo-template"&gt;
+    ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
+&lt;/script&gt;
+
+&lt;!-- MultiSelect initialization --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#multiselect").kendoMultiSelect({
+            itemTemplate: $("#itemTemplate").html(),
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "jsonp",
+                        url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                    }
+                }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="tag-template-customization"><a href="#tag-template-customization">Tag template customization</a></h3>
+
+<h4>Example - define a tag template</h4>
+
+<pre><code>&lt;select id="multiselect" multiple&gt;&lt;/select&gt;
+&lt;!-- Item Template --&gt;
+&lt;script id="tagTemplate" type="text/x-kendo-template"&gt;
+    ContactName: #:data.ContactName#
+&lt;/script&gt;
+
+&lt;!-- MultiSelect initialization --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#multiselect").kendoMultiSelect({
+            tagTemplate: $("#tagTemplate").html(),
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "jsonp",
+                        url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                    }
+                }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="header-template-customization"><a href="#header-template-customization">Header template customization</a></h3>
+
+<p>The MultiSelect gives you the ability to render a pop-up header.</p>
+
+<h4>Example - define a header template</h4>
+
+<pre><code>&lt;input id="multiselect" /&gt;
+&lt;!-- Template --&gt;
+&lt;script id="headerTemplate" type="text/x-kendo-template"&gt;
+    &lt;strong&gt;Header&lt;/strong&gt;
+&lt;/script&gt;
+
+&lt;!-- MultiSelect initialization --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#multiselect").kendoMultiSelect({
+            headerTemplate: $("#headerTemplate").html(),
+            dataTextField: "ContactName",
+            dataValueField: "CustomerID",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "jsonp",
+                        url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                    }
+                }
+            }
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="customize-the-width-of-the-drop-down-list"><a href="#customize-the-width-of-the-drop-down-list">Customize the width of the drop-down list</a></h2>
+
+<p>jQuery width() method can be used for changing the widget dimension.</p>
+
+<h3 id="example"><a href="#example">Example</a></h3>
+
+<pre><code>&lt;select id="multiselect"&gt;&lt;/select&gt;
+
+&lt;script&gt;
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+
+    // set width of the drop-down list
+    multiselect.list.width(400);
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="pre-select-values-on-initial-loading"><a href="#pre-select-values-on-initial-loading">Pre-select values on initial loading</a></h2>
+
+<p>When autoBind option is set to false you will need to specify a list of data items instead of just list of strings.
+This functionality is supported in Q1 SP1 2013 release and later versions of Kendo UI.</p>
+
+<pre><code>&lt;select id="multiselect"&gt;&lt;/select&gt;
+&lt;!-- MultiSelect initialization --&gt;
+&lt;script&gt;
+    $(document).ready(function() {
+        $("#multiselect").kendoMultiSelect({
+            autoBind: false,
+            dataTextField: "Name",
+            dataValueField: "Id",
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            },
+            value: [
+                { ProductName: "Chang", ProductID: 2 },
+                { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
+            ]
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="how-to-make-the-multiselect-widget-scrollable"><a href="#how-to-make-the-multiselect-widget-scrollable">How to make the MultiSelect widget scrollable</a></h2>
+
+<p>By design, the MultiSelect expands vertically when adding more items that do not fit in the existing free space. Limited expansion and scrolling can be achieved with some CSS and JavaScript code. Check <a href="http://dojo.telerik.com/axeMa">this Kendo UI Dojo snippet</a>, which shows how its done.</p>
+
+<h2 id="support-for-label-element"><a href="#support-for-label-element">Support for label element</a></h2>
+
+<p>Because of its complex rendering, focusing the widget using a <code>LABEL</code> element requires additional implementation.
+Check <a href="http://dojo.telerik.com/uSeho">this Kendo UI Dojo snippet</a>, which shows how its done.</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

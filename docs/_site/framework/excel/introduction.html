@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Create Excel files with Kendo UI</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="This article shows how to create Excel document with Kendo UI">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/excel/introduction.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/excel/introduction.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="introduction"><a href="#introduction">Introduction</a></h1>
+
+<p>Kendo UI provides Excel generation support since the 2014 Q3 release. It allows developers to create Excel documents in JavaScript and save them on the client machine.</p>
+
+<h2 id="requirements"><a href="#requirements">Requirements</a></h2>
+
+<p>The Excel generation feature needs the <a href="http://stuk.github.io/jszip/">JSZip</a> JavaScript library. Include the file before the Kendo UI JavaScript files.</p>
+
+<pre><code>&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"&gt;&lt;/script&gt;
+&lt;script src="http://cdn.kendostatic.com/2014.3.1029/js/kendo.all.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>JSZip is part of the Kendo UI distribution and is also available via the Kendo UI CDN:</p>
+
+<pre><code>&lt;script src="http://cdn.kendostatic.com/2014.3.1029/js/jszip.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<blockquote>
+<p>If JSZip is not included in the page Kendo UI will raise a runtime exception.</p>
+</blockquote>
+
+<h2 id="using-globalizejs"><a href="#using-globalizejs">Using GlobalizeJS</a></h2>
+
+<p>When GlobalizeJS is needed, it should be included after the Kendo UI scripts.</p>
+
+<h2 id="using-requirejs"><a href="#using-requirejs">Using RequireJS</a></h2>
+
+<p>JSZip doesn't play well with RequireJS by default. However it is possible to make it work. Here is an example:</p>
+
+<pre lang="html"><code>    &lt;script src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js'&gt;&lt;/script&gt;
+    &lt;script&gt;
+      requirejs.config({
+        paths : {
+          jquery : 'http://cdn.kendostatic.com/2014.3.1411/js/jquery.min',
+          jszip : 'http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip',
+          kendo : 'http://cdn.kendostatic.com/2014.3.1411/js/kendo.all.min'
+        },
+        shim : {
+          "kendo" : {
+            deps : [ "jquery", "jszip" ]
+          }
+        }
+      });
+    &lt;/script&gt;
+    &lt;div id="example"&gt;
+      &lt;div id="grid" style="width: 900px"&gt;&lt;/div&gt;
+      &lt;script&gt;
+        require([ "jszip", "kendo" ], initApp);
+        function initApp(jszip){
+          window.JSZip = jszip;
+          $("#grid").kendoGrid({
+            toolbar: ["excel"],
+            excel: {
+              fileName: "Kendo UI Grid Export.xlsx",
+              proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            },
+            dataSource: {
+              type: "odata",
+              transport: {
+                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              },
+              schema:{
+                model: {
+                  fields: {
+                    ProductName: { type: "string" },
+                    UnitPrice: { type: "number" }
+                  }
+                }
+              },
+              pageSize: 7,
+            },
+            columns: [
+              { width: 300, field: "ProductName", title: "Product Name"},
+              { width: 300, field: "UnitPrice", title: "Unit Price"}
+            ]
+          });
+        }
+      &lt;/script&gt;
+    &lt;/div&gt;
+</code></pre>
+
+<h2 id="browser-support"><a href="#browser-support">Browser support</a></h2>
+
+<p>Excel generation is available for all <a href="/kendo-ui/browsers-support">supported browsers</a>. Saving the file needs a server-side proxy for older browser versions.
+Check the <a href="/kendo-ui/framework/save-files/introduction">saving files</a> help topic for more details.</p>
+
+<h2 id="create-excel-document"><a href="#create-excel-document">Create Excel Document</a></h2>
+
+<p>To create an Excel document (a.k.a. workbook) follow these steps:</p>
+
+<ol>
+<li>Instantiate a <a href="/kendo-ui/api/javascript/ooxml/workbook">kendo.ooxml.Workbook</a>. The workbook has an array of sheets. Sheets have rows and rows have cells.</li>
+<li>Call the <a href="/kendo-ui/api/javascript/ooxml/workbook#methods-toDataURL">toDataURL</a> method of the workbook to get the output Excel file as a data URI.</li>
+<li>Call the <a href="/kendo-ui/api/javascript/kendo#methods-saveAs">kendo.saveAs</a> method to save the Excel file on the client machine.</li>
+</ol>
+
+<h3 id="example---create-an-excel-workbook"><a href="#example---create-an-excel-workbook">Example - create an Excel workbook</a></h3>
+
+<pre lang="html"><code>&lt;script&gt;
+var workbook = new kendo.ooxml.Workbook({
+  sheets: [
+    {
+      // Column settings (width)
+      columns: [
+        { autoWidth: true },
+        { autoWidth: true }
+      ],
+      // Title of the sheet
+      title: "Customers",
+      // Rows of the sheet
+      rows: [
+        // First row (header)
+        {
+          cells: [
+            // First cell
+            { value: "Company Name" },
+            // Second cell
+            { value: "Contact" }
+          ]
+        },
+        // Second row (data)
+        {
+          cells: [
+            { value: "Around the Horn" },
+            { value: "Thomas Hardy" }
+          ]
+        },
+        // Third row (data)
+        {
+          cells: [
+            { value: "B's Beverages" },
+            { value: "Victoria Ashworth" }
+          ]
+        }
+      ]
+    }
+  ]
+});
+kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+});
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="further-reading"><a href="#further-reading">Further reading</a></h2>
+
+<p>The following help articles show how to perform common tasks related to Excel export.</p>
+
+<ul>
+<li><a href="appearance">Customize the Appearance</a></li>
+<li><a href="freeze-pane">Freeze Rows and Columns</a></li>
+<li><a href="column-width">Set column width</a></li>
+<li><a href="colspan-rowspan">Colspan and rowspan</a></li>
+<li><a href="sheets">Multiple sheets</a></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

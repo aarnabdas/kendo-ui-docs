@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Number Formatting | Kendo UI Framework Globalization documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Use number formatting methods to convert a Number object to a human readable string using culture's specific settings.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/globalization/numberformatting.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/globalization/numberformatting.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="number-formatting"><a href="#number-formatting">Number Formatting</a></h1>
+
+<p>The purpose of number formatting is to convert a Number object to a human readable string using culture's specific settings. <a href="/kendo-ui/api/framework/kendo#format">kendo.format</a> and <a href="/kendo-ui/api/framework/kendo#tostring">kendo.toString</a> methods support standard and custom numeric formats:</p>
+
+<h2 id="standard-numeric-formats"><a href="#standard-numeric-formats">Standard numeric formats</a></h2>
+
+<ul>
+<li>
+<p><em>n</em> for number</p>
+
+<pre><code>kendo.culture("en-US");
+kendo.toString(1234.567, "n"); //1,234.57
+
+kendo.toString(10.12, "n5"); //10.12000
+kendo.toString(10.12, "n0"); //10
+
+kendo.culture("de-DE");
+kendo.toString(1234.567, "n3"); //1.234,567
+</code></pre>
+</li>
+<li>
+<p><em>c</em> for currency</p>
+
+<pre><code>kendo.culture("en-US");
+kendo.toString(1234.567, "c"); //$1,234.57
+
+kendo.culture("en-US");
+kendo.toString(1234.567, "c0"); //$1,235
+
+kendo.culture("de-DE");
+kendo.toString(1234.567, "c3"); //1.234,567 €
+</code></pre>
+</li>
+<li>
+<p><em>p</em> for percentage (number is multiplied by 100)</p>
+
+<pre><code>kendo.culture("en-US");
+kendo.toString(0.222, "p"); //22.20 %
+
+kendo.culture("en-US");
+kendo.toString(0.222, "p0"); //22 %
+
+kendo.culture("de-DE");
+kendo.toString(0.22, "p3"); //22.000 %
+</code></pre>
+</li>
+<li>
+<p><em>e</em> for exponential</p>
+
+<p>kendo.toString(0.122, "e"); //1.22e-1
+   kendo.toString(0.122, "e4"); //1.2200e-1</p>
+</li>
+</ul>
+
+<h2 id="custom-numeric-formats"><a href="#custom-numeric-formats">Custom numeric formats</a></h2>
+
+<p>You can create custom numeric format string using one or more custom numeric specifiers. Custom numeric format string is any tha is not a standard numeric format.</p>
+
+<p>Here is a list of the supported format specifiers:</p>
+
+<ul>
+<li>
+<p>"0" - zero placeholder</p>
+
+<p>Replaces the zero with the corresponding digit if one is present; otherwise, zero appears in the result string - <code>kendo.toString(1234.5678, "00000")</code> -&gt; 01235.</p>
+</li>
+<li>
+<p>"#" - digit placeholder</p>
+
+<p>Replaces the pound sign with the corresponding digit if one is present; otherwise, no digit appears in the result string - <code>kendo.toString(1234.5678, "#####")</code> -&gt; 1235.</p>
+
+<p><strong>Note</strong>: "#" specifier cannot be used to format a number as telephone number, i.e. (###)-###-####</p>
+</li>
+<li>
+<p>"." - decimal placeholder</p>
+
+<p>Determines the location of the decimal separator in the result string - <code>kendo.toString(0.45678, "0.00")</code> -&gt; 0.46 (en-us).</p>
+</li>
+<li>
+<p>"," - group separator placeholder</p>
+
+<p>Insert localized group separator between each group - <code>kendo.toString(12345678, "##,#")</code> -&gt; 12,345,678(en-us).</p>
+</li>
+<li>
+<p>"%" - percentage placeholder</p>
+
+<p>Multiplies a number by 100 and inserts a localized percentage symbol in the result string.</p>
+
+<p><strong>Note</strong>: '%' symbol is interpreted as a format specifier in the format string. If you need to prevent this, you will need to precede the '%' symbol with a double backslash - 'kendo.toString(12, "# \\%")' -&gt; 12 % (en-us).</p>
+</li>
+<li>
+<p>"$" - currency placeholder</p>
+
+<p>Specifies that the number should be formatted using the currency culture settings. The "$" symbol is replaced with the localized currency symbol.</p>
+
+<p><strong>Note</strong>: '$' symbol is interpreted as a format specifier in the format string. If you need to prevent this, you will need to precede the '$' symbol with a double backslash - 'kendo.toString(12, "# \\$")' -&gt; 12 $ (en-us).</p>
+</li>
+<li>
+<p>"e" - exponential notation</p>
+
+<p><code>kendo.toString(0.45678, "e0")</code> -&gt; 5e-1</p>
+</li>
+<li>
+<p>";" - section separator</p>
+
+<p>Defines sections wih separate format strings for positive, negative, and zero numbers.</p>
+</li>
+<li>
+<p>"string"/'string' - Literal string delimiter</p>
+
+<p>Indicates that the enclosed characters should be copied to the result string.</p>
+</li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,492 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI Mobile Pane</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="See how to easily configure the id of the initial mobile View to display, the default Pane layout, loading popup text, default View transition and more.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/mobile/ui/pane.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/mobile/ui/pane.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendomobileuipane"><a href="#kendomobileuipane">kendo.mobile.ui.Pane</a></h1>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-collapsible">
+<a href="#configuration-collapsible">collapsible </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: false)</em>
+</h3>
+
+<p>Applicable when the pane is inside a SplitView. If set to <code>true</code>, the pane will be hidden when the device is in portrait position. The <a href="/kendo-ui/api/mobile/splitview#methods-expandPanes">expandPanes</a> SplitView method displays the hidden panes.</p>
+
+<blockquote>
+<p>In order for the collapsible to size itself correctly, the <code>portraitWidth</code> configuration option should be set too.</p>
+</blockquote>
+
+<p>The id of the initial mobile View to display.</p>
+
+<h3 id="configuration-initial">
+<a href="#configuration-initial">initial </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The id of the initial mobile View to display.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+    &lt;div data-role="pane" data-initial="#bar"&gt;
+
+      &lt;div data-role="view" id="foo"&gt;
+        Foo
+      &lt;/div&gt;
+
+      &lt;div data-role="view" id="bar"&gt;
+        Bar
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-layout">
+<a href="#configuration-layout">layout </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The id of the default Pane Layout.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" data-initial="#bar" data-layout="my"&gt;
+      &lt;div data-role="view" id="foo"&gt;
+        Foo
+      &lt;/div&gt;
+
+      &lt;div data-role="view" id="bar"&gt;
+        Bar
+      &lt;/div&gt;
+
+    &lt;div data-role="layout" data-id="my"&gt;
+      &lt;div data-role="header"&gt;Layout Header&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-loading">
+<a href="#configuration-loading">loading </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "Loading...")</em>
+</h3>
+
+<p>The text displayed in the loading popup. Setting this value to false will disable the loading popup.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" id="my-pane" data-loading="Wait!"&gt;
+      &lt;div data-role="view" id="foo" data-show="showLoading"&gt;
+        Foo
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+
+function showLoading(e) {
+  $("#my-pane").data("kendoMobilePane").showLoading();
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-portraitWidth">
+<a href="#configuration-portraitWidth">portraitWidth </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a>
+</h3>
+
+<p>Sets the pane width in pixels when the device is in portrait position.</p>
+
+<h3 id="configuration-transition">
+<a href="#configuration-transition">transition </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h3>
+
+<p>The default View transition.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" data-transition="slide"&gt;
+      &lt;div data-role="view" id="foo"&gt; &lt;a data-role="button" href="#bar"&gt;Bar&lt;/a&gt; &lt;/div&gt;
+      &lt;div data-role="view" id="bar"&gt; &lt;a data-role="button" href="#foo"&gt;Foo&lt;/a&gt; &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the <strong>Pane</strong> for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.</p>
+
+<blockquote>
+<p><strong>Important:</strong> This method does not remove the Pane element from DOM.</p>
+</blockquote>
+
+<h3 id="methods-hideLoading"><a href="#methods-hideLoading">hideLoading</a></h3>
+
+<p>Hide the loading animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" id="my-pane" data-loading="Wait!"&gt;
+      &lt;div data-role="view" id="foo" data-show="showLoading"&gt;
+        Foo
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+
+function showLoading(e) {
+  $("#my-pane").data("kendoMobilePane").showLoading();
+
+  setTimeout(function() {
+      $("#my-pane").data("kendoMobilePane").hideLoading();
+  }, 1000);
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-navigate"><a href="#methods-navigate">navigate</a></h3>
+
+<p>Navigate the local or remote view.</p>
+
+<h4>Navigate to a remote view</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+    &lt;div data-role="pane" id="main-pane"&gt;
+        &lt;div data-role="view"&gt;
+            &lt;a data-role="button" data-click="goToSettings"&gt;Settings&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function goToSettings() {
+    var pane = $("#main-pane").data("kendoMobilePane");
+    pane.navigate("settings.html");
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Navigate to a local view</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+    &lt;div data-role="pane" id="main-pane"&gt;
+        &lt;div data-role="view"&gt; &lt;a data-role="button" data-click="goToSettings"&gt;Settings&lt;/a&gt; &lt;/div&gt;
+        &lt;div data-role="view" id="settings"&gt;Settings View&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function goToSettings() {
+    var pane = $("#main-pane").data("kendoMobilePane");
+    pane.navigate("#settings");
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Parameters</h4>
+
+<h5>url <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The id or URL of the view.</p>
+
+<h5>transition <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The transition to apply when navigating. See <a href="/kendo-ui/mobile/application#view-transitions">View Transitions</a> for more information.</p>
+
+<h3 id="methods-replace"><a href="#methods-replace">replace</a></h3>
+
+<p>Navigate to local or to remote view. The view will replace the current one in the history stack.</p>
+
+<h4>Parameters</h4>
+
+<h5>url <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The id or URL of the view.</p>
+
+<h5>transition <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
+</h5>
+
+<p>The transition to apply when navigating. See <a href="/kendo-ui/mobile/application#view-transitions">View Transitions</a> for more information.</p>
+
+<h3 id="methods-Example"><a href="#methods-Example">Example</a></h3>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+    &lt;div data-role="pane" id="main-pane"&gt;
+        &lt;div data-role="view" id="foo"&gt;
+            Foo
+            &lt;a href="#bar" data-role="button"&gt;Bar&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div data-role="view" id="bar"&gt;
+            &lt;a data-role="button" data-click="replaceBar"&gt;Baz&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;div data-role="view" id="baz"&gt;
+            &lt;a data-role="backbutton"&gt;Back (will show Foo view)&lt;/a&gt;
+            Baz
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript" charset="utf-8"&gt;
+    function replaceBar() {
+        var pane = $("#main-pane").data("kendoMobilePane");
+        pane.replace("#baz");
+    }
+
+    new kendo.mobile.Application(document.body);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-showLoading"><a href="#methods-showLoading">showLoading</a></h3>
+
+<p>Show the loading animation.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" id="my-pane" data-loading="Wait!"&gt;
+      &lt;div data-role="view" id="foo" data-show="showLoading"&gt;
+        Foo
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+
+function showLoading(e) {
+  $("#my-pane").data("kendoMobilePane").showLoading();
+
+  setTimeout(function() {
+      $("#my-pane").data("kendoMobilePane").hideLoading();
+  }, 1000);
+}
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-view"><a href="#methods-view">view</a></h3>
+
+<p>Get a reference to the current view.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" data-init="showLoading" id="my-pane" data-loading="Wait!"&gt;
+      &lt;div data-role="view" id="foo"&gt;
+        &lt;a data-click="getView" data-role="button"&gt;Get View&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+new kendo.mobile.Application();
+
+function getView(e) {
+ console.log($("#my-pane").data("kendoMobilePane").view());
+}
+&lt;/script&gt;
+</code></pre>
+
+<h4>Returns</h4>
+
+<p><code>kendo.mobile.ui.View</code> the view instance.</p>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-navigate"><a href="#events-navigate">navigate</a></h3>
+
+<p>Triggered when pane navigates to a view.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" data-navigate="onNavigate"&gt;
+      &lt;div data-role="view" id="foo"&gt; &lt;a data-role="button" href="#bar"&gt;Bar&lt;/a&gt; &lt;/div&gt;
+      &lt;div data-role="view" id="bar"&gt; &lt;a data-role="button" href="#foo"&gt;Foo&lt;/a&gt; &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+function onNavigate(e) {
+    console.log(e);
+}
+
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.url <a href="http://api.jquery.com/Types/#jQuery" class="type-link"><code>jQuery</code></a>
+</h5>
+
+<p>The URL of the view</p>
+
+<h3 id="events-viewShow"><a href="#events-viewShow">viewShow</a></h3>
+
+<p>Triggered after the pane displays a view.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;div data-role="splitview"&gt;
+  &lt;div data-role="pane" data-view-show="viewShown"&gt;
+      &lt;div data-role="view" id="foo"&gt; &lt;a data-role="button" href="#bar"&gt;Bar&lt;/a&gt; &lt;/div&gt;
+      &lt;div data-role="view" id="bar"&gt; &lt;a data-role="button" href="#foo"&gt;Foo&lt;/a&gt; &lt;/div&gt;
+    &lt;/div&gt;
+ &lt;/div&gt;
+
+&lt;script&gt;
+function viewShown(e) {
+    console.log(e);
+}
+new kendo.mobile.Application();
+&lt;/script&gt;
+</code></pre>
+
+<h4>Event Data</h4>
+
+<h5>e.view <code>kendo.mobile.ui.View</code>
+</h5>
+
+<p>The displayed view</p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

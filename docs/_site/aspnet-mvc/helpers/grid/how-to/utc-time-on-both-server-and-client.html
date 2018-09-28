@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Using UTC time on both the client and the server.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/aspnet-mvc" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/aspnet-mvc" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/aspnet-mvc" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/aspnet-mvc" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("aspnet-mvc/helpers/grid/how-to/utc-time-on-both-server-and-client.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//aspnet-mvc/helpers/grid/how-to/utc-time-on-both-server-and-client.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="using-utc-time-on-both-the-client-and-the-server"><a href="#using-utc-time-on-both-the-client-and-the-server">Using UTC time on both the client and the server.</a></h1>
+
+<p>This project shows how to keep a <code>DateTime</code> property in <code>UTC</code> format on both server and client side when using a Grid with Ajax binding and editing.
+Every time a date is being retrieved from the database or received from the client, on the server side the DateTime Kind property is left unspecified. The .NET framework implicitly converts such dates to local format.</p>
+
+<p>Similar thing happens on the client side. Browsers convert all dates according to local time when the Date is parsed from Number to Date object.</p>
+
+<p>For examle when you create a JavaScript date like this <code>new Date(1353397262112)</code> browsers on the different machinves which use different TimeZone system settings will show different string representations.</p>
+
+<p>In order to keep time in UTC, explicit transformation should be applied to the dates on both client and server side.</p>
+
+<p>Hence there are two steps to be covered:</p>
+
+<ol>
+<li>Use a ViewModel with setter and getter that explicitly set the DateTime Kind to UTC.</li>
+</ol>
+
+<pre><code>    private DateTime birthDate;
+    public DateTime BirthDate
+    {
+        get { return this.birthDate; }
+        set {
+            this.birthDate = new DateTime(value.Ticks, DateTimeKind.Utc);
+        }
+    }
+</code></pre>
+
+<ol>
+<li>Use <a href="http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#requestend">requestEnd</a> event of the DataSource to intercept and replace the incoming Date field with the time difference.</li>
+</ol>
+
+<pre><code>@(Html.Kendo().Grid&lt;KendoUIMVC5.Models.Person&gt;().Name("persons")
+    .DataSource(dataSource =&gt; dataSource
+        .Ajax()
+        .Events(ev=&gt;ev.RequestEnd("onRequestEnd"))
+    )
+    // ...
+)
+
+&lt;script&gt;
+    function onRequestEnd = function(e) {
+        if (e.response.Data &amp;&amp; e.response.Data.length) {
+            var data = e.response.Data;
+            if (this.group().length &amp;&amp; e.type == "read") {
+                handleGroups(data);
+            } else {
+                loopRecords(data);
+            }
+        }
+    }
+
+    function handleGroups(groups) {
+        for (var i = 0; i &lt; groups.length; i++) {
+            var gr = groups[i];
+            offsetDateFields(gr); //handle the Key variable as well
+            if (gr.HasSubgroups) {
+                handleGroups(gr.Items)
+            } else {
+                loopRecords(gr.Items);
+            }
+        }
+    }
+
+    function loopRecords(persons) {
+        for (var i = 0; i &lt; persons.length; i++) {
+            var person = persons[i];
+            offsetDateFields(person);
+        }
+    }
+
+    function offsetDateFields(obj) {
+        for (var name in obj) {
+            var prop = obj[name];
+            if (typeof (prop) === "string" &amp;&amp; prop.indexOf("/Date(") == 0) {
+                obj[name] = prop.replace(/\d+/, function (n) {
+                    var offsetMiliseconds = new Date(parseInt(n)).getTimezoneOffset() * 60000;
+                    return parseInt(n) + offsetMiliseconds
+                });
+            }
+        }
+    }
+&lt;/script&gt;
+</code></pre>
+
+<h1 id="sample-project-on-github"><a href="#sample-project-on-github">Sample project on GitHub</a></h1>
+
+<p><a href="https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/utc-on-server-and-client">Using UTC time on both the client and the server</a></p>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

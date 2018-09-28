@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Colorizing tasks</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Colorizing tasks">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/gantt/how-to/colorizing-tasks.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/gantt/how-to/colorizing-tasks.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="colorizing-tasks"><a href="#colorizing-tasks">Colorizing tasks</a></h1>
+
+<p>The example below demonstrates how to colorize each task based on a condition.</p>
+
+<h4>Example:</h4>
+
+<pre lang="html"><code>    &lt;div id="gantt"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+      function onDataBound() {
+        var gantt = this;
+
+        gantt.element.find(".k-task").each(function(e) {
+          var dataItem = gantt.dataSource.getByUid($(this).attr("data-uid"));
+
+          // colorize task per business requirements
+          if (dataItem.percentComplete &lt; .5) {
+            this.style.backgroundColor = "#f99";
+          } else {
+            this.style.backgroundColor = "#9f9";
+          }
+        });
+      }
+
+      $(document).ready(function() {
+        var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+        var tasksDataSource = new kendo.data.GanttDataSource({
+          batch: false,
+          transport: {
+            read: {
+              url: serviceRoot + "/GanttTasks",
+              dataType: "jsonp"
+            },
+            update: {
+              url: serviceRoot + "/GanttTasks/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: serviceRoot + "/GanttTasks/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: serviceRoot + "/GanttTasks/Create",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read") {
+                return { models: kendo.stringify(options.models || [options]) };
+              }
+            }
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "ID", type: "number" },
+                orderId: { from: "OrderID", type: "number", validation: { required: true } },
+                parentId: { from: "ParentID", type: "number", defaultValue: null, validation: { required: true } },
+                start: { from: "Start", type: "date" },
+                end: { from: "End", type: "date" },
+                title: { from: "Title", defaultValue: "", type: "string" },
+                percentComplete: { from: "PercentComplete", type: "number" },
+                summary: { from: "Summary", type: "boolean" },
+                expanded: { from: "Expanded", type: "boolean", defaultValue: true }
+              }
+            }
+          }
+        });
+
+        var dependenciesDataSource = new kendo.data.GanttDependencyDataSource({
+          transport: {
+            read: {
+              url: serviceRoot + "/GanttDependencies",
+              dataType: "jsonp"
+            },
+            update: {
+              url: serviceRoot + "/GanttDependencies/Update",
+              dataType: "jsonp"
+            },
+            destroy: {
+              url: serviceRoot + "/GanttDependencies/Destroy",
+              dataType: "jsonp"
+            },
+            create: {
+              url: serviceRoot + "/GanttDependencies/Create",
+              dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+              if (operation !== "read" &amp;&amp; options.models) {
+                return { models: kendo.stringify(options.models) };
+              }
+            }
+          },
+          schema: {
+            model: {
+              id: "id",
+              fields: {
+                id: { from: "ID", type: "number" },
+                predecessorId: { from: "PredecessorID", type: "number" },
+                successorId: { from: "SuccessorID", type: "number" },
+                type: { from: "Type", type: "number" }
+              }
+            }
+          }
+        });
+
+        $("#gantt").kendoGantt({
+          dataSource: tasksDataSource,
+          dependencies: dependenciesDataSource,
+          views: [
+            "day",
+            { type: "week", selected: true },
+            "month"
+          ],
+          columns: [
+            { field: "id", title: "ID", width: 50 },
+            { field: "title", title: "Title", editable: true, sortable: true },
+            { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
+            { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
+          ],
+          height: 700,
+
+          showWorkHours: false,
+          showWorkDays: false,
+
+          snap: false,
+
+          dataBound: onDataBound
+        });
+      });
+
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

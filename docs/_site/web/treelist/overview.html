@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Overview of TreeList UI widget | Kendo UI Documentation</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Quick steps to help you create a Kendo UI TreeList">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/treelist/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/treelist/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="treelist-introduction"><a href="#treelist-introduction">TreeList Introduction</a></h1>
+
+<p>The Kendo UI TreeList widget enables display of self-referencing tabular data, and allows sorting, filtering, and editing of data</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<p>The Kendo UI TreeList needs a data source where the data is retrieved from. The treelist uses a special type of Kendo UI DataSource - the <a href="/kendo-ui/api/javascript/data/treelistdatasource">kendo.data.TreeListDataSource</a>. The <code>TreeListDataSource</code> contains instances of a custom Kendo UI model - <a href="/kendo-ui/api/javascript/data/treelistmodel">kendo.data.TreeListModel</a> - which represents the treelist data items.</p>
+
+<h2 id="binding-to-a-javascript-array"><a href="#binding-to-a-javascript-array">Binding to a JavaScript array</a></h2>
+
+<p>To create a Kendo UI TreeList, use an empty <code>div</code> element and supply all TreeList settings in the initialization script.</p>
+
+<h3 id="example---create-a-treelist-from-an-empty-div"><a href="#example---create-a-treelist-from-an-empty-div">Example - create a TreeList from an empty div</a></h3>
+
+<pre lang="html"><code>&lt;!-- Define the HTML div that will hold the TreeList --&gt;
+&lt;div id="treelist"&gt;&lt;/div&gt;
+
+&lt;!-- Initialize the TreeList --&gt;
+&lt;script&gt;
+
+    $(document).ready(function(){
+        $("#treelist").kendoTreeList({
+            columns: [
+                { field: "Name" },
+                { field: "Position" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+                    { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
+                    { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+                ]
+            }
+        });
+    });
+
+&lt;/script&gt;
+</code></pre>
+
+<p>Note that data objects contain both an <code>id</code> and <code>parentId</code> field, which describe the hierarchy of items. These field names can be changed via the <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema-model"><code>schema.model</code></a> definition.</p>
+
+<h2 id="binding-to-remote-data"><a href="#binding-to-remote-data">Binding to remote data</a></h2>
+
+<p>The TreeListDataSource can be bound to remote data, in order to enable the TreeList to load items from a web service. This allows TreeList items to be retrieved from and saved to a database on the server. To enable remote binding, set the DataSource <code>transport</code>:</p>
+
+<h3 id="example---bind-the-treelist-to-a-remote-service"><a href="#example---bind-the-treelist-to-a-remote-service">Example - bind the TreeList to a remote service</a></h3>
+
+<pre lang="html"><code>    &lt;!-- Define the HTML div that will hold the TreeList --&gt;
+    &lt;div id="treelist"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+
+        $(document).ready(function(){
+            var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+
+            // Create the TreeListDataSource
+            var dataSource = new kendo.data.TreeListDataSource({
+                transport: {
+                    // Define the remote end points
+                    read:  {
+                        url: serviceRoot + "/EmployeeDirectory/All",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: serviceRoot + "/EmployeeDirectory/Update",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: serviceRoot + "/EmployeeDirectory/Destroy",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: serviceRoot + "/EmployeeDirectory/Create",
+                        dataType: "jsonp"
+                    },
+
+                    // Post changed models in the `model` field, as serialized JSON
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" &amp;&amp; options.models) {
+                            return { models: kendo.stringify(options.models) };
+                        }
+                    }
+                },
+
+                // Enable batch updates
+                batch: true,
+
+                // Define the model schema
+                schema: {
+                    model: {
+                        id: "EmployeeId",
+                        fields: {
+                            EmployeeId: { type: "number", editable: false, nullable: false },
+                            parentId: { field: "ReportsTo", nullable: true },
+                            FirstName: { validation: { required: true } },
+                            LastName: { validation: { required: true } },
+                            HireDate: { type: "date" },
+                            Phone: { type: "string" },
+                            HireDate: { type: "date" },
+                            BirthDate: { type: "date" },
+                            Extension: { type: "number", validation: { min: 0, required: true } },
+                            Position: { type: "string" }
+                        }
+                    }
+                }
+            });
+
+            // Create the TreeList
+            $("#treelist").kendoTreeList({
+                // Declare the TreeList columns
+                columns: [
+                    { field: "LastName", title: "Last Name" },
+                    { field: "Position" }
+                ],
+                // Bind the TreeList to the dataSource
+                dataSource: dataSource
+            });
+        });
+
+    &lt;/script&gt;
+</code></pre>
+
+<p>Note that the <code>parentId</code> is mapped from the <code>ReportsTo</code> field by the line <code>parentId: { field: "ReportsTo", nullable: true }</code>. The TreeList renders its hierarchy based on the <code>parentId</code> - <code>id</code> relationship.</p>
+
+<blockquote>
+<p>All fields must be listed when using <code>schema.model.fields</code>. The field which represents the <code>id</code> of the event must also be set via <code>schema.model.id</code>. Not setting these will still work for displaying data, but will post incomplete objects on the server when editing items.</p>
+</blockquote>
+
+<h2 id="getting-reference-to-a-kendo-ui-treelist"><a href="#getting-reference-to-a-kendo-ui-treelist">Getting reference to a Kendo UI TreeList</a></h2>
+
+<p>To get a reference to a Kendo UI TreeList instance, use the jQuery <code>data</code> method and pass "kendoTreeList" as argument:</p>
+
+<h3 id="example---get-reference-to-a-kendo-ui-treelist"><a href="#example---get-reference-to-a-kendo-ui-treelist">Example - get reference to a Kendo UI TreeList</a></h3>
+
+<pre lang="html"><code>    &lt;div id="treelist"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "Name" },
+        { field: "Position" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+        ]
+      }
+    });
+    // Get reference to the kendo.ui.TreeList instance
+    var treelist = $("#treelist").data("kendoTreeList");
+    &lt;/script&gt;
+</code></pre>
+
+<h2 id="using-the-api-of-kendo-ui-treelist"><a href="#using-the-api-of-kendo-ui-treelist">Using the API of Kendo UI TreeList</a></h2>
+
+<p>The TreeList widget exposes a set of <a href="/kendo-ui/api/javascript/ui/treelist#methods">methods</a> and <a href="/kendo-ui/api/javascript/ui/treelist#fields">fields</a> which you can use.</p>
+
+<h3 id="example---use-the-api-of-the-kendo-ui-treelist"><a href="#example---use-the-api-of-the-kendo-ui-treelist">Example - use the API of the Kendo UI TreeList</a></h3>
+
+<pre lang="html"><code>    &lt;div id="treelist"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "Name" },
+        { field: "Position" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+        ]
+      }
+    });
+
+    // Get reference to the kendo.ui.TreeList instance
+    var treelist = $("#treelist").data("kendoTreeList");
+
+    // Use the expand method to expand the first row
+    treelist.expand($("#treelist tbody&gt;tr:eq(0)"));
+    &lt;/script&gt;
+</code></pre>
+
+<h2 id="subscribing-to-the-events-of-kendo-ui-treelist"><a href="#subscribing-to-the-events-of-kendo-ui-treelist">Subscribing to the events of Kendo UI TreeList</a></h2>
+
+<p>The treelist widget supports a set of <a href="/kendo-ui/api/javascript/ui/treelist#events">events</a> which you can subscribe to. There are two ways to handle events:</p>
+
+<ul>
+<li>Specify the JavaScript function which will handle the event during widget initialization.</li>
+<li>Use the <code>bind</code> method of the widget.</li>
+</ul>
+
+<p>The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data.
+You can get a reference of the widget which fired the event via the <code>sender</code> field of the event argument.
+The function context of the event handler (available via the <code>this</code> keyword) is set to the instance of the widget which fired the event.</p>
+
+<h3 id="example---subscribe-to-a-treelist-event-during-initialization"><a href="#example---subscribe-to-a-treelist-event-during-initialization">Example - subscribe to a treelist event during initialization</a></h3>
+
+<pre lang="html"><code>    &lt;div id="treelist"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "Name" },
+        { field: "Position" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+        ]
+      },
+      dataBound: function(e) {
+        console.log("dataBound");
+      }
+    });
+    &lt;/script&gt;
+</code></pre>
+
+<h3 id="example---subscribe-to-a-treelist-event-using-the-bind-method"><a href="#example---subscribe-to-a-treelist-event-using-the-bind-method">Example - subscribe to a treelist event using the bind method</a></h3>
+
+<pre lang="html"><code>    &lt;div id="treelist"&gt;&lt;/div&gt;
+    &lt;script&gt;
+    function treelist_databound(e) {
+        console.log("dataBound");
+    }
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "Name" },
+        { field: "Position" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+        ]
+      }
+    });
+    var treelist = $("#treelist").data("kendoTreeList");
+    treelist.bind("dataBound", treelist_databound);
+    &lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

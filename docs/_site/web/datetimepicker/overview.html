@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>How-to for jQuery UI DateTimePicker widget in Kendo UI Web framework</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Overview of Kendo UI DateTimePicker widget. Get familiar with the configuration options of the control and define the interval between values in the time drop-down list.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/datetimepicker/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/datetimepicker/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="datetimepicker-overview"><a href="#datetimepicker-overview">DateTimePicker Overview</a></h1>
+
+<p>The DateTimePicker widget allows the user to select a value from a
+calendar or a time drop-down list as well as direct input.
+It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view
+of the calendar, start view and the depth of the navigation.</p>
+
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+
+<h3 id="datetimepicker-initialization"><a href="#datetimepicker-initialization">DateTimePicker initialization</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+  $(document).ready(function(){
+    $("#dateTimePicker").kendoDateTimePicker();
+  });
+&lt;/script&gt;
+</code></pre>
+
+<blockquote>
+<p>Widget copies any styles and CSS classes from the input element to the wrapper element.</p>
+</blockquote>
+
+<h2 id="configure-datetimepicker-behavior"><a href="#configure-datetimepicker-behavior">Configure DateTimePicker Behavior</a></h2>
+
+<p>The DateTimePicker widget provides configuration options that can be set
+during initialization. Among the properties that can be controlled:</p>
+
+<ul>
+<li>  Selected datetime</li>
+<li>  Minimum/Maximum datetime</li>
+<li>  Define format</li>
+<li>  Start view</li>
+<li>  Navigation depth (last view to which the user can navigate)</li>
+<li>  Define interval between predefined values in the time drop-down list</li>
+</ul>
+
+<h3 id="create-datetimepicker-with-a-selected-value-and-a-defined-minimum-and-maximum-datetime"><a href="#create-datetimepicker-with-a-selected-value-and-a-defined-minimum-and-maximum-datetime">Create DateTimePicker with a selected value and a defined minimum and maximum datetime</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $(document).ready(function(){
+        $("#dateTimePicker").kendoDateTimePicker({
+            value: new Date(2000, 10, 10, 10, 0, 0),
+            min: new Date(1950, 0, 1, 8, 0, 0),
+            max: new Date(2049, 11, 31, 18, 0, 0)
+        })
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>DateTimePicker will set the value only if the entered datetime is valid and
+within the defined range.</p>
+
+<h3 id="define-the-format"><a href="#define-the-format">Define the format</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $("#dateTimePicker").kendoDateTimePicker({
+        format: "MM/dd/yyyy hh:mm tt" //format is used to format the value of the widget and to parse the input.
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p>The DateTimePicker value is parsed when the user changes the content via typing. This means that if, for example, the format contains only a time portion, the date will be reset to today.
+To support such a DateTimePicker format, you should make the widget textbox read-only after the widget is initialized and not via the widget's readonly() method (otherwise the Date and Time pop-ups will be disabled).</p>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $("#dateTimePicker").kendoDateTimePicker({
+        /*...*/
+    }).attr("readonly", "readonly");
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="define-the-time-format"><a href="#define-the-time-format">Define the time format</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $("#dateTimePicker").kendoDateTimePicker({
+        timeFormat: "hh:mm:ss tt" //this format will be used to format the predefined values in the time list.
+    });
+&lt;/script&gt;     
+</code></pre>
+
+<h2 id="define-a-start-view-and-navigation-depth"><a href="#define-a-start-view-and-navigation-depth">Define a Start View and Navigation Depth</a></h2>
+
+<p>The first rendered view can be defined with the "start" option.
+Navigation depth can be controlled with "depth" option. Predefined
+views are:</p>
+
+<ul>
+<li>  "month" - shows the days from the month</li>
+<li>  "year" - shows the months of the year</li>
+<li>  "decade" - shows the years from the decade</li>
+<li>  "century" - shows the decades from the century</li>
+</ul>
+
+<h3 id="create-a-datetimepicker-for-selecting-a-month"><a href="#create-a-datetimepicker-for-selecting-a-month">Create a DateTimePicker for selecting a month</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $("#dateTimePicker").kendoDateTimePicker({
+        start: "year",
+        depth: "year"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="define-the-interval-in-minutes-between-values-in-the-time-drop-down-list"><a href="#define-the-interval-in-minutes-between-values-in-the-time-drop-down-list">Define the interval (in minutes) between values in the time drop-down list</a></h3>
+
+<pre><code>&lt;input id="dateTimePicker"&gt; 
+
+&lt;script&gt;
+    $("#dateTimePicker").kendoDateTimePicker({
+        interval: 15
+    })
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

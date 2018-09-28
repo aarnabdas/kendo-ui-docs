@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Overview of DOM element Draggable functionality | Kendo UI Docs</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Lear more about the draggable functionality on any DOM element and how to enable and initialize it. We guide you how to enable DOM elements to be targets for draggable elements.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("framework/draganddrop/overview.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//framework/draganddrop/overview.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="drag--drop-overview"><a href="#drag--drop-overview">Drag &amp; Drop Overview</a></h1>
+
+<p>There are two separate Kendo UI widgets which, combined together, allow the developer to implement Drag &amp; Drop scenarios - <code>kendoDraggable</code> and <code>kendoDropTarget</code>.
+The first one enables the draggable functionality, while the second one creates the drop-able zones.</p>
+
+<h2 id="draggable"><a href="#draggable">Draggable</a></h2>
+
+<p>The Draggable widget allows a DOM element to be moved using the mouse or finger on touch devices.</p>
+
+<h3 id="initialization"><a href="#initialization">Initialization</a></h3>
+
+<pre><code>&lt;div id="draggable" style="width: 200px; height: 200px; background-color: #0ff;"&gt;drag me&lt;/div&gt;
+&lt;script&gt;
+    var draggable = $("#draggable").kendoDraggable({
+      hint: function(element) {
+        return element.clone();
+      }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<blockquote>
+<p>The <code>hint</code> configuration option must be specified in order for the user to have a visual indication of the dragged item.</p>
+</blockquote>
+
+<h3 id="creating-a-listtable-with-draggable-items"><a href="#creating-a-listtable-with-draggable-items">Creating a list/table with draggable items</a></h3>
+
+<p>The Draggable widget itself does not support binding to DataSource. The developer may bind a DataSource instance to a ListView or a Grid widget and initialize a Draggable widget for it.
+If the data is retrieved from a remote server <strong>asynchronously</strong>, by the time the Draggable is initialized the items that should be draggable will not be rendered yet.
+Because of this, you should initialize the Draggable widget on the parent container and use the <code>filter</code> draggable configuration option with a selector that matches the Grid/ListView item elements.</p>
+
+<h4>ListView with draggable items</h4>
+
+<pre><code>&lt;div id="listA"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    //create dataSource
+    var listA_DS = new kendo.data.DataSource({
+        data: [
+            { id: 1, item: "Item 1" },
+            { id: 2, item: "Item 2" }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number" },
+                    item: { type: "string" }
+                }
+            }
+        }
+    });
+
+    //display dataSource's data through ListView
+    $("#listA").kendoListView({
+        dataSource: listA_DS,
+        template: "&lt;div class='item'&gt;ListA: #: item #&lt;/div&gt;"
+    });
+
+    //create a draggable for the parent container
+    $("#listA").kendoDraggable({
+        filter: ".item", //specify which items will be draggable
+        hint: function(element) { //create a UI hint, the `element` argument is the dragged item
+            return element.clone().css({
+                "opacity": 0.6,
+                "background-color": "#0cf"
+            });
+        }
+    });
+&lt;/script&gt;
+
+&lt;style&gt;
+    #listA {
+        width: 300px;
+        border: 3px solid black;
+        border-radius: 3px;
+    }
+
+    .item {
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="droptarget"><a href="#droptarget">DropTarget</a></h2>
+
+<p>The DropTarget widget marks a DOM element as a drop target for a draggable widget.</p>
+
+<h3 id="initialization"><a href="#initialization">Initialization</a></h3>
+
+<pre><code>&lt;div id="listB"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#listB").kendoDropTarget();
+&lt;/script&gt;
+&lt;style&gt;
+    #listB {
+        width: 300px;
+        height: 280px;
+        border: 3px solid black;
+        border-radius: 3px;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<blockquote>
+<p>If the DropTarget element is initially empty, the developer should set the element <code>height</code> or <code>min-height</code> with CSS, like in the example above. The user will not be able to drag on target with zero height.</p>
+</blockquote>
+
+<h2 id="using-the-draggabledroptarget-events"><a href="#using-the-draggabledroptarget-events">Using the Draggable/DropTarget events</a></h2>
+
+<p>The Draggable, DropTarget and DropTargetArea widgets provide various <a href="/kendo-ui/api/javascript/ui/draggable#events">events</a> that the developer may use to implement specific business requirements.</p>
+
+<h3 id="getting-the-dragged-element-corresponding-dataitem"><a href="#getting-the-dragged-element-corresponding-dataitem">Getting the dragged element corresponding dataItem</a></h3>
+
+<p>Data management widgets such as the Grid or the ListView automatically append an <code>uid</code> data attribute to their items' DOM elements. The developer may use the <code>uid</code> attribute to get reference to the dataItem from the DataSource instance.</p>
+
+<pre><code>&lt;div id="listA"&gt;&lt;/div&gt;
+&lt;script&gt;
+    $("#listA").kendoListView({
+        dataSource: listA_DS,
+        template: "&lt;div class='item'&gt;ListA: #: item #&lt;/div&gt;"
+    });
+
+    $("#listA").kendoDraggable({
+        filter: ".item",
+        dragstart: function(e) {
+            var draggedElement = e.currentTarget, //get the DOM element that is being dragged
+                dataItem = listA_DS.getByUid(draggedElement.data("uid")); //get corresponding dataItem from the DataSource instance
+
+            console.log(dataItem);
+        },
+        hint: function(element) {
+            return element.clone().css({
+                "opacity": 0.6,
+                "background-color": "#0cf"
+            });
+        }
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="add-visual-indications"><a href="#add-visual-indications">Add visual indications</a></h3>
+
+<p>The developer may use the DropTarget events such as <code>dragenter</code> and <code>dragleave</code> to visually indicate that when the dragged item enters/leaves the DropTarget element boundaries.</p>
+
+<pre><code>&lt;div id="listA"&gt;&lt;/div&gt;
+&lt;div id="listB"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var listA_DS= new kendo.data.DataSource({
+        data: [
+            { id: 1, item: "Item 1" },
+            { id: 2, item: "Item 2" },
+            { id: 3, item: "Item 3" }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number" },
+                    item: { type: "string" }
+                }
+            }
+        }
+    });
+
+    var listB_DS= new kendo.data.DataSource({
+        data: [ /* still no data */ ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number" },
+                    item: { type: "string" }
+                }
+            }
+        }
+    });
+
+    $("#listA").kendoListView({
+        dataSource: listA_DS,
+        template: "&lt;div class='item'&gt;ListA: #: item #&lt;/div&gt;"
+    });
+
+    $("#listA").kendoDraggable({
+        filter: ".item",
+        hint: function(element) {
+            return element.clone().css({
+                "opacity": 0.6,
+                "background-color": "#0cf"
+            });
+        }
+    });
+
+    $("#listB").kendoListView({
+        dataSource: listB_DS,
+        template: "&lt;div class='item'&gt;ListB: #: item #&lt;/div&gt;"
+    });
+
+    function addStyling(e) {
+        this.element.css({
+            "border-color": "#06c",
+            "background-color": "#e0e0e0",
+            "opacity": 0.6
+        });
+    }
+
+    function resetStyling(e) {
+        this.element.css({
+            "border-color": "black",
+            "background-color": "transparent",
+            "opacity": 1
+        });
+    }
+
+    //create dropTarget
+    $("#listB").kendoDropTarget({
+        dragenter: addStyling, //add visual indication
+        dragleave: resetStyling, //remove the visual indication
+    });
+&lt;/script&gt;
+&lt;style&gt;
+    #listA, #listB {
+        width: 300px;
+        height: 280px;
+        float: left;
+        margin-right: 30px;
+        border: 3px solid black;
+        border-radius: 3px;
+    }
+
+    .item {
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h3 id="moving-items-from-one-list-to-another"><a href="#moving-items-from-one-list-to-another">Moving items from one list to another</a></h3>
+
+<p>The Drag &amp; Drop components don't automatically change the data bound widget data.
+To have the move changes applied to the DataSource instances, the developer may use the <code>drop</code> event and the DataSource's <code>add</code> and <code>remove</code> methods.</p>
+
+<pre><code>&lt;div id="listA"&gt;&lt;/div&gt;
+&lt;div id="listB"&gt;&lt;/div&gt;
+&lt;script&gt;
+    var listA_DS= new kendo.data.DataSource({
+        data: [
+            { id: 1, item: "Item 1" },
+            { id: 2, item: "Item 2" },
+            { id: 3, item: "Item 3" }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number" },
+                    item: { type: "string" }
+                }
+            }
+        }
+    });
+
+    var listB_DS= new kendo.data.DataSource({
+        data: [ /* still no data */ ],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number" },
+                    item: { type: "string" }
+                }
+            }
+        }
+    });
+
+    function addStyling(e) {
+        this.element.css({
+            "border-color": "#06c",
+            "background-color": "#e0e0e0",
+            "opacity": 0.6
+        });
+    }
+
+    function resetStyling(e) {
+        this.element.css({
+            "border-color": "black",
+            "background-color": "transparent",
+            "opacity": 1
+        });
+    }
+
+    $("#listA").kendoListView({
+        dataSource: listA_DS,
+        template: "&lt;div class='item'&gt;ListA: #: item #&lt;/div&gt;"
+    });
+
+    $("#listA").kendoDraggable({
+        filter: ".item",
+        hint: function(element) {
+            return element.clone().css({
+                "opacity": 0.6,
+                "background-color": "#0cf"
+            });
+        }
+    });
+
+    $("#listB").kendoListView({
+        dataSource: listB_DS,
+        template: "&lt;div class='item'&gt;ListB: #: item #&lt;/div&gt;"
+    });
+
+    $("#listB").kendoDropTarget({
+        dragenter: addStyling,
+        dragleave: resetStyling,
+        drop: function(e) { //apply changes to the data after an item is dropped
+            var draggableElement = e.draggable.currentTarget,
+            dataItem = listA_DS.getByUid(draggableElement.data("uid")); //find the corresponding dataItem by uid
+
+            listA_DS.remove(dataItem); //remove the item from ListA
+            listB_DS.add(dataItem); //add the item to ListB
+
+            resetStyling.call(this); //reset visual dropTarget indication that was added on dragenter
+        }
+    });
+&lt;/script&gt;
+&lt;style&gt;
+    #listA, #listB {
+        width: 300px;
+        height: 280px;
+        float: left;
+        margin-right: 30px;
+        border: 3px solid black;
+        border-radius: 3px;
+    }
+
+    .item {
+        margin: 5px;
+        padding: 5px;
+        text-align: center;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="droptargetarea"><a href="#droptargetarea">DropTargetArea</a></h2>
+
+<p>The DropTargetArea allows the developer to create multiple DropTarget elements located in the area container. This is useful when the DropTarget elements will be added dynamically.</p>
+
+<blockquote>
+<p>Specifying <code>filter</code> for the DropTargetArea is mandatory!</p>
+</blockquote>
+
+<h3 id="initialization"><a href="#initialization">Initialization</a></h3>
+
+<pre><code>&lt;div id="area"&gt;
+  &lt;div class="orange"&gt;&lt;/div&gt;
+  &lt;div class="purple"&gt;&lt;/div&gt;
+  &lt;div class="orange"&gt;&lt;/div&gt;
+  &lt;div class="purple"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="draggable"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  $("#draggable").kendoDraggable({
+    hint: function(element) {
+      return element.clone();
+    }
+  });
+
+  $("#area").kendoDropTargetArea({
+      filter: ".orange",
+      drop: onDrop
+  });
+
+  function onDrop(e) {
+    e.dropTarget.removeClass("orange").addClass("purple");
+  }
+&lt;/script&gt;
+
+&lt;style&gt;
+  #draggable {
+    width: 50px;
+    height: 50px;
+    border: 2px solid green;
+    margin: 5px;
+    display: inline-block;
+    background-color: orange;
+  }
+  .orange, .purple {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    display: inline-block;
+  }
+  .orange { background-color: orange; }
+  .purple { background-color: purple; }
+  #area {
+      width: 300px;
+      height: 300px;
+      background-color: gray;
+  }
+  #droptarget {
+    width: 100px;
+    height: 100px;
+    border: 2px solid green;
+    margin: 0 96px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+&lt;/style&gt;
+</code></pre>
+
+<h3 id="next-steps"><a href="#next-steps">Next Steps</a></h3>
+
+<ul>
+<li><a href="http://demos.telerik.com/kendo-ui/dragdrop/index">Online demos</a></li>
+<li><a href="/kendo-ui/api/javascript/ui/draggable">Draggable API reference</a></li>
+<li><a href="/kendo-ui/api/javascript/ui/droptarget">DropTarget API reference</a></li>
+<li><a href="/kendo-ui/api/javascript/ui/droptargetarea">DropTargetArea API reference</a></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

@@ -1,0 +1,451 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Configuration, methods and events of Kendo UI ResponsivePanel</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Configure the ResponsivePanel UI widget, use methods and explore the events which are triggered upon certain behaviors.">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("api/javascript/ui/responsivepanel.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//api/javascript/ui/responsivepanel.md">Edit this page</a>
+
+    <div id="markdown-toc"></div>
+
+    <div id="page-article">
+        <article>
+            <h1 id="kendouiresponsivepanel"><a href="#kendouiresponsivepanel">kendo.ui.ResponsivePanel</a></h1>
+
+<p>Represents the Kendo UI ResponsivePanel widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+
+<h3 id="configuration-autoClose">
+<a href="#configuration-autoClose">autoClose </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a> <em>(default: true)</em>
+</h3>
+
+<p>If set to <code>false</code> the widget will not close when the page content is touched, after it was opened on a mobile device. You will need to call the <a href="#methods-close">close method</a> when the panel needs to close.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        autoClose: false
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-breakpoint">
+<a href="#configuration-breakpoint">breakpoint </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 640)</em>
+</h3>
+
+<p>Specifies the page width at which the widget will be hidden and its toggle button will become visible.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        breakpoint: 1020
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-orientation">
+<a href="#configuration-orientation">orientation </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "left")</em>
+</h3>
+
+<p>Specifies the direction from which the hidden element will open up, once the toggle button has been activated. Valid values are "left", "right", and "top".</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;header&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+    Logo
+&lt;/header&gt;
+
+&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        orientation: "top"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="configuration-toggleButton">
+<a href="#configuration-toggleButton">toggleButton </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: ".k-rpanel-toggle")</em>
+</h3>
+
+<p>Specifies the selector for the toggle button that will show and hide the responsive panel.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;header&gt;
+    &lt;button class="toggle-button"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+    Logo
+&lt;/header&gt;
+
+&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        orientation: "top",
+        toggleButton: ".toggle-button"
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="methods"><a href="#methods">Methods</a></h2>
+
+<h3 id="methods-close"><a href="#methods-close">close</a></h3>
+
+<p>Closes the responsive panel.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;header&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+    Logo
+&lt;/header&gt;
+
+&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        orientation: "top"
+    });
+
+    $("#navigation a").click(function(e) {
+        e.preventDefault();
+
+        alert("navigating to " + $(e.currentTarget).text());
+
+        var panel = $("#navigation").data("kendoResponsivePanel");
+        panel.close();
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
+
+<p>Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls the <code>destroy</code> method of any child Kendo widgets.</p>
+
+<blockquote>
+<p>This method does not remove the widget element from DOM.</p>
+</blockquote>
+
+<h4>Example</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel();
+
+    var panel = $("#navigation").data("kendoResponsivePanel");
+
+    panel.destroy();
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="methods-open"><a href="#methods-open">open</a></h3>
+
+<p>Opens the responsive panel.</p>
+
+<h4>Example</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button id="open-button"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel({
+        orientation: "top"
+    });
+
+    $("#open-button").click(function(e) {
+        e.stopPropagation();
+        var panel = $("#navigation").data("kendoResponsivePanel");
+        panel.open();
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h2 id="events"><a href="#events">Events</a></h2>
+
+<h3 id="events-close"><a href="#events-close">close</a></h3>
+
+<p>Triggered before the responsive panel is closed. Cancellable.</p>
+
+<h4>Attach close event handler during initialization</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    // event handler for close event
+    var onClose = function() {
+        // the responsive panel is closing
+        console.log("closing");
+    };
+
+    // attach close event handler during initialization
+    $("#navigation").kendoResponsivePanel({
+        close: onClose
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach close event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel();
+
+    // event handler for close event
+    var onClose = function() {
+        // the responsive panel is closing
+        console.log("closing");
+    };
+
+    // attach close event handler via bind()
+    $("#navigation").data("kendoResponsivePanel").bind("close", onClose);
+&lt;/script&gt;
+</code></pre>
+
+<h3 id="events-open"><a href="#events-open">open</a></h3>
+
+<p>Triggered before the responsive panel is opened. Cancellable.</p>
+
+<h4>Attach open event handler during initialization</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    // event handler for open event
+    var onOpen = function() {
+        // the responsive panel is opening
+        console.log("opening");
+    };
+
+    // attach open event handler during initialization
+    $("#navigation").kendoResponsivePanel({
+        open: onOpen
+    });
+&lt;/script&gt;
+</code></pre>
+
+<h4>Attach open event handler via bind(); detach via unbind()</h4>
+
+<pre><code>&lt;nav id="navigation"&gt;
+    &lt;a href="#"&gt;Home&lt;/a&gt;
+    &lt;a href="#"&gt;Products&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;article&gt;
+    &lt;button class="k-rpanel-toggle"&gt;&lt;span class="k-icon k-i-hbars"&gt;&lt;/span&gt;&lt;/button&gt;
+
+    Content
+&lt;/article&gt;
+
+&lt;script&gt;
+    $("#navigation").kendoResponsivePanel();
+
+    // event handler for open event
+    var onOpen = function() {
+        // the responsive panel is opening
+        console.log("opening");
+    };
+
+    // attach open event handler via bind()
+    $("#navigation").data("kendoResponsivePanel").bind("open", onOpen);
+&lt;/script&gt;
+</code></pre>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+

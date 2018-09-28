@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Edit records using an external form</title>
+        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <meta name="description" content="Kendo UI Grid example that demonstrates how to edit Grid records using an external form">
+        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        
+
+        <!--[if lt IE 9]>
+        <script>
+        document.createElement('header');
+        document.createElement('nav');
+        document.createElement('section');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('footer');
+        document.createElement('hgroup');
+        </script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Google Tag Manager -->
+        <noscript>
+            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-6X92" height="0" width="0" style="display: none; visibility: hidden"></iframe>
+        </noscript>
+        <script>(function(w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-6X92');</script>
+        <!-- End Google Tag Manager -->
+        <header id="page-header">
+            <span class="toggle-nav"><span></span></span>
+            <div id="logo-bar">
+    <a href="/kendo-ui/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    </a>
+</div>
+
+<div id="page-search">
+    <script>
+  (function() {
+    var cx = '001595215763381649090:eblhnfskwrk';
+    var gcse = document.createElement('script');
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+</div>
+
+<span class="show-search">
+	<span class="k-icon k-i-search"></span>
+</span>
+
+<div class="nav-buttons">
+    <a href="http://demos.telerik.com/kendo-ui" class="btn demos-btn">Demos</a>
+    <a href="http://www.telerik.com/kendo-ui" class="btn about-btn">About</a>
+    <a href="http://www.telerik.com/purchase/kendo-ui" class="btn pricing-btn">Pricing</a>
+    <a href="http://www.telerik.com/download/kendo-ui" class="btn btn-primary">Try now</a>
+</div>
+
+        </header>
+
+        <div id="page-inner-content">
+    <div id="page-nav">
+        <div id="page-tree"></div>
+        <script>
+        $("#page-tree").kendoTreeView({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/kendo-ui/default.json",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "path",
+                        children: "items",
+                        hasChildren: "items"
+                    }
+                }
+            },
+            select: preventParentSelection,
+            template: navigationTemplate("/kendo-ui/"),
+            dataBound: expandNavigation("web/grid/how-to/Editing/grid-external-form-editing.html")
+        });
+        </script>
+    </div>
+
+    <a id="page-edit-link" class="btn btn-action" href="https://github.com/telerik/kendo-ui-core/edit/master/docs//web/grid/how-to/Editing/grid-external-form-editing.md">Edit this page</a>
+
+    
+
+    <div id="page-article">
+        <article>
+            <h1 id="edit-kendo-ui-grid-records-using-an-external-form"><a href="#edit-kendo-ui-grid-records-using-an-external-form">Edit Kendo UI Grid records using an external form</a></h1>
+
+<p>This example demonstrates how to configure editing with custom UI form, create editors for <code>string</code>, <code>number</code> and <code>boolean</code> field and add validation.</p>
+
+<h4>Example</h4>
+
+<pre lang="html"><code>&lt;div id="grid"&gt;&lt;/div&gt;
+&lt;div id="editForm"&gt;
+    &lt;h2&gt;Edit Form&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;label for="ProductName"&gt;ProductName&lt;/label&gt;
+            &lt;input type="text" class="k-textbox" name="ProductName" data-bind="value: selected.ProductName" required /&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="UnitPrice"&gt;UnitPrice&lt;/label&gt;
+            &lt;input data-role="numerictextbox" name="UnitPrice" data-bind="value: selected.UnitPrice" required min="1" /&gt;
+            &lt;span class="k-invalid-msg" data-for="UnitPrice"&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="UnitsInStock"&gt;UnitsInStock&lt;/label&gt; 
+            &lt;input data-role="numerictextbox" name="UnitsInStock" data-bind="value: selected.UnitsInStock" required min="0" /&gt;
+            &lt;span class="k-invalid-msg" data-for="UnitsInStock"&gt;&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label for="Discontinued"&gt;&lt;/label&gt;
+            &lt;input type="checkbox" name="Discontinued" data-bind="checked: selected.Discontinued" /&gt;
+            &lt;span&gt;Items is discontinued&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class="buttons"&gt;
+            &lt;button class="k-button btnSave" data-bind="events: { click: sync }"&gt;Save&lt;/button&gt;
+            &lt;button class="k-button btnCancel" data-bind="events: { click: cancel }"&gt;Cancel&lt;/button&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var crudServiceBaseUrl = "http://demos.kendoui.com/service";
+    var validator;
+    var viewModel = kendo.observable({
+        dataSource: new kendo.data.DataSource({
+            transport: {
+                read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: crudServiceBaseUrl + "/Products/Create",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" &amp;&amp; options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            batch: true,
+            pageSize: 20,
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        ProductName: { validation: { required: true } },
+                        UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                        Discontinued: { type: "boolean" },
+                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                }
+            },
+            change: function () {
+                viewModel.set("hasChanges", this.hasChanges());
+            }
+        }),
+        selected: {},
+        hasChanges: false,
+        sync: function () {
+            if(validator.validate()) {
+                this.dataSource.sync();
+            }
+        },
+        cancel: function () {
+            this.dataSource.cancelChanges();
+            validator.hideMessages();
+        }
+    });
+
+    kendo.bind($("#editForm"), viewModel);
+    validator = $("#editForm").kendoValidator().data("kendoValidator");
+
+    var grid = $("#grid").kendoGrid({
+        dataSource: viewModel.dataSource,
+        pageable: true,
+        height: 430,
+        columns: [
+            "ProductName",
+            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
+            { field: "UnitsInStock", title: "Units In Stock", width: 110 },
+            { field: "Discontinued", width: 110 }
+        ],
+        selectable: true,
+        dataBound: function(e) {
+            var row = this.tbody.find("&gt;tr[data-uid=" + viewModel.selected.uid + "]");
+            if(row) {
+                this.select(row);
+            }
+        },
+        change: function (e) {
+            var model = this.dataItem(this.select());
+            validator.hideMessages();
+            viewModel.set("selected", model);
+        }
+    }).data("kendoGrid");
+
+    $("#grid").data("kendoGrid").one("dataBound", function (e) {
+        this.select(this.tbody.find("&gt;tr:first"));
+    });
+
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+    #grid {
+        width: 700px;
+        float: left;
+    }
+    #editForm {
+        width: 600px;
+        margin: 20px;
+        padding: 20px;
+        float: left;
+        border: 1px solid #c5c5c5;
+        border-radius: 10px;
+        font-size: 80%;
+    }
+    #editForm h2 {
+        border-bottom: 1px solid #ccc;
+        font-size: 1.4em;
+        font-weight: normal;
+        padding: 0;
+        margin: 0;
+    }
+    #editForm ul {
+        list-style-type: none;
+    }
+    #editForm ul li {
+        margin: 10px;
+    }
+    #editForm ul label {
+        font-weight: bold;
+        display: inline-block;
+        width: 90px;
+        text-align: right;
+    }
+    #editForm label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    #editForm .buttons {
+        margin-top: 25px;
+    }
+    #editForm .k-button {
+        width: 100px;
+    }
+&lt;/style&gt;
+</code></pre>
+
+<h2 id="related-resources"><a href="#related-resources">Related resources:</a></h2>
+
+<ul>
+<li><a href="http://docs.telerik.com/kendo-ui/framework/mvvm/observableobject">Observable Object</a></li>
+<li><a href="http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value">MVVM value binding</a></li>
+<li><a href="http://docs.telerik.com/kendo-ui/framework/validator/overview">Kendo Validator</a></li>
+<li><a href="http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods">Data Source methods</a></li>
+</ul>
+        </article>
+    </div>
+</div>
+
+<footer>
+<p>Copyright &copy; 2002-2018. All rights reserved.</p>
+</footer>
+
+
+    </body>
+</html>
+
