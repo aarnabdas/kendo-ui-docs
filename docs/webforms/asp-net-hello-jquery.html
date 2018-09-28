@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Tutorial series for HTML5 development with ASP.NET: Hello jQuery</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This tutorial for HTML5 development with ASP.NET will help you learn how to install jQuery, then use it with WebForms and IE F12 Developer Tools.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("webforms/asp-net-hello-jquery.html")
         });
         </script>
@@ -138,7 +138,7 @@ development is the browser. As long the browser is capable, .NET is capable.</p>
 
 <p>Select <strong>File / New Project</strong> and select the <strong>ASP.NET Web Application</strong> project template.  Name the application "HellojQuery".</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-file-new-project.png" alt="File New Project"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-file-new-project.png" alt="File New Project"></p>
 
 <p>Open the <strong>Default.aspx</strong> page.  Switch to <strong>Design</strong> view and delete all the
 content.  From the toolbox, drag out two <strong>TextBoxes</strong>, a <strong>Button</strong> and a
@@ -150,7 +150,7 @@ following line by pressing <strong>Enter</strong>.</p>
 <p>Name the first TextBox "txtFirstName", the second one "txtLastName".
 Name the Button "btnSayHello" and change it's <strong>Text</strong> property to "Say Hello".  Set the Label ID to <strong>lblResult</strong> and clear out the <strong>Text</strong> property.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-default-design-view.png" alt="Default Design View"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-default-design-view.png" alt="Default Design View"></p>
 
 <p>Double-click the <strong>Say Hello</strong> button to create a new button click event in
 the <strong>Default.aspx.cs</strong> file.  Set the label text equal to the string "Hello" concatenated with the <strong>Text</strong> property of <strong>txtFirstName</strong> and the
@@ -172,7 +172,7 @@ name yet or click the button.  Instead, press <strong>F12</strong> to open the I
 Tools.  Switch to the <strong>Network</strong> tab and click the <strong>Start Capturing</strong>
 button.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-developer-tools.png" alt="F12 Developer Tools"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-developer-tools.png" alt="F12 Developer Tools"></p>
 
 <p>Refresh the page.  Notice that the <strong>Network</strong> tab now shows three items.  The
 first is the <strong>Default.aspx</strong> page that you are looking at.  The second is the
@@ -187,7 +187,7 @@ an HTTP <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a>.
 information from a server.  By default when you visit a URL, your browser will
 do a <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">GET</a> to retrieve the requested site.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-network-traffic-get.png" alt="Network Traffic For A Get"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-network-traffic-get.png" alt="Network Traffic For A Get"></p>
 
 <p>Now fill the form out in the application with your first name and click the
 <strong>Say Hello</strong> button.  The server responds as expected by setting the label
@@ -199,13 +199,13 @@ values of the first name and last name textboxes.  When browsers send
 information to the server and expect a response, this is typically done with a
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">POST</a>.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-network-traffic-post.png" alt="Network Traffic For A Post"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-network-traffic-post.png" alt="Network Traffic For A Post"></p>
 
 <p>In ASP.NET WebForms, the page posts back to itself, or the same URL. To
 inspect the information that was sent to the server, double click on the
 <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">POST</a> method and click on the <strong>Request Body</strong> tab.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-network-request-body.png" alt="Network Request Body"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-network-request-body.png" alt="Network Request Body"></p>
 
 <p>Here you can see that the <a href="http://msdn.microsoft.com/en-us/library/ms972976.aspx">_VIEWSTATE</a> object was sent back to the server.
 If you scroll down far enough, you will find the values of the first and last
@@ -233,7 +233,7 @@ and enter "jquery" in the search box.  Click the <strong>Install</strong> button
 <a href="http://jquery.com/">jQuery</a> package.  This will install the VSDoc files as well.  There is no
 need to install them separately.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-nuget-jquery-search.png" alt="Nuget jQuery Search"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-nuget-jquery-search.png" alt="Nuget jQuery Search"></p>
 
 <p>This will put the latest version of <a href="http://jquery.com/">jQuery</a> in the <strong>Scripts</strong> folder.
 There will be 3 files there.</p>
@@ -256,7 +256,7 @@ as the <a href="http://jquery.com/">jQuery</a> file, Intellisense will work.</p>
 will create a new <strong>link</strong> tag pointing to the jQuery-1.9.1.js file.
 <a href="http://jquery.com/">JQuery</a> has now been added to the project.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-jquery-added-to-master.png" alt="jQuery Added To The Master Page"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-jquery-added-to-master.png" alt="jQuery Added To The Master Page"></p>
 
 <h4>Using jQuery Directly In The Browser</h4>
 
@@ -265,7 +265,7 @@ selecting <strong>F12</strong>.  Switch to the <strong>Console</strong> tab in t
 console allows a developer to execute arbitrary JavaScript commands at
 runtime.  As a test, type <strong>alert("Hello!");</strong> in the console and press enter.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-alert-hello.png" alt="Alert Hello"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-alert-hello.png" alt="Alert Hello"></p>
 
 <p><a href="http://jquery.com/">jQuery</a> code can be executed either by calling methods off of the
 <strong>jQuery</strong> object, or simply using the <strong>$</strong>. The <strong>$</strong> is commonly known and
@@ -319,7 +319,7 @@ $("#txtFirstName").val();
 <p>Notice that the command is echoed out into the Console, but there is no value.
 This mistake was made to demonstrate an important feature of ASP.NET WebForms.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-txtfirstname-no-value.png" alt="txtFirstName Has No Value"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-txtfirstname-no-value.png" alt="txtFirstName Has No Value"></p>
 
 <p>To debug why this didn't work, click on the white arrow which is the element
 selector.  Then go up into the page and click on the textbox that you named
@@ -331,7 +331,7 @@ a parent server control will be prefixed with the parent name.  If parents are
 nested within parents, they may have multiple values appended onto the front.
 This is to make sure that ID's do in fact remain unique.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-main-content-txt-firstname.png" alt="Main Content Prefixed txtFirstName"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-main-content-txt-firstname.png" alt="Main Content Prefixed txtFirstName"></p>
 
 <p>Switch back to the <strong>Console</strong> tab and keeping in mind the actual ID of
 <strong>txtFirstName</strong> at runtime, enter the following command in the <strong>console.</strong></p>
@@ -344,7 +344,7 @@ $("#MainContent_txtFirstName").val();
 
 <p>Notice that the text value of the first name textbox is returned.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-jquery-txtfirstname-has-value.png" alt="txtFirstName Has A Value"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-jquery-txtfirstname-has-value.png" alt="txtFirstName Has A Value"></p>
 
 <h4>Refactor The Application To Use jQuery</h4>
 

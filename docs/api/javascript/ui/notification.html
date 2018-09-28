@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Configuration, methods and events of the Kendo UI Notification">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/notification.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouinotification"><a href="#kendouinotification">kendo.ui.Notification</a></h1>
 
-<p><em>It is assumed that the reader of this page is familiar with the <a href="kendo-ui-docs/web/notification/overview/">Notification widget Overview</a>.</em></p>
+<p><em>It is assumed that the reader of this page is familiar with the <a href="/kendo-ui-docs/web/notification/overview/">Notification widget Overview</a>.</em></p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -427,7 +427,7 @@ $("#notification").kendoNotification({
 
 <p>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are <code>"info"</code>, <code>"success"</code>, <code>"warning"</code> and <code>"error"</code>.</p>
 
-<p><em>This documentation section assumes that you are familiar with <a href="kendo-ui-docs/framework/templates/overview">Kendo UI templates</a></em>.</p>
+<p><em>This documentation section assumes that you are familiar with <a href="/kendo-ui-docs/framework/templates/overview">Kendo UI templates</a></em>.</p>
 
 <h4>Example - define several custom templates</h4>
 
@@ -533,7 +533,7 @@ $("#notification").kendoNotification({
 <p>If you will be using this method to dispose of all visible messages, (e.g. before showing new ones), then <strong>remove</strong> them from the DOM
 instead of <a href="#methods-hide">hiding</a> them, unless animations are disabled. This is because animations are asynchronous and the new messages
 will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
-<a href="kendo-ui-docs/web/notification/overview#popup-messages"><strong>popup</strong></a> notification messages, you should remove the <a href="kendo-ui-docs/web/notification/overview#html-output"><strong>parent</strong></a>
+<a href="/kendo-ui-docs/web/notification/overview#popup-messages"><strong>popup</strong></a> notification messages, you should remove the <a href="/kendo-ui-docs/web/notification/overview#html-output"><strong>parent</strong></a>
 of each member of the collection, returned by the <code>getNotifications()</code> method. In this case the parent will be a <code>div.k-animation-container</code> element.</p>
 
 <h4>Example</h4>

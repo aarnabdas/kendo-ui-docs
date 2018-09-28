@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/vs-integration/latest-version-retrieval.html")
         });
         </script>
@@ -110,7 +110,7 @@
 
 <p>Once a day, upon Visual Studio launch, the extensions query the Telerik website for a new version of Telerik UI for ASP.NET MVC. A notification gets displayed when a new version is discovered:</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/vs-integration/images/notification.png" alt="Notification"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/vs-integration/images/notification.png" alt="Notification"></p>
 
 <blockquote>
 <p><strong>Note:</strong>
@@ -119,7 +119,7 @@ If you've disabled the notifications, you can use the Options Dialog to activate
 
 <p>Clicking the <strong>Get Now</strong> button starts the Latest Version Acquirer tool, prompting for your Telerik credentials in its first page. If you do not have <a href="http://www.telerik.com">www.telerik.com</a> account, you can create one through the <strong>Register</strong> link.</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/vs-integration/images/lva1.png" alt="Get latest version"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/vs-integration/images/lva1.png" alt="Get latest version"></p>
 
 <blockquote>
 <p><strong>Important:</strong>
@@ -132,9 +132,9 @@ You cannot use the tool if you have a trial license. Attempt to download a distr
 
 <p>The download starts automatically after a confirmation window.</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/vs-integration/images/lva2.png" alt="Get latest version">
-<img src="kendo-ui-docs/aspnet-mvc/vs-integration/images/lva3.png" alt="Get latest version">
-<img src="kendo-ui-docs/aspnet-mvc/vs-integration/images/lva4.png" alt="Get latest version"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/vs-integration/images/lva2.png" alt="Get latest version">
+<img src="/kendo-ui-docs/aspnet-mvc/vs-integration/images/lva3.png" alt="Get latest version">
+<img src="/kendo-ui-docs/aspnet-mvc/vs-integration/images/lva4.png" alt="Get latest version"></p>
 
 <p>Once the download succeeds, the latest version of Telerik UI for ASP.NET MVC** will be available for use in the <strong>Upgrade Wizard</strong> and the **New Project Wizard.</p>
 

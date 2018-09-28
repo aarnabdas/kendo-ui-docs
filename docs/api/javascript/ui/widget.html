@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/widget.html")
         });
         </script>
@@ -108,13 +108,13 @@
         <article>
             <h1 id="kendouiwidget"><a href="#kendouiwidget">kendo.ui.Widget</a></h1>
 
-<p>Base class of all Kendo UI widgets. Inherits from <a href="kendo-ui-docs/api/javascript/observable">Observable</a>.</p>
+<p>Base class of all Kendo UI widgets. Inherits from <a href="/kendo-ui-docs/api/javascript/observable">Observable</a>.</p>
 
 <h2 id="methods"><a href="#methods">Methods</a></h2>
 
 <h3 id="methods-bind"><a href="#methods-bind">bind</a></h3>
 
-<p>Attaches a handler to an event. Examples and more info can be found in the <a href="kendo-ui-docs/api/framework/observable#bind">bind</a> section of the <code>kendo.Observable</code> API reference.</p>
+<p>Attaches a handler to an event. Examples and more info can be found in the <a href="/kendo-ui-docs/api/framework/observable#bind">bind</a> section of the <code>kendo.Observable</code> API reference.</p>
 
 <h3 id="methods-destroy"><a href="#methods-destroy">destroy</a></h3>
 
@@ -122,7 +122,7 @@
 
 <h3 id="methods-one"><a href="#methods-one">one</a></h3>
 
-<p>Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the <a href="kendo-ui-docs/api/framework/observable#one">one</a> section of the
+<p>Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the <a href="/kendo-ui-docs/api/framework/observable#one">one</a> section of the
 <code>kendo.Observable</code> API reference.</p>
 
 <h3 id="methods-setOptions"><a href="#methods-setOptions">setOptions</a></h3>
@@ -159,12 +159,12 @@ $(function(){
 
 <h3 id="methods-trigger"><a href="#methods-trigger">trigger</a></h3>
 
-<p>Executes all handlers attached to the given event. More info can be found in the <a href="kendo-ui-docs/api/framework/observable#trigger">trigger</a> section of the
+<p>Executes all handlers attached to the given event. More info can be found in the <a href="/kendo-ui-docs/api/framework/observable#trigger">trigger</a> section of the
 <code>kendo.Observable</code> API reference.</p>
 
 <h3 id="methods-unbind"><a href="#methods-unbind">unbind</a></h3>
 
-<p>Remove a previously attached event handler. More info can be found in the <a href="kendo-ui-docs/api/framework/observable#unbind">unbind</a> section of the
+<p>Remove a previously attached event handler. More info can be found in the <a href="/kendo-ui-docs/api/framework/observable#unbind">unbind</a> section of the
 <code>kendo.Observable</code> API reference.</p>
         </article>
     </div>

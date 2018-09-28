@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Draw basic shapes with the Kendo UI Drawing API</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("framework/drawing/basic-shapes.html")
         });
         </script>
@@ -200,19 +200,19 @@ var draw = kendo.drawing;
 </code></pre>
 
 <p>The <code>kendo.geometry</code> namespace contains primitives such as
-<a href="kendo-ui-docs/api/dataviz/geometry/point">Point</a>,
-<a href="kendo-ui-docs/api/dataviz/geometry/rect">Rect</a> and
-<a href="kendo-ui-docs/api/dataviz/geometry/size">Size</a>.</p>
+<a href="/kendo-ui-docs/api/dataviz/geometry/point">Point</a>,
+<a href="/kendo-ui-docs/api/dataviz/geometry/rect">Rect</a> and
+<a href="/kendo-ui-docs/api/dataviz/geometry/size">Size</a>.</p>
 
 <p>Drawing elements such as
-<a href="kendo-ui-docs/api/dataviz/drawing/path">Path</a>,
-<a href="kendo-ui-docs/api/dataviz/drawing/image">Image</a> and
-<a href="kendo-ui-docs/api/dataviz/drawing/group">Group</a>
+<a href="/kendo-ui-docs/api/dataviz/drawing/path">Path</a>,
+<a href="/kendo-ui-docs/api/dataviz/drawing/image">Image</a> and
+<a href="/kendo-ui-docs/api/dataviz/drawing/group">Group</a>
 live in the <code>kendo.drawing</code> namespace.</p>
 
 <h3 id="draw-the-path"><a href="#draw-the-path">Draw the path</a></h3>
 
-<p>A <a href="kendo-ui-docs/api/dataviz/drawing/path">Path</a> element is used to
+<p>A <a href="/kendo-ui-docs/api/dataviz/drawing/path">Path</a> element is used to
 draw straight lines, curves or a combination of both.</p>
 
 <p>We'll set the stroke (line) color and width to match the picture:</p>
@@ -225,7 +225,7 @@ draw straight lines, curves or a combination of both.</p>
 });
 </code></pre>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/drawing/path#configuration">configuration</a> object
+<p>The <a href="/kendo-ui-docs/api/dataviz/drawing/path#configuration">configuration</a> object
 can contain other appearance options as well.</p>
 
 <p>We can now construct the path by issuing commands:</p>
@@ -236,15 +236,15 @@ can contain other appearance options as well.</p>
 </code></pre>
 
 <p>We set the line initial position with a
-<a href="kendo-ui-docs/api/dataviz/drawing/path#methods-moveTo">moveTo</a> command.
+<a href="/kendo-ui-docs/api/dataviz/drawing/path#methods-moveTo">moveTo</a> command.
 The three sides are drawn using
-<a href="kendo-ui-docs/kendo-ui/api/dataviz/drawing/path#methods-lineTo">lineTo</a> commands.
+<a href="/kendo-ui-docs/kendo-ui/api/dataviz/drawing/path#methods-lineTo">lineTo</a> commands.
 The last command
-<a href="kendo-ui-docs/api/dataviz/drawing/path#methods-close">closes</a>
+<a href="/kendo-ui-docs/api/dataviz/drawing/path#methods-close">closes</a>
 the path, drawing a straight line to the initial position.</p>
 
 <p>Since this is a rectangle we can use the alternative
-<a href="kendo-ui-docs/api/dataviz/drawing/path#fromrect">fromRect</a>
+<a href="/kendo-ui-docs/api/dataviz/drawing/path#fromrect">fromRect</a>
 static method:</p>
 
 <pre><code>var borderRect = new geom.Rect(
@@ -261,8 +261,8 @@ var path = draw.Path.fromRect(borderRect, {
 
 <h3 id="draw-the-image"><a href="#draw-the-image">Draw the image</a></h3>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/drawing/image">Image</a> element draws a bitmap image from a given URL.
-The image position and size is defined as a <a href="kendo-ui-docs/api/dataviz/geometry/rect">Rect</a>.</p>
+<p>The <a href="/kendo-ui-docs/api/dataviz/drawing/image">Image</a> element draws a bitmap image from a given URL.
+The image position and size is defined as a <a href="/kendo-ui-docs/api/dataviz/geometry/rect">Rect</a>.</p>
 
 <pre><code>var imageRect = new geom.Rect(
     new geom.Point(5, 5),
@@ -287,9 +287,9 @@ var image = new draw.Image(imageUrl, imageRect);
 
 <h3 id="draw-the-text"><a href="#draw-the-text">Draw the text</a></h3>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/drawing/text">Text</a> element draws a single line of text.
+<p>The <a href="/kendo-ui-docs/api/dataviz/drawing/text">Text</a> element draws a single line of text.
 Appearance options, such as font are set through
-<a href="kendo-ui-docs/api/dataviz/drawing/text#configuration">configuration</a>.</p>
+<a href="/kendo-ui-docs/api/dataviz/drawing/text#configuration">configuration</a>.</p>
 
 <pre><code>    var text = new draw.Text(
         "Diego Roel",
@@ -305,7 +305,7 @@ Appearance options, such as font are set through
 <p>It's often convenient to treat a group of shapes as a single entity.
 In this case we'll use a group to set the position of all elements at once.</p>
 
-<p>Create a <a href="kendo-ui-docs/api/dataviz/drawing/group">Group</a> element and append the rest of the elements as children:</p>
+<p>Create a <a href="/kendo-ui-docs/api/dataviz/drawing/group">Group</a> element and append the rest of the elements as children:</p>
 
 <pre><code>    var group = new draw.Group();
     group.append(path, image, text);
@@ -322,7 +322,7 @@ We effectively make the element coordinates relative by translating their parent
 <h3 id="render-the-scene"><a href="#render-the-scene">Render the scene</a></h3>
 
 <p>All that is left is to render the scene on the screen.
-The <a href="kendo-ui-docs/api/dataviz/drawing/surface#create">Surface.create</a> method will
+The <a href="/kendo-ui-docs/api/dataviz/drawing/surface#create">Surface.create</a> method will
 choose an implementation that matches the capabilities of the browser:</p>
 
 <pre><code>    &lt;div id="surface" style="width: 250px; height: 165px;"&gt;&lt;/div&gt;

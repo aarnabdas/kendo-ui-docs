@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/editor/imagebrowser.html")
         });
         </script>
@@ -110,17 +110,17 @@
 
 <p>By default the "Insert Image" tool opens a simple dialog which allows the user to type in or paste the URL of an image and optionally specify a tooltip.</p>
 
-<p><img src="kendo-ui-docs/web/editor/editor-insert-image.png" alt="Insert Image Dialog"></p>
+<p><img src="/kendo-ui-docs/web/editor/editor-insert-image.png" alt="Insert Image Dialog"></p>
 
 <p>Since the Q3 2012 release KendoUI Editor widget supports a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.</p>
 
-<p><img src="kendo-ui-docs/web/editor/editor-image-browser.png" alt="Image Browser Dialog"></p>
+<p><img src="/kendo-ui-docs/web/editor/editor-image-browser.png" alt="Image Browser Dialog"></p>
 
 <p>The image browser needs a server side implementation to retrieve and upload the files and directories.</p>
 
 <h2 id="configuring-the-imagebrowser"><a href="#configuring-the-imagebrowser">Configuring the ImageBrowser</a></h2>
 
-<p>The image browser tool can be configured through the <a href="kendo-ui-docs/api/web/editor#configuration-imageBrowser"><code>imagebrowser</code> configuration option</a>.</p>
+<p>The image browser tool can be configured through the <a href="/kendo-ui-docs/api/web/editor#configuration-imageBrowser"><code>imagebrowser</code> configuration option</a>.</p>
 
 <h4>Example</h4>
 
@@ -185,7 +185,7 @@
 </li>
 </ul>
 
-<p>All of these can be changed through the <a href="kendo-ui-docs/api/web/editor#configuration-imageBrowser"><code>imagebrowser</code> configuration</a>.</p>
+<p>All of these can be changed through the <a href="/kendo-ui-docs/api/web/editor#configuration-imageBrowser"><code>imagebrowser</code> configuration</a>.</p>
         </article>
     </div>
 </div>

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/tutorial-kendo-music-store/music-store-web/kendo-music-store-web-menu.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="create-the-main-menu---kendo-ui-music-store"><a href="#create-the-main-menu---kendo-ui-music-store">Create the Main Menu - Kendo UI Music Store</a></h1>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-overview.png" alt="kendo-menu-overview"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-overview.png" alt="kendo-menu-overview"></p>
 
 <p>The main menu of the Music Store application shows off some of the functionality of the <a href="http://demos.telerik.com/kendo-ui/web/menu/index.html">Kendo UI Menu Widget</a>.
 The <strong>Genres</strong> item uses a pull-down menu of items to show all the genres of music in the store.
@@ -150,7 +150,7 @@ Any <strong>&lt;li&gt;</strong> elements that in turn contain another list <stro
 
 <p>This creates the pull-down item:</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-placeholder.png" alt="kendo-menu-pulldown-placeholder"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-placeholder.png" alt="kendo-menu-pulldown-placeholder"></p>
 
 <p>We can replace our "placeholder" <strong>&lt;li&gt;</strong> elements with an MVC partial that loads the list of Genres:</p>
 
@@ -199,7 +199,7 @@ For example, let's add this content for our "About" menu item:</p>
 
 <p>This creates the <strong>&lt;div&gt;</strong> content displayed in a dropdown menu item:</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-content.png" alt="kendo-menu-pulldown-content"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-menu-pulldown-content.png" alt="kendo-menu-pulldown-content"></p>
         </article>
     </div>
 </div>

@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI ColorPalette</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/colorpalette.html")
         });
         </script>
@@ -120,7 +120,7 @@ a drop-down.</p>
 </h3>
 
 <p>Specifies the color palette to display.
-It can be a string with comma-separated colors in hex representation, an array of <a href="kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a> objects or of strings that <a href="kendo-ui-docs/api/framework/kendo#parseColor">parseColor</a> understands.  As a shortcut, you can pass "basic" to get the simple palette (this is the default) or "websafe" to get the Web-safe palette.</p>
+It can be a string with comma-separated colors in hex representation, an array of <a href="/kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a> objects or of strings that <a href="/kendo-ui-docs/api/framework/kendo#parseColor">parseColor</a> understands.  As a shortcut, you can pass "basic" to get the simple palette (this is the default) or "websafe" to get the Web-safe palette.</p>
 
 <h4>Example - use "websafe" palette</h4>
 
@@ -236,7 +236,7 @@ $("#palette").kendoColorPalette({
 
 <p>Get or set the selected color. If no argument is given, this returns the currently selected color as a string in format <code>#FFFFFF</code>.</p>
 
-<p>If one argument is given, it selects the new color and updates the UI. The argument can be a string in <strong>hex</strong>, <strong>rgb</strong> or <strong>rgba</strong> format, or a <a href="kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a> object.</p>
+<p>If one argument is given, it selects the new color and updates the UI. The argument can be a string in <strong>hex</strong>, <strong>rgb</strong> or <strong>rgba</strong> format, or a <a href="/kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a> object.</p>
 
 <blockquote>
 <p>This method does not trigger the "change" event.</p>
@@ -268,7 +268,7 @@ var value = palette.value();
 
 <h3 id="methods-color"><a href="#methods-color">color</a></h3>
 
-<p>Get or set the selected color. If no argument is given, this returns the currently selected color as a <a href="kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a>.</p>
+<p>Get or set the selected color. If no argument is given, this returns the currently selected color as a <a href="/kendo-ui-docs/api/framework/color"><code>kendo.Color</code> object</a>.</p>
 
 <h4>Parameters</h4>
 

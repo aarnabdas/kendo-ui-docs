@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Class-based Inheritance with Kendo UI</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("framework/inheritance.html")
         });
         </script>
@@ -157,7 +157,7 @@ var person = new Person();
 person.sayHello();
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-capture.png" alt="Capture"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-capture.png" alt="Capture"></p>
 
 <p>We can also add a constructor for this object by including an "<em>init</em>" method.  We could then create a new person by newing up a new <strong>Person</strong>
 object. We’ll create a new <a href="http://twitter.com/johnbristowe">John Bristowe</a>.  We’ll also set his “<em>isAPrettyCoolPerson</em>” to true.</p>
@@ -180,7 +180,7 @@ person.isAPrettyCoolPerson = true;
 person.sayHello();
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-nh5.png" alt="nh5"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-nh5.png" alt="nh5"></p>
 
 <p>Now we can instantiate a new person object of type parent that inherits the properties of <strong>Person</strong> by extending the base person object.  Here I’ve
 created an instance of my Dad who is a parent.  My dad’s also a really cool person so we’ll toggle that on.</p>
@@ -196,9 +196,9 @@ myDad.sayHello();
 alert(myDad.isAPrettyCoolPerson);
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-nh1_1.png" alt="nh1"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-nh1_1.png" alt="nh1"></p>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-nh2.png" alt="nh2"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-nh2.png" alt="nh2"></p>
 
 <p>Now a child would inherit some, but not all properties from their parents. I inherit my father's last name, but I override the first name since I have
 my own. Also, since my dad is a pretty cool person, that's a trait that I should inherit from his as well right?</p>
@@ -210,9 +210,9 @@ me.sayHello();
 alert(me.isPrettyCoolPerson);
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-nh3.png" alt="nh3"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-nh3.png" alt="nh3"></p>
 
-<p><img src="kendo-ui-docs/images/inheritance/8c23-nh4.png" alt="nh4"></p>
+<p><img src="/kendo-ui-docs/images/inheritance/8c23-nh4.png" alt="nh4"></p>
 
 <h3 id="understanding-parent-objects"><a href="#understanding-parent-objects">Understanding Parent Objects</a></h3>
 

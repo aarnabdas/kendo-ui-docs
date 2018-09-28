@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Summary of Kendo UI Button functionality</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Find out how to use the Kendo UI Button widget">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/button/overview.html")
         });
         </script>
@@ -109,7 +109,7 @@
 <p>The <strong>Kendo UI Button</strong> provides a styled clickable UI widget with arbitrary content.
 Apart from consistent Kendo UI styling, the <strong>Button</strong> provides keyboard operability for elements, which natively don't have it (e.g. <code>span</code>).</p>
 
-<p>It is assumed that the reader of this page is familiar with the <a href="kendo-ui-docs/widgets">fundamental Kendo UI widget concepts</a>.</p>
+<p>It is assumed that the reader of this page is familiar with the <a href="/kendo-ui-docs/widgets">fundamental Kendo UI widget concepts</a>.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -152,7 +152,7 @@ $(function(){
 <h3 id="multiple-buttons-initialization-with-kendoinit"><a href="#multiple-buttons-initialization-with-kendoinit">Multiple Buttons initialization with kendo.init</a></h3>
 
 <p>This approach allows you to initialize multiple <strong>Buttons</strong> at once, but with different configuration options.
-For more information, please refer to <a href="kendo-ui-docs/data-attribute-initialization">Data Attribute Initialization</a> and <a href="kendo-ui-docs/api/framework/kendo#methods-init"><code>kendo.init()</code> method description</a>.</p>
+For more information, please refer to <a href="/kendo-ui-docs/data-attribute-initialization">Data Attribute Initialization</a> and <a href="/kendo-ui-docs/api/framework/kendo#methods-init"><code>kendo.init()</code> method description</a>.</p>
 
 <pre><code>&lt;div id="buttonsContainer"&gt;
     &lt;span data-role="button" data-sprite-css-class="myEditIcon"&gt;Edit&lt;/span&gt;
@@ -319,7 +319,7 @@ $(function(){
 &lt;/script&gt;
 </code></pre>
 
-<p>For more information on the <strong>Button</strong> <a href="kendo-ui-docs/api/web/button#configuration-enable"><code>enable</code> property</a> and the <a href="kendo-ui-docs/api/web/button#methods-enable"><code>enable</code> method</a>, please refer to the <a href="kendo-ui-docs/api/web/button/">Button API</a>.</p>
+<p>For more information on the <strong>Button</strong> <a href="/kendo-ui-docs/api/web/button#configuration-enable"><code>enable</code> property</a> and the <a href="/kendo-ui-docs/api/web/button#methods-enable"><code>enable</code> method</a>, please refer to the <a href="/kendo-ui-docs/api/web/button/">Button API</a>.</p>
 
 <h2 id="accessing-the-button-instance"><a href="#accessing-the-button-instance">Accessing the Button instance</a></h2>
 
@@ -363,7 +363,7 @@ $(function(){
 &lt;/script&gt;
 </code></pre>
 
-<p>For further reading and related information, please refer to the <a href="kendo-ui-docs/api/web/button/">Button API</a>.</p>
+<p>For further reading and related information, please refer to the <a href="/kendo-ui-docs/api/web/button/">Button API</a>.</p>
 
 <h3 id="creating-floating-action-button"><a href="#creating-floating-action-button">Creating Floating Action Button</a></h3>
 

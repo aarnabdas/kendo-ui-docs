@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI Editor</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Help guide for proper configuration of Editor UI widget, and how to use methods and events.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/editor.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouieditor"><a href="#kendouieditor">kendo.ui.Editor</a></h1>
 
-<p>Represents the Kendo UI Editor widget. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI Editor widget. Inherits from <a href="/kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -1732,7 +1732,7 @@ console.log($("#editor").data("kendoEditor").value()); // logs "The character &a
 
 <blockquote>
 <p>Setting this option does not prevent cross-site scripting (XSS) attacks; you need server sanitization, too.
-See the <a href="kendo-ui-docs/web/editor/preventing-xss">preventing cross-site-scripting</a> help topic for more information.</p>
+See the <a href="/kendo-ui-docs/web/editor/preventing-xss">preventing cross-site-scripting</a> help topic for more information.</p>
 </blockquote>
 
 <h4>Example</h4>
@@ -1774,7 +1774,7 @@ console.log($("#editor").data("kendoEditor").value()); // logs "Check out &lt;i&
 <a href="#configuration-stylesheets">stylesheets </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
 </h3>
 
-<p>Allows custom stylesheets to be included within the editing area. This setting is applicable only when the <a href="kendo-ui-docs/web/editor/overview">Editor is initialized from a <code>textarea</code></a>
+<p>Allows custom stylesheets to be included within the editing area. This setting is applicable only when the <a href="/kendo-ui-docs/web/editor/overview">Editor is initialized from a <code>textarea</code></a>
 and a contenteditable iframe is generated.</p>
 
 <h4>Example</h4>
@@ -2340,7 +2340,7 @@ $("#editor").kendoEditor({
 
 <p>The URL which will handle the upload of the new images. If not specified the Upload button will not be displayed.</p>
 
-<p>The requirements for this handler are the same as for the <a href="kendo-ui-docs/web/upload/modes#save-handler">save handler</a> in the Upload widget.</p>
+<p>The requirements for this handler are the same as for the <a href="/kendo-ui-docs/web/upload/modes#save-handler">save handler</a> in the Upload widget.</p>
 
 <h4>Example</h4>
 

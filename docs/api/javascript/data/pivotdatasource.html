@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for Kendo UI PivotDataSource</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn more about the configuration of Kendo UI PivotDataSource, methods and events.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/data/pivotdatasource.html")
         });
         </script>
@@ -108,12 +108,12 @@
         <article>
             <h1 id="kendodatapivotdatasource"><a href="#kendodatapivotdatasource">kendo.data.PivotDataSource</a></h1>
 
-<p>The data source used by the <a href="kendo-ui-docs/api/web/pivotgrid">kendo.ui.PivotGrid</a> widget.
-Inherits from <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>.</p>
+<p>The data source used by the <a href="/kendo-ui-docs/api/web/pivotgrid">kendo.ui.PivotGrid</a> widget.
+Inherits from <a href="/kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
 
 <h3 id="configuration-columns">
 <a href="#configuration-columns">columns </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
@@ -211,9 +211,9 @@ Measures can be defined as a list of objects with <code>name</code> and <code>ty
 </code></pre>
 
 <blockquote>
-<p>The <code>type</code> value can be defined to "status" or "trend" to render <a href="kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-kpiStatusTemplate">kpiStatusTemplate</a>
-or <a href="kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplate">kpiTrendTemplate</a>. If type is not defined, then the
-<a href="kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-dataCellTemplate">dataCellTemplate</a> will be used.</p>
+<p>The <code>type</code> value can be defined to "status" or "trend" to render <a href="/kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-kpiStatusTemplate">kpiStatusTemplate</a>
+or <a href="/kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplate">kpiTrendTemplate</a>. If type is not defined, then the
+<a href="/kendo-ui-docs/api/javascript/ui/pivotgrid#configuration-dataCellTemplate">dataCellTemplate</a> will be used.</p>
 </blockquote>
 
 <h4>Example - set the measures</h4>
@@ -1223,7 +1223,7 @@ var dataSource = new kendo.data.PivotDataSource({
 
 <h2 id="methods"><a href="#methods">Methods</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
 
 <h3 id="methods-axes"><a href="#methods-axes">axes</a></h3>
 

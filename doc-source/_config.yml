@@ -273,7 +273,7 @@ navigation:
         title: "Geometry"
 
 ## The application virtual path
-baseurl: /kendo-ui
+baseurl: /kendo-ui-docs
 
 ## The Kendo UI version used
 cdnVersion: "2015.1.429"

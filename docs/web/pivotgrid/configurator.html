@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of the Kendo UI PivotConfigurator widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Quick steps to help you create a Kendo UI PivotConfigurator.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/pivotgrid/configurator.html")
         });
         </script>
@@ -111,7 +111,7 @@ It is a suplementary widget, which is strongly related to Kendo PivotDataSource 
 
 <h2 id="getting-started"><a href="#getting-started">Getting started</a></h2>
 
-<p>The following tutorial shows how to initialize <a href="kendo-ui-docs/api/web/pivotconfigurator">Kendo UI PivotConfigurator</a> and link it to a Kendo UI PivotGrid widget.</p>
+<p>The following tutorial shows how to initialize <a href="/kendo-ui-docs/api/web/pivotconfigurator">Kendo UI PivotConfigurator</a> and link it to a Kendo UI PivotGrid widget.</p>
 
 <ol>
 <li>
@@ -163,12 +163,12 @@ $(document).ready(function () {
 
 <p>This will create the following widgets:</p>
 
-<p><img src="kendo-ui-docs/images/pivotconfigurator.png" alt="Kendo UI PivotConfigurator"></p>
+<p><img src="/kendo-ui-docs/images/pivotconfigurator.png" alt="Kendo UI PivotConfigurator"></p>
 
 <h2 id="accessing-an-existing-pivotconfigurator"><a href="#accessing-an-existing-pivotconfigurator">Accessing an Existing PivotConfigurator</a></h2>
 
 <p>You can reference an existing <strong>PivotConfigurator</strong> instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="kendo-ui-docs/api/web/pivotconfigurator">PivotConfigurator API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="/kendo-ui-docs/api/web/pivotconfigurator">PivotConfigurator API</a> to control its behavior.</p>
 
 <h3 id="accessing-an-existing-pivotconfigurator-instance"><a href="#accessing-an-existing-pivotconfigurator-instance">Accessing an existing PivotConfigurator instance</a></h3>
 
@@ -178,7 +178,7 @@ Once a reference has been established, you can use the <a href="kendo-ui-docs/ap
 <h2 id="next-steps"><a href="#next-steps">Next steps:</a></h2>
 
 <ul>
-<li><a href="kendo-ui-docs/web/pivotgrid/overview">PivotGrid Overview</a></li>
+<li><a href="/kendo-ui-docs/web/pivotgrid/overview">PivotGrid Overview</a></li>
 </ul>
         </article>
     </div>

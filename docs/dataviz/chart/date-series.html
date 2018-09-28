@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Working with date series in Kendo UI Javascript Chart widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to handle date series and date grouping in Chart UI widget.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("dataviz/chart/date-series.html")
         });
         </script>
@@ -133,12 +133,12 @@
 <p>Specifying categories of type Date will switch the axis to date mode.</p>
 
 <p>The automatic mode selection can be overriden by setting
-<a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.type">categoryAxis.type</a> to "Date".</p>
+<a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.type">categoryAxis.type</a> to "Date".</p>
 
 <h3 id="category-binding"><a href="#category-binding">Category binding</a></h3>
 
 <p>Date series should be bound using
-<a href="kendo-ui-docs/api/dataviz/chart#configuration-series.categoryField">categoryField</a>.</p>
+<a href="/kendo-ui-docs/api/dataviz/chart#configuration-series.categoryField">categoryField</a>.</p>
 
 <p>The categories (dates) for all series will be sorted and merged during data binding.</p>
 
@@ -183,7 +183,7 @@ $("#chart").kendoChart({
 
 <p>Note that the dates match the source:</p>
 
-<p><img src="kendo-ui-docs/dataviz/chart/chart-category-date-axis.png" alt="Chart with date category axis"></p>
+<p><img src="/kendo-ui-docs/dataviz/chart/chart-category-date-axis.png" alt="Chart with date category axis"></p>
 
 <h4>Example: Date series with grouping by year</h4>
 
@@ -224,7 +224,7 @@ $("#chart").kendoChart({
 
 <p>Notice how the chart now displays the maximum value for each year:</p>
 
-<p><img src="kendo-ui-docs/dataviz/chart/chart-category-date-axis-grouped.png" alt="Chart with grouped date category axis"></p>
+<p><img src="/kendo-ui-docs/dataviz/chart/chart-category-date-axis-grouped.png" alt="Chart with grouped date category axis"></p>
 
 <h3 id="aggregates"><a href="#aggregates">Aggregates</a></h3>
 
@@ -294,7 +294,7 @@ categoryAxis: {
 }
 </code></pre>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">baseUnit</a> can be specified manually.
+<p>The <a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">baseUnit</a> can be specified manually.
 Valid options are:</p>
 
 <ul>
@@ -309,17 +309,17 @@ Valid options are:</p>
 </ul>
 
 <p>You can also choose to show every n-th base unit by setting the
-<a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnitStep">baseUnitStep</a>
+<a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnitStep">baseUnitStep</a>
 option.</p>
 
 <h4>Automatic fitting</h4>
 
-<p>Setting <a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">baseUnit</a>
+<p>Setting <a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">baseUnit</a>
 to "fit" will constraint the total number of base units to
-<a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">maxDateGroups</a>.</p>
+<a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.baseUnit">maxDateGroups</a>.</p>
 
 <p>The baseUnit and baseUnitStep will be chosen according to
-<a href="kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.autoBaseUnitSteps">autoBaseUnitSteps</a></p>
+<a href="/kendo-ui-docs/api/dataviz/chart#configuration-categoryAxis.autoBaseUnitSteps">autoBaseUnitSteps</a></p>
 
 <h5>Example: Fit date series</h5>
 
@@ -377,7 +377,7 @@ $("#chart").kendoChart({
 }
 </code></pre>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/chart#categoryaxis.labels.format-string"><code>labels.format</code> property</a> takes priority, if specified.</p>
+<p>The <a href="/kendo-ui-docs/api/dataviz/chart#categoryaxis.labels.format-string"><code>labels.format</code> property</a> takes priority, if specified.</p>
 
 <p>The global KendoUI culture is used for formatting the dates.
 It can be overriden by setting <code>labels.culture</code>.</p>
@@ -398,16 +398,16 @@ The automatic mode selection can be overriden by specifying <code>type: "Date"</
 <p>The following options accept dates:</p>
 
 <ul>
-<li><a href="kendo-ui-docs/api/dataviz/chart#configuration-xAxis.min">min</a></li>
-<li><a href="kendo-ui-docs/api/dataviz/chart#configuration-xAxis.max">max</a></li>
-<li><a href="kendo-ui-docs/api/dataviz/chart#configuration-xAxis.axisCrossingValue">axisCrossingValue</a></li>
+<li><a href="/kendo-ui-docs/api/dataviz/chart#configuration-xAxis.min">min</a></li>
+<li><a href="/kendo-ui-docs/api/dataviz/chart#configuration-xAxis.max">max</a></li>
+<li><a href="/kendo-ui-docs/api/dataviz/chart#configuration-xAxis.axisCrossingValue">axisCrossingValue</a></li>
 </ul>
 
 <p>The following options are expressed in base units:</p>
 
 <ul>
-<li><a href="kendo-ui-docs/api/dataviz/chart#configuration-xAxis.minorUnit">minorUnit</a></li>
-<li><a href="kendo-ui-docs/api/dataviz/chart#configuration-xAxis.majorUnit">majorUnit</a></li>
+<li><a href="/kendo-ui-docs/api/dataviz/chart#configuration-xAxis.minorUnit">minorUnit</a></li>
+<li><a href="/kendo-ui-docs/api/dataviz/chart#configuration-xAxis.majorUnit">majorUnit</a></li>
 </ul>
 
 <h3 id="base-units"><a href="#base-units">Base Units</a></h3>
@@ -453,10 +453,10 @@ xAxis: {
 }
 </code></pre>
 
-<p>The <a href="kendo-ui-docs/api/dataviz/chart#xAxis.labels.format"><code>labels.format</code> property</a> property takes priority, if specified.</p>
+<p>The <a href="/kendo-ui-docs/api/dataviz/chart#xAxis.labels.format"><code>labels.format</code> property</a> property takes priority, if specified.</p>
 
 <p>The global KendoUI culture is used for formatting the dates.
-It can be overriden by setting <a href="kendo-ui-docs/api/dataviz/chart#xAxis.labels.culture"><code>labels.culture</code> property</a>.</p>
+It can be overriden by setting <a href="/kendo-ui-docs/api/dataviz/chart#xAxis.labels.culture"><code>labels.culture</code> property</a>.</p>
         </article>
     </div>
 </div>

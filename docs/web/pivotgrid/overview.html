@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of the Kendo UI PivotGrid widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Quick steps to help you create a Kendo UI PivotGrid.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/pivotgrid/overview.html")
         });
         </script>
@@ -106,14 +106,14 @@
         <article>
             <h1 id="pivotgrid-overview"><a href="#pivotgrid-overview">PivotGrid Overview</a></h1>
 
-<p>The Kendo UI PivotGrid widget represents multidimensional data in a cross-tabular format. It allows the user to perform a complex analysis on the visualized data. The Kendo UI PivotGrid uses the <em>Online Analytical Processing</em> (<a href="http://en.wikipedia.org/wiki/Online_analytical_processing">OLAP</a>) approach to present the result of multidimensional queries in a comprehensive way. It also supports a drill-down functionality that represents the underlying data for calculated cells. The widget uses an instance of <a href="kendo-ui-docs/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> component as a data source. The PivotDataSource component communicates with OLAP <a href="http://en.wikipedia.org/wiki/OLAP_cube">cube</a> instance on HTTP using the <a href="http://en.wikipedia.org/wiki/XML_for_Analysis">XMLA</a> protocol.</p>
+<p>The Kendo UI PivotGrid widget represents multidimensional data in a cross-tabular format. It allows the user to perform a complex analysis on the visualized data. The Kendo UI PivotGrid uses the <em>Online Analytical Processing</em> (<a href="http://en.wikipedia.org/wiki/Online_analytical_processing">OLAP</a>) approach to present the result of multidimensional queries in a comprehensive way. It also supports a drill-down functionality that represents the underlying data for calculated cells. The widget uses an instance of <a href="/kendo-ui-docs/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> component as a data source. The PivotDataSource component communicates with OLAP <a href="http://en.wikipedia.org/wiki/OLAP_cube">cube</a> instance on HTTP using the <a href="http://en.wikipedia.org/wiki/XML_for_Analysis">XMLA</a> protocol.</p>
 
 <h2 id="prerequisites"><a href="#prerequisites">Prerequisites:</a></h2>
 
 <ul>
-<li><a href="kendo-ui-docs/web/pivotgrid/fundamentals">PivotGrid Fundamentals</a></li>
+<li><a href="/kendo-ui-docs/web/pivotgrid/fundamentals">PivotGrid Fundamentals</a></li>
 <li>
-<a href="kendo-ui-docs/web/pivotgrid/olap-cube-setup">Setup an OLAP cube</a> or use our OLAP service (<a href="http://demos.telerik.com/olap/msmdpump.dll">http://demos.telerik.com/olap/msmdpump.dll</a>)</li>
+<a href="/kendo-ui-docs/web/pivotgrid/olap-cube-setup">Setup an OLAP cube</a> or use our OLAP service (<a href="http://demos.telerik.com/olap/msmdpump.dll">http://demos.telerik.com/olap/msmdpump.dll</a>)</li>
 </ul>
 
 <h2 id="getting-started"><a href="#getting-started">Getting started</a></h2>
@@ -166,12 +166,12 @@
 
 <p>This will create the following PivotGrid widget:</p>
 
-<p><img src="kendo-ui-docs/images/pivotgrid.png" alt="Kendo UI PivotGrid"></p>
+<p><img src="/kendo-ui-docs/images/pivotgrid.png" alt="Kendo UI PivotGrid"></p>
 
 <h2 id="accessing-an-existing-pivotgrid"><a href="#accessing-an-existing-pivotgrid">Accessing an Existing PivotGrid</a></h2>
 
 <p>You can reference an existing <strong>PivotGrid</strong> instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="kendo-ui-docs/api/web/pivotgrid">PivotGrid API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="/kendo-ui-docs/api/web/pivotgrid">PivotGrid API</a> to control its behavior.</p>
 
 <h3 id="accessing-an-existing-pivotgrid-instance"><a href="#accessing-an-existing-pivotgrid-instance">Accessing an existing PivotGrid instance</a></h3>
 
@@ -181,7 +181,7 @@ Once a reference has been established, you can use the <a href="kendo-ui-docs/ap
 <h2 id="next-steps"><a href="#next-steps">Next steps:</a></h2>
 
 <ul>
-<li><a href="kendo-ui-docs/web/pivotgrid/configurator">PivotConfigurator Overview</a></li>
+<li><a href="/kendo-ui-docs/web/pivotgrid/configurator">PivotConfigurator Overview</a></li>
 </ul>
         </article>
     </div>

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Kendo UI Grid for ASP.NET MVC Excel Export">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/excel-export.html")
         });
         </script>
@@ -163,10 +163,10 @@
 %&gt;
 </code></pre>
 
-<p>To initiate Excel export via code call the <a href="kendo-ui-docs/api/javascript/ui/grid.html#methods-saveAsExcel">saveAsExcel</a> method.</p>
+<p>To initiate Excel export via code call the <a href="/kendo-ui-docs/api/javascript/ui/grid.html#methods-saveAsExcel">saveAsExcel</a> method.</p>
 
 <blockquote>
-<p>Important: Older browsers (IE9 and below, Safari) require the implementation of a <a href="kendo-ui-docs/framework/save-files/introduction#browser-support">server proxy</a>.</p>
+<p>Important: Older browsers (IE9 and below, Safari) require the implementation of a <a href="/kendo-ui-docs/framework/save-files/introduction#browser-support">server proxy</a>.</p>
 </blockquote>
 
 <h2 id="what-is-exported"><a href="#what-is-exported">What is Exported</a></h2>
@@ -226,49 +226,49 @@
 
 <h3 id="customize-the-excel-document"><a href="#customize-the-excel-document">Customize the Excel Document</a></h3>
 
-<p>The <a href="kendo-ui-docs/api/javascript/ui/grid#events-excelExport">excelExport</a> event allows customization of the generated Excel document.
+<p>The <a href="/kendo-ui-docs/api/javascript/ui/grid#events-excelExport">excelExport</a> event allows customization of the generated Excel document.
 The <code>workbook</code> event argument exposes the generated Excel workbook configuration.</p>
 
-<p>To understand how Excel documents work check the <a href="kendo-ui-docs/framework/excel/introduction#create-excel-document">Excel Introduction</a> help topic.</p>
+<p>To understand how Excel documents work check the <a href="/kendo-ui-docs/framework/excel/introduction#create-excel-document">Excel Introduction</a> help topic.</p>
 
-<p>The <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/alternating-rows">Color Alternating Rows</a> tutorial shows one way to customize the generated Excel document.</p>
+<p>The <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/alternating-rows">Color Alternating Rows</a> tutorial shows one way to customize the generated Excel document.</p>
 
 <h3 id="column-templates"><a href="#column-templates">Column Templates</a></h3>
 
 <p>Kendo UI Grid doesn't use the <code>ClientTemplate</code> during Excel export - it exports only the data. The reason is simple - a column template may contain arbitrary HTML which can't be converted to Excel column values.</p>
 
-<p>The <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/column-template-export">Column Template</a> tutorial shows how to use a column template that doesn't contain HTML.</p>
+<p>The <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/column-template-export">Column Template</a> tutorial shows how to use a column template that doesn't contain HTML.</p>
 
 <h3 id="column-format"><a href="#column-format">Column Format</a></h3>
 
 <p>Kendo UI Grid doesn't use the <code>Format</code> option during Excel export because some Kendo UI formats are incompatible with Excel.</p>
 
-<p>To format the cell values set the <a href="kendo-ui-docs/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format">format</a> option of the cells.</p>
+<p>To format the cell values set the <a href="/kendo-ui-docs/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format">format</a> option of the cells.</p>
 
 <p>The <a href="https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4">Create a custom number format</a> page describes the formats that Excel supports.</p>
 
-<p>The <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/cell-format">Cell Format</a> tutorial shows how to format the cell values.</p>
+<p>The <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/cell-format">Cell Format</a> tutorial shows how to format the cell values.</p>
 
 <h3 id="detail-template"><a href="#detail-template">Detail Template</a></h3>
 
 <p>Kendo UI Grid doesn't export its <code>DetailTemplate</code> for the same reason as column templates.</p>
 
-<p>If the detail template contains another grid you can follow the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/detail-grid-export">Detail Grid Export</a> tutorial.</p>
+<p>If the detail template contains another grid you can follow the <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/detail-grid-export">Detail Grid Export</a> tutorial.</p>
 
 <h3 id="export-multiple-grids"><a href="#export-multiple-grids">Export Multiple Grids</a></h3>
 
-<p>The <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/multiple-grid-export">Multiple Grid Export</a> tutorial shows how to export multiple grids in a single Excel document. Each grid is exported in a separate Excel sheet.</p>
+<p>The <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/how-to/excel/multiple-grid-export">Multiple Grid Export</a> tutorial shows how to export multiple grids in a single Excel document. Each grid is exported in a separate Excel sheet.</p>
 
 <h2 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h2>
 
 <h3 id="javascript-error-that-jszip-is-not-found"><a href="#javascript-error-that-jszip-is-not-found">JavaScript error that JSZip is not found</a></h3>
 
 <p>Clicking the "Export to Excel" button or calling the <code>saveAsExcel</code> throws an exception if the JSZip JavaScript library isn't found. Including JSZip in the page solves the problem.
-Further info is available in the <a href="kendo-ui-docs/framework/excel/introduction#requirements">Excel Export Introduction</a></p>
+Further info is available in the <a href="/kendo-ui-docs/framework/excel/introduction#requirements">Excel Export Introduction</a></p>
 
 <h3 id="export-does-not-work-in-internet-explorer-and-safari"><a href="#export-does-not-work-in-internet-explorer-and-safari">Export does not work in Internet Explorer and Safari</a></h3>
 
-<p>Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a <a href="kendo-ui-docs/framework/save-files/introduction#browser-support">server proxy</a>.
+<p>Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a <a href="/kendo-ui-docs/framework/save-files/introduction#browser-support">server proxy</a>.
 Set the <code>ProxyURL</code> option to specify the server proxy URL.</p>
 
 <h4>Example - user server proxy</h4>
@@ -316,9 +316,9 @@ Set the <code>ProxyURL</code> option to specify the server proxy URL.</p>
 <h2 id="further-reading"><a href="#further-reading">Further Reading</a></h2>
 
 <ul>
-<li><a href="kendo-ui-docs/framework/excel/introduction">Create Excel Documents with Kendo UI</a></li>
-<li><a href="kendo-ui-docs/framework/save-files/introduction">Save Files with Kendo UI</a></li>
-<li><a href="kendo-ui-docs/api/javascript/ooxml/Workbook">kendo.ooxml.Workbook API Reference</a></li>
+<li><a href="/kendo-ui-docs/framework/excel/introduction">Create Excel Documents with Kendo UI</a></li>
+<li><a href="/kendo-ui-docs/framework/save-files/introduction">Save Files with Kendo UI</a></li>
+<li><a href="/kendo-ui-docs/api/javascript/ooxml/Workbook">kendo.ooxml.Workbook API Reference</a></li>
 </ul>
         </article>
     </div>

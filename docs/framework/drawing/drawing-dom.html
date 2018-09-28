@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Draw a piece of HTML available in the DOM</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("framework/drawing/drawing-dom.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="html-drawing-api"><a href="#html-drawing-api">HTML-drawing API</a></h1>
 
-<p>Using the <code>drawing.drawDOM</code> function you can draw a DOM element into a <a href="kendo-ui-docs/api/dataviz/drawing/group">drawing.Group</a>, which you can then render with one of the supported backends into SVG, PDF, HTML5 <code>&lt;canvas&gt;</code> or VML.</p>
+<p>Using the <code>drawing.drawDOM</code> function you can draw a DOM element into a <a href="/kendo-ui-docs/api/dataviz/drawing/group">drawing.Group</a>, which you can then render with one of the supported backends into SVG, PDF, HTML5 <code>&lt;canvas&gt;</code> or VML.</p>
 
 <p>The DOM element must be appended to the document and must be visible (i.e. you cannot draw an element which has <code>display: none</code> or <code>visibility: hidden</code>, etc.).  For example if you have this HTML in the page:</p>
 
@@ -135,7 +135,7 @@
 
 <h3 id="custom-fonts-and-pdf"><a href="#custom-fonts-and-pdf">Custom fonts and PDF</a></h3>
 
-<p>If you need PDF output, for optimal layout and Unicode support your document should declare the fonts that it uses using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face">CSS <code>font-face</code> declarations</a>.  Starting with version Q3-2014-SP1, the PDF generator in Kendo UI is able to dig such declarations directly from the CSS and there is no need for you to manually call <a href="kendo-ui-docs/framework/drawing/pdf-output.html#using-custom-fonts">pdf.defineFont</a>.</p>
+<p>If you need PDF output, for optimal layout and Unicode support your document should declare the fonts that it uses using <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face">CSS <code>font-face</code> declarations</a>.  Starting with version Q3-2014-SP1, the PDF generator in Kendo UI is able to dig such declarations directly from the CSS and there is no need for you to manually call <a href="/kendo-ui-docs/framework/drawing/pdf-output.html#using-custom-fonts">pdf.defineFont</a>.</p>
 
 <p>Here is an example CSS declaration:</p>
 
@@ -162,7 +162,7 @@
 
 <h3 id="multi-page-pdf-output"><a href="#multi-page-pdf-output">Multi-page PDF output</a></h3>
 
-<p><code>drawing.drawDOM</code> allows you to create a <a href="kendo-ui-docs/framework/drawing/pdf-output.html#multiple-pages-output">multi-page PDF</a> by specifying manual page breaks.</p>
+<p><code>drawing.drawDOM</code> allows you to create a <a href="/kendo-ui-docs/framework/drawing/pdf-output.html#multiple-pages-output">multi-page PDF</a> by specifying manual page breaks.</p>
 
 <p>A page break will occur <strong>before</strong> each element that matches the <code>forcePageBreak</code> CSS selector.</p>
 
@@ -201,7 +201,7 @@
 
 <h3 id="automatic-page-breaking-q1-2015"><a href="#automatic-page-breaking-q1-2015">Automatic page breaking (Q1 2015)</a></h3>
 
-<p>When your target is PDF output, you can solicit automatic page breaking (subject to a few limitations detailed below) by informing <code>drawDOM</code> what is the desired page size and margins.  The options are <code>paperSize</code> and <code>margin</code>, same as documented in <a href="kendo-ui-docs/framework/drawing/pdf-output.html#pdf-options">PDF options</a>.  You can still use <code>forcePageBreak</code> in this case to manually specify break points.</p>
+<p>When your target is PDF output, you can solicit automatic page breaking (subject to a few limitations detailed below) by informing <code>drawDOM</code> what is the desired page size and margins.  The options are <code>paperSize</code> and <code>margin</code>, same as documented in <a href="/kendo-ui-docs/framework/drawing/pdf-output.html#pdf-options">PDF options</a>.  You can still use <code>forcePageBreak</code> in this case to manually specify break points.</p>
 
 <p>Example:</p>
 

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Use AngularJS or Kendo UI MVVM to instantiate and configure Kendo UI widgets</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to add Kendo UI widgets to your mobile website or web application.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("basics/markup.html")
         });
         </script>
@@ -113,19 +113,19 @@
 
 <h1 id="initialize-kendo-ui-widgets-from-markup"><a href="#initialize-kendo-ui-widgets-from-markup">Initialize Kendo UI Widgets From Markup</a></h1>
 
-<p>In addition to the <a href="kendo-ui-docs/basics/jquery-initialization">jQuery plugin syntax</a>, the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:</p>
+<p>In addition to the <a href="/kendo-ui-docs/basics/jquery-initialization">jQuery plugin syntax</a>, the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:</p>
 
 <ul>
-<li>The <a href="kendo-ui-docs/framework/spa/view">View</a> and the <a href="kendo-ui-docs/getting-started/mobile/application">mobile Application</a> instantiate widgets based on <code>role</code> <strong>HTML 5 data attributes</strong>.
-Both use the <a href="kendo-ui-docs/getting-started/framework/mvvm/overview">MVVM</a> internally;</li>
+<li>The <a href="/kendo-ui-docs/framework/spa/view">View</a> and the <a href="/kendo-ui-docs/getting-started/mobile/application">mobile Application</a> instantiate widgets based on <code>role</code> <strong>HTML 5 data attributes</strong>.
+Both use the <a href="/kendo-ui-docs/getting-started/framework/mvvm/overview">MVVM</a> internally;</li>
 <li>The <code>kendo.bind</code> method will scan the passed DOM element contents for <code>data-role</code> attributes and will instantiate the respective widgets;</li>
-<li>The Kendo UI <a href="kendo-ui-docs/AngularJS/introduction"><strong>AngularJS</strong></a> directives support declarative initialization based on <strong>custom element attributes</strong> or <strong>custom tag names</strong>.</li>
+<li>The Kendo UI <a href="/kendo-ui-docs/AngularJS/introduction"><strong>AngularJS</strong></a> directives support declarative initialization based on <strong>custom element attributes</strong> or <strong>custom tag names</strong>.</li>
 </ul>
 
 <blockquote>
 <p>Data attribute initialization is not designed to be combined with the Kendo UI server wrappers.
-Using wrappers is equivalent to <a href="kendo-ui-docs/basics/jquery-initialization">jQuery plugin syntax initialization</a>. If you want to create Kendo UI widget instances via the
-<a href="kendo-ui-docs/getting-started/framework/mvvm/overview">MVVM</a> or <a href="kendo-ui-docs/AngularJS/introduction">AngularJS</a> mechanisms, then do not use server wrappers for these instances.</p>
+Using wrappers is equivalent to <a href="/kendo-ui-docs/basics/jquery-initialization">jQuery plugin syntax initialization</a>. If you want to create Kendo UI widget instances via the
+<a href="/kendo-ui-docs/getting-started/framework/mvvm/overview">MVVM</a> or <a href="/kendo-ui-docs/AngularJS/introduction">AngularJS</a> mechanisms, then do not use server wrappers for these instances.</p>
 </blockquote>
 
 <h2 id="a-spa-view-with-an-autocomplete-widget-in-the-template"><a href="#a-spa-view-with-an-autocomplete-widget-in-the-template">A SPA View With an AutoComplete Widget in the Template</a></h2>
@@ -141,7 +141,7 @@ Using wrappers is equivalent to <a href="kendo-ui-docs/basics/jquery-initializat
 &lt;/script&gt;
 </code></pre>
 
-<p>More information about the SPA View may be found in the <a href="kendo-ui-docs/framework/spa/overview">Buliding Single Page Applications help section</a>.</p>
+<p>More information about the SPA View may be found in the <a href="/kendo-ui-docs/framework/spa/overview">Buliding Single Page Applications help section</a>.</p>
 
 <h2 id="mvvm-bound-dom-element-with-an-autocomplete-widget"><a href="#mvvm-bound-dom-element-with-an-autocomplete-widget">MVVM Bound DOM Element With an AutoComplete widget</a></h2>
 
@@ -157,7 +157,7 @@ Using wrappers is equivalent to <a href="kendo-ui-docs/basics/jquery-initializat
 </code></pre>
 
 <blockquote>
-<p>The <code>data-bind</code> attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the <code>source</code>). For more information, refer to the <a href="kendo-ui-docs/framework/mvvm/overview">MVVM introduction help topic</a>.</p>
+<p>The <code>data-bind</code> attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the <code>source</code>). For more information, refer to the <a href="/kendo-ui-docs/framework/mvvm/overview">MVVM introduction help topic</a>.</p>
 </blockquote>
 
 <h2 id="kendo-ui-mobile-application-with-a-view-and-an-autocomplete-widget"><a href="#kendo-ui-mobile-application-with-a-view-and-an-autocomplete-widget">Kendo UI Mobile Application With a View and an AutoComplete Widget</a></h2>
@@ -183,12 +183,12 @@ Using wrappers is equivalent to <a href="kendo-ui-docs/basics/jquery-initializat
 &lt;/script&gt;
 </code></pre>
 
-<p>More information about the Kendo UI Mobile Application is available in the <a href="kendo-ui-docs/mobile/application">Building Hybrid Mobile Applications topic</a>.</p>
+<p>More information about the Kendo UI Mobile Application is available in the <a href="/kendo-ui-docs/mobile/application">Building Hybrid Mobile Applications topic</a>.</p>
 
 <h2 id="widget-configuration-options-and-event-handlers-as-data-attributes"><a href="#widget-configuration-options-and-event-handlers-as-data-attributes">Widget Configuration Options and Event Handlers as Data Attributes</a></h2>
 
 <p>In addition to the <code>data-role</code> attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor.
-You can find out more about the supported data attributes and how to bind to widget events in the <a href="kendo-ui-docs/framework/data-attribute-initialization">data attributes explained</a> section.</p>
+You can find out more about the supported data attributes and how to bind to widget events in the <a href="/kendo-ui-docs/framework/data-attribute-initialization">data attributes explained</a> section.</p>
 
 <h2 id="kendo-ui-angularjs-autocomplete-directive"><a href="#kendo-ui-angularjs-autocomplete-directive">Kendo UI AngularJS AutoComplete Directive</a></h2>
 
@@ -209,7 +209,7 @@ You can find out more about the supported data attributes and how to bind to wid
 &lt;/script&gt;
 </code></pre>
 
-<p>To learn more about the features of the Kendo UI AngularJS directives, please visit the <a href="kendo-ui-docs/AngularJS/introduction">AngularJS</a> help topic.</p>
+<p>To learn more about the features of the Kendo UI AngularJS directives, please visit the <a href="/kendo-ui-docs/AngularJS/introduction">AngularJS</a> help topic.</p>
         </article>
     </div>
 </div>

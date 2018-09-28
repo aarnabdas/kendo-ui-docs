@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI Upload</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to configure the ability to upload files in an asynchronous manner in Upload UI widget.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/upload.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouiupload"><a href="#kendouiupload">kendo.ui.Upload</a></h1>
 
-<p>Represents the Kendo UI Upload. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI Upload. Inherits from <a href="/kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -117,7 +117,7 @@
 </h3>
 
 <p>Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode help topic</a>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode help topic</a>
 for more details.</p>
 
 <h4>Example</h4>
@@ -316,7 +316,7 @@ This option will be ignored if the browser doesn't support File API.</p>
 </ul>
 
 <blockquote>
-<p><strong>Important:</strong> This option could be used only when the Upload widget is in <a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>. The files will be rendered as successfully uploaded.</p>
+<p><strong>Important:</strong> This option could be used only when the Upload widget is in <a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>. The files will be rendered as successfully uploaded.</p>
 </blockquote>
 
 <h4>Example - passing an array of initial files</h4>
@@ -666,7 +666,7 @@ client-side events to build your own UI.</p>
 <a href="#configuration-template">template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the files in the list</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the files in the list</p>
 
 <h4>Template data <code>Array</code>
 </h4>
@@ -818,7 +818,7 @@ To use the default progress-bar, you should add the following markup at the begi
 <p>Fires when the upload has been cancelled while in progress.</p>
 
 <p>Note: The cancel event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <h4>Example</h4>
 
@@ -860,7 +860,7 @@ To use the default progress-bar, you should add the following markup at the begi
 <p>Fires when all active uploads have completed either successfully or with errors.</p>
 
 <p>Note: The complete event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <h4>Example</h4>
 
@@ -885,7 +885,7 @@ To use the default progress-bar, you should add the following markup at the begi
 <p>Fires when an upload / remove operation has failed.</p>
 
 <p>Note: The error event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <h4>Example</h4>
 
@@ -948,10 +948,10 @@ Verify that this is an actual XHR before accessing any other fields.</li>
 <p>Fires when upload progress data is available.</p>
 
 <p>Note: The progress event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <p>Note: The progress event is not fired in IE.
-See <a href="kendo-ui-docs/web/upload/supported-browsers">Supported Browsers</a></p>
+See <a href="/kendo-ui-docs/web/upload/supported-browsers">Supported Browsers</a></p>
 
 <h4>Example</h4>
 
@@ -1092,7 +1092,7 @@ occurring.</p>
 <p>Fires when an upload / remove operation has been completed successfully.</p>
 
 <p>Note: The success event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <h4>Example</h4>
 
@@ -1160,7 +1160,7 @@ Canceling the event will prevent the upload.</p>
 
 <blockquote>
 <p>The upload event fires only when the upload is in
-<a href="kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
+<a href="/kendo-ui-docs/web/upload/modes#asynchronous-mode">async mode</a>.</p>
 
 <p>It is possible to change the saveUrl at this point.</p>
 </blockquote>

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>DataSource Configuration of Kendo UI Grid for ASP.NET MVC | Kendo UI Documentation</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Kendo UI DataSource documentation guides you how to configure DataSource to use Ajax binding, add grid columns.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/configuration.html")
         });
         </script>
@@ -120,7 +120,7 @@
 }
 </code></pre>
 
-<p>The Kendo UI Grid fluent API is exposed via the <a href="kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder">Kendo.Mvc.UI.Fluent.GridBuilder</a> class.
+<p>The Kendo UI Grid fluent API is exposed via the <a href="/kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder">Kendo.Mvc.UI.Fluent.GridBuilder</a> class.
 You don't need to instantiate that class though. You need to use the <code>Grid</code> HtmlHelper extension method instead:</p>
 
 <pre><code>@(Html.Kendo().Grid&lt;Product&gt;().Name("grid"))
@@ -128,8 +128,8 @@ You don't need to instantiate that class though. You need to use the <code>Grid<
 
 <h2 id="common-datasource-settings"><a href="#common-datasource-settings">Common DataSource Settings</a></h2>
 
-<p>The <a href="kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-DataSource(System.Action%3CKendo.Mvc.UI.Fluent.DataSourceBuilder%3CT%3E%3E)">DataSource</a>
-method of Kendo UI Grid for ASP.NET MVC configures the <a href="kendo-ui-docs/api/web/grid#configuration-dataSource">data source</a>.</p>
+<p>The <a href="/kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-DataSource(System.Action%3CKendo.Mvc.UI.Fluent.DataSourceBuilder%3CT%3E%3E)">DataSource</a>
+method of Kendo UI Grid for ASP.NET MVC configures the <a href="/kendo-ui-docs/api/web/grid#configuration-dataSource">data source</a>.</p>
 
 <h3 id="aggregates"><a href="#aggregates">Aggregates</a></h3>
 
@@ -196,7 +196,7 @@ method of Kendo UI Grid for ASP.NET MVC configures the <a href="kendo-ui-docs/ap
 
 <h3 id="events"><a href="#events">Events</a></h3>
 
-<p>Specifies the event handlers for the data source <a href="kendo-ui-docs/api/framework/datasource#events">events</a>.</p>
+<p>Specifies the event handlers for the data source <a href="/kendo-ui-docs/api/framework/datasource#events">events</a>.</p>
 
 <h4>Example - handle data source events</h4>
 
@@ -399,7 +399,7 @@ function dataSource_requestStart(e) {
 
 <h2 id="column-configuration"><a href="#column-configuration">Column Configuration</a></h2>
 
-<p>The <a href="kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action%3CKendo.Mvc.UI.Fluent.GridColumnFactory%3CT%3E%3E)">Columns</a> method configures the grid columns. If not used the grid will create a column for every public property of the model.</p>
+<p>The <a href="/kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action%3CKendo.Mvc.UI.Fluent.GridColumnFactory%3CT%3E%3E)">Columns</a> method configures the grid columns. If not used the grid will create a column for every public property of the model.</p>
 
 <h3 id="example---configure-the-grid-columns-webforms"><a href="#example---configure-the-grid-columns-webforms">Example - configure the grid columns (WebForms)</a></h3>
 
@@ -469,10 +469,10 @@ should contain no spaces, no special characters, and the first character should 
 
 <h3 id="clienttemplate"><a href="#clienttemplate">ClientTemplate</a></h3>
 
-<p>A <a href="kendo-ui-docs/framework/templates/overview">Kendo UI template</a> which specifies the way the column is displayed.</p>
+<p>A <a href="/kendo-ui-docs/framework/templates/overview">Kendo UI template</a> which specifies the way the column is displayed.</p>
 
 <blockquote>
-<p>The <code>ClientTemplate</code> is used when he grid is configured for <strong><a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a></strong>.</p>
+<p>The <code>ClientTemplate</code> is used when he grid is configured for <strong><a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a></strong>.</p>
 </blockquote>
 
 <p>Client templates defined in server-side code are URL encoded before sent to the client.
@@ -559,7 +559,7 @@ the filtering UI.</p>
 )
 </code></pre>
 
-<p>The supported formats are described in the <a href="kendo-ui-docs/framework/globalization/overview">globalization</a>
+<p>The supported formats are described in the <a href="/kendo-ui-docs/framework/globalization/overview">globalization</a>
 help topic.</p>
 
 <h3 id="groupable"><a href="#groupable">Groupable</a></h3>
@@ -610,7 +610,7 @@ grid columns can be dragged for grouping.</p>
 <p>Sets the server template which will be used when displaying the bound field.</p>
 
 <blockquote>
-<p>The <code>Template</code> is used when he grid is configured for <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">server binding</a>.</p>
+<p>The <code>Template</code> is used when he grid is configured for <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">server binding</a>.</p>
 </blockquote>
 
 <p>In WebForms the template is a <a href="http://msdn.microsoft.com/en-us/library/ms178135%28vs.80%29.aspx">server side code block</a>.
@@ -694,10 +694,10 @@ In Razor the template is a <a href="http://haacked.com/archive/2011/02/27/templa
 
 <h3 id="clienttemplate"><a href="#clienttemplate">ClientTemplate</a></h3>
 
-<p>A <a href="kendo-ui-docs/framework/templates/overview">Kendo template</a> which specifies the way the column is displayed.</p>
+<p>A <a href="/kendo-ui-docs/framework/templates/overview">Kendo template</a> which specifies the way the column is displayed.</p>
 
 <blockquote>
-<p>The <code>ClientTemplate</code> is used when he grid is configured for <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a>.</p>
+<p>The <code>ClientTemplate</code> is used when he grid is configured for <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a>.</p>
 </blockquote>
 
 <h4>Example - set the template column client template</h4>

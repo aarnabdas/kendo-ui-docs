@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI Window</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to initialize a Window UI widget and configure its behaviors, center a window, set its content and toggle the state of the UI widget.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/window.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouiwindow"><a href="#kendouiwindow">kendo.ui.Window</a></h1>
 
-<p>Represents the Kendo UI Window. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI Window. Inherits from <a href="/kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -272,7 +272,7 @@ $("#dialog").data("kendoWindow").open();
 <a href="#configuration-appendTo">appendTo </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: document.body)</em>
 </h3>
 
-<p>The element that the Window will be appended to. Beneficial if the <a href="kendo-ui-docs/web/window/overview#using-kendo-ui-window-with-a-form">Window is used together with a form</a>.
+<p>The element that the Window will be appended to. Beneficial if the <a href="/kendo-ui-docs/web/window/overview#using-kendo-ui-window-with-a-form">Window is used together with a form</a>.
 Note that this <em>does not</em> constrain the window dragging within the given element.</p>
 
 <h4>Example - set the window container to be the form with id="mainForm"</h4>
@@ -375,7 +375,7 @@ $("#dialog").kendoWindow({
 <a href="#configuration-iframe">iframe </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a>
 </h3>
 
-<p>Explicitly states whether a content iframe should be created. For more information, please read <a href="kendo-ui-docs/web/window/overview#using-iframes">Using iframes</a>.</p>
+<p>Explicitly states whether a content iframe should be created. For more information, please read <a href="/kendo-ui-docs/web/window/overview#using-iframes">Using iframes</a>.</p>
 
 <h4>Example - load full page</h4>
 
@@ -795,7 +795,7 @@ dialog.pin();
 
 <h3 id="methods-refresh"><a href="#methods-refresh">refresh</a></h3>
 
-<p>Refreshes the content of a Window from a remote URL or the initially defined <a href="kendo-ui-docs/api/web/window#configuration-content.template">content template</a>.
+<p>Refreshes the content of a Window from a remote URL or the initially defined <a href="/kendo-ui-docs/api/web/window#configuration-content.template">content template</a>.
 <strong>Note that passing <code>data</code> and non-GET requests cannot be sent to an iframe</strong>, as they require a form with a target attribute.</p>
 
 <h4>Parameters</h4>

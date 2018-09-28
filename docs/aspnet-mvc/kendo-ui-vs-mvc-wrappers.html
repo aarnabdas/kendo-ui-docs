@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>ASP.NET MVC wrappers vs Kendo UI widgets</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Comparison between the HTML/JS Kendo UI widgets and their ASP.NET MVC wrappers">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/kendo-ui-vs-mvc-wrappers.html")
         });
         </script>
@@ -114,19 +114,19 @@ However, there are some implementation specifics to consider before choosing one
 <ul>
 <li>Create widgets with no HTML and JavaScript coding. JavaScript knowledge will still be required to use client-side methods and events.</li>
 <li>
-<a href="kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">Server-side data binding</a> and in some cases, server-side rendering.</li>
-<li>Use the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ToDataSourceResult</a> extension method to bind Kendo UI widgets to server-side collections and
+<a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">Server-side data binding</a> and in some cases, server-side rendering.</li>
+<li>Use the <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ToDataSourceResult</a> extension method to bind Kendo UI widgets to server-side collections and
 perform data operations (paging, sorting, filtering, grouping).</li>
-<li>Integration with some ASP.NET MVC features, e.g. <a href="kendo-ui-docs/aspnet-mvc/helpers/menu/overview#security-trimming">security trimming</a> or
-<a href="kendo-ui-docs/aspnet-mvc/globalization#localized-user-interface">localization with resource files</a> or <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/editor-templates">editor templates</a>.</li>
+<li>Integration with some ASP.NET MVC features, e.g. <a href="/kendo-ui-docs/aspnet-mvc/helpers/menu/overview#security-trimming">security trimming</a> or
+<a href="/kendo-ui-docs/aspnet-mvc/globalization#localized-user-interface">localization with resource files</a> or <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/editor-templates">editor templates</a>.</li>
 <li>Support for unobtrusive validation based on Data Annotation attributes.</li>
 <li>CRUD operations implementation simplicity - support for CRUD operations will require less coding, compared to when client-side Kendo UI is used.
 In the latter case, you will have to repeat the model and data field configuration in the JavaScript code.</li>
 <li>Visual Studio intellisense for the server-side configuration syntax.</li>
 <li>
-<a href="kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Visual Studio Extensions</a> for automatic creation of new Kendo UI ASP.NET MVC applications, or adding Kendo UI to existing projects,
+<a href="/kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Visual Studio Extensions</a> for automatic creation of new Kendo UI ASP.NET MVC applications, or adding Kendo UI to existing projects,
 or automatic updating of the Kendo UI version.</li>
-<li>Use <a href="kendo-ui-docs/aspnet-mvc/scaffolding">Scaffolding</a> to generate widget declarations and related controller action methods.</li>
+<li>Use <a href="/kendo-ui-docs/aspnet-mvc/scaffolding">Scaffolding</a> to generate widget declarations and related controller action methods.</li>
 </ul>
 
 <p>The vanilla HTML/JavaScript Kendo UI widgets provide the following benefits:</p>
@@ -135,12 +135,12 @@ or automatic updating of the Kendo UI version.</li>
 <li>Complete server platform independence. The widgets can be used with any web server and server framework (<strong>including ASP.NET MVC</strong>).
 For example, you can build Single Page Applications with any RESTful back-end.</li>
 <li>Full control over the initialization scripts' placement - server wrappers render the widgets' initialization scripts right after the widget's HTML output.
-Even if you use <a href="kendo-ui-docs/aspnet-mvc/fundamentals#deferred-initialization">deferred initialization</a>, the scripts will still be in the View.
+Even if you use <a href="/kendo-ui-docs/aspnet-mvc/fundamentals#deferred-initialization">deferred initialization</a>, the scripts will still be in the View.
 When using plain (non-wrapper) Kendo UI widgets, you write the initialization scripts yourself and can move them to external script files.</li>
-<li>Integration with <a href="kendo-ui-docs/framework/mvvm/overview">MVVM</a>, <a href="kendo-ui-docs/AngularJS/introduction">AngularJS</a> and <a href="kendo-ui-docs/framework/spa/overview">Single Page Application</a> development patterns.
+<li>Integration with <a href="/kendo-ui-docs/framework/mvvm/overview">MVVM</a>, <a href="/kendo-ui-docs/AngularJS/introduction">AngularJS</a> and <a href="/kendo-ui-docs/framework/spa/overview">Single Page Application</a> development patterns.
 Server wrappers are not intended to be used with those.</li>
 <li>
-<a href="kendo-ui-docs/vs-intellisense">Visual Studio Intellisense</a> for the client-side API.</li>
+<a href="/kendo-ui-docs/vs-intellisense">Visual Studio Intellisense</a> for the client-side API.</li>
 </ul>
 
 <p>Finally, there is no problem to use UI for ASP.NET MVC helpers and vanilla Kendo UI widgets <strong>at the same time on the same page</strong>, if a specific scenario requires that.</p>

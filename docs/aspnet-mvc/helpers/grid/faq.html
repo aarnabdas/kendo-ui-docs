@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Frequently asked questions for Kendo UI Grid for ASP.NET MVC</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to use Kendo UI Grid for ASP.NET MVC by reading Grid FAQ and learning with examples. How Data binding works with Kendo ASP.NET MVC helpers.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/faq.html")
         });
         </script>
@@ -110,7 +110,7 @@
 
 <h3 id="how-do-i-display-html-in-a-grid-column"><a href="#how-do-i-display-html-in-a-grid-column">How do I display HTML in a grid column?</a></h3>
 
-<p>By default the Kendo UI Grid for ASP.NET MVC will encode the HTML entities present in the data. To prevent that call the <a href="kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilderi#encodedsystem.boolean">Encoded</a>
+<p>By default the Kendo UI Grid for ASP.NET MVC will encode the HTML entities present in the data. To prevent that call the <a href="/kendo-ui-docs/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilderi#encodedsystem.boolean">Encoded</a>
 method and pass <code>false</code> as the argument.</p>
 
 <h4>Example: Display HTML Entities In Grid Columns</h4>
@@ -120,7 +120,7 @@ method and pass <code>false</code> as the argument.</p>
 
 <h3 id="how-do-i-customize-the-way-a-property-is-displayed-in-a-grid-bound-column"><a href="#how-do-i-customize-the-way-a-property-is-displayed-in-a-grid-bound-column">How do I customize the way a property is displayed in a grid bound column?</a></h3>
 
-<p>If the grid is <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">server bound</a> use the <code>Template</code> method.</p>
+<p>If the grid is <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">server bound</a> use the <code>Template</code> method.</p>
 
 <h4>Example: Customize the Column Appearance of a Server Bound Grid (WebForms)</h4>
 
@@ -157,8 +157,8 @@ method and pass <code>false</code> as the argument.</p>
 The bound item is available using the <code>@item</code> parameter.</p>
 </blockquote>
 
-<p>If the grid is <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax bound</a> use the <code>ClientTemplate</code> method.
-The value should be a string which represents a valid <a href="kendo-ui-docs/framework/templates/overview">Kendo Template</a>.</p>
+<p>If the grid is <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax bound</a> use the <code>ClientTemplate</code> method.
+The value should be a string which represents a valid <a href="/kendo-ui-docs/framework/templates/overview">Kendo Template</a>.</p>
 
 <h4>Example: Customize the Column Appearance of a Ajax Bound Grid</h4>
 
@@ -258,7 +258,7 @@ function productDetails(product) {
 <h3 id="how-do-i-use-a-kendo-ui-widget-inside-a-grid-client-column-template"><a href="#how-do-i-use-a-kendo-ui-widget-inside-a-grid-client-column-template">How do I use a Kendo UI widget inside a Grid client column template?</a></h3>
 
 <p><code>script</code> tags are not automatically evaluated inside a Grid client column template, so any included widgets will not be initialized.
-The scripts must be evaluated manually in the <a href="kendo-ui-docs/api/web/grid#events-dataBound">Grid's dataBound event</a>.</p>
+The scripts must be evaluated manually in the <a href="/kendo-ui-docs/api/web/grid#events-dataBound">Grid's dataBound event</a>.</p>
 
 <h4>Example: Add a Kendo UI Menu inside a Grid client column template</h4>
 
@@ -308,7 +308,7 @@ The scripts must be evaluated manually in the <a href="kendo-ui-docs/api/web/gri
 <h3 id="how-do-i-change-the-format-of-a-bound-column"><a href="#how-do-i-change-the-format-of-a-bound-column">How do I change the format of a bound column?</a></h3>
 
 <p>Use the <a href="api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string">Format</a> method.
-The value should be a valid <a href="kendo-ui-docs/api/framework/kendo#standard-number-formats">number</a> or <a href="kendo-ui-docs/api/framework/kendo#standard-date-formats">date</a> format.</p>
+The value should be a valid <a href="/kendo-ui-docs/api/framework/kendo#standard-number-formats">number</a> or <a href="/kendo-ui-docs/api/framework/kendo#standard-date-formats">date</a> format.</p>
 
 <h4>Example: Specify the Format Of a Bound Column</h4>
 
@@ -348,13 +348,13 @@ The value should be a valid <a href="kendo-ui-docs/api/framework/kendo#standard-
 
 <p>If your model supports the <code>IQueryable</code> interface or is <code>DataTable</code> the grid will do paging, sorting, filtering, grouping and aggregates (<code>DataTable</code> binding supports only <code>count</code> aggregate) automatically.
 For server binding scenarios no additional steps are required - just pass the IQueryable to the <code>Grid</code> constructor. Check the
-<a href="kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">server binding</a> help topic for additional info.</p>
+<a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding">server binding</a> help topic for additional info.</p>
 
 <p>For ajax binding scenarios the <code>ToDataSourceResult</code> extension method must be used to perform the data processing.
-Check the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a> help topic for additional information.</p>
+Check the <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a> help topic for additional information.</p>
 
 <p>If your model does not implement <code>IQueryable</code> custom binding should be implemented. This means that the developer is responsible for
-paging, sorting, filtering and grouping the data. More info can be found in the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/custom-binding">custom binding</a> help topic.</p>
+paging, sorting, filtering and grouping the data. More info can be found in the <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/custom-binding">custom binding</a> help topic.</p>
 
 <blockquote>
 <p><strong>Important</strong>: All data operations will be performed at database server level if the underlying IQueryable provider supports translation of expression trees to SQL. Kendo Grid for ASP.NET MVC has been tested with the following frameworks:</p>
@@ -404,7 +404,7 @@ paging, sorting, filtering and grouping the data. More info can be found in the 
 
 <h3 id="how-do-i-reload-the-data-in-an-ajax-bound-grid"><a href="#how-do-i-reload-the-data-in-an-ajax-bound-grid">How do I reload the data in an ajax bound grid?</a></h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/datasource#read">read</a> method of the DataSource should be used.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/datasource#read">read</a> method of the DataSource should be used.</p>
 
 <h4>Example: Reload Ajax Bound Grid</h4>
 
@@ -474,7 +474,7 @@ public ActionResult Read([DataSourceRequest] DataSourceRequest request)
 
 <h3 id="how-do-i-handle-errors-in-ajax-binding-mode"><a href="#how-do-i-handle-errors-in-ajax-binding-mode">How do I handle errors in ajax binding mode?</a></h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/datasource#error">error</a> event of the DataSource should be used.
+<p>The <a href="/kendo-ui-docs/api/framework/datasource#error">error</a> event of the DataSource should be used.
 Use the <code>Error</code> method from the fluent API to specify the name of the JavaScript function which will handle the event.</p>
 
 <h4>Example: Handle Errors In Ajax Binding</h4>

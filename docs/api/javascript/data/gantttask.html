@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for Kendo Data GanttTask</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Documentation how to get started with the GanttTask.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/data/gantttask.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendodatagantttask"><a href="#kendodatagantttask">kendo.data.GanttTask</a></h1>
 
-<p>The <code>kendo.data.GanttTask</code> class represents a data item from the <a href="kendo-ui-docs/api/framework/ganttdatasource">kendo.data.GanttDataSource</a>. Inherits from <a href="kendo-ui-docs/api/framework/model">kendo.data.Model</a>.</p>
+<p>The <code>kendo.data.GanttTask</code> class represents a data item from the <a href="/kendo-ui-docs/api/framework/ganttdatasource">kendo.data.GanttDataSource</a>. Inherits from <a href="/kendo-ui-docs/api/framework/model">kendo.data.Model</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -473,7 +473,7 @@ console.log(task.title); // outputs "Task1"
 
 <h2 id="methods"><a href="#methods">Methods</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/model#methods">Model methods</a> for all inherited methods.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/model#methods">Model methods</a> for all inherited methods.</p>
 
 <h3 id="methods-GanttTask.define"><a href="#methods-GanttTask.define">GanttTask.define</a></h3>
 
@@ -527,7 +527,7 @@ for "number" is <code>0</code> and for "date" is <code>new Date()</code> (today)
 <h5>options.fields.fieldName.validation <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
 </h5>
 
-<p>Specifies the validation options which will be used by <a href="kendo-ui-docs/api/framework/validator">Kendo Validator</a>.</p>
+<p>Specifies the validation options which will be used by <a href="/kendo-ui-docs/api/framework/validator">Kendo Validator</a>.</p>
 
 <h4>Example - define custom gantt task</h4>
 
@@ -593,7 +593,7 @@ console.log(task.isMilestone()); //logs 'true'
 
 <h2 id="events"><a href="#events">Events</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/model#events">Model events</a> for all inherited events.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/model#events">Model events</a> for all inherited events.</p>
         </article>
     </div>
 </div>

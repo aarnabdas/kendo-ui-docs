@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI ComboBox</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn to configure Kendo UI ComboBox widget, use the documentation guide to operate different types of methods and get familiar with all events, used in ComboBox UI widget.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/combobox.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouicombobox"><a href="#kendouicombobox">kendo.ui.ComboBox</a></h1>
 
-<p>Represents the Kendo UI ComboBox widget. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI ComboBox widget. Inherits from <a href="/kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -172,7 +172,7 @@ $("#combobox").kendoComboBox({
 
 <p>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.</p>
 
-<p><a href="kendo-ui-docs/api/framework/fx/common">Complete list of available animations</a></p>
+<p><a href="/kendo-ui-docs/api/framework/fx/common">Complete list of available animations</a></p>
 
 <h3 id="configuration-animation.close.duration">
 <a href="#configuration-animation.close.duration">animation.close.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 100)</em>
@@ -207,7 +207,7 @@ $("#combobox").kendoComboBox({
 
 <p>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.</p>
 
-<p><a href="kendo-ui-docs/api/framework/fx/common">Complete list of available animations</a></p>
+<p><a href="/kendo-ui-docs/api/framework/fx/common">Complete list of available animations</a></p>
 
 <h3 id="configuration-animation.open.duration">
 <a href="#configuration-animation.open.duration">animation.open.duration </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number</code></a> <em>(default: 200)</em>
@@ -236,7 +236,7 @@ $("#combobox").kendoComboBox({
 </h3>
 
 <p>Use it to set the Id of the parent ComboBox widget.
-<a href="kendo-ui-docs/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
+<a href="/kendo-ui-docs/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
 
 <h4>Example</h4>
 
@@ -270,8 +270,8 @@ $("#child").kendoComboBox({
 <a href="#configuration-cascadeFromField">cascadeFromField </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>Defines the field to be used to filter the data source. If not defined the <a href="kendo-ui-docs/api/web/combobox#configuration-dataValueField">parent's dataValueField option will be used</a>.
-<a href="kendo-ui-docs/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
+<p>Defines the field to be used to filter the data source. If not defined the <a href="/kendo-ui-docs/api/web/combobox#configuration-dataValueField">parent's dataValueField option will be used</a>.
+<a href="/kendo-ui-docs/web/combobox/cascading">Help topic showing how cascading functionality works</a></p>
 
 <h4>Example</h4>
 
@@ -303,15 +303,15 @@ $("#child").kendoComboBox({
 </code></pre>
 
 <h3 id="configuration-dataSource">
-<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array |</code></a><a href="/kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
 </h3>
 
-<p>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>
+<p>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing <a href="/kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>
 instance.</p>
 
-<p>If the <code>dataSource</code> option is set to a JavaScript object or array the widget will initialize a new <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a> instance using that value as data source configuration.</p>
+<p>If the <code>dataSource</code> option is set to a JavaScript object or array the widget will initialize a new <a href="/kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a> instance using that value as data source configuration.</p>
 
-<p>If the <code>dataSource</code> option is an existing <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
 
 <h4>Example - set dataSource as a JavaScript object</h4>
 
@@ -459,7 +459,7 @@ $("#combobox").kendoComboBox({
 <a href="#configuration-fixedGroupTemplate">fixedGroupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the fixed header group. By default the widget displays only the value of the current group.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the fixed header group. By default the widget displays only the value of the current group.</p>
 
 <pre><code>&lt;input id="customers" style="width: 400px" /&gt;
 &lt;script&gt;
@@ -485,7 +485,7 @@ $("#combobox").kendoComboBox({
 <a href="#configuration-groupTemplate">groupTemplate </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the groups. By default the widget displays only the value of the group.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the groups. By default the widget displays only the value of the group.</p>
 
 <pre><code>&lt;input id="customers" style="width: 400px" /&gt;
 &lt;script&gt;
@@ -627,7 +627,7 @@ $("#combobox").kendoComboBox({
 </h3>
 
 <p>The options that will be used for the popup initialization. For more details about the available options
-refer to <a href="kendo-ui-docs/api/javascript/ui/popup">Popup</a> documentation.</p>
+refer to <a href="/kendo-ui-docs/api/javascript/ui/popup">Popup</a> documentation.</p>
 
 <h4>Example - append the popup to a specific element</h4>
 
@@ -695,7 +695,7 @@ $("#combobox").kendoComboBox({
 <a href="#configuration-template">template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the items. By default the widget displays only the text of the data item (configured via <code>dataTextField</code>).</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> used to render the items. By default the widget displays only the text of the data item (configured via <code>dataTextField</code>).</p>
 
 <h4>Example - specify template as a function</h4>
 
@@ -773,7 +773,7 @@ $("#combobox").kendoComboBox({
 <a href="#configuration-valuePrimitive">valuePrimitive </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
 </h3>
 
-<p>Specifies the <a href="kendo-ui-docs/framework/mvvm/bindings/value">value binding</a> behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</p>
+<p>Specifies the <a href="/kendo-ui-docs/framework/mvvm/bindings/value">value binding</a> behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</p>
 
 <h4>Example - specify that the View-Model field should be updated with the selected item value</h4>
 
@@ -944,10 +944,10 @@ The widget will pass the selected value(s) in the <code>valueMapper</code> funct
 <h2 id="fields"><a href="#fields">Fields</a></h2>
 
 <h3 id="fields-dataSource">
-<a href="#fields-dataSource">dataSource </a><a href="kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+<a href="#fields-dataSource">dataSource </a><a href="/kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/datasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/datasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
 
 <blockquote>
 <p>Changes of the data source will be reflected in the widget.</p>
@@ -1367,7 +1367,7 @@ var selectedIndex = combobox.select();
 
 <h4>Parameters</h4>
 
-<h5>dataSource <a href="kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+<h5>dataSource <a href="/kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
 </h5>
 
 <h4>Example</h4>
@@ -1506,7 +1506,7 @@ combobox.value("Oranges");
 
 <blockquote>
 <p><strong>Important:</strong> The event is not fired when the value of the widget is changed from code.
-<strong>Important:</strong> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the <a href="kendo-ui-docs/api/web/combobox#events-cascade">cascade</a> event.</p>
+<strong>Important:</strong> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the <a href="/kendo-ui-docs/api/web/combobox#events-cascade">cascade</a> event.</p>
 </blockquote>
 
 <h4>Event Data</h4>
@@ -1647,7 +1647,7 @@ combobox.bind("dataBound", combobox_dataBound);
 <p>The filter descriptor that will be used to filter the data source.</p>
 
 <blockquote>
-<p>The data source filters the data items client-side unless the <a href="kendo-ui-docs/api/framework/datasource#configuration-serverFiltering">data source serverFiltering</a> option is set to <code>true</code>.</p>
+<p>The data source filters the data items client-side unless the <a href="/kendo-ui-docs/api/framework/datasource#configuration-serverFiltering">data source serverFiltering</a> option is set to <code>true</code>.</p>
 </blockquote>
 
 <h4>Example - subscribe to the "filtering" event during initialization</h4>

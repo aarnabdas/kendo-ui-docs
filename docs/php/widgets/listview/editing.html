@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>How to perform CRUD with Kendo ListView for PHP</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to do create, update and destroy with Kendo UI ListView for PHP">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/php-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/php-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("php/widgets/listview/editing.html")
         });
         </script>
@@ -119,7 +119,7 @@
 <h3 id="configure-listview-for-editing"><a href="#configure-listview-for-editing">Configure ListView for editing</a></h3>
 
 <ol>
-<li>Follow the steps from the <a href="kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
+<li>Follow the steps from the <a href="/kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
 <li>
 <p>Define item template for listview:</p>
 
@@ -308,7 +308,7 @@ $db = new PDO('sqlite:../sample.db');
 </code></pre>
 </li>
 <li>
-<p>Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap">parameterMap</a>.</p>
+<p>Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap">parameterMap</a>.</p>
 
 <pre><code>&lt;?php
 $request = json_decode(file_get_contents('php://input'));
@@ -454,7 +454,7 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the <s
 <h3 id="configure-listview-for-editing-using-datasourceresult"><a href="#configure-listview-for-editing-using-datasourceresult">Configure ListView for editing (using DataSourceResult)</a></h3>
 
 <ol>
-<li>Follow the steps from the <a href="kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
+<li>Follow the steps from the <a href="/kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
 <li>
 <p>Define item template for listview:</p>
 
@@ -640,7 +640,7 @@ echo $listview-&gt;render();
 </code></pre>
 </li>
 <li>
-<p>Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap">parameterMap</a>.</p>
+<p>Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap">parameterMap</a>.</p>
 
 <pre><code>&lt;?php
 $request = json_decode(file_get_contents('php://input'));

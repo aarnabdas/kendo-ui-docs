@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API documentation for Kendo UI jQuery TreeView widget for ASP.NET MVC</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This documentation guides you how to load data on demand in the server-side API of Kendo UI TreeView for ASP.NET MVC and serialize JSON format data from the server.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/migration/widgets/treeview.html")
         });
         </script>
@@ -200,7 +200,7 @@
 
 <h3 id="conditional-load-on-demand-for-some-nodes"><a href="#conditional-load-on-demand-for-some-nodes">Conditional load on demand for some nodes</a></h3>
 
-<p>This behavior can be achieved using a custom transport, like shown in the how to <a href="kendo-ui-docs/web/treeview/how-to/mix-local-data-and-remote-loading">mix local data and remote binding article</a>. Defining the local transport via the server-side wrappers can be done like this:</p>
+<p>This behavior can be achieved using a custom transport, like shown in the how to <a href="/kendo-ui-docs/web/treeview/how-to/mix-local-data-and-remote-loading">mix local data and remote binding article</a>. Defining the local transport via the server-side wrappers can be done like this:</p>
 
 <pre><code>@(Html.Kendo().TreeView()
     .Name("treeview")
@@ -252,11 +252,11 @@
 )
 </code></pre>
 
-<p>Any conditional code executed in the client-side template. See also <a href="kendo-ui-docs/web/treeview/how-to/hide-checkboxes-for-root-level">how to hide checkboxes for root level</a>.</p>
+<p>Any conditional code executed in the client-side template. See also <a href="/kendo-ui-docs/web/treeview/how-to/hide-checkboxes-for-root-level">how to hide checkboxes for root level</a>.</p>
 
 <h4>Show node lines</h4>
 
-<p>Node line functionality is not supported out of the box, but can be achieved via custom styling, as shown in the <a href="kendo-ui-docs/web/treeview/how-to/show-node-lines">show lines between nodes help topic</a>.</p>
+<p>Node line functionality is not supported out of the box, but can be achieved via custom styling, as shown in the <a href="/kendo-ui-docs/web/treeview/how-to/show-node-lines">show lines between nodes help topic</a>.</p>
 
 <h1 id="client-side-api-changes"><a href="#client-side-api-changes">Client-Side API Changes</a></h1>
 

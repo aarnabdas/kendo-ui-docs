@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard/building-the-store-sales-page.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="build-the-store-sales-page"><a href="#build-the-store-sales-page">Build the Store Sales page</a></h1>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-overview.png" alt="sales-overview"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-overview.png" alt="sales-overview"></p>
 
 <p>This page is constructed to show a collection of data visualization graphs, exposing several different views of store data. The page is dominated by a general sales graph, which can be filtered by five different dimensions, selectable by the buttons to the left of graph.</p>
 
@@ -118,15 +118,15 @@
 
 <p>The <strong>Sales By Genre</strong> chart allows for the chart type to be changed dynamically. The chart can be changed from, for instance, a bar graph</p>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png" alt="sales-by-genre-bar"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png" alt="sales-by-genre-bar"></p>
 
 <p>to a line graph</p>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-line.png" alt="sales-by-genre-line"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-line.png" alt="sales-by-genre-line"></p>
 
 <p>using the buttons down the right side.</p>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png" alt="sales-by-genre-bar-button-highlight"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png" alt="sales-by-genre-bar-button-highlight"></p>
 
 <p>The <strong>Sales By Genre</strong> and <strong>Searches By Genre</strong> charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within it's own <strong>&lt;div&gt;</strong>, with an accompanying <strong>&lt;span&gt;</strong> that contains the buttons for changing the chart type. The Sales By Genre chart is constructed like so:</p>
 
@@ -194,11 +194,11 @@
 
 <p>The <strong>Sales By Genre</strong> and <strong>Searches By Genre</strong> charts also provide a method to dynamically change the temporal data in use. For example, using the buttons on top, the <strong>Sales By Genre</strong> chart can be changed from showing Weekly data</p>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png" alt="sales-by-genre-bar-weekly"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png" alt="sales-by-genre-bar-weekly"></p>
 
 <p>to showing Monthly data.</p>
 
-<p><img src="kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-monthly.png" alt="sales-by-genre-bar-monthly"></p>
+<p><img src="/kendo-ui-docs/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-monthly.png" alt="sales-by-genre-bar-monthly"></p>
 
 <p>As before, the two charts are constructed similarly, with declarative markup and JavaScript. (And jQuery, of course!)</p>
 

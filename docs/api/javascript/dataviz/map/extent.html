@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API reference for Kendo UI Map Location</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/dataviz/map/extent.html")
         });
         </script>
@@ -107,7 +107,7 @@
     <div id="page-article">
         <article>
             <h1 id="kendodatavizmapextent--kendoclass">
-<a href="#kendodatavizmapextent--kendoclass">kendo.dataviz.map.Extent</a><span class="type-link">Inherits from <a class="type-link" href="kendo-ui-docs/api/javascript/class">kendo.Class</a></span>
+<a href="#kendodatavizmapextent--kendoclass">kendo.dataviz.map.Extent</a><span class="type-link">Inherits from <a class="type-link" href="/kendo-ui-docs/api/javascript/class">kendo.Class</a></span>
 </h1>
 
 <p>Represents a geographic region defined by two extreme locations (North West and South East).</p>
@@ -115,13 +115,13 @@
 <h2 id="constructor-parameters"><a href="#constructor-parameters">Constructor Parameters</a></h2>
 
 <h3 id="nw-kendodatavizmaplocationarray">
-<a href="#nw-kendodatavizmaplocationarray">nw </a><a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+<a href="#nw-kendodatavizmaplocationarray">nw </a><a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
 </h3>
 
 <p>The North West extreme location.</p>
 
 <h3 id="se-kendodatavizmaplocationarray">
-<a href="#se-kendodatavizmaplocationarray">se </a><a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+<a href="#se-kendodatavizmaplocationarray">se </a><a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
 </h3>
 
 <p>The South East extreme location.</p>
@@ -134,7 +134,7 @@
 
 <h4>Parameters</h4>
 
-<h5>a <a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
+<h5>a <a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a>
 </h5>
 
 <p>The extent North West extreme location or a [latitude, longitude] array.</p>
@@ -142,7 +142,7 @@
 <p>Alternatively, specify the full extent as an array of four elements
 ([NW lat, NW long, SE lat, SE long]) and omit the second parameter:</p>
 
-<h5>b <a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>optional</em>
+<h5>b <a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>optional</em>
 </h5>
 
 <p>The extent South East extreme location,
@@ -150,18 +150,18 @@ or an [latitude, longitude] array.</p>
 
 <h4>Returns</h4>
 
-<p><a href="kendo-ui-docs/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a> The Extent instance, if valid.</p>
+<p><a href="/kendo-ui-docs/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a> The Extent instance, if valid.</p>
 
 <h2 id="fields"><a href="#fields">Fields</a></h2>
 
 <h3 id="fields-nw">
-<a href="#fields-nw">nw </a><a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+<a href="#fields-nw">nw </a><a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
 </h3>
 
 <p>The North West extreme location.</p>
 
 <h3 id="fields-se">
-<a href="#fields-se">se </a><a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+<a href="#fields-se">se </a><a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
 </h3>
 
 <p>The South East extreme location.</p>
@@ -174,7 +174,7 @@ or an [latitude, longitude] array.</p>
 
 <h4>Parameters</h4>
 
-<h5>location <a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+<h5>location <a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
 </h5>
 
 <p>The location to test for.</p>
@@ -204,7 +204,7 @@ or an [latitude, longitude] array.</p>
 
 <h4>Returns</h4>
 
-<p><a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a> The extent center location.</p>
+<p><a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a> The extent center location.</p>
 
 <h3 id="methods-include"><a href="#methods-include">include</a></h3>
 
@@ -212,7 +212,7 @@ or an [latitude, longitude] array.</p>
 
 <h4>Parameters</h4>
 
-<h5>location <a href="kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
+<h5>location <a href="/kendo-ui-docs/api/javascript/dataviz/map/location" class="type-link"><code>kendo.dataviz.map.Location</code></a>
 </h5>
 
 <p>The location to include in the extent.</p>
@@ -250,7 +250,7 @@ or an [latitude, longitude] array.</p>
 
 <h4>Parameters</h4>
 
-<h5>extent <a href="kendo-ui-docs/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a>
+<h5>extent <a href="/kendo-ui-docs/api/javascript/dataviz/map/extent" class="type-link"><code>kendo.dataviz.map.Extent</code></a>
 </h5>
 
 <p>The extent to test with.</p>

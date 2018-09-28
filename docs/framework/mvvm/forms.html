@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Build MVVM-Bound Forms With Kendo UI</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("framework/mvvm/forms.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="build-mvvm-bound-forms-with-kendo-ui"><a href="#build-mvvm-bound-forms-with-kendo-ui">Build MVVM Bound Forms With Kendo UI</a></h1>
 
-<p>This article provides an in-depth look on collecting data from HTML forms using the <a href="kendo-ui-docs/framework/mvvm/overview">Kendo UI framework MVVM features</a>.</p>
+<p>This article provides an in-depth look on collecting data from HTML forms using the <a href="/kendo-ui-docs/framework/mvvm/overview">Kendo UI framework MVVM features</a>.</p>
 
 <h3 id="the-initial-form"><a href="#the-initial-form">The Initial Form</a></h3>
 
@@ -215,7 +215,7 @@ kendo.bind(document.body.children, viewModel);
 </code></pre>
 
 <p>The <code>merchant</code> input has a new binding. The <code>data-bind=”value: merchant”</code> says that we want to bind the value of this input to the <code>merchant</code>
-variable in the view model. We also added a <code>k-textbox</code> CSS class to it to style it using <a href="kendo-ui-docs/ui-widgets/appearance-styling">Kendo UI
+variable in the view model. We also added a <code>k-textbox</code> CSS class to it to style it using <a href="/kendo-ui-docs/ui-widgets/appearance-styling">Kendo UI
 styles</a>.</p>
 
 <pre><code>&lt;dt&gt;Amount&lt;/dt&gt;
@@ -224,7 +224,7 @@ styles</a>.</p>
 &lt;/dd&gt;
 </code></pre>
 
-<p>The <code>amount</code> input has two new bindings: <code>data-role</code> sets the input to a <a href="kendo-ui-docs/web/numerictextbox/overview">Kendo UI NumericTextBox</a> and <code>data-bind</code> which binds the value to our <code>amount</code> variable.</p>
+<p>The <code>amount</code> input has two new bindings: <code>data-role</code> sets the input to a <a href="/kendo-ui-docs/web/numerictextbox/overview">Kendo UI NumericTextBox</a> and <code>data-bind</code> which binds the value to our <code>amount</code> variable.</p>
 
 <pre><code>&lt;button id="create" data-bind="click: create" class="k-button"&gt;Add&lt;/button&gt;
 </code></pre>
@@ -235,7 +235,7 @@ styles</a>.</p>
      data-columns='["Type", "Merchant", "Amount"]' &gt;&lt;/div&gt;
 </code></pre>
 
-<p>This last one is the grid. Yes, this one line creates a <a href="kendo-ui-docs/ui-widgets/grid/walkthrough">Kendo UI Grid</a>.</p>
+<p>This last one is the grid. Yes, this one line creates a <a href="/kendo-ui-docs/ui-widgets/grid/walkthrough">Kendo UI Grid</a>.</p>
 
 <h3 id="the-final-result"><a href="#the-final-result">The Final Result</a></h3>
 
@@ -245,7 +245,7 @@ styles</a>.</p>
 
 <p>Not only does MVVM keep you from having to worry about many of the manual details, it also dramatically simplifies your code so that in your JavaScript you are only working with model objects. The DOM simply reflects the changes that you make to the model.</p>
 
-<p>To explore Kendo UI MVVM Features more, visit the <a href="kendo-ui-docs/framework/mvvm/overview">MVVM Overview Page</a> and related docs.</p>
+<p>To explore Kendo UI MVVM Features more, visit the <a href="/kendo-ui-docs/framework/mvvm/overview">MVVM Overview Page</a> and related docs.</p>
         </article>
     </div>
 </div>

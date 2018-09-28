@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI DataViz StockChart</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/dataviz/ui/stock-chart.html")
         });
         </script>
@@ -361,7 +361,7 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-navigator.categoryAxis.crosshair.tooltip.format">navigator.categoryAxis.crosshair.tooltip.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the tooltip. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the tooltip. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h3 id="configuration-navigator.categoryAxis.crosshair.tooltip.padding">
 <a href="#configuration-navigator.categoryAxis.crosshair.tooltip.padding">navigator.categoryAxis.crosshair.tooltip.padding </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: 0)</em>
@@ -397,7 +397,7 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-navigator.categoryAxis.crosshair.tooltip.template">navigator.categoryAxis.crosshair.tooltip.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the tooltip.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the tooltip.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -499,13 +499,13 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-navigator.categoryAxis.labels.culture">navigator.categoryAxis.labels.culture </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>The culture to use when formatting date values. See the <a href="kendo-ui-docs/framework/globalization/overview">globalization overview</a> for more information.</p>
+<p>The culture to use when formatting date values. See the <a href="/kendo-ui-docs/framework/globalization/overview">globalization overview</a> for more information.</p>
 
 <h3 id="configuration-navigator.categoryAxis.labels.dateFormats">
 <a href="#configuration-navigator.categoryAxis.labels.dateFormats">navigator.categoryAxis.labels.dateFormats </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
 </h3>
 
-<p>The format used to display the labels when the categories are dates. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the labels when the categories are dates. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <blockquote>
 <p>The chart will choose the appropriate format for the current <a href="#configuration-categoryAxis.baseUnit">categoryAxis.baseUnit</a>. Setting the <a href="#configuration-categoryAxis.labels.format">categoryAxis.labels.format</a> option will override the date formats.</p>
@@ -551,7 +551,7 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-navigator.categoryAxis.labels.format">navigator.categoryAxis.labels.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the labels. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the labels. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h3 id="configuration-navigator.categoryAxis.labels.margin">
 <a href="#configuration-navigator.categoryAxis.labels.margin">navigator.categoryAxis.labels.margin </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="type-link"><code>Number |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a> <em>(default: 0)</em>
@@ -641,7 +641,7 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-navigator.categoryAxis.labels.template">navigator.categoryAxis.labels.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -1285,7 +1285,7 @@ body of the chart.</p>
 <a href="#configuration-navigator.categoryAxis.notes.label.template">navigator.categoryAxis.notes.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -1309,7 +1309,7 @@ body of the chart.</p>
 <a href="#configuration-navigator.categoryAxis.notes.label.format">navigator.categoryAxis.notes.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the notes label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the notes label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h3 id="configuration-navigator.categoryAxis.notes.label.position">
 <a href="#configuration-navigator.categoryAxis.notes.label.position">navigator.categoryAxis.notes.label.position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "inside")</em>
@@ -1492,7 +1492,7 @@ body of the chart.</p>
 <a href="#configuration-navigator.categoryAxis.notes.data.label.template">navigator.categoryAxis.notes.data.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -1516,7 +1516,7 @@ body of the chart.</p>
 <a href="#configuration-navigator.categoryAxis.notes.data.label.format">navigator.categoryAxis.notes.data.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the note label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the note label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h3 id="configuration-navigator.categoryAxis.notes.data.label.text">
 <a href="#configuration-navigator.categoryAxis.notes.data.label.text">navigator.categoryAxis.notes.data.label.text </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
@@ -2096,7 +2096,7 @@ $("#stock-chart").kendoStockChart({
 &lt;/script&gt;
 </code></pre>
 
-<p>The name can also be a <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which sets the name of the series when bound to grouped data source.</p>
+<p>The name can also be a <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which sets the name of the series when bound to grouped data source.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -2539,7 +2539,7 @@ padding: { top: 1, left: 1 }
 <a href="#configuration-navigator.series.labels.template">navigator.series.labels.template </a><code>String  |</code><code> Function</code>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the chart series label.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the chart series label.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -3289,7 +3289,7 @@ Every n-th label is rendered where n is the step</p>
 <a href="#configuration-categoryAxis.labels.template">categoryAxis.labels.template </a><code>String  |</code><code> Function</code>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -4027,7 +4027,7 @@ that the total number of categories does not exceed <a href="#configuration-cate
 <a href="#configuration-categoryAxis.labels.culture">categoryAxis.labels.culture </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>Culture to use for formatting the dates. See <a href="kendo-ui-docs/framework/globalization/overview">Globalization</a> for more information.
+<p>Culture to use for formatting the dates. See <a href="/kendo-ui-docs/framework/globalization/overview">Globalization</a> for more information.
 It defaults to the global culture.</p>
 
 <h3 id="configuration-categoryAxis.labels.dateFormats">
@@ -4709,7 +4709,7 @@ $("#chart").kendoChart({
 <a href="#configuration-categoryAxis.notes.label.template">categoryAxis.notes.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -4793,7 +4793,7 @@ $("#chart").kendoChart({
 <a href="#configuration-categoryAxis.notes.label.format">categoryAxis.notes.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the notes label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the notes label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h4>Example - set the category axis notes label format</h4>
 
@@ -5384,7 +5384,7 @@ $("#chart").kendoChart({
 <a href="#configuration-categoryAxis.notes.data.label.template">categoryAxis.notes.data.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -5474,7 +5474,7 @@ $("#chart").kendoChart({
 <a href="#configuration-categoryAxis.notes.data.label.format">categoryAxis.notes.data.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the note label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
+<p>The format used to display the note label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the category value.</p>
 
 <h4>Example - set the category axis note label format</h4>
 
@@ -5977,7 +5977,7 @@ Any valid CSS color string will work here, including hex and rgb.</p>
 <a href="#configuration-legend.labels.template">legend.labels.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -6160,7 +6160,7 @@ Any valid CSS color string will work here, including hex and rgb.</p>
 <a href="#configuration-legend.inactiveItems.labels.template">legend.inactiveItems.labels.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -7178,7 +7178,7 @@ $("#stock-chart").kendoStockChart({
 &lt;/script&gt;
 </code></pre>
 
-<p>The name can also be a <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which sets the name of the series when bound to grouped data source.</p>
+<p>The name can also be a <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which sets the name of the series when bound to grouped data source.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -7689,7 +7689,7 @@ padding: { top: 1, left: 1 }
 <a href="#configuration-series.labels.template">series.labels.template </a><code>String  |</code><code> Function</code>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the chart series label.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the chart series label.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -8363,7 +8363,7 @@ Template variables:</p>
 <a href="#configuration-series.notes.label.template">series.notes.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -8387,7 +8387,7 @@ Template variables:</p>
 <a href="#configuration-series.notes.label.format">series.notes.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the notes label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
+<p>The format used to display the notes label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
 
 <h3 id="configuration-series.notes.label.position">
 <a href="#configuration-series.notes.label.position">series.notes.label.position </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "inside")</em>
@@ -10636,7 +10636,7 @@ $("#chart").kendoChart({
 <a href="#configuration-valueAxis.notes.label.template">valueAxis.notes.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -10720,7 +10720,7 @@ $("#chart").kendoChart({
 <a href="#configuration-valueAxis.notes.label.format">valueAxis.notes.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the notes label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
+<p>The format used to display the notes label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
 
 <h4>Example - set the value axis notes label format</h4>
 
@@ -11311,7 +11311,7 @@ $("#chart").kendoChart({
 <a href="#configuration-valueAxis.notes.data.label.template">valueAxis.notes.data.label.template </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="type-link"><code>Function</code></a>
 </h3>
 
-<p>The <a href="kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
+<p>The <a href="/kendo-ui-docs/api/framework/kendo#methods-template">template</a> which renders the labels.</p>
 
 <p>The fields which can be used in the template are:</p>
 
@@ -11401,7 +11401,7 @@ $("#chart").kendoChart({
 <a href="#configuration-valueAxis.notes.data.label.format">valueAxis.notes.data.label.format </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(default: "{0}")</em>
 </h3>
 
-<p>The format used to display the note label. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
+<p>The format used to display the note label. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one placeholder ("{0}") which represents the axis value.</p>
 
 <h4>Example - set the value axis note label format</h4>
 
@@ -11599,7 +11599,7 @@ $("#chart").kendoChart({
 
 <h4>Parameters</h4>
 
-<h5>options <a href="kendo-ui-docs/api/javascript/drawing/pdfoptions" class="type-link"><code>kendo.drawing.PDFOptions</code></a> <em>(optional)</em>
+<h5>options <a href="/kendo-ui-docs/api/javascript/drawing/pdfoptions" class="type-link"><code>kendo.drawing.PDFOptions</code></a> <em>(optional)</em>
 </h5>
 
 <p>Parameters for the exported PDF file.</p>
@@ -11655,7 +11655,7 @@ $("#chart").kendoChart({
 
 <h4>Parameters</h4>
 
-<h5>dataSource <a href="kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+<h5>dataSource <a href="/kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
 </h5>
 
 <p>The data source to which the widget should be bound.</p>

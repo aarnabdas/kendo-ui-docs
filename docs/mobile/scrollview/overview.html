@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Technical documentation for Kendo UI Mobile ScrollView widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to initialize Mobile ScrollView widget and define content pages in order to display one item per page.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("mobile/scrollview/overview.html")
         });
         </script>
@@ -415,7 +415,7 @@ When DataSource is populated with data the widget will use its <code>template</c
 
 <h3 id="pager-overlay"><a href="#pager-overlay">Pager overlay</a></h3>
 
-<p><img src="kendo-ui-docs/mobile/scrollview/pager-overlay.png" alt="ScrollView pager overlay"></p>
+<p><img src="/kendo-ui-docs/mobile/scrollview/pager-overlay.png" alt="ScrollView pager overlay"></p>
 
 <p>To activate the feature add <code>km-scrollview-overlay</code> class to the ScrollView element.</p>
 
@@ -432,17 +432,17 @@ When DataSource is populated with data the widget will use its <code>template</c
 <p>If a dataBound ScrollView does not display any data the reason might be:</p>
 
 <ul>
-<li>the <a href="kendo-ui-docs/api/framework/datasource#configuration-pageSize">pageSize</a> of the DataSource is undefined. Setting <code>pageSize</code> is mandatory.</li>
-<li>the <a href="kendo-ui-docs/api/framework/datasource#configuration-schema.total">total</a> amount of records in the DataSource is undefined. Setting the <code>total</code> is mandatory.</li>
-<li>the widget's <a href="kendo-ui-docs/api/mobile/scrollview#configuration-template">template</a> is undefined. Setting <code>template</code> is mandatory.</li>
-<li>the widget content height is zero - if <code>contentHeight</code> is set to 100% the ScrollView element should be immediate child of the View and the View's stretch option should be set to true. Code sample could be found <a href="kendo-ui-docs/api/mobile/scrollview#configuration-contentHeight">here</a>
+<li>the <a href="/kendo-ui-docs/api/framework/datasource#configuration-pageSize">pageSize</a> of the DataSource is undefined. Setting <code>pageSize</code> is mandatory.</li>
+<li>the <a href="/kendo-ui-docs/api/framework/datasource#configuration-schema.total">total</a> amount of records in the DataSource is undefined. Setting the <code>total</code> is mandatory.</li>
+<li>the widget's <a href="/kendo-ui-docs/api/mobile/scrollview#configuration-template">template</a> is undefined. Setting <code>template</code> is mandatory.</li>
+<li>the widget content height is zero - if <code>contentHeight</code> is set to 100% the ScrollView element should be immediate child of the View and the View's stretch option should be set to true. Code sample could be found <a href="/kendo-ui-docs/api/mobile/scrollview#configuration-contentHeight">here</a>
 </li>
 </ul>
 
 <p>If the widget loads data but the application hangs or crashes:</p>
 
 <ul>
-<li>most probably the total amount of records that you are loading is large and you have to set <a href="kendo-ui-docs/api/mobile/scrollview#configuration-enablePager">enablePager</a> to false.</li>
+<li>most probably the total amount of records that you are loading is large and you have to set <a href="/kendo-ui-docs/api/mobile/scrollview#configuration-enablePager">enablePager</a> to false.</li>
 </ul>
         </article>
     </div>

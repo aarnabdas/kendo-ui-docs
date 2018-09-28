@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for Kendo UI GanttDataSource</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn more about the configuration of Kendo UI GanttDataSource, methods and events.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/data/ganttdatasource.html")
         });
         </script>
@@ -108,13 +108,13 @@
         <article>
             <h1 id="kendodataganttdatasource"><a href="#kendodataganttdatasource">kendo.data.GanttDataSource</a></h1>
 
-<p>The data source used by the <a href="kendo-ui-docs/api/web/gantt">kendo.ui.Gantt</a> widget.
-Inherits from <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>. The GanttDataSource contains instances of the
-<a href="kendo-ui-docs/api/framework/gantttask">kendo.data.GanttTask</a> class.</p>
+<p>The data source used by the <a href="/kendo-ui-docs/api/web/gantt">kendo.ui.Gantt</a> widget.
+Inherits from <a href="/kendo-ui-docs/api/framework/datasource">kendo.data.DataSource</a>. The GanttDataSource contains instances of the
+<a href="/kendo-ui-docs/api/framework/gantttask">kendo.data.GanttTask</a> class.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration options.</p>
 
 <h3 id="configuration-schema">
 <a href="#configuration-schema">schema </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
@@ -126,7 +126,7 @@ Inherits from <a href="kendo-ui-docs/api/framework/datasource">kendo.data.DataSo
 <a href="#configuration-schema.model">schema.model </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
 </h3>
 
-<p>The model configuration of the GanttDataSource. See <a href="kendo-ui-docs/api/framework/gantttask#configuration">GanttTask</a> for more info.</p>
+<p>The model configuration of the GanttDataSource. See <a href="/kendo-ui-docs/api/framework/gantttask#configuration">GanttTask</a> for more info.</p>
 
 <h4>Example - configure the data source model schema</h4>
 
@@ -176,7 +176,7 @@ dataSource.fetch(function() {
 
 <h2 id="methods"><a href="#methods">Methods</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
 
 <h3 id="methods-taskAllChildren"><a href="#methods-taskAllChildren">taskAllChildren</a></h3>
 

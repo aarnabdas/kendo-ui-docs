@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Tutorial SalesHub - Creating and Editing Orders</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/tutorial-saleshub/order-page/kendo-saleshub-creating-and-editing-orders.html")
         });
         </script>
@@ -120,7 +120,7 @@
 <p>Since there are many similarities between the create and edit views for an Order, we'll discuss how
 both of them work in this article.</p>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-edit-screenshot.png" alt="kendo-saleshub-order-edit-screenshot"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-edit-screenshot.png" alt="kendo-saleshub-order-edit-screenshot"></p>
 
 <h2 id="set-up-the-partial-view-for-an-order"><a href="#set-up-the-partial-view-for-an-order">Set up the Partial View for an Order</a></h2>
 
@@ -130,7 +130,7 @@ can be found in <strong>Views/Order/_Order.cshtml</strong>.</p>
 
 <h2 id="set-up-the-basic-order-fields"><a href="#set-up-the-basic-order-fields">Set up the basic Order fields</a></h2>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-info-screenshot.png" alt="kendo-saleshub-order-info-screenshot"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-info-screenshot.png" alt="kendo-saleshub-order-info-screenshot"></p>
 
 <p>The first part of the form is where we declare the fields where the user can set the contract weight/amount,
 date, and the order number for the given order. For the sake of brevity, we'll only cover the fields which
@@ -177,7 +177,7 @@ as a parameter and will cause the extensions to generate the markup for the unde
 
 <h2 id="set-up-the-tabstrip"><a href="#set-up-the-tabstrip">Set up the TabStrip</a></h2>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-tabstrip-screenshot.png" alt="kendo-saleshub-order-tabstrip-screenshot"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-tabstrip-screenshot.png" alt="kendo-saleshub-order-tabstrip-screenshot"></p>
 
 <p>The next part of the Orders view is the <a href="http://demos.telerik.com/kendo-ui/web/tabstrip/index.html">Kendo TabStrip</a>, which contains
 the grids for Order details and notes.</p>
@@ -303,8 +303,8 @@ the extensions that the grid will be bound against <code>OrderDetailViewModel</c
 <p>Here we set up each column for the Grid. Calling <code>Filterable(false)</code> allows you to selectively choose when a column cannot be filtered by the user.</p>
 
 <p>Calling <code>ClientFooterTemplate</code> allows you to specify a footer which is displayed for the specified column. In our case these footer templates
-make use of the <a href="kendo-ui-docs/api/framework/datasource#configuration-aggregate">DataSource aggregates</a> that we set up, later on, in our DataSource. As the
-client footer templates are bound client-side we use <a href="kendo-ui-docs/api/framework/kendo#methods-template">Kendo's template syntax</a> to tell it which aggregate
+make use of the <a href="/kendo-ui-docs/api/framework/datasource#configuration-aggregate">DataSource aggregates</a> that we set up, later on, in our DataSource. As the
+client footer templates are bound client-side we use <a href="/kendo-ui-docs/api/framework/kendo#methods-template">Kendo's template syntax</a> to tell it which aggregate
 to display the result of (in our case we only bind against a <code>sum</code> aggregate).</p>
 
 <p>The last column is a command column and we use the Grid's built-in <code>Edit</code> and <code>Destroy</code> commands.</p>
@@ -420,13 +420,13 @@ grid is being bound against. After you <code>Add</code> an aggregate for a prope
 </code></pre>
 
 <p>Setting up the Order notes grid is somewhat similar to how we set up the order details grid. Since we're display a DateTime to the user, we specify
-a ClientTemplate for the <code>PostedDate</code> column which makes use of Kendo UI's <a href="kendo-ui-docs/framework/globalization/dateformatting">date formatting</a>
+a ClientTemplate for the <code>PostedDate</code> column which makes use of Kendo UI's <a href="/kendo-ui-docs/framework/globalization/dateformatting">date formatting</a>
 capabilities. Another difference is that we only support viewing and creating order notes, so we only provide <code>Read</code> and <code>Create</code> URLs for the
 DataSource.</p>
 
 <h2 id="set-up-the-panel-bar"><a href="#set-up-the-panel-bar">Set up the Panel Bar</a></h2>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-panelbar-screenshot.png" alt="kendo-saleshub-order-panelbar-screenshot"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-panelbar-screenshot.png" alt="kendo-saleshub-order-panelbar-screenshot"></p>
 
 <p>After the tabstrip containing the order details and order notes grid we have a <a href="http://demos.telerik.com/kendo-ui/web/panelbar/index.html">Kendo PanelBar</a> which contains
 the fields for editing the payment terms of an Order, along with setting invoice comments.</p>

@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for methods and properties in Kendo UI Framework</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Examples and detailed explanation of Kendo UI methods and properties.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/kendo.html")
         });
         </script>
@@ -413,7 +413,7 @@ console.log(value);
 <h5>formats <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String |</code></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="type-link"><code>Array</code></a> <em>(optional)</em>
 </h5>
 
-<p>The format(s) that will be used to parse the date. By default all <a href="kendo-ui-docs/framework/globalization/dateformatting">standard date formats</a> of the current culture are used.</p>
+<p>The format(s) that will be used to parse the date. By default all <a href="/kendo-ui-docs/framework/globalization/dateformatting">standard date formats</a> of the current culture are used.</p>
 
 <h5>culture <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(optional)</em>
 </h5>
@@ -613,7 +613,7 @@ $("ul").html(html);
 <h5>force <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="type-link"><code>Boolean</code></a><em>(default: false)</em>
 </h5>
 
-<p>Determines whether the resizing routine should be executed even if the respective widget's outer dimensions have not changed. The parameter will be passed to the <a href="kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing">widget's <code>resize</code> method</a>.</p>
+<p>Determines whether the resizing routine should be executed even if the respective widget's outer dimensions have not changed. The parameter will be passed to the <a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing">widget's <code>resize</code> method</a>.</p>
 
 <h3 id="methods-saveAs"><a href="#methods-saveAs">saveAs</a></h3>
 
@@ -897,12 +897,12 @@ console.log(template({ name: "John Doe" })); // outputs "&lt;strong&gt;John Doe&
 <h5>format <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h5>
 
-<p>The format string which should be used to format the value. <a href="kendo-ui-docs/framework/globalization/numberformatting">Number formatting</a> and <a href="kendo-ui-docs/framework/globalization/dateformatting">date formatting</a> depends on the current culture.</p>
+<p>The format string which should be used to format the value. <a href="/kendo-ui-docs/framework/globalization/numberformatting">Number formatting</a> and <a href="/kendo-ui-docs/framework/globalization/dateformatting">date formatting</a> depends on the current culture.</p>
 
 <h5>culture <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a> <em>(optional)</em>
 </h5>
 
-<p>The name of the culture which should be used to format the value. <a href="kendo-ui-docs/framework/globalization/overview#add%20culture%20scripts%20to%20the%20page">The culture should be registered on the page</a>.</p>
+<p>The name of the culture which should be used to format the value. <a href="/kendo-ui-docs/framework/globalization/overview#add%20culture%20scripts%20to%20the%20page">The culture should be registered on the page</a>.</p>
 
 <h3 id="methods-unbind"><a href="#methods-unbind">unbind</a></h3>
 

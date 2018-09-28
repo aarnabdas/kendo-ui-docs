@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for Kendo UI Hierarchical DataSource</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn more about the configuration of Kendo UI DataSource, methods and events.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/data/hierarchicaldatasource.html")
         });
         </script>
@@ -110,22 +110,22 @@
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#configuration">DataSource configuration</a> for all inherited configuration.</p>
 
 <h3 id="configuration-schema">
 <a href="#configuration-schema">schema </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object</code></a>
 </h3>
 
-<p>The schema configuration. See the <a href="kendo-ui-docs/api/framework/datasource#configuration-schema">DataSource.schema configuration</a> for all available options.</p>
+<p>The schema configuration. See the <a href="/kendo-ui-docs/api/framework/datasource#configuration-schema">DataSource.schema configuration</a> for all available options.</p>
 
 <h3 id="configuration-schema.model">
 <a href="#configuration-schema.model">schema.model </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><code>kendo.data.Node</code>
 </h3>
 
-<p>The data item (model) configuration. See the <a href="kendo-ui-docs/api/framework/datasource#configuration-schema.model">DataSource.schema.model configuration</a> for all available options.</p>
+<p>The data item (model) configuration. See the <a href="/kendo-ui-docs/api/framework/datasource#configuration-schema.model">DataSource.schema.model configuration</a> for all available options.</p>
 
 <blockquote>
-<p>The model <strong>must</strong> inherit from <a href="kendo-ui-docs/api/framework/node">kendo.data.Node</a>.</p>
+<p>The model <strong>must</strong> inherit from <a href="/kendo-ui-docs/api/framework/node">kendo.data.Node</a>.</p>
 </blockquote>
 
 <h4>Example - use a custom model</h4>
@@ -339,18 +339,18 @@ console.log(sw5.children.data().length); // logs 4
 
 <h2 id="methods"><a href="#methods">Methods</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#methods">DataSource methods</a> for all inherited methods.</p>
 
 <p>The <strong>remove</strong> and <strong>getByUid</strong> methods are overridden and work with the hierarchical data
 (they will act on all child datasources that have been read).</p>
 
 <h2 id="events"><a href="#events">Events</a></h2>
 
-<p>See the <a href="kendo-ui-docs/api/framework/datasource#events">DataSource events</a> for all inherited events.</p>
+<p>See the <a href="/kendo-ui-docs/api/framework/datasource#events">DataSource events</a> for all inherited events.</p>
 
 <h3 id="events-change"><a href="#events-change">change</a></h3>
 
-<p>Fires when data is changed. In addition to the <a href="kendo-ui-docs/api/framework/datasource#change">standard change event</a>,
+<p>Fires when data is changed. In addition to the <a href="/kendo-ui-docs/api/framework/datasource#change">standard change event</a>,
 the HierarchicalDataSource includes additional data when the event has been triggered from a child
 DataSource.</p>
 

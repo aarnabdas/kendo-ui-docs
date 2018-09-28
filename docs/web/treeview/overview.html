@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of Kendo UI jQuery TreeView widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Documentation for Kendo UI TreeView widget.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/treeview/overview.html")
         });
         </script>
@@ -192,7 +192,7 @@ preferably in the $(document).ready() event handler.</p>
 </code></pre>
 
 <p>A complete reference on how to bind the TreeView to different service end-points can be found
-on the <a href="kendo-ui-docs/api/framework/hierarchicaldatasource">HierarchicalDataSource API help</a>.</p>
+on the <a href="/kendo-ui-docs/api/framework/hierarchicaldatasource">HierarchicalDataSource API help</a>.</p>
 
 <h3 id="enabling-drag-and-drop-for-treeview-nodes"><a href="#enabling-drag-and-drop-for-treeview-nodes">Enabling drag-and-drop for TreeView nodes</a></h3>
 
@@ -254,12 +254,12 @@ use the API to control its behavior.</p>
 </code></pre>
 
 <p>The <strong>text</strong>, <strong>imageUrl</strong>, <strong>spriteCssClass</strong> and <strong>url</strong> fields can be changed through the
-<a href="kendo-ui-docs/api/web/treeview#dataTextField">datatextfield</a>, <a href="kendo-ui-docs/api/web/treeview#dataImageUrlField">dataimageurlfield</a>,
-<a href="kendo-ui-docs/api/web/treeview#dataSpriteCssClassField">dataspritecssclassfield</a>, and <a href="kendo-ui-docs/api/web/treeview#dataUrlField">dataurlfield</a>,
+<a href="/kendo-ui-docs/api/web/treeview#dataTextField">datatextfield</a>, <a href="/kendo-ui-docs/api/web/treeview#dataImageUrlField">dataimageurlfield</a>,
+<a href="/kendo-ui-docs/api/web/treeview#dataSpriteCssClassField">dataspritecssclassfield</a>, and <a href="/kendo-ui-docs/api/web/treeview#dataUrlField">dataurlfield</a>,
 respectively.</p>
 
 <p>You can add arbitrary fields when binding through a dataSource. These are stored in the HierarchicalDataSource,
-and can be easily accessed through the treeview <a href="kendo-ui-docs/api/web/treeview#dataitem">dataItem method</a>:</p>
+and can be easily accessed through the treeview <a href="/kendo-ui-docs/api/web/treeview#dataitem">dataItem method</a>:</p>
 
 <h2 id="common-operations"><a href="#common-operations">Common operations</a></h2>
 
@@ -283,8 +283,8 @@ $("#treeview").kendoTreeView({
 });
 </code></pre>
 
-<p>Since the dataItem is of type <a href="kendo-ui-docs/api/framework/node">Node</a>,
-you can use its <a href="kendo-ui-docs/api/framework/node#methods-loaded">loaded flag</a> to force reloading of nodes from the server.</p>
+<p>Since the dataItem is of type <a href="/kendo-ui-docs/api/framework/node">Node</a>,
+you can use its <a href="/kendo-ui-docs/api/framework/node#methods-loaded">loaded flag</a> to force reloading of nodes from the server.</p>
 
 <h3 id="reloading-child-nodes-when-nodes-are-expanded"><a href="#reloading-child-nodes-when-nodes-are-expanded">Reloading child nodes when nodes are expanded</a></h3>
 
@@ -326,7 +326,7 @@ gatherStates(treeview.dataSource.view());
 
 <h3 id="projecting-the-treeview-state"><a href="#projecting-the-treeview-state">Projecting the TreeView state</a></h3>
 
-<p>Because the HierarchicalDataSource does not support data projection, you might need to remap state fields via the <a href="kendo-ui-docs/api/framework/datasource#configuration-schema.parse">schema.parse</a> configuration option:</p>
+<p>Because the HierarchicalDataSource does not support data projection, you might need to remap state fields via the <a href="/kendo-ui-docs/api/framework/datasource#configuration-schema.parse">schema.parse</a> configuration option:</p>
 
 <pre><code>&lt;div id="tree"&gt;
 &lt;script&gt;

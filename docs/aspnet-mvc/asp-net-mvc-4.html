@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Using Telerik UI for ASP.NET MVC with MVC 4</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to use Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/asp-net-mvc-4.html")
         });
         </script>
@@ -121,7 +121,7 @@
 <li>Select <strong>ASP.NET MVC 4 Web Application</strong> and click <strong>OK</strong>. This will start the <strong>New ASP.NET MVC 4 Project</strong> wizard.</li>
 <li>Select <strong>Internet Application</strong> from the available templates and click <strong>OK</strong>. Alternatively you can select other templates - the remaining steps are the same.</li>
 <li>Press <strong>CTRL+F5</strong> to build and run the application.
-<img src="kendo-ui-docs/aspnet-mvc/images/mvc4-new-app.png" alt="New ASP.NET MVC 4 Application">
+<img src="/kendo-ui-docs/aspnet-mvc/images/mvc4-new-app.png" alt="New ASP.NET MVC 4 Application">
 </li>
 </ol>
 
@@ -144,7 +144,7 @@
 <li>Rename the <strong>Scripts/js</strong> directory to <strong>Scripts/kendo</strong>. Rename <strong>Content/styles</strong> to <strong>Content/kendo</strong>.</li>
 </ol>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/images/mvc4-solution.png" alt="Kendo directories in Solution Explorer"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/images/mvc4-solution.png" alt="Kendo directories in Solution Explorer"></p>
 
 <p>After the required JavaScript and CSS files are added in the application you can include them.</p>
 
@@ -160,7 +160,7 @@
 </code></pre>
 </li>
 <li>
-<p>Add a style bundle for Telerik UI for ASP.NET MVC. <strong>It is important to read the <a href="kendo-ui-docs/aspnet-mvc/fundamentals#css-bundling">CSS Bundling</a> documentation</strong>.</p>
+<p>Add a style bundle for Telerik UI for ASP.NET MVC. <strong>It is important to read the <a href="/kendo-ui-docs/aspnet-mvc/fundamentals#css-bundling">CSS Bundling</a> documentation</strong>.</p>
 
 <pre><code>bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
             "~/Content/kendo/kendo.common.min.css",
@@ -305,14 +305,14 @@
 <li><p>Press <strong>CTRL+F5</strong> to build and run the application.</p></li>
 </ol>
 
-<p><img src="kendo-ui-docs/aspnet-mvc/images/mvc4-final.png" alt="Final result"></p>
+<p><img src="/kendo-ui-docs/aspnet-mvc/images/mvc4-final.png" alt="Final result"></p>
 
 <h2 id="next-steps"><a href="#next-steps">Next steps</a></h2>
 
 <ul>
-<li><a href="kendo-ui-docs/aspnet-mvc/fundamentals">Fundamentals</a></li>
-<li><a href="kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Using the Telerik UI for ASP.NET MVC Visual Studio Extensions</a></li>
-<li><a href="kendo-ui-docs/aspnet-mvc/troubleshooting">Troubleshooting</a></li>
+<li><a href="/kendo-ui-docs/aspnet-mvc/fundamentals">Fundamentals</a></li>
+<li><a href="/kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Using the Telerik UI for ASP.NET MVC Visual Studio Extensions</a></li>
+<li><a href="/kendo-ui-docs/aspnet-mvc/troubleshooting">Troubleshooting</a></li>
 </ul>
         </article>
     </div>

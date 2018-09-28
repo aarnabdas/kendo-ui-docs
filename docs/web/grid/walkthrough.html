@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Detailed documentation for Kendo UI Grid Widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This walkthrough section will guide you how to create a grid, add HTML table and control grid widget's features.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/grid/walkthrough.html")
         });
         </script>
@@ -164,7 +164,7 @@ Fields and templates are defined via data attributes:</p>
 </code></pre>
 
 <p>The table can now describe the entire structure of the grid. The field that the column is bound to in the data set, is specified in the <code>data-field</code> attribute of each <code>th</code> element. Using <code>data-field</code> attributes is highly
-recommended, otherwise the header cell content should meet the <a href="kendo-ui-docs/api/web/grid#configuration-columns.field">requirements for data field names</a>.</p>
+recommended, otherwise the header cell content should meet the <a href="/kendo-ui-docs/api/web/grid#configuration-columns.field">requirements for data field names</a>.</p>
 
 <p>Since the layout of the grid is defined by the HTML it’s only necessary to call the kendoGrid() function to create a grid.</p>
 
@@ -195,7 +195,7 @@ recommended, otherwise the header cell content should meet the <a href="kendo-ui
  });
 </code></pre>
 
-<p><img src="kendo-ui-docs/web/grid/grid2_1.png" alt=""></p>
+<p><img src="/kendo-ui-docs/web/grid/grid2_1.png" alt=""></p>
 
 <h3 id="data-binding--remote"><a href="#data-binding--remote">Data Binding – Remote</a></h3>
 
@@ -235,7 +235,7 @@ You can control the height of the grid by specifying a static pixel value.</p>
 });
 </code></pre>
 
-<p><img src="kendo-ui-docs/web/grid/grid3_1.png" alt="Grid With Fixed Height And Scrolling"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid3_1.png" alt="Grid With Fixed Height And Scrolling"></p>
 
 <p>As all block elements, the Grid expands to 100% width. Setting CSS width properties for the Grid itself, or some of its ancestors can control the width of the Grid.</p>
 
@@ -250,7 +250,7 @@ make the Grid <code>div</code> 100% high. According to web standards, elements w
 until an element with a pixel height is reached, or until the <code>html</code> element is reached. 100% high elements cannot have margins, paddings, borders or sibling elements,
 so the default border of the Grid <code>div</code> should be removed as well.</p>
 
-<p>The second step is to subscribe to the browser window's <code>resize</code> event and execute the Grid's <a href="kendo-ui-docs/using-kendo-in-responsive-web-pages"><code>resize</code></a> method.
+<p>The second step is to subscribe to the browser window's <code>resize</code> event and execute the Grid's <a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages"><code>resize</code></a> method.
 If Grid virtual scrolling is used, then execute the following instead of <code>resize</code>.</p>
 
 <pre><code>$("#GridID").data("kendoGrid").dataSource.fetch();
@@ -287,7 +287,7 @@ If virtual scrolling is used, the vertical scrollbar will not appear.</p>
 <ul>
 <li>The Grid should be initialized when its element becomes visible;</li>
 <li>The Grid's layout must be adjusted manually. With old Kendo UI versions, use the code from the above example (there is no need to attach a window resize handler). Since Q3 2013,
-you can use <a href="kendo-ui-docs/api/framework/kendo/#methods-resize"><code>kendo.resize()</code></a> or the Grid's <a href="kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize()</code></a> method.</li>
+you can use <a href="/kendo-ui-docs/api/framework/kendo/#methods-resize"><code>kendo.resize()</code></a> or the Grid's <a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize()</code></a> method.</li>
 <li>
 <p>Instead of setting an overall height for the Grid in its configuration, you can define height for the scrollable data area only. In this case no height calculations will be made:</p>
 
@@ -483,7 +483,7 @@ This requirement ensures that at least one non-locked column is always visible a
  });
 </code></pre>
 
-<p><img src="kendo-ui-docs/web/grid/grid4_1.png" alt="Grid With Row Selection Enabled"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid4_1.png" alt="Grid With Row Selection Enabled"></p>
 
 <p>The <code>selectable</code> option can also be set to the following values:</p>
 
@@ -559,9 +559,9 @@ This requirement ensures that at least one non-locked column is always visible a
 });
 </code></pre>
 
-<p><img src="kendo-ui-docs/web/grid/grid5_1.png" alt="Grid With Grouping Enabled"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid5_1.png" alt="Grid With Grouping Enabled"></p>
 
-<p><img src="kendo-ui-docs/web/grid/grid6_1.png" alt="Grid Grouped By Last Name"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid6_1.png" alt="Grid Grouped By Last Name"></p>
 
 <p>You can additionally sort the grouping by clicking on the grouping tab.  In this example, clicking on “lastName” will sort the grouping descending.  Clicking it again will toggle to ascending.  Each of the individual groups themselves can be toggled from expanded to collapsed by clicking on the arrow next to the respective header grouping.</p>
 
@@ -605,7 +605,7 @@ which adds additional cells, depending on the number of existing groups.</p>
 });
 </code></pre>
 
-<p><img src="kendo-ui-docs/web/grid/grid7_1.png" alt="Grid With Sorting Enabled"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid7_1.png" alt="Grid With Sorting Enabled"></p>
 
 <p>The sortable attribute also has the following settings:</p>
 
@@ -653,7 +653,7 @@ This is achieved by preventing event bubbling of the custom hyperlinks' <strong>
 
 <p>In order to get a Grid table row by the data item ID can be achieved in the following way.</p>
 
-<p>First, the <a href="kendo-ui-docs/api/framework/model#configuration-Example">ID field should be defined in the model configuration</a> of the Grid datasource.</p>
+<p>First, the <a href="/kendo-ui-docs/api/framework/model#configuration-Example">ID field should be defined in the model configuration</a> of the Grid datasource.</p>
 
 <p>Then, the row model, the model UID and the Grid table row can be retrieved consecutively in the following way:</p>
 
@@ -693,7 +693,7 @@ var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is 
 
 <p>Now the email address is an interactive hyperlink  that will open a new email message.</p>
 
-<p><img src="kendo-ui-docs/web/grid/grid8_1.png" alt="Grid With Row Template"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid8_1.png" alt="Grid With Row Template"></p>
 
 <h2 id="printing-the-grid"><a href="#printing-the-grid">Printing the Grid</a></h2>
 
@@ -801,7 +801,7 @@ $(document).ready(function () {
 <p>When the datasource does not return any data (e.g. as a result of filtering) a table row with some user-friendly message can be added manually:</p>
 
 <h3 id="example---adding-a-table-row-in-the-grids-databound-event-handler">
-<a href="#example---adding-a-table-row-in-the-grids-databound-event-handler">Example - adding a table row in the Grid's </a><a href="kendo-ui-docs/api/web/grid/#events-dataBound">dataBound</a> event handler</h3>
+<a href="#example---adding-a-table-row-in-the-grids-databound-event-handler">Example - adding a table row in the Grid's </a><a href="/kendo-ui-docs/api/web/grid/#events-dataBound">dataBound</a> event handler</h3>
 
 <pre><code>function onGridDataBound(e) {
     if (!e.sender.dataSource.view().length) {

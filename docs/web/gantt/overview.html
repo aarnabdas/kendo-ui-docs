@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of the Kendo UI Gantt widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Quick steps to help you create a Kendo UI Gantt.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/gantt/overview.html")
         });
         </script>
@@ -110,7 +110,7 @@
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
-<p>The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the <a href="kendo-ui-docs/api/framework/ganttdatasource">kendo.data.GanttDataSource</a> for loading tasks, and <a href="kendo-ui-docs/api/framework/ganttdependencydatasource">kendo.data.GanttDependencyDataSource</a> for loading dependencies (although the widget can work when only tasks are loaded as well). The <code>GanttDataSource</code> contains instances of a custom Kendo UI model – <a href="kendo-ui-docs/api/framework/gantttask">kendo.data.GanttTask</a>, which represents the gantt task data items, and the <code>GanttDependencyDataSource</code> contains instances of the custom <a href="kendo-ui-docs/api/framework/ganttdependency">kendo.data.GanttDependency</a> model, which represents the gantt dependency data items.</p>
+<p>The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the <a href="/kendo-ui-docs/api/framework/ganttdatasource">kendo.data.GanttDataSource</a> for loading tasks, and <a href="/kendo-ui-docs/api/framework/ganttdependencydatasource">kendo.data.GanttDependencyDataSource</a> for loading dependencies (although the widget can work when only tasks are loaded as well). The <code>GanttDataSource</code> contains instances of a custom Kendo UI model – <a href="/kendo-ui-docs/api/framework/gantttask">kendo.data.GanttTask</a>, which represents the gantt task data items, and the <code>GanttDependencyDataSource</code> contains instances of the custom <a href="/kendo-ui-docs/api/framework/ganttdependency">kendo.data.GanttDependency</a> model, which represents the gantt dependency data items.</p>
 
 <h2 id="binding-to-local-javascript-array"><a href="#binding-to-local-javascript-array">Binding to local JavaScript array</a></h2>
 
@@ -159,7 +159,7 @@ a demo remote service which returns sample gantt tasks and dependencies. That se
 
 <blockquote>
 <p>The demo service uses JSONP in order to be accessible cross-domain. If your own service lives in the same domain as the web site you don't need to use JSONP - you can use JSON instead. More information
-about cross-domain requests can be found <a href="kendo-ui-docs/howto/use-cors-with-all-modern-browsers">here</a>.</p>
+about cross-domain requests can be found <a href="/kendo-ui-docs/howto/use-cors-with-all-modern-browsers">here</a>.</p>
 </blockquote>
 
 <h3 id="example---binding-to-remote-service"><a href="#example---binding-to-remote-service">Example - binding to remote service</a></h3>
@@ -381,7 +381,7 @@ The "remote service binding" example shown above shows how to map remote service
 <li>format - the format in which the data in the column is represented in.</li>
 </ul>
 
-<p>To configure individual columns use the <a href="kendo-ui-docs/api/web/gantt#configuration-columns">views</a> option:</p>
+<p>To configure individual columns use the <a href="/kendo-ui-docs/api/web/gantt#configuration-columns">views</a> option:</p>
 
 <h3 id="example---configure-gantt-columns"><a href="#example---configure-gantt-columns">Example - configure gantt columns</a></h3>
 
@@ -424,7 +424,7 @@ $("#gantt").kendoGantt({
 <li>month - the timeline is divided into months and weeks.</li>
 </ul>
 
-<p>To enable or disable individual other views or configure them use the <a href="kendo-ui-docs/api/web/gantt#configuration-views">views</a> option:</p>
+<p>To enable or disable individual other views or configure them use the <a href="/kendo-ui-docs/api/web/gantt#configuration-views">views</a> option:</p>
 
 <h3 id="example---enable-all-scheduler-views"><a href="#example---enable-all-scheduler-views">Example - enable all scheduler views</a></h3>
 
@@ -490,7 +490,7 @@ var gantt = $("#gantt").data("kendoGantt");
 
 <h2 id="using-the-api-of-kendo-ui-gantt"><a href="#using-the-api-of-kendo-ui-gantt">Using the API of Kendo UI Gantt</a></h2>
 
-<p>The gantt widget exposes a set of <a href="kendo-ui-docs/api/web/gantt#methods">methods</a> and <a href="kendo-ui-docs/api/web/gantt#fields">fields</a> which the developer can use.</p>
+<p>The gantt widget exposes a set of <a href="/kendo-ui-docs/api/web/gantt#methods">methods</a> and <a href="/kendo-ui-docs/api/web/gantt#fields">fields</a> which the developer can use.</p>
 
 <h3 id="example---using-the-api-of-kendo-ui-gantt"><a href="#example---using-the-api-of-kendo-ui-gantt">Example - using the API of Kendo UI Gantt</a></h3>
 
@@ -515,7 +515,7 @@ gantt.view("week"); // Go to week view
 
 <h2 id="subscribing-to-the-events-of-kendo-ui-gantt"><a href="#subscribing-to-the-events-of-kendo-ui-gantt">Subscribing to the events of Kendo UI Gantt</a></h2>
 
-<p>The gantt widget supports a set of <a href="kendo-ui-docs/api/web/gantt#events">events</a> which the developer can subscribe to. There are two ways to handle events:</p>
+<p>The gantt widget supports a set of <a href="/kendo-ui-docs/api/web/gantt#events">events</a> which the developer can subscribe to. There are two ways to handle events:</p>
 
 <ul>
 <li>Specify the JavaScript function which will handle the event during widget initialization.</li>

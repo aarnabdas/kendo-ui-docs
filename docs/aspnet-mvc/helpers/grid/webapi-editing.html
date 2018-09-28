@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Web API Controller Editing with Kendo UI Grid for ASP.NET MVC</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Tutorial showing how to implement CRUD operations with a Web API controller.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/webapi-editing.html")
         });
         </script>
@@ -110,21 +110,21 @@
 The example uses the Products table from the Northwind database.</p>
 
 <ol>
-<li>Create a new <strong>ASP.NET MVC 4 Web Application</strong> (or <strong>Telerik MVC Web Application</strong> if you have installed the <a href="kendo-ui-docs/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
-Name the application "KendoGridWebApiCRUD". If you decided not to use the Visual Studio Extensions follow the steps from the <a href="kendo-ui-docs/aspnet-mvc/asp-net-mvc-4">introduction</a> help topic in order
+<li>Create a new <strong>ASP.NET MVC 4 Web Application</strong> (or <strong>Telerik MVC Web Application</strong> if you have installed the <a href="/kendo-ui-docs/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
+Name the application "KendoGridWebApiCRUD". If you decided not to use the Visual Studio Extensions follow the steps from the <a href="/kendo-ui-docs/aspnet-mvc/asp-net-mvc-4">introduction</a> help topic in order
 to add Telerik UI for ASP.NET MVC to the application.</li>
 <li>Add a new "Entity Framework Data Model". Right click the <strong>Models</strong> folder in Visual Studio solution explorer and pick <strong>Add -&gt; New Item</strong>. Choose <strong>Data -&gt; ADO.NET Entity Data Model</strong> from the <strong>Add New Item</strong> dialog.
 Name the model "Northwind.edmx" and click <strong>Next</strong>. This will start the <strong>Entity Data Model Wizard</strong>.
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
 </li>
 <li>Select <strong>Generate from database</strong> option and click <strong>Next</strong>. Configure a connection to the Northwind database. Click <strong>Next</strong>.</li>
 <li>Select the <strong>Products</strong> table. Leave all other options as they are set by default. Click <strong>Finish</strong> to create the Entity Framework model.
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
 </li>
 <li>Right click the <strong>Controllers</strong> folder in Visual Studio solution explorer. Select <strong>Add -&gt; Controller</strong>.</li>
 <li>Set "ProductsController" as <strong>Controller name</strong>. Select <strong>API controller with read/write actions, using Entity Framework</strong> as <strong>Template</strong>. Select <strong>Product (KendoGridWebApiCRUD.Models)</strong> as <strong>Model class</strong> and
 <strong>NorthwindEntities (KendoGridWebApiCRUD.Models)</strong> as <strong>Data context class</strong>. Click <strong>Add</strong> to create the Web API controller.
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-api-controller.png" alt="Add Controller">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-api-controller.png" alt="Add Controller">
 </li>
 <li>Open <strong>Controllers/ProductsController.cs</strong>
 </li>
@@ -229,7 +229,7 @@ Name the model "Northwind.edmx" and click <strong>Next</strong>. This will start
 </code></pre>
 </li>
 <li>Build and run the application
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-inline-grid.png" alt="Final result">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-inline-grid.png" alt="Final result">
 </li>
 </ol>
 

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>How to use the Chart PHP class, server-side wrapper for Kendo UI Chart widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to bind Kendo UI Chart for PHP, handle Kendo UI Chart Events, access an existing chart.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/php-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/php-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("php/widgets/chart/overview.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="chart"><a href="#chart">Chart</a></h1>
 
-<p>The Kendo Chart for PHP is a server-side wrapper for the <a href="kendo-ui-docs/api/dataviz/chart">Kendo UI Chart</a> widget.</p>
+<p>The Kendo Chart for PHP is a server-side wrapper for the <a href="/kendo-ui-docs/api/dataviz/chart">Kendo UI Chart</a> widget.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -114,15 +114,15 @@
 
 <ul>
 <li>
-<a href="kendo-ui-docs/php/widgets/chart/local-binding">local</a> - the chart is bound to PHP array</li>
+<a href="/kendo-ui-docs/php/widgets/chart/local-binding">local</a> - the chart is bound to PHP array</li>
 <li>
-<a href="kendo-ui-docs/php/widgets/chart/remote-binding">remote</a> - the chart makes AJAX requests and is bound to JSON result</li>
+<a href="/kendo-ui-docs/php/widgets/chart/remote-binding">remote</a> - the chart makes AJAX requests and is bound to JSON result</li>
 </ul>
 
 <p>Here is how to configure the chart for local binding:</p>
 
 <ol>
-<li><p>Follow the steps from the <a href="kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</p></li>
+<li><p>Follow the steps from the <a href="/kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</p></li>
 <li>
 <p>Create an array which to which the chart will be bound to</p>
 
@@ -135,7 +135,7 @@ $data = array(
 </code></pre>
 </li>
 <li>
-<p>Create a <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource">data source</a> and set its <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
+<p>Create a <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource">data source</a> and set its <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
 
 <pre><code>&lt;?php
 $dataSource = new \Kendo\Data\DataSource();
@@ -144,7 +144,7 @@ $dataSource-&gt;data($data);
 </code></pre>
 </li>
 <li>
-<p>Create a <a href="kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart">chart</a>, configure its <a href="kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#addSeriesItem">series</a>, <a href="kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#addCategoryAxisItem">categoryAxis</a> and set its <a href="kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#datasource">data source</a>.</p>
+<p>Create a <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart">chart</a>, configure its <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#addSeriesItem">series</a>, <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#addCategoryAxisItem">categoryAxis</a> and set its <a href="/kendo-ui-docs/api/wrappers/php/Kendo/Dataviz/UI/Chart#datasource">data source</a>.</p>
 
 <pre><code>&lt;?php
 $ageSeries = new \Kendo\Dataviz\UI\ChartSeriesItem();
@@ -161,7 +161,7 @@ $chart-&gt;addSeriesItem($ageSeries)
 </code></pre>
 </li>
 <li>
-<p>Output the chart by echo-ing the result of the <a href="kendo-ui-docs/api/wrappers/php/Kendo/UI/Widget#render">render</a> method.</p>
+<p>Output the chart by echo-ing the result of the <a href="/kendo-ui-docs/api/wrappers/php/Kendo/UI/Widget#render">render</a> method.</p>
 
 <pre><code>&lt;?php
 echo $chart-&gt;render();
@@ -173,7 +173,7 @@ echo $chart-&gt;render();
 <h2 id="getting-client-side-reference"><a href="#getting-client-side-reference">Getting Client-side Reference</a></h2>
 
 <p>You can reference the clien-side Kendo Chart instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="kendo-ui-docs/api/dataviz/chart#methods">API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="/kendo-ui-docs/api/dataviz/chart#methods">API</a> to control its behavior.</p>
 
 <h3 id="example"><a href="#example">Example</a></h3>
 
@@ -191,7 +191,7 @@ $(function() {
 
 <h2 id="handling-events"><a href="#handling-events">Handling Events</a></h2>
 
-<p>You can subscribe to all Chart <a href="kendo-ui-docs/api/dataviz/chart#events">events</a>.</p>
+<p>You can subscribe to all Chart <a href="/kendo-ui-docs/api/dataviz/chart#events">events</a>.</p>
 
 <h3 id="example---subscribing-by-specifying-javascript-function-name"><a href="#example---subscribing-by-specifying-javascript-function-name">Example - subscribing by specifying JavaScript function name</a></h3>
 

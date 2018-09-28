@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Appearance of the Kendo UI Grid widget</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This section will guide you how to control the Grid layout and appearance">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("web/grid/appearance.html")
         });
         </script>
@@ -108,7 +108,7 @@
 
 <h2 id="scrolling"><a href="#scrolling">Scrolling</a></h2>
 
-<p>Grid scrolling is enabled by default (except for the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">MVC wrapper</a>, for historical reasons).</p>
+<p>Grid scrolling is enabled by default (except for the <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">MVC wrapper</a>, for historical reasons).</p>
 
 <p>Enabled scrolling does not guarantee that scrollbars will appear. This is because scrolling makes sense and works together with set dimensions.</p>
 
@@ -181,7 +181,7 @@ This approach should be used only if the previous two are unacceptable.</li>
 <h2 id="height"><a href="#height">Height</a></h2>
 
 <p>By default the Grid has no height and expands to fit all table rows. For historical reasons, the Grid MVC wrapper
-<a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">applies a default height of 200px to its data area</a> when widget scrolling is enabled.</p>
+<a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">applies a default height of 200px to its data area</a> when widget scrolling is enabled.</p>
 
 <p>A height can be set to the Grid in one of the following ways:</p>
 
@@ -194,10 +194,10 @@ This approach should be used only if the previous two are unacceptable.</li>
 <p>It makes sense to set height to the Grid <strong>only if Grid scrolling is enabled</strong>.</p>
 
 <p>When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header, data and pager is equal to the expected Grid height.
-That's why, if the Grid height is changed width Javascript after the widget has been created, the <a href="kendo-ui-docs/using-kendo-in-responsive-web-pages">Grid's <code>resize</code> method</a> must be called afterwards.
+That's why, if the Grid height is changed width Javascript after the widget has been created, the <a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages">Grid's <code>resize</code> method</a> must be called afterwards.
 In this way the Grid will recalculate the height of its data area.</p>
 
-<p><img src="kendo-ui-docs/web/grid/grid3_1.png" alt="Grid With Fixed Height And Scrolling"></p>
+<p><img src="/kendo-ui-docs/web/grid/grid3_1.png" alt="Grid With Fixed Height And Scrolling"></p>
 
 <p>In some special scenarios, it is possible to set a height style (via Javascript or external CSS) to the Grid's scrollable data area, which is a <code>div.k-grid-content</code> element.
 In this case, please do not set height to the Grid.</p>
@@ -206,7 +206,7 @@ In this case, please do not set height to the Grid.</p>
 
 <p>It is possible to make the Grid expand and shrink vertically, according to the number of its rows, but within certain limits.
 To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area.
-Do not forget to <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">remove the default data area height</a> if using the MVC wrapper.</p>
+Do not forget to <a href="/kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#scrolling">remove the default data area height</a> if using the MVC wrapper.</p>
 
 <pre><code>#GridID .k-grid-content
 {
@@ -222,14 +222,14 @@ Do not forget to <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#sc
 <p>This section is applicable to <strong>scrollable</strong> Grids only.</p>
 
 <p>In order to configure the Grid to be 100% high and resize together with its parent element, the first and most important thing to do is
-make the Grid <a href="kendo-ui-docs/framework/widgets/wrapper-element">wrapper <code>&lt;div&gt;</code></a> 100% high. According to web standards,
+make the Grid <a href="/kendo-ui-docs/framework/widgets/wrapper-element">wrapper <code>&lt;div&gt;</code></a> 100% high. According to web standards,
 <strong>elements with a percentage height require their parent to have an explicit height</strong>. This requirement applies recursively
 until an element with a pixel height is reached, or until the <code>html</code> element is reached. 100% high elements cannot have margins, paddings, borders or sibling elements,
 so the default border of the Grid should be removed as well.</p>
 
 <p>The second step is to ensure that the inner Grid layout adapts to changes in the height of the widget's wrapper <code>&lt;div&gt;</code>.
 If those changes are triggered by browser window resizing, then subscribe to the browser window's <code>resize</code> event and execute the Grid's
-<a href="kendo-ui-docs/using-kendo-in-responsive-web-pages"><code>resize</code></a> method. The <code>resize</code> method will take care of measuring the height of the Grid <code>div</code> and
+<a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages"><code>resize</code></a> method. The <code>resize</code> method will take care of measuring the height of the Grid <code>div</code> and
 adjusting the height of the scrollable data area. The <code>resize</code> method doesn't have to be called if the Grid is placed inside a Kendo UI Splitter,
 because the Splitter will execute it automatically. The method is also not needed if locked (frozen) columns are used.</p>
 
@@ -252,16 +252,16 @@ to execute the Grid's <code>resize</code> method. In this case, call the <code>r
 });
 </code></pre>
 
-<p>The "<a href="kendo-ui-docs/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized">How to resize the Grid when the window is resized</a>" documentation page contains a runnable example of the discussed scenario.</p>
+<p>The "<a href="/kendo-ui-docs/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized">How to resize the Grid when the window is resized</a>" documentation page contains a runnable example of the discussed scenario.</p>
 
 <h3 id="grid-loading-indicator"><a href="#grid-loading-indicator">Grid Loading Indicator</a></h3>
 
-<p>The Grid uses internally the <a href="kendo-ui-docs/api/javascript/ui/ui#methods-progress"><code>kendo.ui.progress</code></a> method to display a loading overlay during remote read requests.
+<p>The Grid uses internally the <a href="/kendo-ui-docs/api/javascript/ui/ui#methods-progress"><code>kendo.ui.progress</code></a> method to display a loading overlay during remote read requests.
 If Grid scrolling is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
 If Grid scrolling is enabled and the Grid has no height, the data area will initially have a zero height,
 which will make the loading overlay invisible during the first remote request.
 This issue can be resolved in two ways - set some Grid height, or apply a <code>min-height</code> style to the <code>div.k-grid-content</code> element
-(see <a href="kendo-ui-docs/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits">example above</a>).</p>
+(see <a href="/kendo-ui-docs/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits">example above</a>).</p>
 
 <h2 id="initialize-the-grid-inside-a-hidden-container"><a href="#initialize-the-grid-inside-a-hidden-container">Initialize the Grid inside a hidden container</a></h2>
 
@@ -273,7 +273,7 @@ Depending on the exact scenario, the following can be observed when the widget i
 <ul>
 <li>
 <p>the scrollable data area overflows the Grid's bottom border. This can be resolved by executing the Grid's
-<a href="kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible.
+<a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible.
 Alternatively, apply the desired height to the scrollable data area, instead of the Grid widget:</p>
 
 <pre><code>#GridID .k-grid-content
@@ -284,14 +284,14 @@ Alternatively, apply the desired height to the scrollable data area, instead of 
 </li>
 <li>
 <p>the virtual scrollbar is not visible. This can be resolved by executing the Grid's
-<a href="kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible. For Kendo UI versions 2014.3.1119 (Q3 2014) and older,
+<a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible. For Kendo UI versions 2014.3.1119 (Q3 2014) and older,
 the following statement is required instead of <code>resize()</code>:</p>
 
 <pre><code>$("#GridID").data("kendoGrid").dataSource.fetch();
 </code></pre>
 </li>
 <li>frozen columns are too narrow and non-frozen columns are not visible. This can be resolved by executing the Grid's
-<a href="kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible.</li>
+<a href="/kendo-ui-docs/using-kendo-in-responsive-web-pages#individual-widget-resizing"><code>resize</code></a> method when the widget becomes visible.</li>
 </ul>
 
 <p>In some cases it may be possible to delay the Grid initialization, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible.</p>
@@ -433,7 +433,7 @@ Using a larger row count than that can produce unexpected behavior or Javascript
 This limitation is worked around on desktop devices with the help of the mousewheel event, but it does not exist on touch devices.</p>
 
 <blockquote>
-<p>The <a href="kendo-ui-docs/api/javascript/ui/grid">Grid API</a> allows columns to be locked and unlocked on the fly.
+<p>The <a href="/kendo-ui-docs/api/javascript/ui/grid">Grid API</a> allows columns to be locked and unlocked on the fly.
 However, this is possible only if at least one column is locked initially during initialization.
 The HTML output and script behavior of the Grid are very different when frozen columns are used,
 that's why the widget cannot switch between "frozen" and "unfrozen" mode after initialization.</p>

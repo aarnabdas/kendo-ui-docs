@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Tutorial for HTML5 development with ASP.NET WebAPI and RESTful services</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="In this HTML5 development tutorial you will learn how to install ASP.NET WebAPI, create service, supporting CRUD operations, and debug WebAPI Services.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("webforms/asp-net-hello-services.html")
         });
         </script>
@@ -152,7 +152,7 @@ buy JavaScript, but is also much easier for humans to read and debug.</p>
 
 <p>Open Visual Studio. Select <strong>File/New Project</strong> and select the <strong>ASP.NET Web Application</strong> template. Name the application <strong>HelloServices</strong>.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-file-new-project.png" alt="File New Project"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-file-new-project.png" alt="File New Project"></p>
 
 <p>Open the <code>Default.aspx</code> page and delete all the content.</p>
 
@@ -164,7 +164,7 @@ project which will hold the data access layer. Create a second folder called
 <strong>Controllers</strong> which will hold the WebAPI service that will be created in
 this tutorial.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-data-controllers.png" alt="Data Controllers"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-data-controllers.png" alt="Data Controllers"></p>
 
 <h3 id="create-a-data-access-layer"><a href="#create-a-data-access-layer">Create A Data Access Layer</a></h3>
 
@@ -179,9 +179,9 @@ the left-hand side, or from the <strong>View</strong> menu. Expand the <strong>N
 database and expand <strong>Tables</strong>. Drag the <strong>Employees</strong> table onto the design
 surface. Save the file.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-add-linq-to-sql.png" alt="Add Linq To Sql"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-add-linq-to-sql.png" alt="Add Linq To Sql"></p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-linq-to-sql-table-added.png" alt="Linq To Sql Table Added"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-linq-to-sql-table-added.png" alt="Linq To Sql Table Added"></p>
 
 <h3 id="install-nuget-packages"><a href="#install-nuget-packages">Install NuGet Packages</a></h3>
 
@@ -196,13 +196,13 @@ aspnetwebapi in the search box. Select <strong>AspNetWebApi</strong> from the se
 result and click the install button. Accept the package dependencies and
 install those as well.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-nuget-aspnetwebapi.png" alt="Nuget AspNetWebApi"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-nuget-aspnetwebapi.png" alt="Nuget AspNetWebApi"></p>
 
 <p><strong>Install jQuery</strong></p>
 
 <p>Enter "jquery" in the search box. Select the <strong>jQuery</strong> result and select <strong>install</strong>.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-install-jquery.png" alt="Install jQuery"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-install-jquery.png" alt="Install jQuery"></p>
 
 <p>Close the <strong>Add Library Package Reference</strong> dialogue.</p>
 
@@ -212,7 +212,7 @@ install those as well.</p>
 the <strong>Controllers</strong> folder and select <strong>Add</strong> and then <strong>Class</strong>. Name the
 class <code>EmployeesController.cs</code></p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-employees-controller.png" alt="Employees Controller"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-employees-controller.png" alt="Employees Controller"></p>
 
 <p>In order to designate the <code>EmployeesController.cs</code> class that was just
 added as a WebAPI controller that will respond to requests, inherit from the
@@ -221,7 +221,7 @@ over the word until you get the context menu. This will give you the option to
 include <code>System.Web.Http</code> Optionally, you can achieve the same result by
 pressing <strong>Alt+Shift+F10</strong>, which will bring up the same context menu.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-employee-controller-class-inherit.png" alt="Employee Controller Inherits ApiController Class"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-employee-controller-class-inherit.png" alt="Employee Controller Inherits ApiController Class"></p>
 
 <p>This class will contain methods that can be invoked from the web service that
 is being created. This service represents the <strong>Employees</strong> table in the
@@ -266,7 +266,7 @@ the employees from the <strong>Employees</strong> table.</p>
 method <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">Get</a> is enough to designate as the method that will
 respond to an HTTP GET.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-return-linq-object.png" alt="Return A LinqToSql Object"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-return-linq-object.png" alt="Return A LinqToSql Object"></p>
 
 <p>You can override this convention by specifying the verb you want a method to
 respond to by decorating the method with the correct attribute (i.e. HttpPut).</p>
@@ -310,7 +310,7 @@ application throws an error that is somewhat obscure.  If you inspect the
 details of that error, it will tell you that it cannot serialize the LINQ To
 SQL object.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-serialization-error.png" alt="Serialization Error"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-serialization-error.png" alt="Serialization Error"></p>
 
 <p>This is because .NET cannot serialize the LINQ To SQL object that is being
 returned by the <code>Get()</code> method in the <code>EmployeesController.cs</code> file. LINQ
@@ -346,7 +346,7 @@ properties. One for the employee id, first name, and last name.</p>
 }
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-employee-model.png" alt="Employee Model"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-employee-model.png" alt="Employee Model"></p>
 
 <p>Open up the <code>EmployeesController.cs</code> file in the <strong>Controllers</strong> folder.
 Alter the <strong>Get()</strong> method to return a list of <code>Model.Employee</code> objects
@@ -373,7 +373,7 @@ from the database.</p>
 }
 </code></pre>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-web-get.png" alt="Web Get"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-web-get.png" alt="Web Get"></p>
 
 <h3 id="test-the-application"><a href="#test-the-application">Test The Application</a></h3>
 
@@ -382,7 +382,7 @@ URL. Notice that WebAPI returns the records from the Northwind Employees table
 in XML format.  IE will try to download the file, but other browsers such as
 Chrome will display the results.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-employees-xml.png" alt="Employees XML"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-employees-xml.png" alt="Employees XML"></p>
 
 <h3 id="getting-json-data-with-ajax"><a href="#getting-json-data-with-ajax">Getting JSON Data With AJAX</a></h3>
 
@@ -400,7 +400,7 @@ displaying each employee in an HTML table row.</p>
 page just below the <code>Site.css</code> link tag in the head of the page. At the time
 of this writing, the current version of jQuery is <code>jquery-1.9.1.min.js</code></p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-add-jquery-to-master-page.png" alt="Add jQuery To Master Page"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-add-jquery-to-master-page.png" alt="Add jQuery To Master Page"></p>
 
 <p>Open up the <code>Default.aspx</code> file. Create an HTML table element with the id "employees".</p>
 
@@ -594,12 +594,12 @@ and start the application.</p>
 open the developer tools. Click on the network tab and click the <strong>Start Capturing</strong> button. Refresh the page. Notice the request that is made to
 <strong>api/employees</strong>. Double-click on the request. Notice that the <strong>Content-Type</strong> is set to <strong>JSON</strong>.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-f12-content-type-json.png" alt="F12 Content Type Inspection"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-f12-content-type-json.png" alt="F12 Content Type Inspection"></p>
 
 <p>Select the <strong>Response body</strong> tab. Inspect the JSON response returned from the
 server.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-f12-response-body-json.png" alt="F12 Response Body"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-f12-response-body-json.png" alt="F12 Response Body"></p>
 
 <h3 id="enable-deleting-of-employees"><a href="#enable-deleting-of-employees">Enable Deleting Of Employees</a></h3>
 
@@ -811,7 +811,7 @@ Notice that when the <strong>delete</strong> button is clicked, an AJAX request 
 the server with a method of <strong>DELETE</strong>. The server is currently returning a
 404, because the <strong>DELETE</strong> method has not yet been created in the service.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-delete-not-implemented-404.png" alt="Delete Not Implemented"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-delete-not-implemented-404.png" alt="Delete Not Implemented"></p>
 
 <h2 id="add-a-delete-method-to-the-employees-service"><a href="#add-a-delete-method-to-the-employees-service">Add A Delete Method To The Employees Service</a></h2>
 
@@ -866,7 +866,7 @@ the delete button next to the name you added to the database. Notice that the
 This means that everything has happened OK and the item has been deleted from
 the database. Also notice that your name was removed from the page by jQuery.</p>
 
-<p><img src="kendo-ui-docs/images/webforms/hello-services-finally.png" alt="Finally"></p>
+<p><img src="/kendo-ui-docs/images/webforms/hello-services-finally.png" alt="Finally"></p>
 
 <h3 id="further-reading--resources"><a href="#further-reading--resources">Further Reading / Resources</a></h3>
 

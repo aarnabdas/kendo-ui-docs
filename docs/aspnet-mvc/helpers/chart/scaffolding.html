@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>How to use the Kendo UI Scaffolder extension.</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to scaffold Kendo UI Chart for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/chart/scaffolding.html")
         });
         </script>
@@ -109,31 +109,31 @@
 <p>The following tutorial shows how to scaffold a Kendo UI Chart for ASP.NET MVC using the <strong>Kendo UI Scaffolder</strong> Visual Studio extension.</p>
 
 <blockquote>
-<p>The Kendo UI Scaffolder will not include the required <strong>UI for ASP.NET MVC</strong> files to the project. You could achieve this automatically using the <a href="kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Telerik UI for ASP.NET MVC Visual Studio Extensions</a> or manually as demonstrated <a href="kendo-ui-docs/aspnet-mvc/asp-net-mvc-5">here</a>.</p>
+<p>The Kendo UI Scaffolder will not include the required <strong>UI for ASP.NET MVC</strong> files to the project. You could achieve this automatically using the <a href="/kendo-ui-docs/aspnet-mvc/vs-integration/introduction">Telerik UI for ASP.NET MVC Visual Studio Extensions</a> or manually as demonstrated <a href="/kendo-ui-docs/aspnet-mvc/asp-net-mvc-5">here</a>.</p>
 </blockquote>
 
 <h1 id="getting-started"><a href="#getting-started">Getting started</a></h1>
 
 <ol>
-<li><p>Create a new ASP.NET MVC application, include an Entity Framework Data Model and add <strong>Telerik UI for ASP.NET MVC</strong>. If you have already done so, you can skip to the next step, otherwise you can follow the first 4 steps of the <a href="kendo-ui-docs/aspnet-mvc/helpers/chart/overview#getting-started">following tutorial</a>.</p></li>
+<li><p>Create a new ASP.NET MVC application, include an Entity Framework Data Model and add <strong>Telerik UI for ASP.NET MVC</strong>. If you have already done so, you can skip to the next step, otherwise you can follow the first 4 steps of the <a href="/kendo-ui-docs/aspnet-mvc/helpers/chart/overview#getting-started">following tutorial</a>.</p></li>
 <li><p>Right click on the location where the Chart Controller should be generated and select <strong>Add | New Scaffolded item...</strong> from the displayed menu. In this example we will generate it in the <strong>Controllers</strong> folder.
-<img src="kendo-ui-docs/aspnet-mvc/images/scaffolding/new_scaffolded_item.png" alt="New Scaffolded Item"></p></li>
+<img src="/kendo-ui-docs/aspnet-mvc/images/scaffolding/new_scaffolded_item.png" alt="New Scaffolded Item"></p></li>
 <li><p>Select <strong>Kendo UI Scaffolder</strong> from the list of available scaffolders.
-<img src="kendo-ui-docs/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png" alt="Kendo UI Scaffolder"></p></li>
+<img src="/kendo-ui-docs/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png" alt="Kendo UI Scaffolder"></p></li>
 <li><p>Select Kendo UI Chart from the available widgets to scaffold on the left:
-<img src="kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart.png" alt="Kendo UI Chart Scaffolder"></p></li>
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart.png" alt="Kendo UI Chart Scaffolder"></p></li>
 <li>
 <p>On the next screen you will be presented with the Model and Data Context options.</p>
 
 <ul>
 <li>First enter the Controller and View names.<br>
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_chart1.png" alt="Grid options">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_chart1.png" alt="Grid options">
 </li>
 <li>The <strong>Model Class</strong> DropDownList will contain all model types from the active project. In this example we will list products in the Chart. Select the <strong>Product</strong> entity.<br>
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png" alt="Model Class">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png" alt="Model Class">
 </li>
 <li>From the <strong>Data Context Class</strong> DropDownList you could select the <strong>Entity Framework Data Model</strong> class to be used. In this example it is <strong>NorthwindEntities</strong>.<br>
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/data_context_class.png" alt="Data Context Class">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/data_context_class.png" alt="Data Context Class">
 </li>
 </ul>
 </li>
@@ -154,7 +154,7 @@
 </li>
 <li>
 <p>Select the <strong>ProductViewModel</strong> class from the <strong>ViewModel Class</strong> DropDownList.<br>
-<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png" alt="ViewModel Class"></p>
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png" alt="ViewModel Class"></p>
 
 <blockquote>
 <p>It is important that the names of the properties in the ViewModel are exactly the same as the corresponding ones in the Entity. Otherwise the Kendo UI Scaffolder won't be able to link them correctly.</p>
@@ -164,7 +164,7 @@
 </li>
 <li>
 <p>Click the <strong>Chart options</strong> item on the left.<br>
-<img src="kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart2.png" alt="Grid options"><br>
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart2.png" alt="Grid options"><br>
 This screen contains the Chart functionalities that could be configured before scaffolding:</p>
 
 <ul>
@@ -174,10 +174,10 @@ This screen contains the Chart functionalities that could be configured before s
 <li>Show Tooltip - Show the tooltip.<br>
 </li>
 <li>Show Legend - Show a legend. The available options are Bottom and Top.
-<img src="kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/legend.png" alt="Legend options">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/legend.png" alt="Legend options">
 </li>
 <li>Series Type - Select the series type. Each series type will show different Series Options configuration.
-<img src="kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/series_options_1.png" alt="Series options">
+<img src="/kendo-ui-docs/aspnet-mvc/helpers/chart/images/scaffolding/series_options_1.png" alt="Series options">
 </li>
 <li>Add More Series - Adds one additional configuration panel for a series.</li>
 </ul>

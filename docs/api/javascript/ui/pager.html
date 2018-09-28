@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI Pager</title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Configuration steps for the Pager widget and methods for different actions: return number of pages, page size, specified page, update all values.">
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/pager.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouipager"><a href="#kendouipager">kendo.ui.Pager</a></h1>
 
-<p>Represents the Kendo UI Pager widget. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI Pager widget. Inherits from <a href="/kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -174,10 +174,10 @@
 </code></pre>
 
 <h3 id="configuration-dataSource">
-<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
+<a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><a href="/kendo-ui-docs/api/javascript/data/datasource" class="type-link"><code>kendo.data.DataSource</code></a>
 </h3>
 
-<p>Instance of kendo DataSource. See the <a href="kendo-ui-docs/api/framework/datasource"><strong>kendo.data.DataSource</strong></a>.</p>
+<p>Instance of kendo DataSource. See the <a href="/kendo-ui-docs/api/framework/datasource"><strong>kendo.data.DataSource</strong></a>.</p>
 
 <p>This option is mandatory because the Pager is tightly connected with DataSource. The pager is UI widget for managing paging over the DataSource. The Pager gets values like page size or total count of items from DataSource.</p>
 
@@ -512,7 +512,7 @@ A special <code>all</code> value is supported. It sets the page size to the tota
 <a href="#configuration-messages.display">messages.display </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "{0} - {1} of {2} items")</em>
 </h3>
 
-<p>The pager info text. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>.</p>
+<p>The pager info text. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>.</p>
 
 <p>Contains three placeholders:</p>
 
@@ -646,7 +646,7 @@ A special <code>all</code> value is supported. It sets the page size to the tota
 <h3 id="configuration-messages.of">
 <a href="#configuration-messages.of">messages.of </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a><em>(default: "of {0}")</em>,</h3>
 
-<p>The label displayed before the pager input. Uses <a href="kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one optional placeholder {0} which represents the total number of pages.</p>
+<p>The label displayed before the pager input. Uses <a href="/kendo-ui-docs/api/framework/kendo#methods-format">kendo.format</a>. Contains one optional placeholder {0} which represents the total number of pages.</p>
 
 <h4>Example - set the label after the pager input</h4>
 

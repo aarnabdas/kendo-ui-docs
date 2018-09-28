@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
+        <link rel="shortcut icon" href="/kendo-ui-docs/favicon.ico"/>
         
-        <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
-        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
+        <link href="/kendo-ui-docs/externals/kendo.common.min.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="/kendo-ui-docs/assets/theme.css">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="/kendo-ui-docs/externals/kendo.web.min.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="/kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="kendo-ui-docs/">
-        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
+    <a href="/kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="/kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "kendo-ui-docs/default.json",
+                        url: "/kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("kendo-ui-docs/"),
+            template: navigationTemplate("/kendo-ui-docs/"),
             dataBound: expandNavigation("framework/fx/overview.html")
         });
         </script>
@@ -110,7 +110,7 @@
 Each effect utilizes CSS tranisions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse which is very convenient for showing and hiding certain parts of the UI.
 Kendo FX uitilizes <a href="http://api.jquery.com/category/deferred-object/">jQuery Deffered utility</a> for chaining/callbacks.</p>
 
-<p>This document provides an overview of the Kendo UI FX library. <a href="kendo-ui-docs/api/framework/fx/common">Please refer to the FX API docs for complete API details.</a></p>
+<p>This document provides an overview of the Kendo UI FX library. <a href="/kendo-ui-docs/api/framework/fx/common">Please refer to the FX API docs for complete API details.</a></p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -200,15 +200,15 @@ The following three lines will produce identical effects:</p>
 <p>The Kendo UI FX library currently supports the following effects:</p>
 
 <ul>
-<li><a href="kendo-ui-docs/api/framework/fx/expand">Expand</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/fade">Fade</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/flip">Flip</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/pageturn">PageTurn</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/slidein">SlideIn</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/tile">Tile</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/transfer">Transfer</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/zoom">Zoom</a></li>
-<li><a href="kendo-ui-docs/api/framework/fx/replace">Replace</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/expand">Expand</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/fade">Fade</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/flip">Flip</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/pageturn">PageTurn</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/slidein">SlideIn</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/tile">Tile</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/transfer">Transfer</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/zoom">Zoom</a></li>
+<li><a href="/kendo-ui-docs/api/framework/fx/replace">Replace</a></li>
 </ul>
 
 <p>When possible, effects are hardware accelerated via CSS transitions, making them ideal for desktop and mobile devices. Unlike CPU intensive JavaScript animations, animations done with CSS can provide better framerates and battery life.</p>
