@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/spa/view.html")
         });
         </script>
@@ -164,7 +164,7 @@ or return a reference to the existing view element if no container is provided.<
 <h2 id="mvvm-integration"><a href="#mvvm-integration">MVVM Integration</a></h2>
 
 <p>If an observable object is passed as a <code>model</code> configuration option to the view constructor, the view will bind it to the element when instantiated.
-If no model is present, the content will be processed using <a href="/kendo-ui/data-attribute-initialization">Data Attribute Initialization</a>.</p>
+If no model is present, the content will be processed using <a href="kendo-ui-docs/data-attribute-initialization">Data Attribute Initialization</a>.</p>
 
 <h2 id="mvvm-bound-view"><a href="#mvvm-bound-view">MVVM Bound View</a></h2>
 
@@ -178,7 +178,7 @@ If no model is present, the content will be processed using <a href="/kendo-ui/d
 &lt;/script&gt;
 </code></pre>
 
-<p>If the view <code>evalTemplate</code> configuration option is set to <code>true</code>, the template will be treated as <a href="/kendo-ui/framework/templates/overview">kendo template</a> and evaluated against the passed model instance <strong>when the view is rendered initially</strong>.</p>
+<p>If the view <code>evalTemplate</code> configuration option is set to <code>true</code>, the template will be treated as <a href="kendo-ui-docs/framework/templates/overview">kendo template</a> and evaluated against the passed model instance <strong>when the view is rendered initially</strong>.</p>
 
 <blockquote>
 <p>Changing the viewModel fields will not re-render the view template. If you want to display dynamic data, you should use the <code>data-bind</code> syntax.</p>

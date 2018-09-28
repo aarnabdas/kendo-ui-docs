@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>jQuery-powered Cascading ComboBox in Kendo UI Web</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This document provides information how Kendo UI cascading ComboBox works and helps you handle most common scenarios with illustrative examples and FAQ.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("web/combobox/cascading.html")
         });
         </script>
@@ -131,7 +131,7 @@
 &lt;/script&gt;
 </code></pre>
 
-<p>The "child" combobox will cascade from the "parent" combobox if the <a href="/kendo-ui/api/web/combobox#configuration">cascadeFrom</a> option is defined. The <code>cascadeFrom</code> option should point to the parent's ID.</p>
+<p>The "child" combobox will cascade from the "parent" combobox if the <a href="kendo-ui-docs/api/web/combobox#configuration">cascadeFrom</a> option is defined. The <code>cascadeFrom</code> option should point to the parent's ID.</p>
 
 <blockquote>
 <p><strong>Important:</strong> If the <code>cascadeFrom</code> property is not defined or the parent combobox is not initialized then the cascading functionality will not <strong>work</strong>.</p>
@@ -184,11 +184,11 @@ value: "" //parent's value
 &lt;/script&gt;
 </code></pre>
 
-<p>You also can use the <a href="/kendo-ui/api/web/combobox#configuration">value</a> option.</p>
+<p>You also can use the <a href="kendo-ui-docs/api/web/combobox#configuration">value</a> option.</p>
 
 <p>Q: I am using comboboxes with load on demand (autoBind: false) and I need to pre-set the selected items. How to do that?</p>
 
-<p>A: You need to set the <a href="/kendo-ui/api/web/combobox#configuration">value</a> and <a href="/kendo-ui/api/web/combobox#configuration">text</a> options.</p>
+<p>A: You need to set the <a href="kendo-ui-docs/api/web/combobox#configuration">value</a> and <a href="kendo-ui-docs/api/web/combobox#configuration">text</a> options.</p>
 
 <pre><code>&lt;input id="parent" value="1" /&gt;
 &lt;input id="child" value="36" /&gt;
@@ -223,7 +223,7 @@ value: "" //parent's value
 
 <p>Q: The serverFiltering is disabled and the child combobox does not work?</p>
 
-<p>A: When <a href="/kendo-ui/api/framework/datasource#configuration">serverFiltering</a> is disabled, then the combobox will not make any additional requests to the server. Hence it will filter the initial data using the parent's dataValueField property. If no items are found, then the child combobox will be left empty. If you need to use child combobox with disabled server filtering, then you will need to provide all neccessary data on the client.</p>
+<p>A: When <a href="kendo-ui-docs/api/framework/datasource#configuration">serverFiltering</a> is disabled, then the combobox will not make any additional requests to the server. Hence it will filter the initial data using the parent's dataValueField property. If no items are found, then the child combobox will be left empty. If you need to use child combobox with disabled server filtering, then you will need to provide all neccessary data on the client.</p>
 
 <p>Q: Cannot get the request parameters on the server?</p>
 

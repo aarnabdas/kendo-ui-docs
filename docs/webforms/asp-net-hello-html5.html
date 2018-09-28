@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Tutorial for HTML5 Development in Visual Studio</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This tutorial will introduce you to HTML5 development with ASP.NET. Learn the theory and look at the implementation of HTML5 development in Visual Studio.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("webforms/asp-net-hello-html5.html")
         });
         </script>
@@ -211,7 +211,7 @@ not forgotten about those still living with the browser "sins" of the past.</p>
 <strong>Add New Item</strong> dialgoue, select <strong>Web Form</strong>.  Call it <strong>Default.aspx</strong> and
 click <strong>Add</strong>.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-new-web-form.png" alt="New Web Form"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-new-web-form.png" alt="New Web Form"></p>
 
 <p>When the <strong>Default.aspx</strong> file is added, it will open in the designer.  If it
 doesn't, open the file.  Make sure you are viewing the HTML source of the Web
@@ -241,9 +241,9 @@ where you removed the previous doctype declaration.</p>
 <p>On the line below the doctype, remove the <strong>xmlns</strong> attribute.  This is not
 necessary.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-xmlns.png" alt="xmlns"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-xmlns.png" alt="xmlns"></p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-no-xmlns.png" alt="No XMLNS"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-no-xmlns.png" alt="No XMLNS"></p>
 
 <p>Some of HTML5 involves simplifying the web development experience and removing
 all of the unnecessary and confusing configuration attributes.</p>
@@ -255,12 +255,12 @@ demonstrate a hypothetical page structure.  Delete the empty <strong>div</strong
 there by default.  Add <code>&lt;header</code>&gt;, <code>&lt;footer&gt;</code>, <code>&lt;section&gt;</code> and <code>&lt;article&gt;</code>
 tags.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-semantic-tags.png" alt="Semantic Tags"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-semantic-tags.png" alt="Semantic Tags"></p>
 
 <p>Notice that Visual Studio intellisense recognizes these as valid tags.  Ensure
 that the schema validation selection is set to <strong>HTML5</strong>.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-html5-schema-validation.png" alt="HTML5 Schema Validation"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-html5-schema-validation.png" alt="HTML5 Schema Validation"></p>
 
 <p>If <strong>HTML5</strong> is not available in the select box, ensure that you are running
 at least Visual Studio 2008 SP 1.  If you cannot run at least Visual Studio
@@ -271,7 +271,7 @@ downloading these packages…</p>
 
 <p>Add some filler text to the article section.  You can use a <strong>Lorem Ipsum</strong> generator to do this for you.  My favorite one is <a href="http://dalekipsum.com/">here</a>.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-lorem-ipsum.png" alt="Lorem Ipsum"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-lorem-ipsum.png" alt="Lorem Ipsum"></p>
 
 <h3 id="run-the-application"><a href="#run-the-application">Run The Application</a></h3>
 
@@ -280,12 +280,12 @@ about the layout of the content.  <code>&lt;header&gt;</code>, <code>&lt;section
 <code>&lt;article&gt;</code> are all block level elements, so they are displayed vertically
 stacked on the page with a default margin between them.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-f5-no-style.png" alt="F5 No Style"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-f5-no-style.png" alt="F5 No Style"></p>
 
 <p>Press <strong>F12</strong> to open the IE Developer Tools.  Change the rendering mode from
 IE 9 to IE 7.  Observe that there is virtually no change in the display.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-browser-mode-ie-7-no-style.png" alt="Browser Mode IE 7 No Style"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-browser-mode-ie-7-no-style.png" alt="Browser Mode IE 7 No Style"></p>
 
 <h3 id="breaking-html5-in-older-browsershello-html"><a href="#breaking-html5-in-older-browsershello-html">Breaking HTML5 In Older Browsershello-html</a></h3>
 
@@ -294,7 +294,7 @@ clicking the project and select <strong>Add New Item</strong>.  Select <strong>S
 name it <strong>style.css</strong>.  Link the stylesheet in the page by dragging it from
 the <strong>Project Explorer</strong> and dropping it just under the empty title tag.</p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-link-stylesheet.png" alt="Link Stylesheet"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-link-stylesheet.png" alt="Link Stylesheet"></p>
 
 <p>Open the <strong>site.css</strong>  file and add the following style to change the
 background color of the article to <strong>salmon</strong>.</p>
@@ -328,7 +328,7 @@ styled semantic tags.</p>
 the project and select <strong>Add Library Package Reference</strong>.  Select online
 from the left-hand side and search for <strong>modernizr.</strong></p>
 
-<p><img src="/kendo-ui/images/webforms/hello-html5-modernizr.png" alt="Modernizr"></p>
+<p><img src="kendo-ui-docs/images/webforms/hello-html5-modernizr.png" alt="Modernizr"></p>
 
 <p>Add <strong>Modernizr</strong> to the head of the page by dragging it from the scripts
 folder into the <strong>Default.aspx</strong> page and drop it directly below the

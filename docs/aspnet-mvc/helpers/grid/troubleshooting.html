@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Kendo UI Grid for ASP.NET MVC Troubleshooting Guide</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to use Kendo UI jQuery Grid component with ASP.NET MVC Helpers and easily handle most common issues.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/troubleshooting.html")
         });
         </script>
@@ -108,9 +108,9 @@
 
 <h2 id="the-grid-performs-http-get-requests-instead-of-post"><a href="#the-grid-performs-http-get-requests-instead-of-post">The grid performs HTTP GET requests instead of POST</a></h2>
 
-<p>By default Kendo Grid for ASP.NET MVC should make POST requests when configured for <a href="/kendo-ui/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a>.
+<p>By default Kendo Grid for ASP.NET MVC should make POST requests when configured for <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a>.
 This is implemented by a custom DataSource transport and schema. Those are defined in the <strong>kendo.aspnetmvc.min.js</strong>. Make sure that this file is included <strong>after</strong> the other
-Kendo JavaScript files. More info can be found in the <a href="/kendo-ui/aspnet-mvc/introduction">introduction help topic</a>.</p>
+Kendo JavaScript files. More info can be found in the <a href="kendo-ui-docs/aspnet-mvc/introduction">introduction help topic</a>.</p>
 
 <h3 id="solution-correct-order-of-javascript-files"><a href="#solution-correct-order-of-javascript-files">Solution: Correct Order Of JavaScript Files</a></h3>
 
@@ -126,7 +126,7 @@ Kendo JavaScript files. More info can be found in the <a href="/kendo-ui/aspnet-
 
 <ol>
 <li>Use your browser's developer console to check for any JavaScript errors. In most browsers pressing <strong>F12</strong> will pop up the developer console. Address all JavaScript errors.
-More info can be found in the <a href="/kendo-ui/aspnet-mvc/troubleshooting">troubleshooting help topic</a>.</li>
+More info can be found in the <a href="kendo-ui-docs/aspnet-mvc/troubleshooting">troubleshooting help topic</a>.</li>
 <li>Check the "Network" (or "Net" in Firebug) tab of the browser developer console. Look for a failed HTTP request for the action method configured via the <code>DataSource</code> grid setting.
 
 <ul>
@@ -142,7 +142,7 @@ in the action method and break with the debugger. Also check the <a href="#well-
 </ul>
 </li>
 <li>Check if you are using the <code>ToDataSourceResult</code> extension method. That method returns the data in the JSON format expected by Kendo Grid for ASP.NET MVC. Check the
-<a href="/kendo-ui/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a> help topic for further instructions.</li>
+<a href="kendo-ui-docs/aspnet-mvc/helpers/grid/ajax-binding">ajax binding</a> help topic for further instructions.</li>
 </ol>
 
 <h2 id="well-known-exceptions"><a href="#well-known-exceptions">Well Known Exceptions</a></h2>
@@ -152,7 +152,7 @@ in the action method and break with the debugger. Also check the <a href="#well-
 <p>The reason for this error is that the <a href="http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx">JavaScriptSerializer</a> class used by
 the <a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.controller.json.aspx">Json</a> method cannot serialize object graphs which contain circular references (refer to each other).
 The best solution is to use View Model objects and avoid the serializing the properties which create the circular reference.
-Check the <a href="/kendo-ui/aspnet-mvc/helpers/grid/faq#how-do-i-avoid-circular-reference-exceptions?">"How do I avoid circular reference exceptions"</a> FAQ section for further information.</p>
+Check the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/faq#how-do-i-avoid-circular-reference-exceptions?">"How do I avoid circular reference exceptions"</a> FAQ section for further information.</p>
 
 <h3 id="error-during-serialization-or-deserialization-using-the-json-javascriptserializer"><a href="#error-during-serialization-or-deserialization-using-the-json-javascriptserializer">Error during serialization or deserialization using the JSON JavaScriptSerializer</a></h3>
 
@@ -162,7 +162,7 @@ There are a few possible solutions:</p>
 <ol>
 <li>Enable paging by calling the <code>Pageable</code> method</li>
 <li>
-<a href="/kendo-ui/aspnet-mvc/helpers/grid/faq#how-do-i-convert-my-models-to-view-model-objects?">Use a View Model</a> to serialize only the required properties of your model.</li>
+<a href="kendo-ui-docs/aspnet-mvc/helpers/grid/faq#how-do-i-convert-my-models-to-view-model-objects?">Use a View Model</a> to serialize only the required properties of your model.</li>
 <li>
 <p>Return a custom action result</p>
 
@@ -243,8 +243,8 @@ public ActionResult Read([DataSourceRequest] DataSourceRequest request)
 
 <h2 id="a-column-template-is-not-displayed"><a href="#a-column-template-is-not-displayed">A column template is not displayed</a></h2>
 
-<p>This will happen if the server template is set but the grid is configured for ajax binding. Set the <a href="/kendo-ui/aspnet-mvc/helpers/grid/configuration#clienttemplate">ClientTemplate</a> as well.
-This will also happen if only the client template is set but the grid is configured for server binding. Set the <a href="/kendo-ui/aspnet-mvc/helpers/grid/configuration#template">Template</a> as well.</p>
+<p>This will happen if the server template is set but the grid is configured for ajax binding. Set the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#clienttemplate">ClientTemplate</a> as well.
+This will also happen if only the client template is set but the grid is configured for server binding. Set the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#template">Template</a> as well.</p>
 
 <h2 id="the-x-datasource-configuration-option-is-not-available"><a href="#the-x-datasource-configuration-option-is-not-available">The "X" DataSource configuration option is not available</a></h2>
 
@@ -253,7 +253,7 @@ This will also happen if only the client template is set but the grid is configu
 <h2 id="client-side-events-are-not-raised-in-server-bound-mode"><a href="#client-side-events-are-not-raised-in-server-bound-mode">Client-side events are not raised in server bound mode</a></h2>
 
 <p>Kendo Grid for ASP.NET MVC will not raise all client-side events when configured for server bound mode.
-Check the <a href="/kendo-ui/aspnet-mvc/helpers/grid/server-binding#client-side-events-and-server-binding">server binding</a> help topic for further details.</p>
+Check the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/server-binding#client-side-events-and-server-binding">server binding</a> help topic for further details.</p>
         </article>
     </div>
 </div>

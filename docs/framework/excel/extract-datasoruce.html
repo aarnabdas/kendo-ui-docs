@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Create Excel files directly from a DataSource</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This article shows how to create Excel document using a Kendo UI DataSource">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/excel/extract-datasoruce.html")
         });
         </script>
@@ -117,8 +117,8 @@
 <li>Create the rows header structure, based on the DataSource data. Save it into an <code>array</code>
 </li>
 <li>Fetch the remote data, and using the callback of the <a href="api/javascript/data/datasource#methods-fetch">fetch</a> method loop through the items and push the data to the <code>rows</code> array. </li>
-<li>Instantiate a <a href="/kendo-ui/api/javascript/ooxml/workbook">kendo.ooxml.Workbook</a>. The workbook has an array of sheets, where you can set their width, title and set the rows property to the already created <code>rows</code> array.</li>
-<li>Call the <a href="/kendo-ui/api/javascript/ooxml/workbook#methods-toDataURL">toDataURL</a> method of the workbook to get the output Excel file as a data URI.</li>
+<li>Instantiate a <a href="kendo-ui-docs/api/javascript/ooxml/workbook">kendo.ooxml.Workbook</a>. The workbook has an array of sheets, where you can set their width, title and set the rows property to the already created <code>rows</code> array.</li>
+<li>Call the <a href="kendo-ui-docs/api/javascript/ooxml/workbook#methods-toDataURL">toDataURL</a> method of the workbook to get the output Excel file as a data URI.</li>
 </ol>
 
 <h3 id="example---create-an-excel-workbook"><a href="#example---create-an-excel-workbook">Example - create an Excel workbook</a></h3>

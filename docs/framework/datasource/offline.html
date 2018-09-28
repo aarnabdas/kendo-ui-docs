@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Work offline with the Kendo DataSource</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Kendo offline support">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/datasource/offline.html")
         });
         </script>
@@ -117,7 +117,7 @@ Users can continue working with the available data until network connectivity re
 
 <h2 id="configure-offline-storage"><a href="#configure-offline-storage">Configure offline storage</a></h2>
 
-<p>Set the <a href="/kendo-ui/api/framework/datasource#configuration-offlineStorage">offlineStorage</a> option to enable offline storage. The DataSource uses this value as a key when saving and loading its state.</p>
+<p>Set the <a href="kendo-ui-docs/api/framework/datasource#configuration-offlineStorage">offlineStorage</a> option to enable offline storage. The DataSource uses this value as a key when saving and loading its state.</p>
 
 <p>By default the Kendo UI DataSource uses <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage#localStorage">localStorage</a> to persist its offline state.</p>
 
@@ -145,11 +145,11 @@ Users can continue working with the available data until network connectivity re
 
 <h2 id="go-offline-and-online"><a href="#go-offline-and-online">Go offline and online</a></h2>
 
-<p>The DataSource is "online" by default. All data item changes (create, update, destroy) go to the remote service configured via the <a href="/kendo-ui/api/framework/datasource#configuration-transport">transport</a> option.</p>
+<p>The DataSource is "online" by default. All data item changes (create, update, destroy) go to the remote service configured via the <a href="kendo-ui-docs/api/framework/datasource#configuration-transport">transport</a> option.</p>
 
-<p>To switch to "offline" mode call the <a href="/kendo-ui/api/framework/datasource#methods-online">online</a> method  with <code>false</code> as an argument. From now on the DataSource will persist all data item changes in offline storage.</p>
+<p>To switch to "offline" mode call the <a href="kendo-ui-docs/api/framework/datasource#methods-online">online</a> method  with <code>false</code> as an argument. From now on the DataSource will persist all data item changes in offline storage.</p>
 
-<p>To go back in "online" mode call the <code>online</code> method with <code>true</code> as an argument. The DataSource immediately calls the <a href="/kendo-ui/api/framework/datasource#methods-sync">sync</a> method to send all offline changes to the remote service.</p>
+<p>To go back in "online" mode call the <code>online</code> method with <code>true</code> as an argument. The DataSource immediately calls the <a href="kendo-ui-docs/api/framework/datasource#methods-sync">sync</a> method to send all offline changes to the remote service.</p>
 
 <h3 id="example---go-in-offline-mode"><a href="#example---go-in-offline-mode">Example - go in offline mode</a></h3>
 
@@ -191,7 +191,7 @@ dataSource.fetch(function() {
 
 <h2 id="get-the-offline-state"><a href="#get-the-offline-state">Get the offline state</a></h2>
 
-<p>The <a href="/kendo-ui/api/framework/datasource#methods-offlineData">offlineData</a> method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items.
+<p>The <a href="kendo-ui-docs/api/framework/datasource#methods-offlineData">offlineData</a> method returns the current offline state of the DataSource. The state is an array of JavaScript objects that represent the data items.
 Changed data items have a <code>__state__</code> field attached. That field indicates the type of change: "create", "update" or "destroy". Unmodified data items don't have a <code>__state__</code> field.</p>
 
 <h3 id="example---get-the-offline-state"><a href="#example---get-the-offline-state">Example - get the offline state</a></h3>
@@ -234,7 +234,7 @@ dataSource.fetch(function() {
 </code></pre>
 
 <blockquote>
-<p>If the <a href="/kendo-ui/api/framework/datasource#configuration-serverGrouping">serverGrouping</a> option is set to <code>true</code> the <code>offlineData</code> will return array of groups: <code>{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }</code>.</p>
+<p>If the <a href="kendo-ui-docs/api/framework/datasource#configuration-serverGrouping">serverGrouping</a> option is set to <code>true</code> the <code>offlineData</code> will return array of groups: <code>{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }</code>.</p>
 </blockquote>
 
 <h2 id="use-custom-offline-storage"><a href="#use-custom-offline-storage">Use custom offline storage</a></h2>

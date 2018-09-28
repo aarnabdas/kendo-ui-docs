@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/jsp-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/jsp-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("jsp/tags/upload/overview.html")
         });
         </script>
@@ -106,14 +106,14 @@
         <article>
             <h1 id="upload"><a href="#upload">Upload</a></h1>
 
-<p>The Upload HtmlHelper extension is a server-side wrapper for the <a href="/kendo-ui/web/upload/overview">Kendo UI Upload</a> widget.</p>
+<p>The Upload HtmlHelper extension is a server-side wrapper for the <a href="kendo-ui-docs/web/upload/overview">Kendo UI Upload</a> widget.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
 <p>The following example shows how to setup an asynchronous upload using the Spring MVC framework:</p>
 
 <ol>
-<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/jsp/introduction">Introduction</a> help topic.</p></li>
+<li><p>Make sure you have followed all the steps from the <a href="kendo-ui-docs/jsp/introduction">Introduction</a> help topic.</p></li>
 <li>
 <p>Create a new action method which renders the view:</p>
 
@@ -154,7 +154,7 @@ public @ResponseBody String save(@RequestParam List&lt;MultipartFile&gt; files) 
 <h2 id="accessing-an-existing-upload"><a href="#accessing-an-existing-upload">Accessing an Existing Upload</a></h2>
 
 <p>You can reference an existing Upload instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="/kendo-ui/api/web/upload#methods">API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="kendo-ui-docs/api/web/upload#methods">API</a> to control its behavior.</p>
 
 <h3 id="accessing-an-existing-upload-instance"><a href="#accessing-an-existing-upload-instance">Accessing an existing Upload instance</a></h3>
 
@@ -169,7 +169,7 @@ $(function() {
 
 <h2 id="handling-kendo-ui-upload-events"><a href="#handling-kendo-ui-upload-events">Handling Kendo UI Upload events</a></h2>
 
-<p>You can subscribe to all <a href="/kendo-ui/api/web/upload#events">events</a> exposed by Kendo UI Upload:</p>
+<p>You can subscribe to all <a href="kendo-ui-docs/api/web/upload#events">events</a> exposed by Kendo UI Upload:</p>
 
 <pre><code>&lt;kendo:upload name="files" upload="onUpload" success="onSuccess"&gt;
     &lt;kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/&gt;

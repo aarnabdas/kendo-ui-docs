@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Notification HtmlHelper extension for Kendo UI Notification widget | Kendo UI documentation</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Getting started with Notification HtmlHelper extension in quick steps - configure Kendo UI Notification widget and operate Kendo UI Notification events.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/notification/overview.html")
         });
         </script>
@@ -106,10 +106,10 @@
         <article>
             <h1 id="notification"><a href="#notification">Notification</a></h1>
 
-<p>The Notification HtmlHelper extension is a server-side wrapper for the <a href="/kendo-ui/api/web/notification">Kendo UI Notification</a> widget.</p>
+<p>The Notification HtmlHelper extension is a server-side wrapper for the <a href="kendo-ui-docs/api/web/notification">Kendo UI Notification</a> widget.</p>
 
-<p>It is assumed that the reader of this page is familiar with the fundamental <a href="/kendo-ui/widgets">Kendo UI widget concepts</a> and
-the <a href="/kendo-ui/aspnet-mvc/introduction">Kendo UI MVC wrappers</a> are setup correctly.</p>
+<p>It is assumed that the reader of this page is familiar with the fundamental <a href="kendo-ui-docs/widgets">Kendo UI widget concepts</a> and
+the <a href="kendo-ui-docs/aspnet-mvc/introduction">Kendo UI MVC wrappers</a> are setup correctly.</p>
 
 <p>The <strong>Kendo UI Notification</strong> provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.</p>
 
@@ -243,7 +243,7 @@ One widget instance can display either popup or static notifications, not both a
 
 <h2 id="templates"><a href="#templates">Templates</a></h2>
 
-<p><em>This documentation section assumes that you are familiar with <a href="/kendo-ui/framework/templates/overview">Kendo UI templates</a></em>.</p>
+<p><em>This documentation section assumes that you are familiar with <a href="kendo-ui-docs/framework/templates/overview">Kendo UI templates</a></em>.</p>
 
 <p>The <strong>Notification</strong> widget allows configuring multiple templates. Each template will be used together with its corresponding <a href="#notification-types">notification type</a> (either build-in or custom).
 If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template,
@@ -287,8 +287,8 @@ $(function(){
 </code></pre>
 
 <p>For more information on other Notification features and behavior (HTML output, RTL support, Events, etc),
-please refer to the widget's main <a href="/kendo-ui/web/notification/overview">Overview</a> help page.
-The widget events and methods are described on the <a href="/kendo-ui/api/web/notification/">Notification API</a> page.</p>
+please refer to the widget's main <a href="kendo-ui-docs/web/notification/overview">Overview</a> help page.
+The widget events and methods are described on the <a href="kendo-ui-docs/api/web/notification/">Notification API</a> page.</p>
         </article>
     </div>
 </div>

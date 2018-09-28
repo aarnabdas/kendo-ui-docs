@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>How to use the Gantt PHP class, server-side wrapper for Kendo UI Gantt widget</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to bind Kendo UI Gantt for PHP, handle Kendo UI Gantt Events, access an existing gantt.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/php-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/php-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("php/widgets/gantt/overview.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="gantt"><a href="#gantt">Gantt</a></h1>
 
-<p>The Kendo Gantt for PHP is a server-side wrapper for the <a href="/kendo-ui/api/web/gantt">Kendo UI Gantt</a> widget.</p>
+<p>The Kendo Gantt for PHP is a server-side wrapper for the <a href="kendo-ui-docs/api/web/gantt">Kendo UI Gantt</a> widget.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -114,15 +114,15 @@
 
 <ul>
 <li>
-<a href="/kendo-ui/php/widgets/gantt/local-binding">local</a> - the gantt is bound to PHP array</li>
+<a href="kendo-ui-docs/php/widgets/gantt/local-binding">local</a> - the gantt is bound to PHP array</li>
 <li>
-<a href="/kendo-ui/php/widgets/gantt/remote-binding">remote</a> - the gantt makes AJAX requests and is bound to JSON result</li>
+<a href="kendo-ui-docs/php/widgets/gantt/remote-binding">remote</a> - the gantt makes AJAX requests and is bound to JSON result</li>
 </ul>
 
 <p>Here is how to configure the gantt for local binding:</p>
 
 <ol>
-<li>Follow the steps from the <a href="/kendo-ui/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
+<li>Follow the steps from the <a href="kendo-ui-docs/php/introduction">introduction</a> - include the autoloader, JavaScript and CSS files.</li>
 <li>
 <p>Create an array of tasks to which the gantt will be bound to</p>
 
@@ -166,7 +166,7 @@ $dependenciesData = array(
 </code></pre>
 </li>
 <li>
-<p>Create a <a href="/kendo-ui/api/wrappers/php/Kendo/Data/DataSource">data source</a> for the tasks and set its <a href="/kendo-ui/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
+<p>Create a <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource">data source</a> for the tasks and set its <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
 
 <pre><code>&lt;?php
 $tasksDataSource = new \Kendo\Data\DataSource();
@@ -175,7 +175,7 @@ $tasksDataSource-&gt;data($tasksData);
 </code></pre>
 </li>
 <li>
-<p>Create a <a href="/kendo-ui/api/wrappers/php/Kendo/Data/DataSource">data source</a> for the dependencies and set its <a href="/kendo-ui/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
+<p>Create a <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource">data source</a> for the dependencies and set its <a href="kendo-ui-docs/api/wrappers/php/Kendo/Data/DataSource#data">data</a>:</p>
 
 <pre><code>&lt;?php
 $dependenciesDataSource = new \Kendo\Data\DataSource();
@@ -184,7 +184,7 @@ $dependenciesDataSource-&gt;data($dependenciesData);
 </code></pre>
 </li>
 <li>
-<p>Create a <a href="/kendo-ui/api/wrappers/php/Kendo/UI/Gantt">gantt</a>, set its <a href="/kendo-ui/api/wrappers/php/Kendo/UI/Gantt#datasource">data source</a> and  <a href="/kendo-ui/api/wrappers/php/Kendo/UI/Gantt#dependencies">dependencies data source</a>.</p>
+<p>Create a <a href="kendo-ui-docs/api/wrappers/php/Kendo/UI/Gantt">gantt</a>, set its <a href="kendo-ui-docs/api/wrappers/php/Kendo/UI/Gantt#datasource">data source</a> and  <a href="kendo-ui-docs/api/wrappers/php/Kendo/UI/Gantt#dependencies">dependencies data source</a>.</p>
 
 <pre><code>&lt;?php
 $gantt = new \Kendo\UI\Gantt('gantt');
@@ -194,7 +194,7 @@ $gantt-&gt;dataSource($tasksDataSource)
 </code></pre>
 </li>
 <li>
-<p>Output the gantt by echo-ing the result of the <a href="/kendo-ui/api/wrappers/php/Kendo/UI/Widget#render">render</a> method.</p>
+<p>Output the gantt by echo-ing the result of the <a href="kendo-ui-docs/api/wrappers/php/Kendo/UI/Widget#render">render</a> method.</p>
 
 <pre><code>&lt;?php
 echo $gantt-&gt;render();
@@ -206,7 +206,7 @@ echo $gantt-&gt;render();
 <h2 id="getting-client-side-reference"><a href="#getting-client-side-reference">Getting Client-side Reference</a></h2>
 
 <p>You can reference the clien-side Kendo Gantt instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="/kendo-ui/api/web/gantt#methods">API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="kendo-ui-docs/api/web/gantt#methods">API</a> to control its behavior.</p>
 
 <h3 id="example"><a href="#example">Example</a></h3>
 
@@ -224,7 +224,7 @@ $(function() {
 
 <h2 id="handling-events"><a href="#handling-events">Handling Events</a></h2>
 
-<p>You can subscribe to all gantt <a href="/kendo-ui/api/web/gantt#events">events</a>.</p>
+<p>You can subscribe to all gantt <a href="kendo-ui-docs/api/web/gantt#events">events</a>.</p>
 
 <h3 id="example---subscribing-by-specifying-javascript-function-name"><a href="#example---subscribing-by-specifying-javascript-function-name">Example - subscribing by specifying JavaScript function name</a></h3>
 

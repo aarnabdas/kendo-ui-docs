@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of Kendo UI Window widget</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to get started with Kendo UI Window widget, load content via Ajax, access an existing window.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("web/window/overview.html")
         });
         </script>
@@ -135,7 +135,7 @@ DOM element that was used to initialize the content.</p>
 <h3 id="html-structure-and-dom-placement"><a href="#html-structure-and-dom-placement">HTML structure and DOM Placement</a></h3>
 
 <p>By default, the Window is created as a child of the <code>&lt;body&gt;</code> element. This behavior should be taken into account with regard to CSS selectors or element discovery via Javascript.
-The behavior is configurable via the <a href="/kendo-ui/api/web/window#configuration-appendTo"><code>appendTo</code> setting</a>.</p>
+The behavior is configurable via the <a href="kendo-ui-docs/api/web/window#configuration-appendTo"><code>appendTo</code> setting</a>.</p>
 
 <h4>Before initialization</h4>
 
@@ -295,7 +295,7 @@ all sorts of undesired side effects, including a broken DOM tree, deleted widget
 </code></pre>
 
 <p>If the Window has no set dimensions, it will probably resize after the AJAX content is loaded. This will naturally change the widget position on the screen and it will no longer be centered. If this is a requirement,
-then either <a href="/kendo-ui/api/web/window#methods-center"><code>center</code></a> the Window in its <a href="/kendo-ui/api/web/window#events-refresh"><code>refresh</code></a> event, or set some explicit dimensions.</p>
+then either <a href="kendo-ui-docs/api/web/window#methods-center"><code>center</code></a> the Window in its <a href="kendo-ui-docs/api/web/window#events-refresh"><code>refresh</code></a> event, or set some explicit dimensions.</p>
 
 <h2 id="using-iframes"><a href="#using-iframes">Using iframes</a></h2>
 
@@ -368,9 +368,9 @@ use the API to control its behavior.</p>
 <h3 id="accessing-the-window-dom-elements"><a href="#accessing-the-window-dom-elements">Accessing the Window DOM elements</a></h3>
 
 <p>Similar to other Kendo UI widgets, the Window has two DOM elements, which you may want to access and use to customize the appearance of the widget or its content.
-These are the widget's <a href="/kendo-ui/framework/widgets/wrapper-element"><code>wrapper</code> and <code>element</code></a>, which are provided as fields of the widget object. In specific scenarios,
+These are the widget's <a href="kendo-ui-docs/framework/widgets/wrapper-element"><code>wrapper</code> and <code>element</code></a>, which are provided as fields of the widget object. In specific scenarios,
 the Window wrapper can be used to tweak the widget's position or size, although this should normally be done via the API and the
-<a href="/kendo-ui/api/javascript/ui/window#methods-setOptions"><code>setOptions</code> method</a>.</p>
+<a href="kendo-ui-docs/api/javascript/ui/window#methods-setOptions"><code>setOptions</code> method</a>.</p>
 
 <pre><code>var win = $("#window").data("kendoWindow");
 var winWrapper = win.wrapper;
@@ -387,7 +387,7 @@ but may lead to undesired side effects if the Window is created from an element 
 
 <ol>
 <li>the whole form including its opening and closing tags should be inside the element, from which the Window is created;</li>
-<li>if some parts of the form should remain outside the Window, then the <a href="/kendo-ui/api/web/window#configuration-appendTo">appendTo</a> property should be used,
+<li>if some parts of the form should remain outside the Window, then the <a href="kendo-ui-docs/api/web/window#configuration-appendTo">appendTo</a> property should be used,
 so that the widget remains inside the form;</li>
 </ol>
 
@@ -397,7 +397,7 @@ because in such cases the Window should remain visible to display and validation
 
 <h2 id="destroying-a-kendo-ui-window"><a href="#destroying-a-kendo-ui-window">Destroying a Kendo UI Window</a></h2>
 
-<p>Unlike most other widgets, the Kendo UI Window is <strong>completely removed from the DOM</strong> when <a href="/kendo-ui/widgets#destroying-kendo-ui-widgets">destroyed</a>.
+<p>Unlike most other widgets, the Kendo UI Window is <strong>completely removed from the DOM</strong> when <a href="kendo-ui-docs/widgets#destroying-kendo-ui-widgets">destroyed</a>.
 This means that the element, from which it was initialized, no longer exists on the page, so a new Window instance can be created only from another element.</p>
 
 <h2 id="printing-the-window-contents"><a href="#printing-the-window-contents">Printing the Window contents</a></h2>

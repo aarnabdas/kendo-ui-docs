@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API reference for Kendo UI Drawing API Arc</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/drawing/arc.html")
         });
         </script>
@@ -107,7 +107,7 @@
     <div id="page-article">
         <article>
             <h1 id="kendodrawingarc--kendodrawingelement">
-<a href="#kendodrawingarc--kendodrawingelement">kendo.drawing.Arc</a><span class="type-link">Inherits from <a class="type-link" href="/kendo-ui/api/javascript/drawing/element">kendo.drawing.Element</a></span>
+<a href="#kendodrawingarc--kendodrawingelement">kendo.drawing.Arc</a><span class="type-link">Inherits from <a class="type-link" href="kendo-ui-docs/api/javascript/drawing/element">kendo.drawing.Element</a></span>
 </h1>
 
 <p>Draws an arc with set geometry, fill and stroke.</p>
@@ -135,7 +135,7 @@
 <h2 id="constructor-parameters"><a href="#constructor-parameters">Constructor Parameters</a></h2>
 
 <h3 id="geometry-kendogeometryarc">
-<a href="#geometry-kendogeometryarc">geometry </a><a href="/kendo-ui/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a>
+<a href="#geometry-kendogeometryarc">geometry </a><a href="kendo-ui-docs/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a>
 </h3>
 
 <p>The geometric object that defines the arc parameters.</p>
@@ -149,14 +149,14 @@
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
 <h3 id="configuration-clip">
-<a href="#configuration-clip">clip </a><a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
+<a href="#configuration-clip">clip </a><a href="kendo-ui-docs/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
 </h3>
 
 <p>The element clipping path.
 Inherited from <a href="element#configuration-clip">Element.clip</a></p>
 
 <h3 id="configuration-fill">
-<a href="#configuration-fill">fill </a><a href="/kendo-ui/api/javascript/drawing/fill-options" class="type-link"><code>kendo.drawing.FillOptions</code></a>
+<a href="#configuration-fill">fill </a><a href="kendo-ui-docs/api/javascript/drawing/fill-options" class="type-link"><code>kendo.drawing.FillOptions</code></a>
 </h3>
 
 <p>The fill options of the shape.</p>
@@ -169,13 +169,13 @@ Inherited from <a href="element#configuration-clip">Element.clip</a></p>
 Inherited from <a href="element#configuration-opacity">Element.opacity</a></p>
 
 <h3 id="configuration-stroke">
-<a href="#configuration-stroke">stroke </a><a href="/kendo-ui/api/javascript/drawing/stroke-options" class="type-link"><code>kendo.drawing.StrokeOptions</code></a>
+<a href="#configuration-stroke">stroke </a><a href="kendo-ui-docs/api/javascript/drawing/stroke-options" class="type-link"><code>kendo.drawing.StrokeOptions</code></a>
 </h3>
 
 <p>The stroke options of the shape.</p>
 
 <h3 id="configuration-transform">
-<a href="#configuration-transform">transform </a><a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
+<a href="#configuration-transform">transform </a><a href="kendo-ui-docs/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
 </h3>
 
 <p>The transformation to apply to this element.
@@ -197,7 +197,7 @@ Inherited from <a href="element#methods-bbox">Element.bbox</a></p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with transformations applied.</p>
+<p><a href="kendo-ui-docs/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with transformations applied.</p>
 
 <h3 id="methods-clip"><a href="#methods-clip">clip</a></h3>
 
@@ -206,14 +206,14 @@ Inherited from <a href="element#methods-clip">Element.clip</a></p>
 
 <h4>Parameters</h4>
 
-<h5>clip <a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
+<h5>clip <a href="kendo-ui-docs/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a>
 </h5>
 
 <p>The element clipping path.</p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a> The current element clipping path.</p>
+<p><a href="kendo-ui-docs/api/javascript/drawing/path" class="type-link"><code>kendo.drawing.Path</code></a> The current element clipping path.</p>
 
 <h3 id="methods-clippedBBox"><a href="#methods-clippedBBox">clippedBBox</a></h3>
 
@@ -222,7 +222,7 @@ Inherited from <a href="element#methods-clippedBBox">Element.clippedBBox</a></p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with clipping transformations applied.</p>
+<p><a href="kendo-ui-docs/api/javascript/geometry/rect" class="type-link"><code>kendo.geometry.Rect</code></a> The bounding box of the element with clipping transformations applied.</p>
 
 <h3 id="methods-geometry"><a href="#methods-geometry">geometry</a></h3>
 
@@ -230,14 +230,14 @@ Inherited from <a href="element#methods-clippedBBox">Element.clippedBBox</a></p>
 
 <h4>Parameters</h4>
 
-<h5>value <a href="/kendo-ui/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a>
+<h5>value <a href="kendo-ui-docs/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a>
 </h5>
 
 <p>The new geometry to use.</p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a> The current arc geometry.</p>
+<p><a href="kendo-ui-docs/api/javascript/geometry/arc" class="type-link"><code>kendo.geometry.Arc</code></a> The current arc geometry.</p>
 
 <h3 id="methods-fill"><a href="#methods-fill">fill</a></h3>
 
@@ -257,7 +257,7 @@ Inherited from <a href="element#methods-clippedBBox">Element.clippedBBox</a></p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/drawing/arc" class="type-link"><code>kendo.drawing.Arc</code></a> The current instance to allow chaining.</p>
+<p><a href="kendo-ui-docs/api/javascript/drawing/arc" class="type-link"><code>kendo.drawing.Arc</code></a> The current instance to allow chaining.</p>
 
 <h3 id="methods-opacity"><a href="#methods-opacity">opacity</a></h3>
 
@@ -300,7 +300,7 @@ Inherited from <a href="element#methods-opacity">Element.opacity</a></p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/drawing/arc" class="type-link"><code>kendo.drawing.Arc</code></a> The current instance to allow chaining.</p>
+<p><a href="kendo-ui-docs/api/javascript/drawing/arc" class="type-link"><code>kendo.drawing.Arc</code></a> The current instance to allow chaining.</p>
 
 <h3 id="methods-transform"><a href="#methods-transform">transform</a></h3>
 
@@ -309,14 +309,14 @@ Inherited from <a href="element#methods-transform">Element.transform</a></p>
 
 <h4>Parameters</h4>
 
-<h5>transform <a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
+<h5>transform <a href="kendo-ui-docs/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a>
 </h5>
 
 <p>The transformation to apply to the element.</p>
 
 <h4>Returns</h4>
 
-<p><a href="/kendo-ui/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a> The current transformation on the element.</p>
+<p><a href="kendo-ui-docs/api/javascript/geometry/transformation" class="type-link"><code>kendo.geometry.Transformation</code></a> The current transformation on the element.</p>
 
 <h3 id="methods-visible"><a href="#methods-visible">visible</a></h3>
 

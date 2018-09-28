@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("mobile/listview/endless-scrolling.html")
         });
         </script>
@@ -107,7 +107,7 @@
             <h1 id="use-the-listview-of-kendo-ui-mobile-with-endless-scrolling"><a href="#use-the-listview-of-kendo-ui-mobile-with-endless-scrolling">Use the ListView of Kendo UI Mobile With Endless Scrolling</a></h1>
 
 <p>The listview widget supports displaying large amounts of data by appending additional pages of data on demand.
-Loading can happen automatically by enabling <a href="/kendo-ui/api/mobile/listview#configuration-endlessScroll">endless scrolling</a>, or by displaying a button at the bottom (<a href="/kendo-ui/api/mobile/listview#configuration-loadMore"> press to load more </a>).
+Loading can happen automatically by enabling <a href="kendo-ui-docs/api/mobile/listview#configuration-endlessScroll">endless scrolling</a>, or by displaying a button at the bottom (<a href="kendo-ui-docs/api/mobile/listview#configuration-loadMore"> press to load more </a>).
 Enabling endless scrolling or press to load more options triggers the <strong>virtual mode</strong> of the ListView.</p>
 
 <p>In order for the listview virtual mode to be working as expected, the listview should be the only widget in the scrolling container. In case more widgets are needed in the view in question, the listview should be wrapped in a mobile scroller container.</p>
@@ -127,7 +127,7 @@ For example, if 5 items are visible on the page, at least 15 physical DOM elemen
 <p>Bigger DataSource page size ensures smooth scrolling, but has adverce effects on view transition performance.</p>
 </blockquote>
 
-<p>Once the listview reaches the amount of items specified by the <a href="/kendo-ui/api/framework/datasource#configuration-schema.total">schema.total</a> setting of the datasource, the loadmore button/endless scrolling indicator is hidden.</p>
+<p>Once the listview reaches the amount of items specified by the <a href="kendo-ui-docs/api/framework/datasource#configuration-schema.total">schema.total</a> setting of the datasource, the loadmore button/endless scrolling indicator is hidden.</p>
 
 <blockquote>
 <p>Currently, certain features (<strong>grouped mode</strong> and <strong>inset styling</strong>) are <strong>not supported</strong> in virtual mode.</p>

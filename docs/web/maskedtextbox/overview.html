@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>MaskedTextBox UI widget - documentation overview</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to create MaskedTextBox widget and deal with proper configuration of its behaviors.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("web/maskedtextbox/overview.html")
         });
         </script>
@@ -107,7 +107,7 @@
             <h1 id="maskedtextbox-overview"><a href="#maskedtextbox-overview">MaskedTextBox Overview</a></h1>
 
 <p>The MaskedTextBox widget allows controlled text input based on a specific format.
-It can be defined using the <a href="/kendo-ui/api/web/maskedtextbox#configuration-mask">mask</a> option of the widget. Every mask can contain mask rules and
+It can be defined using the <a href="kendo-ui-docs/api/web/maskedtextbox#configuration-mask">mask</a> option of the widget. Every mask can contain mask rules and
 mask literals. The mask literals will be automatically entered for the user and they cannot be removed.
 Widget also has predefined rules specifying:</p>
 
@@ -117,7 +117,7 @@ Widget also has predefined rules specifying:</p>
 <li>required/optional character input (allow any character)</li>
 </ul>
 
-<p>For a complete overview of the MaskedTextBox's methods and configuration options, <a href="/kendo-ui/api/web/maskedtextbox">review the MaskedTextBox API Reference</a>.</p>
+<p>For a complete overview of the MaskedTextBox's methods and configuration options, <a href="kendo-ui-docs/api/web/maskedtextbox">review the MaskedTextBox API Reference</a>.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -153,7 +153,7 @@ controlled are:</p>
 <li>  Culture name</li>
 </ul>
 
-<p>For a complete overview of the MaskedTextBox's methods and configuration options, <a href="/kendo-ui/api/web/maskedtextbox">review the MaskedTextBox API Reference</a>.</p>
+<p>For a complete overview of the MaskedTextBox's methods and configuration options, <a href="kendo-ui-docs/api/web/maskedtextbox">review the MaskedTextBox API Reference</a>.</p>
 
 <h3 id="predefined-mask-rules"><a href="#predefined-mask-rules">Predefined Mask Rules</a></h3>
 
@@ -204,7 +204,7 @@ controlled are:</p>
 <h3 id="define-a-custom-mask-rule"><a href="#define-a-custom-mask-rule">Define a custom mask rule</a></h3>
 
 <p>The MaskedTextBox widget provides the ability to define custom mask rules during initialization.
-To accomplish this task define a rule in the <a href="/kendo-ui/api/web/maskedtextbox#configuration-rules">rules</a>
+To accomplish this task define a rule in the <a href="kendo-ui-docs/api/web/maskedtextbox#configuration-rules">rules</a>
 option. Widget supports rules defined as regular expression or a function:</p>
 
 <pre><code>&lt;input id="maskedtextbox"&gt;
@@ -225,7 +225,7 @@ option. Widget supports rules defined as regular expression or a function:</p>
 </code></pre>
 
 <blockquote>
-<p>Any of the predefined rules can be overridden through the <a href="/kendo-ui/api/web/maskedtextbox#configuration-rules">rules</a> option.</p>
+<p>Any of the predefined rules can be overridden through the <a href="kendo-ui-docs/api/web/maskedtextbox#configuration-rules">rules</a> option.</p>
 </blockquote>
         </article>
     </div>

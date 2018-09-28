@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Modes in Kendo UI jQuery-based file Upload widget</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to use different modes in Kendo UI Upload widget, initialization of the Upload from an existing file and further async, implemented by using the HTML5 File API.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("web/upload/modes.html")
         });
         </script>
@@ -114,7 +114,7 @@
 
 <p>The users benefit from the ability to select a variable number of files. This feature does not require the browser to support multiple file selection.</p>
 
-<p><img src="/kendo-ui/web/upload/upload-sync.png" alt=""></p>
+<p><img src="kendo-ui-docs/web/upload/upload-sync.png" alt=""></p>
 
 <p>The Upload is initialized from an existing file input placed in a form.</p>
 
@@ -138,7 +138,7 @@
 
 <p>In this mode the Upload requires dedicated server handlers to store and remove uploaded files. Files are uploaded immediately or, optionally, after user confirmation. The upload request is executed out-of-band without interrupting the page flow.</p>
 
-<p><img src="/kendo-ui/web/upload/upload-async.png" alt=""></p>
+<p><img src="kendo-ui-docs/web/upload/upload-async.png" alt=""></p>
 
 <p>The async mode is implemented using the HTML5 File API. The upload will gracefully degrade and continue to function in legacy browsers using a hidden IFRAME.</p>
 
@@ -174,14 +174,14 @@
 
 <h3 id="remove-handler"><a href="#remove-handler">Remove handler</a></h3>
 
-<p>The remove handler should accept POST requests (configurable via the <a href="/kendo-ui/api/web/upload#configuration-async.removeVerb">removeVerb</a> option).
+<p>The remove handler should accept POST requests (configurable via the <a href="kendo-ui-docs/api/web/upload#configuration-async.removeVerb">removeVerb</a> option).
 The requests will contain one or more text fields with name "fileNames". In this case, we change it to "fileNames[]" using the removeField option.</p>
 
 <p>The handler should return either:</p>
 
 <ul>
 <li>  An empty response to signify success.</li>
-<li>  A JSON string with "text/plain" content encoding. The de-serialized object is available in the <a href="/kendo-ui/api/web/upload#events-success">success</a> event handler.</li>
+<li>  A JSON string with "text/plain" content encoding. The de-serialized object is available in the <a href="kendo-ui-docs/api/web/upload#events-success">success</a> event handler.</li>
 <li>  Any other response to signify failure.</li>
 </ul>
 

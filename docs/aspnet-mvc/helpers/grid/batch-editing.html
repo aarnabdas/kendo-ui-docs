@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Cell editing mode and Batch Updates for Kendo UI Grid for ASP.NET MVC</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Step by step guide how to enable cell editing mode and batch updates in Kendo UI Grid for ASP.NET MVC.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/batch-editing.html")
         });
         </script>
@@ -109,15 +109,15 @@
 <h2 id="getting-started"><a href="#getting-started">Getting started</a></h2>
 
 <ol>
-<li> Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the <a href="/kendo-ui/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
-Name the application "KendoGridBatchEditing". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions followe the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">introduction</a> help topic in order
+<li> Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the <a href="kendo-ui-docs/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
+Name the application "KendoGridBatchEditing". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions followe the steps from the <a href="kendo-ui-docs/aspnet-mvc/introduction">introduction</a> help topic in order
 to add Telerik UI for ASP.NET MVC to the application.</li>
 <li> Add a new "Entity Framework Data Model". Right click the <code>~/Models</code> folder in the solution explorer and pick "Add -&gt;  New Item". Choose "Data -&gt; ADO.NET Entity Data Model" in the "Add New Item" dialog.
-Name the model "Northwind.edmx" and click "Next". This will start the "Entity Data Model Wizard".<img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
+Name the model "Northwind.edmx" and click "Next". This will start the "Entity Data Model Wizard".<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
 </li>
-<li> Pick the "Generate from database" option and click "Next". Configure a connection to the Northwind database. Click "Next". <img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="Choose the connection">
+<li> Pick the "Generate from database" option and click "Next". Configure a connection to the Northwind database. Click "Next". <img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="Choose the connection">
 </li>
-<li> Choose the "Products" table from the "Which database objects do you want to include in your model?". Leave all other options as they are set by default. Click "Finish". <img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
+<li> Choose the "Products" table from the "Which database objects do you want to include in your model?". Leave all other options as they are set by default. Click "Finish". <img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
 </li>
 <li>
 <p>Add a new class to the <code>~/Models</code> folder. Name it <code>ProductViewModel</code>.</p>

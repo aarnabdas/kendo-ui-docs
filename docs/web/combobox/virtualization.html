@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Kendo UI ComboBox Virtualization</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="This document provides information how to configure virtualization in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("web/combobox/virtualization.html")
         });
         </script>
@@ -143,16 +143,16 @@ When the list is scrolled, the widget will reuse the existing items to display t
 
 <p>In the context of the widget, the <strong>Data</strong> virtualization is accomplished using the DataSource paging functionality and remote data retrieval.
 Thus the widget will retrieve only a concrete data page instead of requesting the whole data set at once. The DataSource paging should be configured <strong>correctly</strong>
-in order to ensure the proper widget's work. Please refer to the <a href="/kendo-ui/kendo-ui/api/javascript/data/datasource#configuration-serverPaging">server paging</a> configuration for more details.</p>
+in order to ensure the proper widget's work. Please refer to the <a href="kendo-ui-docs/kendo-ui/api/javascript/data/datasource#configuration-serverPaging">server paging</a> configuration for more details.</p>
 
 <h2 id="what-is-ui-virtualization"><a href="#what-is-ui-virtualization">What is UI virtualization</a></h2>
 
-<p>The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the <a href="/kendo-ui/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a>
+<p>The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the <a href="kendo-ui-docs/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a>
 and <a href="#itemheight">itemHeight</a> options. Once the number is calculated, the widget creates those elements and starts re-using them to display the current <em>data source page</em>.</p>
 
 <h2 id="how-the-data-and-ui-virtualization-is-combined"><a href="#how-the-data-and-ui-virtualization-is-combined">How the Data and UI virtualization is combined</a></h2>
 
-<p>To ensure the correct work of the widget, the DataSource pageSize value is calculated <strong>automatically</strong>, based on the ((<a href="/kendo-ui/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a>
+<p>To ensure the correct work of the widget, the DataSource pageSize value is calculated <strong>automatically</strong>, based on the ((<a href="kendo-ui-docs/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a>
 / <a href="#itemheight">itemHeight</a>) * 4) formula. This is done by the widget itself, and the defined pageSize value will be overriden if it does not match the calculated one.</p>
 
 <blockquote>
@@ -177,7 +177,7 @@ and <a href="#itemheight">itemHeight</a> options. Once the number is calculated,
 
 <h3 id="pagesize"><a href="#pagesize">pageSize</a></h3>
 
-<p>The virtualized widget will <em>calculate</em> the <strong>pageSize</strong> value automatically based on the ((<a href="/kendo-ui/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a> / <a href="#itemheight">itemHeight</a>) * 4) formula
+<p>The virtualized widget will <em>calculate</em> the <strong>pageSize</strong> value automatically based on the ((<a href="kendo-ui-docs/kendo-ui/api/javascript/ui/combobox#configuration-height">height</a> / <a href="#itemheight">itemHeight</a>) * 4) formula
 and will <em>override</em> the custom defined pageSize value. This is done to ensure the proper work of the virtualized list.</p>
 
 <p>Let's consider the following scenario:</p>
@@ -244,12 +244,12 @@ that passes the <strong>selected value</strong> and requests the corresponding <
 <li>The dataSource will change the page to <code>25</code> and will display the items showing the selected item too.</li>
 </ol>
 
-<p><img src="/kendo-ui/web/combobox/virtualization.png" alt="Virtualization process"></p>
+<p><img src="kendo-ui-docs/web/combobox/virtualization.png" alt="Virtualization process"></p>
 
 <h3 id="what-should-return-the-valuemapper-service"><a href="#what-should-return-the-valuemapper-service">What should return the valueMapper service?</a></h3>
 
 <p>The valueMapper callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either index (number) or list of indices.
-For instance, you can examine the result of <a href="/kendo-ui/kendo-ui/service/Orders/ValueMapper">the test service</a> used in the online demos:</p>
+For instance, you can examine the result of <a href="kendo-ui-docs/kendo-ui/service/Orders/ValueMapper">the test service</a> used in the online demos:</p>
 
 <pre lang="javascript"><code>$.ajax({
     url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
@@ -343,9 +343,9 @@ iteration of all items counting the index of the rows.</p>
 <h2 id="further-reading"><a href="#further-reading">Further Reading</a></h2>
 
 <ul>
-<li><a href="/kendo-ui/framework/datasource/overview">Kendo UI DataSource Overview</a></li>
-<li><a href="/kendo-ui/api/javascript/data/datasource">Kendo UI DataSource API</a></li>
-<li><a href="/kendo-ui/api/javascript/ui/combobox#configuration-virtual">Kendo UI ComboBox virtual setup</a></li>
+<li><a href="kendo-ui-docs/framework/datasource/overview">Kendo UI DataSource Overview</a></li>
+<li><a href="kendo-ui-docs/api/javascript/data/datasource">Kendo UI DataSource API</a></li>
+<li><a href="kendo-ui-docs/api/javascript/ui/combobox#configuration-virtual">Kendo UI ComboBox virtual setup</a></li>
 </ul>
         </article>
     </div>

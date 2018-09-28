@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Overview of Validator UI in Kendo UI framework</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to initialize jQuery Validator UI and trigger elements' validation.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/validator/overview.html")
         });
         </script>
@@ -108,7 +108,7 @@
 
 <p>The Kendo UI Validator offers an easy way to do client-side form validation. Built around the HTML5 form validation attributes, it supports variety of built-in validation rules, but also provides a convenient way for setting custom rules handling.</p>
 
-<p>For a complete overview of the Validator's methods and configuration options, <a href="/kendo-ui/api/javascript/ui/validator">review the Validator API Reference</a>.</p>
+<p>For a complete overview of the Validator's methods and configuration options, <a href="kendo-ui-docs/api/javascript/ui/validator">review the Validator API Reference</a>.</p>
 
 <h2 id="html5-form-validation"><a href="#html5-form-validation">HTML5 form validation</a></h2>
 
@@ -216,7 +216,7 @@ $("#save").on("click", function() {
 
 <h2 id="custom-validation-rules"><a href="#custom-validation-rules">Custom Validation Rules</a></h2>
 
-<p>Beside the built-in validation rules, with KendoUI Validator you can set custom rules through the <a href="/kendo-ui/api/javascript/ui/validator#rules">rules configuration option</a>.</p>
+<p>Beside the built-in validation rules, with KendoUI Validator you can set custom rules through the <a href="kendo-ui-docs/api/javascript/ui/validator#rules">rules configuration option</a>.</p>
 
 <p>Important things to note about custom validation rules and messages:</p>
 
@@ -385,7 +385,7 @@ adding a span with data-for attribute set to the validated input name and a clas
 <p>The validation toolip element is bound to the input's <strong>name</strong> via data-for attribute.</p>
 </blockquote>
 
-<p>The Kendo UI Validator is a powerful framework component and essential for any application that collects user input. <a href="/kendo-ui/api/javascript/ui/validator">Review the API Docs</a> for more configuration details and options.</p>
+<p>The Kendo UI Validator is a powerful framework component and essential for any application that collects user input. <a href="kendo-ui-docs/api/javascript/ui/validator">Review the API Docs</a> for more configuration details and options.</p>
         </article>
     </div>
 </div>

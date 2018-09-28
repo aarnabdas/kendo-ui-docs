@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Add Kendo UI jQuery Widgets to an Application using jQuery Plugin</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Learn how to add Kendo UI widgets to your mobile website or web application.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("basics/jquery-initialization.html")
         });
         </script>
@@ -112,7 +112,7 @@ widgets' methods are prefixed with <code>Mobile</code> to avoid collisions with 
 <code>kendoMobileListView</code>).</p>
 
 <p>Some Kendo UI widgets have specific requirements about the element types they should be instantiated on. For more details and working examples,
-check the source code in the <a href="http://demos.telerik.com/kendo-ui/">respective widget demo</a> and <a href="/kendo-ui/api/introduction">API reference</a>.</p>
+check the source code in the <a href="http://demos.telerik.com/kendo-ui/">respective widget demo</a> and <a href="kendo-ui-docs/api/introduction">API reference</a>.</p>
 
 <h2 id="instantiate-a-kendo-ui-autocomplete-widget"><a href="#instantiate-a-kendo-ui-autocomplete-widget">Instantiate a Kendo UI Autocomplete Widget</a></h2>
 
@@ -156,7 +156,7 @@ methods to be chained.</p>
 <h2 id="configure-kendo-ui-widgets"><a href="#configure-kendo-ui-widgets">Configure Kendo UI Widgets</a></h2>
 
 <p>You can configure a Kendo UI widget by passing a configuration object (key/value pairs) as an argument to the jQuery plugin method. Each widget supported
-configuration options and events are listed in the respective widget <a href="/kendo-ui/api/introduction">API reference</a>. The configuration object may also contain
+configuration options and events are listed in the respective widget <a href="kendo-ui-docs/api/introduction">API reference</a>. The configuration object may also contain
 event handlers that will be bound to the corresponding widget events.</p>
 
 <h3 id="instantiate-and-configure-a-kendo-ui-grid"><a href="#instantiate-and-configure-a-kendo-ui-grid">Instantiate and Configure a Kendo UI Grid</a></h3>
@@ -192,7 +192,7 @@ $("#grid").kendoGrid({
 &lt;/script&gt;
 </code></pre>
 
-<p>This example sets the <a href="/kendo-ui/api/web/grid#height-numberstring">height</a>, <a href="/kendo-ui/api/web/grid#columns-array">columns</a> and <a href="/kendo-ui/api/web/grid#datasource-kendodatadatasource--object">dataSource</a> configuration options of the Grid widget.</p>
+<p>This example sets the <a href="kendo-ui-docs/api/web/grid#height-numberstring">height</a>, <a href="kendo-ui-docs/api/web/grid#columns-array">columns</a> and <a href="kendo-ui-docs/api/web/grid#datasource-kendodatadatasource--object">dataSource</a> configuration options of the Grid widget.</p>
 
 <h2 id="duplicate-kendo-ui-widget-initialization"><a href="#duplicate-kendo-ui-widget-initialization">Duplicate Kendo UI Widget Initialization</a></h2>
 

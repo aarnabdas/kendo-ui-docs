@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration and methods for Mobile Application widget</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to hide the browser address bar, set the platform which will force on the application, hide/show a loading animation and more in Kendo UI Mobile Application widget.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/mobile/application.html")
         });
         </script>
@@ -331,7 +331,7 @@ new kendo.mobile.Application($(document.body), { serverNavigation: true });
 
 <blockquote>
 <p>The default setting of "black" pushes down the content of the page, while the rest overlay it. To create seamless status bar in iOS7,
-check <a href="/kendo-ui/mobile/application#seamless-status-bar-in-ios7">Seamless Status Bar in iOS7</a> section in Mobile Application's Getting Started page.</p>
+check <a href="kendo-ui-docs/mobile/application#seamless-status-bar-in-ios7">Seamless Status Bar in iOS7</a> section in Mobile Application's Getting Started page.</p>
 </blockquote>
 
 <h4>Example</h4>
@@ -349,7 +349,7 @@ check <a href="/kendo-ui/mobile/application#seamless-status-bar-in-ios7">Seamles
 <a href="#configuration-transition">transition </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h3>
 
-<p>The default View transition. For a list of supported transitions, check the <a href="/kendo-ui/mobile/application#view-transitions">Getting Started help topic</a>.</p>
+<p>The default View transition. For a list of supported transitions, check the <a href="kendo-ui-docs/mobile/application#view-transitions">Getting Started help topic</a>.</p>
 
 <h4>Example</h4>
 
@@ -383,7 +383,7 @@ new kendo.mobile.Application($(document.body), { updateDocumentTitle: false });
 <p>By default, the mobile application uses flexbox for the mobile views layout. The content element is made scrollable, either by initializing a mobile scroller or with the browser supported <code>overflow: auto</code> and <code>-webkit-overflow-scrolling: touch</code> CSS declarations.
 When the <code>useNativeScrolling</code> configuration option is set to true, the view header and footer are positioned using <code>position: fixed</code> CSS declaration. The view content vertical padding is adjusted to match the header and footer height; The default browser scroller is utilized for the content scrolling.</p>
 
-<p>For more information regarding native scrolling check <a href="/kendo-ui/mobile/native-scrolling">this article</a>.</p>
+<p>For more information regarding native scrolling check <a href="kendo-ui-docs/mobile/native-scrolling">this article</a>.</p>
 
 <h4>Example</h4>
 
@@ -521,7 +521,7 @@ new kendo.mobile.Application($(document.body), { webAppCapable: false });
 <h5>transition <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h5>
 
-<p>Optional. The transition to apply when navigating. See <a href="/kendo-ui/mobile/application#view-transitions">View Transitions section</a> for more information.</p>
+<p>Optional. The transition to apply when navigating. See <a href="kendo-ui-docs/mobile/application#view-transitions">View Transitions section</a> for more information.</p>
 
 <h6>Example</h6>
 
@@ -551,7 +551,7 @@ new kendo.mobile.Application($(document.body), { webAppCapable: false });
 <h5>transition <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="type-link"><code>String</code></a>
 </h5>
 
-<p>Optional. The transition to apply when navigating. See <a href="/kendo-ui/mobile/application#view-transitions">View Transitions section</a> for more information.</p>
+<p>Optional. The transition to apply when navigating. See <a href="kendo-ui-docs/mobile/application#view-transitions">View Transitions section</a> for more information.</p>
 
 <h6>Example</h6>
 
@@ -695,7 +695,7 @@ new kendo.mobile.Application($(document.body), { webAppCapable: false });
 <a href="#fields-router">router </a><code>kendo.Router</code>
 </h3>
 
-<p>the <a href="/kendo-ui/api/javascript/router">router</a> instance used by the mobile application for navigation purposes.</p>
+<p>the <a href="kendo-ui-docs/api/javascript/router">router</a> instance used by the mobile application for navigation purposes.</p>
 
 <p>The mobile application binds to the <code>routeMissing</code> router event handler, so registering routes will take precedence over the default mobile app actions.</p>
 

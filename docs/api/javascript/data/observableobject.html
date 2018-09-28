@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>API Reference for ObservableObject, a building block of Kendo MVVM</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="The documentation contains examples for the configuration of a new ObservableObject, methods and different types of events.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/data/observableobject.html")
         });
         </script>
@@ -108,10 +108,10 @@
         <article>
             <h1 id="kendodataobservableobject"><a href="#kendodataobservableobject">kendo.data.ObservableObject</a></h1>
 
-<p>The <code>kendo.data.ObservableObject</code> is the building block of <a href="/kendo-ui/framework/mvvm/overview">Kendo MVVM</a>. In addition
-the items of the <a href="/kendo-ui/framework/datasource/overview">kendo.dat.DataSource</a> are <code>kendo.data.ObservableObject</code> instances.</p>
+<p>The <code>kendo.data.ObservableObject</code> is the building block of <a href="kendo-ui-docs/framework/mvvm/overview">Kendo MVVM</a>. In addition
+the items of the <a href="kendo-ui-docs/framework/datasource/overview">kendo.dat.DataSource</a> are <code>kendo.data.ObservableObject</code> instances.</p>
 
-<p>Inherits from <a href="/kendo-ui/api/framework/observable">kendo.Observable</a>.</p>
+<p>Inherits from <a href="kendo-ui-docs/api/framework/observable">kendo.Observable</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -177,7 +177,7 @@ console.log(observable.uid); // outputs "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" w
 
 <h3 id="methods-bind"><a href="#methods-bind">bind</a></h3>
 
-<p>Attaches a handler to an event. Examples and more info can be found in the <a href="/kendo-ui/api/framework/observable#bind">bind</a> section of the
+<p>Attaches a handler to an event. Examples and more info can be found in the <a href="kendo-ui-docs/api/framework/observable#bind">bind</a> section of the
 kendo.Observable API reference.</p>
 
 <h4>Example - subscribe to an event</h4>

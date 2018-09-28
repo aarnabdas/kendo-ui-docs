@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Instructions for Kendo UI DataViz Chart Widget appearance</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to control the appearance of the chart, change the theme of the widget and manage the animated transitions.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("dataviz/chart/appearance.html")
         });
         </script>
@@ -123,7 +123,7 @@
 <li>  Series</li>
 </ul>
 
-<p><img src="/kendo-ui/dataviz/chart/chart-structure.png" alt="Chart Structure"></p>
+<p><img src="kendo-ui-docs/dataviz/chart/chart-structure.png" alt="Chart Structure"></p>
 
 <h3 id="title"><a href="#title">Title</a></h3>
 
@@ -148,7 +148,7 @@
 
 <p>Custom positioning is configured through the <code>offsetX</code>  and <code>offsetY</code> options. For example:</p>
 
-<p><img src="/kendo-ui/dataviz/chart/chart-legend-custom-position.png" alt="Custom legend position"></p>
+<p><img src="kendo-ui-docs/dataviz/chart/chart-legend-custom-position.png" alt="Custom legend position"></p>
 
 <p>Series can be excluded from the legend by setting their <code>visibleInLegend</code> option to <code>false</code>.</p>
 

@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>How to use MultiSelect HtmlHelper extension | Kendo UI documentation</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="User Guide for server-side wrapper for Kendo UI MultiSelect for ASP.NET MVC widget.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/multiselect/overview.html")
         });
         </script>
@@ -106,7 +106,7 @@
         <article>
             <h1 id="multiselect"><a href="#multiselect">MultiSelect</a></h1>
 
-<p>The MultiSelect HtmlHelper extension is a server-side wrapper for the <a href="/kendo-ui/api/web/multiselect">Kendo UI MultiSelect</a> widget.</p>
+<p>The MultiSelect HtmlHelper extension is a server-side wrapper for the <a href="kendo-ui-docs/api/web/multiselect">Kendo UI MultiSelect</a> widget.</p>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
 
@@ -122,7 +122,7 @@
 <p>Here is how to configure the Kendo MultiSelect for server binding to the Northwind Products table using Linq to SQL:</p>
 
 <ol>
-<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li><p>Make sure you have followed all the steps from the <a href="kendo-ui-docs/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
 <li>
 <p>Create a new action method and pass the Products table as the model:</p>
 
@@ -188,7 +188,7 @@
 <p>Here is how to configure the Kendo MultiSelect for ajax binding to the Northwind Products table using Linq to SQL:</p>
 
 <ol>
-<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li><p>Make sure you have followed all the steps from the <a href="kendo-ui-docs/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
 <li>
 <p>Create an action method which renders the view:</p>
 
@@ -264,7 +264,7 @@
 <p>Here is how to configure the multiselect to use a custom datasource and thus to bind to a ToDataSourceResult instance.</p>
 
 <ol>
-<li><p>Make sure you have followed all the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
+<li><p>Make sure you have followed all the steps from the <a href="kendo-ui-docs/aspnet-mvc/introduction">Introduction</a> help topic.</p></li>
 <li>
 <p>Create an action method which renders the view:</p>
 
@@ -504,7 +504,7 @@ This functionality is supported in Q1 SP1 2013 release and later versions of Ken
 <h2 id="accessing-an-existing-multiselect"><a href="#accessing-an-existing-multiselect">Accessing an Existing MultiSelect</a></h2>
 
 <p>You can reference an existing MultiSelect instance via <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-Once a reference has been established, you can use the <a href="/kendo-ui/api/web/multiselect#methods">API</a> to control its behavior.</p>
+Once a reference has been established, you can use the <a href="kendo-ui-docs/api/web/multiselect#methods">API</a> to control its behavior.</p>
 
 <h3 id="accessing-an-existing-multiselect-instance"><a href="#accessing-an-existing-multiselect-instance">Accessing an existing MultiSelect instance</a></h3>
 
@@ -519,7 +519,7 @@ var multiselect = $("#productMultiSelect").data("kendoMultiSelect");
 
 <h2 id="handling-kendo-ui-multiselect-events"><a href="#handling-kendo-ui-multiselect-events">Handling Kendo UI MultiSelect events</a></h2>
 
-<p>You can subscribe to all <a href="/kendo-ui/api/web/multiselect#events">events</a> exposed by Kendo UI MultiSelect:</p>
+<p>You can subscribe to all <a href="kendo-ui-docs/api/web/multiselect#events">events</a> exposed by Kendo UI MultiSelect:</p>
 
 <h3 id="webforms---subscribe-by-handler-name"><a href="#webforms---subscribe-by-handler-name">WebForms - subscribe by handler name</a></h3>
 

@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configuration, methods and events of Kendo UI PivotConfigurator</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Code examples for PivotConfigurator UI widget configuration, learn how to use it.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
-        <script type="text/javascript" src="/kendo-ui/assets/dojo.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/dojo.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -39,8 +39,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -81,7 +81,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -94,7 +94,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("api/javascript/ui/pivotconfigurator.html")
         });
         </script>
@@ -108,7 +108,7 @@
         <article>
             <h1 id="kendouipivotconfigurator"><a href="#kendouipivotconfigurator">kendo.ui.PivotConfigurator</a></h1>
 
-<p>Represents the Kendo UI PivotConfigurator widget. Inherits from <a href="/kendo-ui/api/javascript/ui/widget">Widget</a>.</p>
+<p>Represents the Kendo UI PivotConfigurator widget. Inherits from <a href="kendo-ui-docs/api/javascript/ui/widget">Widget</a>.</p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -116,12 +116,12 @@
 <a href="#configuration-dataSource">dataSource </a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="type-link"><code>Object |</code></a><code>kendo.data.PivotDataSource</code>
 </h3>
 
-<p>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a>
+<p>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing <a href="kendo-ui-docs/api/framework/pivotdatasource">kendo.data.PivotDataSource</a>
 instance.</p>
 
-<p>If the <code>dataSource</code> option is set to a JavaScript object the widget will initialize a new <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance using that value as data source configuration.</p>
+<p>If the <code>dataSource</code> option is set to a JavaScript object the widget will initialize a new <a href="kendo-ui-docs/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance using that value as data source configuration.</p>
 
-<p>If the <code>dataSource</code> option is an existing <a href="/kendo-ui/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
+<p>If the <code>dataSource</code> option is an existing <a href="kendo-ui-docs/api/framework/pivotdatasource">kendo.data.PivotDataSource</a> instance the widget will use that instance and will <strong>not</strong> initialize a new one.</p>
 
 <h4>Example - set dataSource as a JavaScript object</h4>
 
@@ -1476,7 +1476,7 @@ $("#configurator").kendoPivotConfigurator({
 <a href="#fields-dataSource">dataSource </a><code>kendo.data.PivotDataSource</code>
 </h3>
 
-<p>The <a href="/kendo-ui/api/framework/pivotdatasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
+<p>The <a href="kendo-ui-docs/api/framework/pivotdatasource">data source</a> of the widget. Configured via the <a href="#configuration-dataSource">dataSource</a> option.</p>
 
 <blockquote>
 <p>Changes of the data source will be reflected in the widget.</p>

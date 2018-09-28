@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Configure Kendo UI Grid for ASP.NET MVC for Ajax binding</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Kendo UI Grid for ASP.NET MVC makes Ajax requests upon paging, sorting, filtering or grouping once the Grid HtmlHelper extension is configured for Ajax binding.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/helpers/grid/ajax-binding.html")
         });
         </script>
@@ -114,7 +114,7 @@
 
 <ul>
 <li>The grid retrieves only the data (in JSON format) representing the current page. As a result only the grid is updated.</li>
-<li>All grid templates (column, detail) are executed client-side. They follow the <a href="/kendo-ui/framework/templates/overview">Kendo UI Template</a> definition rules and may contain embedded JavaScript code.</li>
+<li>All grid templates (column, detail) are executed client-side. They follow the <a href="kendo-ui-docs/framework/templates/overview">Kendo UI Template</a> definition rules and may contain embedded JavaScript code.</li>
 </ul>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
@@ -122,18 +122,18 @@
 <p>The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to do ajax binding to the Northwind database (the Products table).</p>
 
 <ol>
-<li> Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the <a href="/kendo-ui/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
-Name the application "KendoGridAjaxBinding". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions follow the steps from the <a href="/kendo-ui/aspnet-mvc/introduction">introduction</a> help topic in order
+<li> Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the <a href="kendo-ui-docs/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions">Telerik UI for ASP.NET MVC Visual Studio Extensions</a>).
+Name the application "KendoGridAjaxBinding". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions follow the steps from the <a href="kendo-ui-docs/aspnet-mvc/introduction">introduction</a> help topic in order
 to add Telerik UI for ASP.NET MVC to the application.</li>
 <li> Add a new "Entity Framework Data Model". Right click the <code>~/Models</code> folder in the solution explorer and pick "Add -&gt;  New Item". Choose "Data -&gt; ADO.NET Entity Data Model" in the "Add New Item" dialog.
 Name the model "Northwind.edmx" and click "Next". This will start the "Entity Data Model Wizard".
-<img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
+<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="New entity data model">
 </li>
 <li> Pick the "Generate from database" option and click "Next". Configure a connection to the Northwind database. Click "Next".
-<img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="Choose the connection">
+<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png" alt="Choose the connection">
 </li>
 <li> Choose the "Products" table from the "Which database objects do you want to include in your model?". Leave all other options as they are set by default. Click "Finish".
-<img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
+<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-database-objects.png" alt="Choose the Products table">
 </li>
 <li>
 <p>Open HomeController.cs and add a new action method which will return the Products as JSON. The grid will make ajax requests to this action.</p>
@@ -224,7 +224,7 @@ Decorate that parameter with the <code>Kendo.Mvc.UI.DataSourceRequestAttribute</
 </code></pre>
 </li>
 <li>Build and run the application
-<img src="/kendo-ui/aspnet-mvc/helpers/grid/images/grid-bound-grid.png" alt="Final result">
+<img src="kendo-ui-docs/aspnet-mvc/helpers/grid/images/grid-bound-grid.png" alt="Final result">
 </li>
 </ol>
 
@@ -323,8 +323,8 @@ This tutorial will show how to use view models and Kendo UI Grid for ASP.NET MVC
 <p>To pass additional parameters to the action use the <code>Data</code> method. Provide the name of a JavaScript function which will return a JavaScript object with the additional data:</p>
 
 <p>The custom parameter names must not match reserved words, which are used by the Kendo UI DataSource for
-<a href="/kendo-ui/api/javascript/data/datasource#configuration-serverSorting">sorting</a>, <a href="/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering">filtering</a>,
-<a href="/kendo-ui/api/javascript/data/datasource#configuration-serverPaging">paging</a> and <a href="/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping">grouping</a>.</p>
+<a href="kendo-ui-docs/api/javascript/data/datasource#configuration-serverSorting">sorting</a>, <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-serverFiltering">filtering</a>,
+<a href="kendo-ui-docs/api/javascript/data/datasource#configuration-serverPaging">paging</a> and <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-serverGrouping">grouping</a>.</p>
 
 <h3 id="example---add-the-additional-parameters-to-the-action-method"><a href="#example---add-the-additional-parameters-to-the-action-method">Example - add the additional parameters to the action method:</a></h3>
 
@@ -447,18 +447,18 @@ can be changed by disabling <code>ServerOperation</code>.</p>
 
 <h2 id="customize-the-rendered-content-and-attach-event-handlers-on-the-fly"><a href="#customize-the-rendered-content-and-attach-event-handlers-on-the-fly">Customize the Rendered Content and Attach Event Handlers on the Fly</a></h2>
 
-<p>In addition using <a href="/kendo-ui/aspnet-mvc/helpers/grid/configuration#template">server</a> and <a href="/kendo-ui/aspnet-mvc/helpers/grid/configuration#clienttemplate">client</a> column templates,
+<p>In addition using <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#template">server</a> and <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/configuration#clienttemplate">client</a> column templates,
 in some cases you may need to customize the Grid data rows' appearance or content with Javascript - hide, show or modify some content, attach custom event handlers, etc.
-When using client-side databinding for the Grid, all these customizations should be performed in the Grid's <a href="/kendo-ui/aspnet-mvc/helpers/grid/overview#handling-kendo-ui-grid-events">dataBound</a> event.
+When using client-side databinding for the Grid, all these customizations should be performed in the Grid's <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/overview#handling-kendo-ui-grid-events">dataBound</a> event.
 If the custom code is executed earlier (e.g. in document.ready), it is very likely to have no effect, because the table rows are still not rendered at that time.</p>
 
 <p>There is one exception to the above - delegated event handlers will work, because they are attached to an ancestor element of the data rows
-(e.g. the Grid <a href="/kendo-ui/api/javascript/ui/grid#fields-table"><code>table</code></a>, <a href="/kendo-ui/api/javascript/ui/grid#fields-tbody"><code>tbody</code></a> or <a href="/kendo-ui/framework/widgets/wrapper-element"><code>wrapper</code></a>),
+(e.g. the Grid <a href="kendo-ui-docs/api/javascript/ui/grid#fields-table"><code>table</code></a>, <a href="kendo-ui-docs/api/javascript/ui/grid#fields-tbody"><code>tbody</code></a> or <a href="kendo-ui-docs/framework/widgets/wrapper-element"><code>wrapper</code></a>),
 and the event handler code should check what is the event target.</p>
 
 <h2 id="prevent-ajax-response-caching"><a href="#prevent-ajax-response-caching">Prevent Ajax response caching</a></h2>
 
-<p>See the <a href="/kendo-ui/aspnet-mvc/helpers/grid/faq#how-to-prevent-ajax-response-caching">FAQ section - How to prevent Ajax response caching?</a></p>
+<p>See the <a href="kendo-ui-docs/aspnet-mvc/helpers/grid/faq#how-to-prevent-ajax-response-caching">FAQ section - How to prevent Ajax response caching?</a></p>
         </article>
     </div>
 </div>

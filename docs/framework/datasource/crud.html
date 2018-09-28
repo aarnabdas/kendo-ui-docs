@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Kendo UI DataSource CRUD Operations</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to use the Kendo UI DataSource component for CRUD operations (create, read, update, destroy), i.e. editing">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/datasource/crud.html")
         });
         </script>
@@ -124,7 +124,7 @@ This is a Javascript object that can be configured to execute predefined functio
 
 <p>The above settings must be configured no matter whether local or remote CRUD operations are used.
 The only case when they are not needed is for scenarios when all data fields are of string type and there is no editing.
-Further details about the schema are provided in the <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema">DataSource API documentation</a>.</p>
+Further details about the schema are provided in the <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-schema">DataSource API documentation</a>.</p>
 
 <h2 id="crud-operations-with-local-transport"><a href="#crud-operations-with-local-transport">CRUD Operations with Local Transport</a></h2>
 
@@ -395,14 +395,14 @@ Theoretically, it is possible to use remote CRUD operations with transport funct
 <li>the client request and expected server response <code>dataType</code> can be <code>"json"</code>, <code>"jsonp"</code>, <code>"odata"</code>, etc.</li>
 </ul>
 
-<p>All these settings are described in detail in the <a href="/kendo-ui/api/javascript/data/datasource">Kendo UI DataSource API</a>.</p>
+<p>All these settings are described in detail in the <a href="kendo-ui-docs/api/javascript/data/datasource">Kendo UI DataSource API</a>.</p>
 
 <h3 id="read-remote"><a href="#read-remote">Read (Remote)</a></h3>
 
 <p>The read service defined by the DataSource transport should return data in the expected format (JSON, JSONP, XML, OData). By default, the expected format is JSON.</p>
 
-<p>If the response is <strong>not</strong> a plain array of objects, a <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema"><code>schema</code></a> must be defined, which will describe the structure of the response
-and especially, <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema.data">where the data is</a>.</p>
+<p>If the response is <strong>not</strong> a plain array of objects, a <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-schema"><code>schema</code></a> must be defined, which will describe the structure of the response
+and especially, <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-schema.data">where the data is</a>.</p>
 
 <p>Here is a simple example with a read transport configuration. The assumed server response is a plain JSON array of objects.</p>
 
@@ -430,9 +430,9 @@ var dataSource = new kendo.data.DataSource({
 </code></pre>
 
 <p>Here is a modified version of the above example, which requires the usage of a <code>schema</code>, due to the more complex response structure.
-The declared <code>itemCount</code> does not match the number of returned items, which is normal when using <a href="/kendo-ui/api/javascript/data/datasource#configuration-serverPaging">server paging</a> -
+The declared <code>itemCount</code> does not match the number of returned items, which is normal when using <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-serverPaging">server paging</a> -
 the server response contains only the items from the current page,
-but information about the <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema.total">total number of items</a> is provided,
+but information about the <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-schema.total">total number of items</a> is provided,
 so that a correct paging interface can be generated, if needed.</p>
 
 <pre><code>/*Server response:
@@ -570,7 +570,7 @@ There are two options:</p>
 <li>A standard error can be returned via an empty response and an <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP status code</a>
 </li>
 <li>A custom error can be returned with a 200 HTTP status code and an error message assigned to an <code>errors</code> field in the response,
-or any other field, specified in <a href="/kendo-ui/api/javascript/data/datasource#configuration-schema.errors"><code>schema.errors</code></a>.</li>
+or any other field, specified in <a href="kendo-ui-docs/api/javascript/data/datasource#configuration-schema.errors"><code>schema.errors</code></a>.</li>
 </ul>
 
 <!-- exit list -->
@@ -632,7 +632,7 @@ var dataSource = new kendo.data.DataSource({
 
 <p>When an error event is fired, the DataSource will not process any data items, which may also be part of the server response.
 For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server,
-you will need to call the <a href="/kendo-ui/api/javascript/data/datasource#methods-read"><code>read</code></a> method of the DataSource in the error handler.
+you will need to call the <a href="kendo-ui-docs/api/javascript/data/datasource#methods-read"><code>read</code></a> method of the DataSource in the error handler.
 Sending the new data together with the error response will not populate the DataSource with the new values.</p>
 
 <h3 id="examples-remote-crud-operations-with-the-kendo-ui-grid"><a href="#examples-remote-crud-operations-with-the-kendo-ui-grid">Examples: Remote CRUD Operations with the Kendo UI Grid</a></h3>

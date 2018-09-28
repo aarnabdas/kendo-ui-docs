@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>jQuery Funnel Chart UI in Kendo UI DataViz</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Overview of Kendo jQuery Funnel Chart with Funnel Series. How to create it and use the different options it provides.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("dataviz/chart/chart-types/funnel-charts.html")
         });
         </script>
@@ -122,7 +122,7 @@
 For example if neckRatio is set to ten then the top base will be ten times smaller than the bottom base.
 The following example shows a funnel chart with neckRatio set to 10.</p>
 
-<p><img src="/kendo-ui/dataviz/chart/chart-types/funnel-neckratio.png" alt="Funnel Chart"></p>
+<p><img src="kendo-ui-docs/dataviz/chart/chart-types/funnel-neckratio.png" alt="Funnel Chart"></p>
 
 <p>When dynamicSlope is enabled then the neckRatio is neglected and each segment creates its form based on the ratio between the current value and the next value.</p>
 
@@ -155,7 +155,7 @@ The following example shows a funnel chart with neckRatio set to 10.</p>
 &lt;/script&gt;
 </code></pre>
 
-<p><img src="/kendo-ui/dataviz/chart/chart-types/funnel-dynamicslope.png" alt="Funnel Chart"></p>
+<p><img src="kendo-ui-docs/dataviz/chart/chart-types/funnel-dynamicslope.png" alt="Funnel Chart"></p>
         </article>
     </div>
 </div>

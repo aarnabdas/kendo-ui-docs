@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title></title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("mobile/touch.html")
         });
         </script>
@@ -154,7 +154,7 @@ Alternatively, it can be initialized using jQuery plugin syntax in the containin
 which contains information about the touch event like its current coordinates, initial position,
 the DOM element, etc.</p>
 
-<p>For a full list of the properties of the Touch object, see the <a href="/kendo-ui/api/mobile/touch/#TouchObject">Touch Object API reference</a>.</p>
+<p>For a full list of the properties of the Touch object, see the <a href="kendo-ui-docs/api/mobile/touch/#TouchObject">Touch Object API reference</a>.</p>
 
 <p>The multitouch gestures event object parameter has a <code>touches</code> property, which is an array of two touch objects.
 In addition to that, a <code>distance</code> and <code>center</code> properties are exposed.</p>
@@ -184,17 +184,17 @@ The widget <code>global</code> configuration option would cause the touch widget
 <h2 id="touch-events--sequences"><a href="#touch-events--sequences">Touch Events / Sequences</a></h2>
 
 <p>The Touch Widget exposes four touch events - <code>touchstart</code>, <code>dragstart</code>, <code>drag</code>, and <code>dragend</code>, corresponding to the four stages of the touch sequence.
-For a detailed event description and sample code, please see the <a href="/kendo-ui/api/mobile/touch">touch widget API reference</a>.</p>
+For a detailed event description and sample code, please see the <a href="kendo-ui-docs/api/mobile/touch">touch widget API reference</a>.</p>
 
 <h2 id="tap-doubletap-and-hold-events"><a href="#tap-doubletap-and-hold-events">Tap, Doubletap, and Hold Events</a></h2>
 
 <p>In addition to the drag events, <code>tap</code>, <code>doubletap</code> and <code>hold</code> events may be fired if the user does not move his/hers finger after pressing.
-The <code>hold</code> event minimum time and the <code>doubletap</code> maximum time between two successive taps can be set through the <a href="/kendo-ui/api/mobile/touch#configuration">touch widget configuration options</a>.</p>
+The <code>hold</code> event minimum time and the <code>doubletap</code> maximum time between two successive taps can be set through the <a href="kendo-ui-docs/api/mobile/touch#configuration">touch widget configuration options</a>.</p>
 
 <h2 id="swipe-events"><a href="#swipe-events">Swipe Events</a></h2>
 
 <p>If the <code>enableSwipe</code> configuration option is set to <strong>true</strong>, the Touch widget recognizes horizontal swipes and fires the <code>swipe</code> event.
-The swipe minimum distance, maximum horizontal deviation, and maximum duration can be set through the <a href="/kendo-ui/api/mobile/touch#configuration">configuration options</a>.</p>
+The swipe minimum distance, maximum horizontal deviation, and maximum duration can be set through the <a href="kendo-ui-docs/api/mobile/touch#configuration">configuration options</a>.</p>
 
 <p><strong>Notice</strong>: if the <code>enableSwipe</code> option is set to true, the <code>dragstart</code>, <code>drag</code> and <code>dragend</code> events <strong>will not be fired</strong>.</p>
 
@@ -203,7 +203,7 @@ The swipe minimum distance, maximum horizontal deviation, and maximum duration c
 <p>If the <code>multiTouch</code> configuration option is set to <strong>true</strong>, the Touch widget will recognize two-finger gestures,
 and fire <code>gesturestart</code>, <code>gesturechange</code> and <code>gestureend</code> events.</p>
 
-<p>For a detailed description for each event, please see the <a href="/kendo-ui/api/mobile/touch">API Reference</a>.</p>
+<p>For a detailed description for each event, please see the <a href="kendo-ui-docs/api/mobile/touch">API Reference</a>.</p>
 
 <blockquote>
 <p>Multi-touch gestures work only on platforms that support multitouch (iOS 4+, Android 4+). What's more, currently, only two finger gestures are supported,

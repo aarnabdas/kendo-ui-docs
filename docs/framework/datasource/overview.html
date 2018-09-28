@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>DataSource component for data binding in Kendo UI framework</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="How to get started using DataSource component in Kendo UI framework to simplify data binding and operations.">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/kendo-ui.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/kendo-ui.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("framework/datasource/overview.html")
         });
         </script>
@@ -114,16 +114,16 @@ remote data (web services returning JSON, JSONP, <a href="http://www.odata.org/"
 
 <ul>
 <li>
-<a href="/kendo-ui/framework/datasource/cors">retrieve data from a remote endpoint</a>;</li>
-<li>maintain the <a href="/kendo-ui/framework/datasource/crud#schema">structure and type of the data (schema)</a>;</li>
+<a href="kendo-ui-docs/framework/datasource/cors">retrieve data from a remote endpoint</a>;</li>
+<li>maintain the <a href="kendo-ui-docs/framework/datasource/crud#schema">structure and type of the data (schema)</a>;</li>
 <li>process serialization formats to/from a remote endpoint;</li>
 <li>
-<a href="/kendo-ui/framework/datasource/crud">synchronize updates (i.e. create, update, delete)</a> to/from a remote endpoint;</li>
+<a href="kendo-ui-docs/framework/datasource/crud">synchronize updates (i.e. create, update, delete)</a> to/from a remote endpoint;</li>
 <li>
-<a href="/kendo-ui/framework/datasource/offline">maintain an in-memory cache of data (including changes)</a> for updating to a remote endpoint;</li>
-<li>calculate and maintain <a href="/kendo-ui/api/javascript/data/datasource#methods-aggregate">aggregates</a>,
-<a href="/kendo-ui/api/javascript/data/datasource#methods-sort">sorting order</a> and <a href="/kendo-ui/api/javascript/data/datasource#methods-page">paging</a>;</li>
-<li>provide a query mechanism via <a href="/kendo-ui/api/javascript/data/datasource#methods-filter">filter expressions</a>.</li>
+<a href="kendo-ui-docs/framework/datasource/offline">maintain an in-memory cache of data (including changes)</a> for updating to a remote endpoint;</li>
+<li>calculate and maintain <a href="kendo-ui-docs/api/javascript/data/datasource#methods-aggregate">aggregates</a>,
+<a href="kendo-ui-docs/api/javascript/data/datasource#methods-sort">sorting order</a> and <a href="kendo-ui-docs/api/javascript/data/datasource#methods-page">paging</a>;</li>
+<li>provide a query mechanism via <a href="kendo-ui-docs/api/javascript/data/datasource#methods-filter">filter expressions</a>.</li>
 </ul>
 
 <p>In other words, the DataSource fully supports CRUD operations (Create, Read, Update, Destroy),
@@ -131,7 +131,7 @@ and provides both client-side and server-side support for sorting, paging, filte
 
 <blockquote>
 <p>To learn more about the capabilities of the DataSource, make sure to check out its
-<a href="/kendo-ui/api/framework/datasource">configuration API, methods and events</a>, and also <a href="http://demos.telerik.com/kendo-ui/datasource/index">demos</a>.</p>
+<a href="kendo-ui-docs/api/framework/datasource">configuration API, methods and events</a>, and also <a href="http://demos.telerik.com/kendo-ui/datasource/index">demos</a>.</p>
 </blockquote>
 
 <h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>

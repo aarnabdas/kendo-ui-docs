@@ -4,15 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Telerik UI for ASP.NET MVC Fundamentals</title>
-        <link rel="shortcut icon" href="/kendo-ui/favicon.ico"/>
+        <link rel="shortcut icon" href="kendo-ui-docs/favicon.ico"/>
         <meta name="description" content="Kendo UI server-side wrappers, configuration, fluent interface, initialization">
         <link href="http://cdn.kendostatic.com/2015.1.429/styles/kendo.common.min.css" rel="stylesheet" />
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/styles.css">
-        <link type="text/css" rel="stylesheet" href="/kendo-ui/assets/theme.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/styles.css">
+        <link type="text/css" rel="stylesheet" href="kendo-ui-docs/assets/theme.css">
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script src="http://cdn.kendostatic.com/2015.1.429/js/kendo.web.min.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/prettify.js"></script>
-        <script type="text/javascript" src="/kendo-ui/assets/app.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/prettify.js"></script>
+        <script type="text/javascript" src="kendo-ui-docs/assets/app.js"></script>
         
 
         <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
         <header id="page-header">
             <span class="toggle-nav"><span></span></span>
             <div id="logo-bar">
-    <a href="/kendo-ui/">
-        <img alt="Kendo UI logo" class="logo" src="/kendo-ui/images/aspnet-mvc.png">
+    <a href="kendo-ui-docs/">
+        <img alt="Kendo UI logo" class="logo" src="kendo-ui-docs/images/aspnet-mvc.png">
     </a>
 </div>
 
@@ -79,7 +79,7 @@
             dataSource: {
                 transport: {
                     read: {
-                        url: "/kendo-ui/default.json",
+                        url: "kendo-ui-docs/default.json",
                         dataType: "json"
                     }
                 },
@@ -92,7 +92,7 @@
                 }
             },
             select: preventParentSelection,
-            template: navigationTemplate("/kendo-ui/"),
+            template: navigationTemplate("kendo-ui-docs/"),
             dataBound: expandNavigation("aspnet-mvc/fundamentals.html")
         });
         </script>
@@ -115,7 +115,7 @@
 <li>Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client-side via the widget initialization script.</li>
 </ul>
 
-<p><img src="/kendo-ui/aspnet-mvc/images/wrapper-output.png" alt="Server-side wrapper outputs HTML and JavaScript"></p>
+<p><img src="kendo-ui-docs/aspnet-mvc/images/wrapper-output.png" alt="Server-side wrapper outputs HTML and JavaScript"></p>
 
 <h2 id="configuration"><a href="#configuration">Configuration</a></h2>
 
@@ -123,13 +123,13 @@
 
 <p>The <strong>Kendo</strong> <a href="http://www.asp.net/mvc/tutorials/older-versions/views/creating-custom-html-helpers-cs">HtmlHelper</a> exposes all Kendo UI server wrappers.</p>
 
-<p><img src="/kendo-ui/aspnet-mvc/images/kendo-extension.png" alt="Kendo HtmlHelper extension method"></p>
+<p><img src="kendo-ui-docs/aspnet-mvc/images/kendo-extension.png" alt="Kendo HtmlHelper extension method"></p>
 
 <h3 id="configuration-Widget"><a href="#configuration-Widget">Widget options</a></h3>
 
 <p>The widget options are exposed via <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluent interface</a>.</p>
 
-<p><img src="/kendo-ui/aspnet-mvc/images/fluent-interface.png" alt="Fluent interface"></p>
+<p><img src="kendo-ui-docs/aspnet-mvc/images/fluent-interface.png" alt="Fluent interface"></p>
 
 <p>To set an option call the corresponding method and pass the required option value.</p>
 
@@ -145,7 +145,7 @@
 <p>You must set the <strong>Name</strong> option of a Kendo UI server wrapper. The value will be used as the <code>id</code> and <code>name</code> HTML attributes (the <code>name</code> HTML attribute is set only for input widgets e.g. DatePicker, NumericTextBox, DropDownList, etc.).
 The <code>id</code> HTML attribute is used to initialize the Kendo UI widget.</p>
 
-<p><img src="/kendo-ui/aspnet-mvc/images/wrapper-name.png" alt="Wrapper name"></p>
+<p><img src="kendo-ui-docs/aspnet-mvc/images/wrapper-name.png" alt="Wrapper name"></p>
 
 <p>Alternatively you can use <code>NumericTextBoxFor</code>. All Kendo UI server wrappers which accept a value can be initialized via a [WidgetName]For method e.g. DatePicker -&gt; DatePicker<strong>For</strong>.
 Those methods set the <strong>Name</strong> of the server wrapper automatically. Thus <code>@Html.Kendo().NumericTextBoxFor(model =&gt; model.Age)</code> is the same as <code>@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)</code>.</p>
