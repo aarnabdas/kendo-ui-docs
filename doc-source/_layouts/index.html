@@ -6,11 +6,11 @@
         <title>{{ page.page_title }}</title>
         <link rel="shortcut icon" href="{{site.baseurl}}/favicon.ico"/>
         {% if page.description %}<meta name="description" content="{{page.description}}">{% endif %}
-        <link href="{{site.baseurl}}/externals/kendo.common.min.css" rel="stylesheet" />
+        <link href="{{site.baseurl}}/assets/kendo.common.min.css" rel="stylesheet" />
         {% stylesheet styles %}
         {% stylesheet theme %}
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="{{site.baseurl}}/externals/kendo.web.min.js"></script>
+        <script src="{{site.baseurl}}/assets/kendo.web.min.js"></script>
         {% javascript prettify %}
         {% javascript app %}
         {% if page.editableExample == "true" %}
